@@ -1,2 +1,2 @@
-# resdiary
-Recommendations engine for Resdiary
+# ResDiary
+Recommendations engine for ResDiary (https://www.resdiary.com/)
