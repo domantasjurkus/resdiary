@@ -1,0 +1,6 @@
+Possibility of using Python for project arose.
+Was curious how easily it is to call Python from C#.
+Turns out really easy.
+Example code - delete later.
+
+https://code.msdn.microsoft.com/windowsdesktop/C-and-Python-interprocess-171378ee
