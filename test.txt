@@ -5,3 +5,7 @@ I am at home on the VM for the project having figured out TRAC home access. SSH 
 Do we need to use the VM git or is GitHub alone sufficent?
 
 Should we somehow try to tie the two together?
+
+###  ADDITION THEN COMMIT ###
+
+For this I just cloned the repo into my local teamproject directory for the VM on my account.
