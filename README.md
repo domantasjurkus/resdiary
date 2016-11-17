@@ -38,5 +38,5 @@ As I'm sure your aware the VM default terminal is as basic as it gets.
 Dom tried to fix his but everything caught fire and he bailed.
 To get the nice one with the colours and the auto-complete after signing in using your username enter the following:
 ```
-sudo usermod -s /bin/bash <username>
+sudo usermod -s /bin/bash <yourUsername>
 ```
