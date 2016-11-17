@@ -1,9 +1,6 @@
 # ResDiary
 Recommendations engine for ResDiary (https://www.resdiary.com/)
 
-# Something we need to test
-Note on whatever just happened where it reset everything and I lost the README edit.
-
 ###Setting up GitHub repo on VM
 We have an online GitHub repo for many reasons.
 
