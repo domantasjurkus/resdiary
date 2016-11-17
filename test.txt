@@ -9,3 +9,15 @@ Should we somehow try to tie the two together?
 ###  ADDITION THEN COMMIT ###
 
 For this I just cloned the repo into my local teamproject directory for the VM on my account.
+
+### NEXT TEST ###
+
+What I've done now is add the resdiary cloned repo to the VM repo.
+
+Now I'm making a change to this repo - making the commit then checking the status of the VM repo rather than the cloned repo. This all makes sense to me at this moment in time. 
+
+Play with things until they break. 
+
+Play with matches because sometimes you just have to get burned, etc.
+
+https://youtu.be/9SOryJvTAGs?t=200
