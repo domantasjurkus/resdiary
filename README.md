@@ -2,12 +2,12 @@
 Recommendations engine for ResDiary (https://www.resdiary.com/)
 
 iTeam:
-- Vladimir Bardarski 
-- Paulius Dilkas 
-- Dom Jurkus
-- Edward Kalfov 
-- Josh O'brien 
-- Joseph O'Hagan: 2136120o 
+- Vladimir Bardarski (PeshoGoshov): 
+- Paulius Dilkas (dilkas):
+- Dom Jurkus (domantasjurkus):
+- Edward Kalfov (TheScouser):
+- Josh O'brien (Josh-Dev): 
+- Joseph O'Hagan (JosephOHagan): 2136120o 
 
 ###Setting up GitHub repo on VM
 We have an online GitHub repo for many reasons.
