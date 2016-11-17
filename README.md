@@ -36,4 +36,7 @@ ssh -L 8000:130.209.251.67:80 -L 8080:130.209.251.67:8080 <yourGUID>@sibu.dcs.gl
 ###To make the VM terminal normal
 As I'm sure your aware the VM default terminal is as basic as it gets.
 Dom tried to fix his but everything caught fire and he bailed.
-The ubuntu one is nice and friendly and until further notice (I might try and fix it) just type bash to get your own looking like that.
+To get the nice one with the colours and the auto-complete after signing in using your username enter the following:
+```
+sudo usermod -s /bin/bash <username>
+```
