@@ -1,0 +1,7 @@
+This is a test.
+
+I am at home on the VM for the project having figured out TRAC home access. SSH wizard, sudo scientist, etc.
+
+Do we need to use the VM git or is GitHub alone sufficent?
+
+Should we somehow try to tie the two together?
