@@ -26,3 +26,4 @@ There's a TRAC Git plugin to allow for ticket closing via commit messages
 Only way to check if it's setup before investigating is to make a commit
 
 This is a commit and reminder to look into that
+
