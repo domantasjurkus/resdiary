@@ -1,0 +1,37 @@
+Diner
+=====
+Id: int
+Name: char(100)
+
+Restaurant
+==========
+Id: int
+Name: char(50)
+Town: char(50) - this might be unreliable since it is free text
+PricePoint: int - 1-5 and shows the price of a restaurant
+Latitude: float
+Longitude: float
+
+RestaurantCuisineTypes - The types of cuisine for the restaurant, there can be more than 1 per restaurant
+======================
+RestaurantId: int
+CuisineTypeId: int
+
+Booking
+=======
+Id: int
+DinerId: int
+RestaurantId: int
+VisitDateTime: datetime
+Covers: int - the number of people for the booking
+
+BookingReview - We have 5 questions for this but we also display an average of the 5 answers.  Not all bookings will have a review.
+=============
+BookingId: int
+DinerId: int
+RestaurantId: int
+LikelyToRecommendScore: int - 1-5 scale and is the answer to "How likely would you be to recommend us to a friend or colleague?"
+FoodAndDrinkScore: int - 1-5
+ServiceScore: int - 1-5
+AtmosphereScore: int 1-5
+ValueForMoneyScore: int 1-5
