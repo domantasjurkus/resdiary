@@ -1,2 +1,4 @@
 *.py[cod]
 __pycache__/
+__init__.py
+data/
