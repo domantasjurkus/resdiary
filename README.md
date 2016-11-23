@@ -18,7 +18,7 @@ ssh -L 8000:130.209.251.67:80 -L 8080:130.209.251.67:8080 <yourGUID>@sibu.dcs.gl
 - To access the VM sign in as you do in the lab: ssh -i teamkey.pem yourUsername@130.209.251.67
 - To access Jenkins go to http://localhost:8080/
 
-###To make the VM terminal normal - maybe don't do this as it might be the cause of my profile corruption (Joseph)
+###To make the VM terminal normal
 As I'm sure your aware the VM default terminal is as basic as it gets.
 Dom tried to fix his but everything caught fire and he bailed.
 To get the nice one with the colours and the auto-complete after signing in using your username enter the following:
