@@ -9,14 +9,14 @@ iTeam:
 - Josh O'brien (Josh-Dev): 
 - Joseph O'Hagan (JosephOHagan): 2136120o 
 
-###Outside of lab access to VM / Trac / Jenkins
+###Outside of lab access Jenkins / Trac / VM
 Fire up the terminal and enter:
 ``` 
 ssh -L 8000:130.209.251.67:80 -L 8080:130.209.251.67:8080 <yourGUID>@sibu.dcs.gla.ac.uk
 ```
+- To access Jenkins go to http://localhost:8080/
 - To access the Trac page visit http://localhost:8000/projects/myproject/
 - To access the VM sign in as you do in the lab: ssh -i teamkey.pem yourUsername@130.209.251.67
-- To access Jenkins go to http://localhost:8080/
 
 ###To make the VM terminal normal
 As I'm sure your aware the VM default terminal is as basic as it gets.
