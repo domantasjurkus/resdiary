@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', 'Open Sans', sans-serif;
+}
+
+.jumbotron {
+    background: #eee;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    min-height: 600px;
+    height: 100%;
+}
+
+.container {
+    background: #fff;
+    padding: 0;
+}
+
+.nav-tabs {
+    background: #00b6f1;
+}
+
+h1, p, a {
+    color: black
+}
+
+.nav-tabs>li>a {
+    margin-right: 0;
+}
+
+.tab-content {
+    min-height: 600px;
+}
+
+.nav-tabs>li>a {
+    border-radius: 0;
+}
+
+.nav-tabs>li.active>a {
+    color: #00b6f1;
+}
