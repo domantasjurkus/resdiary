@@ -1,41 +1,57 @@
 body {
-    margin: 0;
-    font-family: 'Roboto', 'Open Sans', sans-serif;
+	margin: 0;
+	font-family: 'Roboto', 'Open Sans', sans-serif;
 }
 
 .jumbotron {
-    background: #eee;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    min-height: 600px;
-    height: 100%;
+	background: #eee;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	min-height: 600px;
+	height: 100%;
 }
 
 .container {
-    background: #fff;
-    padding: 0;
+	background: #fff;
+	padding: 0;
 }
 
 .nav-tabs {
-    background: #00b6f1;
+	background: #00b6f1;
 }
 
 h1, p, a {
-    color: black
+	color: black
 }
 
 .nav-tabs>li>a {
-    margin-right: 0;
+	margin-right: 0;
 }
 
 .tab-content {
-    min-height: 600px;
+	min-height: 600px;
 }
 
 .nav-tabs>li.active>a {
-    color: #00b6f1;
+	color: #00b6f1;
 }
 
 .not-rounded {
-    border-radius: 0 !important;
+	border-radius: 0 !important;
+}
+
+.rec-image {
+	width: 60px;
+}
+
+.rec-label {
+	display: inline;
+	font-size: 22px;
+	padding-left: 15px;
+}
+
+.rec-divider {
+	padding: 1px;
+	background-color: #e849c8;
+	margin: 7px 0;
 }

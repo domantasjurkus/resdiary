@@ -8,10 +8,10 @@ app.use('/css', express.static(__dirname + '/css'));
 // app.use('/img', express.static(__dirname + '/img'));
 
 app.get('/', function(req, res) {
-    res.sendFile('views/demo.html', { root: __dirname });
+	res.sendFile('views/demo.html', { root: __dirname });
 });
 
 var port = process.env.PORT||3000;
 http.listen(port, function() {
-    console.log('listening on *:3000');
+	console.log('listening on *:3000');
 });
