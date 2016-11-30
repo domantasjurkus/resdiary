@@ -1,0 +1,13 @@
+{
+	"name": "resdiary",
+	"version": "1.0.0",
+	"description": "Resdiary Recommendations Engine",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"author": "Team I",
+	"dependencies": {
+		"express": "^4.14.0"
+	}
+}

@@ -32,10 +32,10 @@ h1, p, a {
     min-height: 600px;
 }
 
-.nav-tabs>li>a {
-    border-radius: 0;
-}
-
 .nav-tabs>li.active>a {
     color: #00b6f1;
+}
+
+.not-rounded {
+    border-radius: 0 !important;
 }
