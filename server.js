@@ -16,6 +16,24 @@ http.listen(port, function() {
 	console.log('listening on *:3000');
 });
 
+
+/*
+	Python and JavaScript talking to one another
+	Possible method 1: https://github.com/extrabacon/python-shell
+*/
+
+var PythonShell = require('python-shell');
+
+PythonShell.run('my_script.py', function (err) {
+  if (err) throw err;
+  console.log('finished');
+});
+
+
+/*
+	Python and JavaScript talking to one another
+	Possible method 2: http://www.sohamkamani.com/blog/2015/08/21/python-nodejs-comm/
+*/
 	
 var spawn = require('child_process').spawn,
 	py = spawn('python', ['compute_input.py']),
