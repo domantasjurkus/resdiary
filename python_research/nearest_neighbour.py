@@ -49,7 +49,7 @@ def main():
 
    	print minDistance
    	print minKey
-   	print restaurantDict[ minKey ]
+   	print restaurantDict[minKey]
    	print k0
 
 
