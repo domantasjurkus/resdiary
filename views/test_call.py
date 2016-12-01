@@ -1,2 +1,5 @@
-def test_call(inPar):
+def main(inPar):
 	return inPar + "--Test--"
+if __name__ == "__main__":
+	main()
+
