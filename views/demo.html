@@ -61,5 +61,25 @@
 
 <script src="../js/demo.js"></script>
 
+<script type="text/javascript" src="d3/d3.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>  
+<script>
+function postData(input) {
+    $.ajax({
+        type: "POST",
+        url: "/test_call.py",
+        data: { param: input },
+        success: callbackFunc
+    });
+}
+
+function callbackFunc(response) {
+    // do something with the response
+    console.log(response);
+}
+
+postData('data input');
+</script>
+
 </body>
 </html>
