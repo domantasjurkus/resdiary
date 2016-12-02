@@ -104,7 +104,7 @@ recom = {}
 
 # write recommendations of the type ([userID],[restaurantID]) into a file called recommendations.csv
 
-with open('recommendations.csv', 'w') as csvfile:
+with open('recommendations.csv', 'wb') as csvfile:
     fieldnames = ['userID', 'restaurantID']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
