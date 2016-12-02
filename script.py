@@ -102,18 +102,24 @@ for i in hasreview:
 recom = {}
 #[userID] is most similar to [most similar userID]
 
-for i in score:
-    minResult = 100
-    j = 0
-    while j < len(score[i]):
-        if score[i][j][1] < minResult:
-            minResult = score[i][j][1]
-            mostSimUser = score[i][j][0]
-        j=j+1
+# write recommendations of the type ([userID],[restaurantID]) into a file called recommendations.csv
 
-    # gives output in appropriate format
-    print "\nRecommendations for", i
-    for k in visited.get(mostSimUser):
-        print k
+with open('recommendations.csv', 'w') as csvfile:
+    fieldnames = ['userID', 'restaurantID']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    for i in score:
+        minResult = 100
+        j = 0
+        while j < len(score[i]):
+            if score[i][j][1] < minResult:
+                minResult = score[i][j][1]
+                mostSimUser = score[i][j][0]
+            j=j+1
+
+        # gives output in appropriate format
+        for k in visited.get(mostSimUser):
+            writer.writerow({'userID':i,'restaurantID':k})
+
     
 
