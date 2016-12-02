@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	
 	var userIds = getUserIds();
 
 	userIds.forEach(function(id) {
