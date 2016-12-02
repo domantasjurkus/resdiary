@@ -1,0 +1,272 @@
+RestaurantId,Name,Town,PricePoint,Lat,Lon
+3146,Arisaig Restaurant,Glasgow,2,55.8583959,-4.2454518
+3183,Cafe Andaluz Glasgow | City Centre,Glasgow,2,55.8608569,-4.2524175
+3307,Inn on the Loch,Lanark,NULL,55.6710479,-3.7719213
+3338,Elliots,Prestwick,NULL,55.4983721,-4.6112652
+3345,Cafe Andaluz Glasgow | West End,Glasgow,2,55.8762859,-4.2917141
+3349,Mother India Glasgow,Glasgow,3,55.8652482,-4.2833263
+3374,Di Maggio's CITY CENTRE,Glasgow,2,55.8598675,-4.2529515
+3383,Di Maggio's Theatreland,Glasgow,2,55.8652729,-4.2542075
+3384,Amarone Glasgow,Glasgow,2,55.8623994,-4.254073
+3437,Scotts (Troon),Troon,2,55.5450256,-4.6782151
+3466,Di Maggio's Airdrie,Airdrie,2,55.8598369,-3.9994152
+3467,Di Maggio's West End,Glasgow,2,55.8751972,-4.2941796
+3468,Di Maggio's Shawlands,Glasgow,2,55.8315368,-4.2790967
+3495,Bunker Bar and Restaurant,Glasgow,NULL,55.8646818,-4.26361
+3513,Guy's Restaurant & Bar,Glasgow,2,55.8577502,-4.2453985
+3538,La Bonne Auberge Theatreland,Glasgow,3,55.8653822,-4.2537802
+3553,Barolo Grill,Glasgow,NULL,55.8603952,-4.255553
+3570,Metropolitan,Glasgow,2,55.858208,-4.2457352
+3607,Sapporo Glasgow,Glasgow,NULL,55.8590014,-4.2423387
+3676,Andiamo Hamilton,Hamilton,2,55.7777449,-4.0397919
+3713,Chillies West End,Glasgow,NULL,55.8702109,-4.2758837
+3741,Restaurant Mediterraneo,Glasgow,NULL,55.8597918,-4.2484978
+3742,Sapporo Manchester,Manchester,NULL,53.4765706,-2.2550869
+3743,Restaurant Martin Wishart,Edinburgh,NULL,55.9755248,-3.1704828
+3746,Dehesa,London,2,51.5127888,-0.1394345
+3754,Urban Reef Restaurant,Boscombe,3,50.7197989,-1.8430635
+3835,Lido Troon,Troon,NULL,55.5421609,-4.6682737
+3837,Lido Prestwick,Prestwick,NULL,55.500186,-4.610527
+3854,Tony Macaroni Byres Rd,Glasgow,NULL,55.8706524,-4.2991847
+3858,Blythswood Square Restaurant,Glasgow,2,55.8634918,-4.2622879
+3859,Blythswood Square Salon,Glasgow,3,55.8630782,-4.2625075
+3872,The Kailyard by Nick Nairn,Dunblane,2,56.1938045,-3.9569412
+3877,Viva,Glasgow,2,55.8612787,-4.2616122
+3880,Ondine,Edinburgh,NULL,55.9489687,-3.1927987
+3897,Bo’Vine Meats & Wines,Glasgow,2,55.8774828,-4.2908223
+3932,The Swan Inn,Milton Keynes,2,52.0451901,-0.6955168
+3954,Restaurant Mark Greenaway,Edinburgh,NULL,55.9536379,-3.2041201
+4046,Amphitheatre Restaurant,London,3,51.5132824,-0.1234333
+4101,Kazu,Abu Dhabi,NULL,24.467402,54.606059
+4154,Rasoi Indian Restaurant & Deli,Glasgow,2,55.9209653,-4.151406
+4176,Marco Pierre White Steakhouse Bar and Grill,Glasgow,3,55.8608175,-4.2629145
+4198,The Honours,Edinburgh,NULL,55.9529703,-3.2037702
+4212,Osteria del Tempo Perso,Glasgow,2,55.860187,-4.2477166
+4219,Amarone Edinburgh,Edinburgh,2,55.9537424,-3.194403
+4223,Andiamo Giffnock,Giffnock,2,55.804191,-4.2947506
+4264,Bamboo,Glasgow,3,55.8629506,-4.2568538
+4275,Amaretto Ristorante & Bar,Renfrewshire,2,55.8561496,-4.577326
+4288,Dakota Edinburgh,EDINBURGH,1,55.98386,-3.40117
+4297,MD Cafe,Glasgow,NULL,55.8610236,-4.2614563
+4349,The Scarlet,Mawgan Porth,NULL,50.468168,-5.029863
+4392,Grand Central Hotel Glasgow (Tempus),Glasgow,3,55.8605668,-4.2497646
+4465,Celino's Italian Delicatessen Trattoria,Glasgow,NULL,55.8630593,-4.2120164
+4507,YASHIN SUSHI AND BAR,NULL,1,51.500451,-0.1955503
+4509,WEST On The Green,Glasgow,3,55.8514925,-4.2341573
+4530,Oregano,Glasgow,2,55.913547,-4.2195177
+4564,Big Blue Hotel,Blackpool,3,53.7876356,-3.0569948
+4569,Steak,Edinburgh,NULL,55.9567961,-3.1874442
+4637,Lodge on Loch Lomond,Luss,3,56.101491,-4.6422516
+4651,The Orangery @ Seamill Hydro,West Kilbride,2,55.6848663,-4.8612054
+4662,The Long House,Kilmarnock,3,55.6054649,-4.4969119
+4686,the Drunken Duck,Ambleside,NULL,54.402541,-2.99928
+4693,Maggie Mays,Glasgow,3,55.8572672,-4.2457382
+4694,Slouch,Glasgow,2,55.865413,-4.2687401
+4699,Timberyard,Edinburgh,NULL,55.9463418,-3.2014367
+4709,Chaophraya Glasgow,Glasgow,3,55.8621997,-4.2531984
+4741,Donostia,London,2,51.514722,-0.1609475
+4755,Bar Soba City Centre,Glasgow,2,55.8599876,-4.2552277
+4756,Bar Soba Byres Road,Glasgow,NULL,55.8740787,-4.2949894
+4824,The Kitchin,Edinburgh,4,55.9770251,-3.1727333
+4825,Castle Terrace Restaurant,Edinburgh,NULL,55.9470942,-3.202605
+4835,Chaophraya Edinburgh,Edinburgh,3,55.9521411,-3.2029056
+4913,Rang Mahal,Dubai,3,25.1934701,55.2633306
+4915,Tong Thai,Dubai,3,25.1856,55.2566
+4943,Tayyabs,London,1,51.5170973,-0.0659835
+4974,Boteco do Brasil Glasgow,Glasgow,3,55.8572672,-4.2457382
+4984,The Dalziel Park Hotel,Motherwell,1,55.7985722,-3.9422849
+4993,James Street South,Belfast,2,54.5953805,-5.932214
+5015,Cristal Restaurant,Glasgow,NULL,55.9209118,-4.4787504
+5022,Barbarossa Pizzeria,Glasgow,3,55.8177185,-4.2616404
+5023,The Scran & Scallie,Edinburgh,NULL,55.9592744,-3.214688
+5027,Ashoka Ashton Lane,Glasgow,2,55.8746502,-4.2930578
+5030,Green Chilli Cafe,Glasgow,3,55.8663591,-4.2898287
+5031,Ashoka Westend (Argyle Street),Glasgow,3,55.8666894,-4.2899826
+5035,Ashoka Bearsden,Glasgow,3,55.9206268,-4.3328224
+5037,Ashoka Southside,Glasgow,3,55.8121795,-4.2695866
+5042,Operetta Restaurant,Glasgow,NULL,55.8604768,-4.2617528
+5043,Tony Macaroni City Centre,Glasgow,3,55.8623752,-4.2567165
+5050,Crewe Hall -The Brasserie,Crewe,3,53.0841628,-2.4233842
+5081,Palomino,Glasgow,2,55.864537,-4.2626035
+5086,The Meat Bar,Glasgow,NULL,55.863542,-4.260045
+5088,Angels Hotel,Glasgow,2,55.8225142,-4.0838496
+5089,The Parkville Hotel,Glasgow,2,55.7958038,-4.097241
+5113,Champagne Central,Glasgow,2,55.8604758,-4.2576916
+5126,Cafe Source Too,Glasgow,2,55.8819312,-4.3053802
+5130,The Butterfly and The Pig,Glasgow,2,55.8641843,-4.2611286
+5151,Fratelli Galgorm,Galgorm,2,54.8777854,-6.3427271
+5153,Gillies Bar & Grill,Galgorm,1,54.8777854,-6.3427271
+5172,Forest Pines - Eighteen57,Broughton nr Brigg,3,53.5595421,-0.5572413
+5185,Nonna's Kitchen,Alexandra Street,1,55.9373489,-4.1573683
+5190,Brasserie7,Dublin,1,53.3470355,-6.2678792
+5225,Tankersley Manor - Bar and Brasserie,Upper Tankersley,2,53.4895615,-1.4869284
+5234,The Gannet,Glasgow,3,55.8649339,-4.2852853
+5242,The Grand Hotel St Annes,Lytham St Annes,2,53.7459719,-3.0282419
+5271,Ember Yard,London,2,51.5154083,-0.1366345
+5306,Afton Restaurant,New Cumnock,1,55.4131869,-4.2105752
+5322,Lane7,Newcastle upon Tyne,1,54.9672629,-1.623665
+5377,Logans Restaurant,Prestwick,2,55.484853,-4.6171739
+5409,Brel,Glasgow,2,55.8744879,-4.2930916
+5495,Cup Tea Lounge - Glasgow,Glasgow,2,55.8630051,-4.2561074
+5543,Lychee Oriental,Glasgow,2,55.8599866,-4.2557406
+5748,The Westerwood - Grill Restaurant,Glasgow,2,55.9685401,-3.9776058
+5749,The Westerwood - Flemings Restaurant,Glasgow,2,55.9685401,-3.9776058
+5771,Jenkins & Sons,Poole,2,50.7226615,-1.9322975
+5773,Waterfront Fishouse,Oban,2,56.4122118,-5.475658
+5782,Amore Merchant City,Glasgow,1,55.8594379,-4.2425236
+5794,Harpurs of Melbourne,Melbourne,2,52.8252826,-1.4295245
+5842,Ciro's Brasserie,Pulford,2,53.1501455,-2.916925
+5853,Garvie & Co.,Glasgow,2,55.9325674,-4.2671132
+5861,The Howlin' Wolf,Glasgow,2,55.8641241,-4.2579816
+5886,Byron's Restaurant,Seaham,2,54.8459649,-1.3659257
+5887,The Ozone,Lord Byrons Walk,2,54.8459649,-1.3659257
+5900,Palomino's,Bishopton,2,55.9143361,-4.5302628
+5905,Tony Macaroni Soar Intu Braehead,Renfrew,2,55.8786239,-4.3744643
+5909,Ox and Finch,Glasgow,2,55.8657664,-4.2844595
+5914,Opal Restaurant,Larkhall,2,55.7291413,-3.9478329
+5928,NY American Grill,Glasgow,3,55.8592009,-4.2537966
+6082,Beach Access,Dubai,NULL,25.139734,55.13273
+6163,Topolabamba Glasgow,Glasgow,2,55.8614049,-4.2559124
+6214,The Anchor Line Bar and Grill,Glasgow,2,55.8609807,-4.2523803
+6215,Tony Macaroni Omni Centre,Edinburgh,2,55.9571972,-3.1848191
+6288,Cosy Club Leicester,Leicester,2,52.6358285,-1.1389618
+6290,The Finnieston,Glasgow,2,55.8646524,-4.2842259
+6333,La Vita George Square,Glasgow,2,55.860656,-4.2521023
+6343,Amore D'Italia Dennistoun,Glasgow,1,55.8635406,-4.2179885
+6357,Loks Bar & Kitchen,Glasgow,2,55.8232221,-4.2876959
+6359,"Hyde Bar, Grill & Dining",Glasgow,2,55.8700816,-4.2995949
+6376,Obu Pan Asian,Glasgow,2,55.8592009,-4.2537966
+6388,George's Great British Kitchen,Nottingham,2,52.9545423,-1.150109
+6396,Fonab Brasserie,Pitlochry,2,56.6968538,-3.7325665
+6413,Inverdruie Restaurant at Hilton Coylumbridge,Aviemore,2,57.1748659,-3.8050505
+6416,André Garrett Restaurant at Cliveden House Hotel,Taplow,2,51.5581854,-0.6883034
+6448,Darwin Brasserie,London,NULL,51.5112799,-0.083567
+6464,Aizle Restaurant,Edinburgh,2,55.9419569,-3.1791181
+6482,Porter & Rye,Glasgow,2,55.8646739,-4.2844311
+6533,The Conservatory,Galgorm,NULL,54.875487,-6.342806
+6550,The Butterfly and the Pig South,Glasgow,2,55.8313404,-4.2792799
+6563,Nelson's Bar,NULL,2,53.1494074,-2.9171192
+6578,Roxie Clapham,London,2,51.4611878,-0.1671055
+6608,The Peat Inn,Cupar,2,56.2774392,-2.8848441
+6638,The Italian Kitchen,Glasgow,3,55.859451,-4.2436502
+6735,Cafe Gandolfi,Glasgow,3,55.858269,-4.2442539
+6737,The Italian Caffè,Glasgow,2,55.8586594,-4.243967
+6740,Gandolfi Fish,Glasgow,3,55.8585652,-4.24356
+6741,The View Restaurant,Dunbar,2,56.0041561,-2.5226602
+6744,Grill Box,Glasgow,NULL,55.8610236,-4.2614563
+6750,Bar Soba Leeds,Leeds,3,53.8004297,-1.5400076
+6766,Mimi's Bakehouse,Edinburgh,2,55.975513,-3.1701717
+6767,Cafe Andaluz Aberdeen,Aberdeen,2,57.1443167,-2.1057264
+6789,Playfair's Restaurant and Steakhouse,St Andrews,3,56.342234,-2.801103
+6813,Monteaths,Auchterarder,3,56.267913,-3.7174839
+6819,Oran Mor,Glasgow,1,55.8773722,-4.2891382
+6826,Marina Social,Dubai,2,25.0788203,55.1377228
+6858,WEST On The Corner,Glasgow,3,55.869842,-4.275047
+6899,Mitchells Restaurant & Function Room,Glasgow,2,55.7916549,-4.2355417
+6917,Cail Bruich,Glasgow,3,55.8834964,-4.3062078
+6936,Giggling Squid Brighton,Brighton,2,50.8214604,-0.1397625
+7001,The crafty pig,Glasgow,2,55.8756555,-4.2826622
+7009,Raffaelle's Italian Kitchen and Bar,Glasgow,3,55.9294752,-4.3160694
+7031,Bar Soba Merchant City,Glasgow,3,55.8585652,-4.24356
+7090,The Dining Room,Edinburgh,4,55.9545009,-3.1995674
+7119,THE TEA HOUSE RESTAURANT,LARBERT,2,56.0205122,-3.8366796
+7249,Lurra,London,3,51.5146723,-0.161117
+7253,Koolba Restaurant,Glasgow,2,55.8588303,-4.2457804
+7256,Saint Judes,Glasgow,NULL,55.864538,-4.2625403
+7264,Firebrick Brasserie,Lauder,2,55.7193901,-2.7489849
+7305,The Bastion Bar & Restaurant,Liverpool,3,53.4083706,-2.9840143
+7307,ResDiary Training,Glasgow,NULL,55.8610236,-4.2614563
+7321,Loch Fyne Restaurant & Oyster Bar,Cairndow,2,56.269597,-4.9332944
+7332,Black Dove,Glasgow,2,55.8286427,-4.2832299
+7343,Carters Restaurant,Glasgow,2,55.7774941,-4.2682549
+7349,The Bay Brasserie,Lerwick,3,60.1512699,-1.1522367
+7352,Khublai Khans,Glasgow,3,55.8577498,-4.2453985
+7361,No.10 Bar & Restaurant,Aberdeen,2,57.143463,-2.121216
+7381,Ciao Bella,Glasgow,3,55.818626,-4.2024607
+7403,Holbeck Ghyll,Windermere,4,54.4117,-2.9381647
+7461,Atlantic Brasserie,Glasgow,3,55.8609684,-4.2522499
+7471,Bone's Herlev,Herlev,1,55.7193755,12.4511004
+7488,The Last Zebra,Carlisle,3,54.8928969,-2.9331026
+7491,The Mill House,Stewarton,2,55.6836208,-4.5092354
+7497,Lebowskis West End,Glasgow,2,55.8615396,-4.2738627
+7506,The Strathmore,Glasgow,3,55.896145,-4.2989763
+7547,Cup Merchant City,Glasgow,2,55.8587465,-4.2505449
+7548,Gin 71 - Merchant City,Glasgow,2,55.8587465,-4.2505449
+7553,Dunston Hall - Brasserie Bar and Grill,Norwich,2,52.5707843,1.2767469
+7560,Thaikhun Glasgow,Glasgow,2,55.8228906,-4.3420543
+7588,Bavaria Brauhaus,Glasgow,2,55.8612532,-4.259802
+7590,Noir Lounge & Cocktail Bar,Dubai,2,25.11844,55.197196
+7606,Obsession Of India,Glasgow,2,55.857373,-4.2435554
+7609,Belton Woods - Stantons Brasserie,Grantham,3,52.9431803,-0.627104
+7610,Oulton Hall - Calverley Grill,Leeds,3,53.7494027,-1.4591092
+7612,Dine,Edinburgh,4,55.9474822,-3.2042824
+7655,Assams,Glasgow,3,55.8629509,-4.2568488
+7663,Tony Macaroni Glasgow Fort,Glasgow,2,55.8729747,-4.1368895
+7667,Slaley Hall - Hadrians,Hexham,2,54.8977936,-2.0148444
+7680,The Left Bank,Glasgow,1,55.8724254,-4.2827388
+7691,Eusebi Restaurant & Deli,Glasgow,2,55.8725673,-4.2799045
+7733,Mango,Glasgow,2,55.8656605,-4.267251
+7735,The Bunch Of Grapes,Bradford on Avon,3,51.3481662,-2.24897
+7808,Bella Napoli,GLASGOW,2,55.8285241,-4.2828977
+7863,La Vita Bishopbriggs,Glasgow,1,55.9055258,-4.2246084
+7864,La Vita Spuntini,Glasgow,1,55.8743411,-4.2950506
+7865,La Vita Piccolino e Vino,Glasgow,1,55.7748804,-4.314476
+7881,The Shore Bar & Restaurant,Edinburgh,3,55.9775198,-3.1689022
+7883,Dakota Deluxe Glasgow,Glasgow,1,55.8636201,-4.2612065
+7927,Barca Tapas,Glasgow,2,55.8591486,-4.2534372
+7930,Mini Grill,GLASGOW,3,55.865037,-4.265791
+7977,Ubiquitous Chip Restaurant,Glasgow,3,55.8746225,-4.292973
+7984,Hanoi Bike Shop,Glasgow,2,55.8754989,-4.2951349
+7985,Stravaigin,Glasgow,2,55.8725674,-4.2821734
+7990,Stratford Manor-Shakespeare Restaurant,Stratford Upon Avon,3,52.2267428,-1.6633474
+7992,Fishers in the City,Edinburgh,3,55.9538411,-3.1993942
+7994,Ubiquitous Chip Brasserie,Glasgow,2,55.8746225,-4.292973
+7998,Bridgewood Manor - Squires Restaurant,Chatham,2,51.3422647,0.5081734
+8000,Sloans Bar & Restaurant,Glasgow,2,55.8580884,-4.2541394
+8001,Riverhill,Glasgow,2,55.8606704,-4.2556463
+8037,The Spiritualist,Glasgow,3,55.8591928,-4.2505314
+8097,Slaley Hall - Claret Jug,Hexham,1,54.8977936,-2.0148444
+8110,Babbo,Giffnock,2,55.7961402,-4.3004244
+8112,Marina's Grill at The Radisson Blu,Galway,3,53.274275,-9.0434689
+8124,The Three Chimneys,Dunvegan,5,57.443929,-6.641922
+8174,Boclair House,Glasgow,3,55.918148,-4.3205103
+8178,The Belmill Hotel,Bellshill,2,55.8174288,-4.025616
+8188,Amante Ibiza,07849 Santa Eulalia (Ibiza),3,38.94730701,1.5103841
+8218,The Griffin,Glasgow,2,55.8648564,-4.2649244
+8223,Badger and Co,Edinburgh,2,55.9521957,-3.2037561
+8227,Bar Luca,Kilmarnock,3,55.6090206,-4.4983403
+8273,The Larder Glasgow,Glasgow,3,55.920453,-4.3335434
+8276,Norn,Edinburgh,3,55.9732578,-3.1729879
+8279,111 By Nico,Glasgow,3,55.8172597,-4.1962145
+8282,Fanelli's,Glasgow,2,55.8583705,-4.2456573
+8287,Black Sheep Bistro,Glasgow,3,55.8725994,-4.2686726
+8296,Ashford Internation Hotel -Horizons Restaurant,Ashford,1,51.1574343,0.8699707
+8316,The Viking,West Kirby,3,53.3741575,-3.1684364
+8355,dim t London Bridge,London,2,51.5074746,-0.0879591
+8390,Ferryhill House Hotel,Aberdeen,2,57.1380445,-2.104468
+8413,Topolabamba Edinburgh,Edinburgh,2,55.9466552,-3.2052335
+8485,Deans Restaurant,Perth,3,56.3992228,-3.4326779
+8545,Lebowskis South Side,Glasgow,2,55.8371121,-4.272445
+8600,Turtle Bay Bristol CheltenhamRd,Bristol,2,51.4696502,-2.5936751
+8627,Chicama,London,3,51.483365,-0.1765175
+8668,The Wolf and Whistle,Belfast,1,54.5740794,-5.9839671
+8699,Bag o' Nails,Glasgow,3,55.8706619,-4.3014832
+8709,Chaophraya Aberdeen,Aberdeen,2,57.1459207,-2.1027488
+8710,Maggie Mays,Glasgow,1,55.8571189,-4.2453706
+8719,Spa Cafe,Glasgow,3,55.863343,-4.261878
+8726,Craig Millar @ 16 West End,St. Monans,3,56.2041036,-2.7680948
+8732,Cup Tea Lounge - Edinburgh,Edinburgh,2,55.9509842,-3.2057931
+8743,Scholars Restaurant,Glasgow,2,55.8630008,-4.2478616
+8764,The Corner House Kilwinning,Kilwinning,2,55.6535526,-4.7017485
+8770,l'Ecrivain Restaurant,Dublin,4,53.3362309,-6.2487513
+8814,The Elephant Pub & Bakehouse,Liverpool,3,53.3750165,-2.8666412
+8836,Liberty Tavern,Liverpool,3,53.3750165,-2.8666412
+8872,Bloom Brasserie,Dublin,3,53.3336613,-6.2449713
+8885,Chaakoo Glasgow,Glasgow,2,55.8613752,-4.2558403
+8913,Websters Bar and Bistro,Glasgow,3,55.8744571,-4.2781578
+8963,The Grove,Glasgow,2,55.920987,-4.151579
+8979,Chick N Sours -  Seven Dials,London,2,51.5136552,-0.1283688
+9043,Berber & Q - Shawarma Bar,London,2,51.5259925,-0.1086747
+9083,George's Great British Kitchen Newcastle,Newcastle,3,54.9746564,-1.6146282
+9087,The Drugstore Social,Glasgow,3,55.8672406,-4.2928706
+9121,Alchemilla,Glasgow,2,55.8651303,-4.2848377
