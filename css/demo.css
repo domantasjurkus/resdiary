@@ -30,6 +30,7 @@ h1, p, a {
 
 .tab-content {
 	min-height: 600px;
+	padding: 20px;
 }
 
 .nav-tabs>li.active>a {
@@ -38,6 +39,10 @@ h1, p, a {
 
 .not-rounded {
 	border-radius: 0 !important;
+}
+
+.dropdown {
+	margin-bottom: 30px
 }
 
 .rec-image {
