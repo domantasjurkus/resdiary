@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 	// TODO: replace with API call
 	function getUserIds() {
-		return [0,1,2];
+		return [6589241,34162351,13539951];
 	}
 
 	// TODO: replace with API call
@@ -32,12 +32,8 @@ $(document).ready(function() {
 
 	function drawRecommendations(id, recs) {
 		recs.forEach(function(rec) {
-
-			// TODO: remove when actual recommendations are given
-			if (rec.id != parseInt(id)) return;
-
 			// TODO: use a templating module and move HTML into another file
-			var entry = $('<img class="rec-image" src="https://resdiary.blob.core.windows.net/uploads/uk/3349/images/1430/Portal/Logo/img9216.png"><p class="rec-label">'+rec.name+'</p><hr class="rec-divider" />');
+			var entry = $('<img class="rec-image" src="https://resdiary.blob.core.windows.net/uploads/uk/3349/images/1430/Portal/Logo/img9216.png"><p class="rec-label">'+rec.Name+'</p><hr class="rec-divider" />');
 			$("#rec-list").append(entry);
 		});
 	}
