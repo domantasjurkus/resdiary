@@ -32,8 +32,29 @@ $(document).ready(function() {
 	function drawRecommendations(id, recs) {
 		recs.forEach(function(rec) {
 			// TODO: use a templating module and move HTML into another file
-			var entry = $('<div class="rec-div"><img class="rec-image" src="https://resdiary.blob.core.windows.net/uploads/uk/3349/images/1430/Portal/Logo/img9216.png"><p class="rec-label">'+rec.Name+'</p><hr class="rec-divider"/></div>');
+			console.log(rec);
+			var entry = $('<div class="rec-div"><img class="rec-image" src="https://resdiary.blob.core.windows.net/uploads/uk/3349/images/1430/Portal/Logo/img9216.png"><p class="rec-label">'+rec.restaurant_name+'</p><p class="small">'+rec.town+'</p><p class="small">Price point: '+rec.price_point+'</p><hr class="rec-divider"/></div>');
 			$("#rec-list").append(entry);
 		});
+	}
+
+	function csvJSON(csv){
+	  var lines=csv.split("\n");
+	  var result = [];
+	  var headers=lines[0].split(",");
+
+	  for(var i=1;i<lines.length;i++){
+
+		  var obj = {};
+		  var currentline=lines[i].split(",");
+
+		  for(var j=0;j<headers.length;j++){
+			  obj[headers[j]] = currentline[j];
+		  }
+
+		  result.push(obj);
+
+	  }
+	  return JSON.stringify(result); 
 	}
 });

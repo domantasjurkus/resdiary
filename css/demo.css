@@ -11,6 +11,12 @@ body {
 	height: 100%;
 }
 
+.jumbotron p.small{
+	font-size: 14px;
+	margin-left: 75px;
+	margin-bottom: 0;
+}
+
 .container {
 	background: #fff;
 	padding: 0;
