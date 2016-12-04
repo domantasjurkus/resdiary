@@ -1,6 +1,5 @@
 *.csv
 *.py[cod]
 __pycache__/
-data/
 node_modules/
 .idea/

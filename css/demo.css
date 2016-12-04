@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	font-family: 'Roboto', 'Open Sans', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .jumbotron {
@@ -56,7 +56,7 @@ h1, p, a {
 }
 
 .rec-divider {
-	padding: 1px;
-	background-color: #e849c8;
+	padding: 2px;
+	background-color: #f18edd;
 	margin: 7px 0;
 }

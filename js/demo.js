@@ -20,7 +20,6 @@ $(document).ready(function() {
 		return [6589241,34162351,13539951];
 	}
 
-	// TODO: replace with API call
 	function getRecommendations(id) {
 		$.ajax({
 			url: "/recs/"+id,
