@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var parse = require('csv-parse');
 var fs = require('fs');
 var pythonShell = require('python-shell');
+var pg = require('pg');
 
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/css', express.static(__dirname + '/css'));
@@ -11,6 +12,39 @@ app.use('/img', express.static(__dirname + '/img'));
 
 app.get('/', function(req, res) {
     res.sendFile('views/demo.html', { root: __dirname });
+});
+
+
+var config = {
+  user: 'team_i', //env var: PGUSER
+  database: 'dev', //env var: PGDATABASE
+  password: 'Team_i_08', //env var: PGPASSWORD
+  host: 'hsoc-prod.cwyfzstkekxt.eu-west-1.redshift.amazonaws.com', // Server hosting the postgres database
+  port: 5439, //env var: PGPORT
+  max: 10, // max number of clients in the pool
+  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+};
+
+var client = new pg.Client(config);
+
+/* connect to our database */
+client.connect(function (err) {
+  if (err) throw err;
+
+  /* execute a query on our database */
+  /* If you want a parameter then use  */
+  // client.query('SELECT * from resdiary.recommendations where user_id = $1', ['344561'], function (err, result) {
+  client.query('SELECT * from resdiary.recommendations', function (err, result) {
+    if (err) throw err;
+
+    /* just print the result to the console */
+    console.log(result.rows[0]);
+
+    /* disconnect the client */
+    client.end(function (err) {
+      if (err) throw err;
+    });
+  });
 });
 
 /* 
@@ -59,10 +93,11 @@ app.get('/recs/:id', function(req, res) {
     });
 });
 
+
 /* Call Python script to generate recommendation CSV automatically */
 // pythonShell.run('script.py', function (err) {
-//	if (err) throw err;
-//	console.log('Recommendation script success');
+// 	if (err) throw err;
+// 	console.log('Recommendation script success');
 // });
 
 var port = process.env.PORT||3000;
