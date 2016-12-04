@@ -5,10 +5,9 @@ var parse = require('csv-parse');
 var fs = require('fs');
 var pythonShell = require('python-shell');
 
-// app.use(express.static(__dirname + '/public'));
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/css', express.static(__dirname + '/css'));
-// app.use('/img', express.static(__dirname + '/img'));
+app.use('/img', express.static(__dirname + '/img'));
 
 app.get('/', function(req, res) {
     res.sendFile('views/demo.html', { root: __dirname });
@@ -25,10 +24,10 @@ app.get('/recs/:id', function(req, res) {
     if   (!req.params.id) id = 0;
     else id = req.params.id;
 
-    /* Read two files */
-    fs.readFile('./recommendations.csv', 'utf8', function(err1, recommendationsFile) {
-        fs.readFile('./Restaurant.csv', 'utf8', function(err2, restaurantsFile) {
-            /* Parse the files */
+    // read two files
+    fs.readFile('./data/Recommendations.csv', 'utf8', function(err1, recommendationsFile) {
+        fs.readFile('./data/Restaurant.csv', 'utf8', function(err2, restaurantsFile) {
+            // parse the files
             parse(recommendationsFile, {}, function(err3, recommendations) {
                 parse(restaurantsFile, {columns: true}, function(err4, restaurants) {
                     /* Filter out the relevant recommendations */
