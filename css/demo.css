@@ -17,7 +17,7 @@ body {
 }
 
 .nav-tabs {
-	background: #00b6f1;
+	background: #42a5f5;
 }
 
 h1, p, a {
@@ -33,6 +33,10 @@ h1, p, a {
 	padding: 20px;
 }
 
+.nav-tabs>li>a {
+	color: white;
+}
+
 .nav-tabs>li.active>a {
 	color: #00b6f1;
 }
@@ -43,6 +47,10 @@ h1, p, a {
 
 .dropdown {
 	margin-bottom: 30px
+}
+
+.rec-div {
+	margin-bottom: 25px;
 }
 
 .rec-image {
@@ -57,6 +65,6 @@ h1, p, a {
 
 .rec-divider {
 	padding: 2px;
-	background-color: #f18edd;
+	background-color: #ea80fc;
 	margin: 7px 0;
 }

@@ -32,7 +32,7 @@ $(document).ready(function() {
 	function drawRecommendations(id, recs) {
 		recs.forEach(function(rec) {
 			// TODO: use a templating module and move HTML into another file
-			var entry = $('<img class="rec-image" src="https://resdiary.blob.core.windows.net/uploads/uk/3349/images/1430/Portal/Logo/img9216.png"><p class="rec-label">'+rec.Name+'</p><hr class="rec-divider" />');
+			var entry = $('<div class="rec-div"><img class="rec-image" src="https://resdiary.blob.core.windows.net/uploads/uk/3349/images/1430/Portal/Logo/img9216.png"><p class="rec-label">'+rec.Name+'</p><hr class="rec-divider"/></div>');
 			$("#rec-list").append(entry);
 		});
 	}
