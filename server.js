@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var parse = require('csv-parse');
 var fs = require('fs');
+var pythonShell = require('python-shell');
 
 // app.use(express.static(__dirname + '/public'));
 app.use('/js', express.static(__dirname + '/js'));
@@ -12,6 +13,7 @@ app.use('/css', express.static(__dirname + '/css'));
 app.get('/', function(req, res) {
     res.sendFile('views/demo.html', { root: __dirname });
 });
+
 
 // API ports
 app.get('/recs/:id', function(req, res) {
@@ -40,6 +42,12 @@ app.get('/recs/:id', function(req, res) {
             });
         });
     });
+});
+
+/* Call Python script to generate recommendation CSV automatically */
+pythonShell.run('script.py', function (err) {
+	if (err) throw err;
+	console.log('Recommendation script success');
 });
 
 var port = process.env.PORT||3000;

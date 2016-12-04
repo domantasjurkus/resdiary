@@ -3,7 +3,7 @@ Recommendations engine for ResDiary (https://www.resdiary.com/)
 
 iTeam:
 - Vladimir Bardarski (PeshoGoshov): 
-- Paulius Dilkas (dilkas):
+- Paulius Dilkas (dilkas): 2146879d
 - Dom Jurkus (domantasjurkus):
 - Edward Kalfov (TheScouser):
 - Josh O'brien (Josh-Dev): 
