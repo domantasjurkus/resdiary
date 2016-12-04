@@ -1,5 +1,5 @@
 import csv
-with open('Booking.csv', 'rb') as b:
+with open('data/Booking.csv', 'rb') as b:
     reader = csv.reader(b)
     bookings = list(reader)
 
@@ -7,7 +7,7 @@ with open('Booking.csv', 'rb') as b:
 
 
 
-with open('Restaurant.csv', 'rb') as r:
+with open('data/Restaurant.csv', 'rb') as r:
     reader = csv.reader(r)
     restaurants = list(reader)
 
@@ -104,7 +104,7 @@ recom = {}
 
 # write recommendations of the type ([userID],[restaurantID]) into a file called recommendations.csv
 
-with open('recommendations.csv', 'wb') as csvfile:
+with open('data/Recommendations.csv', 'wb') as csvfile:
     fieldnames = ['userID', 'restaurantID']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
