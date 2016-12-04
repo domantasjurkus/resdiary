@@ -14,25 +14,28 @@ app.get('/', function(req, res) {
     res.sendFile('views/demo.html', { root: __dirname });
 });
 
+app.get('/netflix-hover', function(req, res){
+	res.sendFile('views/netflix-hover.html', {root: __dirname});
+});
 
-// API ports
+/* API ports */
 app.get('/recs/:id', function(req, res) {
 
     var id;
     if   (!req.params.id) id = 0;
     else id = req.params.id;
 
-    // read two files
+    /* Read two files */
     fs.readFile('./recommendations.csv', 'utf8', function(err1, recommendationsFile) {
         fs.readFile('./Restaurant.csv', 'utf8', function(err2, restaurantsFile) {
-            // parse the files
+            /* Parse the files */
             parse(recommendationsFile, {}, function(err3, recommendations) {
                 parse(restaurantsFile, {columns: true}, function(err4, restaurants) {
-                    // filter out the relevant recommendations
+                    /* Filter out the relevant recommendations */
                     res.send(recommendations.filter(function(recommendation) {
                         return recommendation[0] == id;
                     }).map(function(recommendation) {
-                        // find the information about each restaurant
+                        /* Find the information about each restaurant */
                         return restaurants.find(function(restaurant) {
                             return restaurant['RestaurantId'] ==
                                 recommendation[1];
