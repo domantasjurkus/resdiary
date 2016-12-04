@@ -13,7 +13,6 @@ app.get('/', function(req, res) {
     res.sendFile('views/demo.html', { root: __dirname });
 });
 
-
 /* 
     Possibly have the demo as the / for Wednesday.
     Later change / to index and have the existing / new user split as discussed.
@@ -23,10 +22,13 @@ app.get('/index', function(req, res){
     res.sendFile('views/index.html', {root: __dirname});
 });
 
-app.get('/netflix-hover', function(req, res){
-	res.sendFile('views/netflix-hover.html', {root: __dirname});
+app.get('/netflix-hover-horizontal', function(req, res){
+	res.sendFile('views/netflix-hover-horizontal.html', {root: __dirname});
 });
 
+app.get('/netflix-hover-vertical', function(req, res){
+    res.sendFile('views/netflix-hover-vertical.html', {root: __dirname});
+});
 
 /* API ports */
 app.get('/recs/:id', function(req, res) {
@@ -35,10 +37,10 @@ app.get('/recs/:id', function(req, res) {
     if   (!req.params.id) id = 0;
     else id = req.params.id;
 
-    // read two files
+    /* Read two files */
     fs.readFile('./data/Recommendations.csv', 'utf8', function(err1, recommendationsFile) {
         fs.readFile('./data/Restaurant.csv', 'utf8', function(err2, restaurantsFile) {
-            // parse the files
+            /* Parse the files */
             parse(recommendationsFile, {}, function(err3, recommendations) {
                 parse(restaurantsFile, {columns: true}, function(err4, restaurants) {
                     /* Filter out the relevant recommendations */
@@ -58,10 +60,10 @@ app.get('/recs/:id', function(req, res) {
 });
 
 /* Call Python script to generate recommendation CSV automatically */
-pythonShell.run('script.py', function (err) {
-	if (err) throw err;
-	console.log('Recommendation script success');
-});
+// pythonShell.run('script.py', function (err) {
+//	if (err) throw err;
+//	console.log('Recommendation script success');
+// });
 
 var port = process.env.PORT||3000;
 http.listen(port, function() {
