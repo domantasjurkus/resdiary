@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 	// TODO: replace with API call
 	function getUserIds() {
-		return [6589241,34162351,13539951];
+		return [6589241,34162351,13539951,5185025,32131221,7115883,15552195,32131221];
 	}
 
 	function getRecommendations(id) {
