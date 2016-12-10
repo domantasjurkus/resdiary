@@ -18,9 +18,9 @@ app.get('/', function(req, res) {
 var config = {
   user: 'team_i', //env var: PGUSER
   database: 'dev', //env var: PGDATABASE
-  password: 'Team_i_08', //env var: PGPASSWORD
-  host: 'hsoc-prod.cwyfzstkekxt.eu-west-1.redshift.amazonaws.com', // Server hosting the postgres database
-  port: 5439, //env var: PGPORT
+  password: '', //env var: PGPASSWORD
+  host: 'team-i-dev.cuslwdgfxmvv.eu-west-1.rds.amazonaws.com', // Server hosting the postgres database
+  port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 };
