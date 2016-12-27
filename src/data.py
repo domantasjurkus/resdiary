@@ -1,11 +1,19 @@
+import os
 from collections import Counter
 from pyspark.sql import SQLContext
 
 def read(spark, filename):
     '''Takes a SparkContext instance and a filename and returns a DataFrame
     containing the parsed CSV file from the data/ directory.'''
-    return SQLContext(spark).read.csv('data/' + filename, header=True,
-                                      inferSchema=True, nullValue='NULL')
+    return SQLContext(spark).read.csv(os.path.join('data', filename),
+                                      header=True, inferSchema=True,
+                                      nullValue='NULL')
+
+def write(filename, df):
+    '''Takes a filename and a DataFrame and writes the contents of the DataFrame
+    to the specified CSV file.'''
+    df.toPandas().to_csv(os.path.join('data', filename), index=False)
+
 def filter_outliers(spark, df):
     '''Takes a SparkContext instance and a DataFrame of bookings and returns a
     new DataFrame without diners that have suspiciously frequent reservations.
