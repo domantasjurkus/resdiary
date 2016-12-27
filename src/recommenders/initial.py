@@ -1,3 +1,5 @@
+from collections import defaultdict
+from sets import Set
 from pyspark.sql import SQLContext
 from data import read
 
@@ -36,9 +38,9 @@ def generate_recommendations(spark, bookings):
                 k += 1
             j += 1
 
-    score = {}
-    # [userID] [[other userID],[similarity score with that user]] - similarity
+    # [userID] ([other userID], [similarity score with that user]) - similarity
     # score - represents differences in review scores => less = more similar
+    closest = {}
     for i in hasreview:
         j = 0
         while j < len(hasreview[i]):
@@ -47,27 +49,20 @@ def generate_recommendations(spark, bookings):
                 while k < len(hasreview[i]):
                     if len(hasreview[i][k]) > 0:
                         if hasreview[i][k][0] != hasreview[i][j][0]:
-                            score.setdefault(hasreview[i][j][0], [])
-                            score[hasreview[i][j][0]].append(
-                                [hasreview[i][k][0],
-                                 abs(round(float(hasreview[i][j][1]) -
-                                           float(hasreview[i][k][1]), 1))])
+                            score = abs(round(float(hasreview[i][j][1]) -
+                                              float(hasreview[i][k][1]), 1))
+                            if (hasreview[i][j][0] not in closest or
+                                score < closest[hasreview[i][j][0]][1]):
+                                closest[hasreview[i][j][0]] = (
+                                    hasreview[i][k][0], score)
                     k += 1
             j += 1
 
-    # generate a list of recommendations
-    recommendations = []
-    for i in score:
-        minResult = 100
-        j = 0
-        while j < len(score[i]):
-            if score[i][j][1] < minResult:
-                minResult = score[i][j][1]
-                mostSimUser = score[i][j][0]
-            j += 1
-
-            # gives output in appropriate format
-            for k in visited.get(mostSimUser):
-                recommendations.append((i, k))
-    return SQLContext(spark).createDataFrame(spark.parallelize(recommendations),
-                                             ['userID', 'restaurantID'])
+    # generate a list of recommended restaurants for each diner
+    recommendations = defaultdict(Set)
+    for i in closest:
+        for k in visited.get(closest[i][0]):
+            recommendations[i].add(k)
+    return SQLContext(spark).createDataFrame(spark.parallelize(
+        [(diner, restaurant) for diner in recommendations
+         for restaurant in recommendations[diner]]), ['userID', 'restaurantID'])
