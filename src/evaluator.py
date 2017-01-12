@@ -35,6 +35,11 @@ def evaluate(spark, algorithm, bookings_data):
     # results
     recommendations = algorithm(spark, SQLContext(spark).createDataFrame(
         spark.parallelize(partial_data), schema=bookings_data.schema))
+
+    # Edge case - consider returning None
+    if not recommendations:
+        return 0.0
+
     right = 0
     total = 0
     for recommendation in recommendations.collect():
