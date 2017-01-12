@@ -1,0 +1,151 @@
+% This example An LaTeX document showing how to use the l3proj class to
+% write your report. Use pdflatex and bibtex to process the file, creating 
+% a PDF file as output (there is no need to use dvips when using pdflatex).
+% Modified 
+
+% This dissertation was built upon base template provided.
+
+\documentclass{l3proj}
+
+\begin{document}
+
+\title{Team I: ResDiary Restaurant Recommendation System}
+
+\author{Vladimir Bardarski \\
+        Paulius Dilkas \\
+        Domantas Jurkus \\
+        Edward Kalfov \\
+        Josh O'brien \\
+		Joseph O'Hagan}
+
+\date{1 January 2000}
+
+\maketitle
+
+\begin{abstract}
+The abstract shall go here! Here is some things to keep in mind while writing it.
+\end{abstract}
+
+\begin{itemize}
+\item The abstract is likely the first substantive description of your work read by an examiner. View it as an opportunity to set accurate expectations.
+\item The abstract is a summary of the whole thesis. It presents all the major elements of your work in a highly condensed form. (Write it having written the rest of the paper) The paper sets the abstract.
+\item It must be capable of substituting for the whole paper when there is insufficient time and space for the full text.
+\item Keep it short and snappy. 
+\item The primary function of your thesis (and by extension your abstract) is not to tell readers what you did, it is to tell them what you discovered.
+\item Approximately the last half of the abstract should be dedicated to summarizing and interpreting your results.
+\item The most common error in abstracts is failure to present results.
+\end{itemize}
+
+% Comment out this line if you do not wish to give consent for your work to be distributed in electronic format.
+% We hereby give consent - spread the knowledge - pending on result of project
+\educationalconsent
+
+\newpage
+
+%==============================================================================
+\section{Introduction}
+% An introduction, explaining the purpose of the document, a very brief outline of the project and a summary of the structure of the rest of the document (approximately 1-2 pages).
+
+% ------ Notes on dissertation structure ------
+The dissertation should contain the following sections.
+
+\begin{itemize}
+\item An introduction, explaining the purpose of the document, a very brief outline of the project and a summary of the structure of the rest of the document (approximately 1-2 pages).
+\item A description of the case study background and context. This should include a description of the project customer (what was the nature of the organisation you were working for), their objectives for the project, and a summary of what was actually achieved. Where appropriate, this section should also make reference to similar related projects in order to make the context clear (approximately 4-5 pages).
+\item Several sections that reflect on your experiences during the team project. Each section should discuss one theme, characterised by incidents or events that occurred during the team course of the project from which you learned (approximately 12-15 pages).
+\item A conclusion that draws general and wider lessons from the case study (approximately 1-2 pages).
+\item References (approximately 1-2 pages)
+\end{itemize}
+% ----------------
+
+This document is the dissertation of Team I, a team consisting of 6 third year Computing Science students at The University of Glasgow. Its purpose is to document the development of the project created as part of the Professional Software Development (PSD3) course. The project was to build a restraunt recommendation engine for the Glasgow based company ResDiary that they could potentially integrate into their exsisting system at a later date.  
+
+This structure of this dissertation is as follows:
+
+% Example of sectioning
+Section \ref{sec:background} presents the background of the case study discussed, describing the customer and project context, aims and objectives and project state at the time of writing.  
+
+Sections \ref{sec:alice} through Section \ref{sec:reflections} discuss issues that arose during the project...
+
+\newpage
+
+%==============================================================================
+\section{Case Study Background}
+\label{sec:background}
+% A description of the case study background and context. This should include a description of the project customer (what was the nature of the organisation you were working for), their objectives for the project, and a summary of what was actually achieved. Where appropriate, this section should also make reference to similar related projects in order to make the context clear (approximately 4-5 pages).
+
+\subsection{Customer}
+\label{customer}
+% The customer organisation and background.
+ResDiary is a Glasgow based online restruant reservation system which was founded in 2006. They are a commerical organisation whose service provides a commission-free online reservation system. Their aim is to provide a booking platform and table management system that is comprehensive and easy to use by both the hospitality industry and their guests. 
+
+For the duration of the project ResDiary senior software engineer's Adam Connelly and Ian Strachan served as both the customer and contact for the project. 
+
+\subsection{Initial Objectives And Rationale}
+\label{initobjectives}
+% The rationale and initial objectives for the project.
+
+\subsection{Delivered Software}
+\label{finsoftware}
+% Information on the final software that was delivered to the customer.
+
+\newpage
+
+%==============================================================================
+\section{Alice}
+\label{sec:alice}
+
+ALICE \cite{alice} was beginning to get very tired of sitting by her sister
+on the bank and of having nothing to do: once or twice she had peeped into
+the book her sister was reading, but it had no pictures or conversations in
+it, ``and what is the use of a book,'' thought Alice, ``without pictures or
+conversations?'
+
+\input{figures/alice}
+
+Alice opened the door (see Figure \ref{fig:alice}) and found that it
+led into a small passage, not much larger than a rat-hole: she knelt
+down and looked along the passage into the loveliest garden you ever
+saw. How she longed to get out of that dark hall, and wander about
+among those beds of bright flowers and those cool fountains, but she
+could not even get her head through the doorway; ``and even if my head
+would go through,'' thought poor Alice, ``it would be of very little
+use without my shoulders. Oh, how I wish I could shut up like a
+telescope! I think I could, if I only knew how to begin.'' For, you
+see, so many out-of-the- way things had happened lately, that Alice
+had begun to think that very few things indeed were really impossible.
+
+%==============================================================================
+
+\section{Choice of Colours}
+\label{design}
+
+The following diagrams (especially figure \ref{fig:alice}) illustrate the
+process...
+
+%==============================================================================
+\section{Managing Dress Sense}
+\label{managing}
+
+In this chapter, we describe how the implemented the system.
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\section{Reflections}
+\label{sec:reflections}
+% Several sections that reflect on your experiences during the team project. Each section should discuss one theme, characterised by incidents or events that occurred during the team course of the project from which you learned (approximately 12-15 pages).
+
+%------------------------------------------------------------------------------
+\section{Conclusions}
+\label{sec:conclusions}
+% A conclusion that draws general and wider lessons from the case study (approximately 1-2 pages)
+
+Explain the wider lessons that you learned about software engineering,
+based on the specific issues discussed in previous sections.  Reflect
+on the extent to which these lessons could be generalised to other
+types of software project.  Relate the wider lessons to others
+reported in case studies in the software engineering literature.
+
+%==============================================================================
+\bibliographystyle{plain}
+\bibliography{dissertation}
+\end{document}
