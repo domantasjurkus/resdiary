@@ -16,7 +16,7 @@ class EvaluatorTest(unittest.TestCase):
 	def setUpClass(self):
 		self.sc = SparkContext()
 		self.data = SQLContext(self.sc).read.csv(
-	        'tests/stubs/StubBookings.csv',
+	        'tests/stubs/StubBookings.txt',
 	        header=True,
 	        inferSchema=True,
 	        nullValue='NULL'
