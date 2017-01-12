@@ -1,0 +1,4 @@
+Diner Id,Restaurant Name,Restaurant Id,Visit Time,Covers,Review Score
+1,Restaurant 01,1,2017-01-01 12:00:00,2,5
+2,Restaurant 02,2,2017-01-01 15:30:00,2,3.8
+3,Restaurant 02,2,2017-01-01 15:30:00,2,4.8

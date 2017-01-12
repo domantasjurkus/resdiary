@@ -2,6 +2,8 @@ from collections import defaultdict
 from sets import Set
 from pyspark.sql import SQLContext
 
+# This is a copy of the initial recommendations algorithm
+# Should be simplified to give more predictable results
 def get_recommendations(spark, bookings):
     '''Takes a SparkContext instance and a DataFrame of bookings and returns a
     DataFrame of recommendations.'''
