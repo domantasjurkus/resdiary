@@ -19,10 +19,10 @@ ssh -L 8000:130.209.251.67:80 -L 8080:130.209.251.67:8080 <yourGUID>@sibu.dcs.gl
 - To access the VM sign in as you do in the lab: ssh -i teamkey.pem yourUsername@130.209.251.67
 
 ###Dissertation Notes
-The dissertation must be prepared using the LaTeX template provided.
-The dissertation is a reflection on the team's experiences during the project.
-The dissertation should be a single PDF document of a maximum of 20 pages including front matter and references.
-The LaTeX source for the template, the dissertation and any assoicated figures must be present in your repository.
-NOTE: The PDF itself should not be stored in the repository.  
+- The dissertation must be prepared using the LaTeX template provided.
+- The dissertation is a reflection on the team's experiences during the project.
+- The dissertation should be a single PDF document of a maximum of 20 pages including front matter and references.
+- The LaTeX source for the template, the dissertation and any assoicated figures must be present in your repository.
+- NOTE: The PDF itself should not be stored in the repository.  
 
 Deadline:  Friday 24th March 2017 at 4pm
