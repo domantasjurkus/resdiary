@@ -10,10 +10,11 @@ def collaborative_filtering_model(data):
 
 sc = SparkContext('local', 'Recommendation Engine')
 ratings = sc.parallelize(get_bookings_with_score(read_csv(sc,'/home/edward/Downloads/Booking.csv')))
+ratings, test_ratings = ratings.randomSplit([0.7,0.3])
 data = sc.parallelize(get_data_array(read_csv(sc,'/home/edward/Downloads/Booking.csv')))
 model = collaborative_filtering_model(ratings)
 
-testdata = data.map(lambda p: (p[0], p[2]))
+testdata = test_ratings.map(lambda p: (p[0], p[1]))
 predictions = model.predictAll(testdata).map(lambda r: ((r[0], r[1]), r[2]))
 print predictions.collect()
 with open('predictions_all.txt','w') as pred_file:
