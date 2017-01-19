@@ -2,4 +2,5 @@
 *.py[cod]
 __pycache__/
 node_modules/
+src/data/
 .idea/
