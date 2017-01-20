@@ -1,17 +1,17 @@
 import data
 from pyspark import SparkContext
 from evaluator import evaluate
-from recommenders import initial
+from recommenders import initial, ALS
 
 sc = SparkContext('local', 'Recommendation Engine')
-bookings = data.read(sc, 'Booking.csv')
+bookings = data.filter_outliers(sc, data.read(sc, 'Booking.csv'))
 
 # data for the front end
-data.write('Recommendations.csv', initial.generate_recommendations(sc, bookings))
+data.write('Recommendations.csv', ALS.generate_recommendations(sc, bookings))
 
 # evaluation
-print '{:.3f}% of the recommendations were good'.format(evaluate(
-    sc, initial.generate_recommendations,
-    data.filter_outliers(sc, bookings)))
+for name, algorithm in [('Initial', initial), ('ALS', ALS)]:
+    print '{}: {:.3f}%'.format(
+        name, evaluate(sc, algorithm.generate_recommendations, bookings))
 
 sc.stop()
