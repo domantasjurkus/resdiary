@@ -1,11 +1,21 @@
 from collections import Counter
 from pyspark.sql import SQLContext
+from pyspark.mllib.recommendation import Rating
 
 def read(spark, filename):
     '''Takes a SparkContext instance and a filename and returns a DataFrame
     containing the parsed CSV file from the data/ directory.'''
     return SQLContext(spark).read.csv('data/' + filename, header=True,
                                       inferSchema=True, nullValue='NULL')
+
+def get_bookings_with_score(spark, data):
+    '''Takes a SparkContext instance and a DataFrame of bookings and returns an
+    RDD of Rating objects constructed from bookings that have non-null review
+    scores.'''
+    return spark.parallelize([Rating(row['Diner Id'], row['Restaurant Id'],
+                                     row['Review Score'])
+                              for row in data.collect() if row['Review Score']])
+
 def filter_outliers(spark, df):
     '''Takes a SparkContext instance and a DataFrame of bookings and returns a
     new DataFrame without diners that have suspiciously frequent reservations.
