@@ -6,7 +6,7 @@ from pyspark.mllib.recommendation import Rating
 def read(spark, filename):
     '''Takes a SparkContext instance and a filename and returns a DataFrame
     containing the parsed CSV file from the data/ directory.'''
-    return SQLContext(spark).read.csv(os.path.join('data', filename),
+    return SQLContext(spark).read.csv(filename,
                                       header=True, inferSchema=True,
                                       nullValue='NULL')
 

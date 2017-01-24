@@ -1,4 +1,4 @@
-# ResDiary
+#ResDiary
 Recommendations engine for ResDiary (https://www.resdiary.com/)
 
 iTeam:
@@ -8,6 +8,14 @@ iTeam:
 - Edward Kalfov (TheScouser):
 - Josh O'brien (Josh-Dev): 
 - Joseph O'Hagan (JosephOHagan): 2136120o 
+
+#Usage
+To run the recommendations script:
+`cd src`
+`spark-submit main.py --alg=ALS --data=data/Booking.csv` provided there is a folder `src/data`
+
+Options for `--alg`: `initial` `ALS`
+`--data` path can be relative (`src/data/Booking.csv`) or absolute (`/home/steve/Booking.csv`)
 
 ###Outside of lab access Jenkins / Trac / VM
 Fire up the terminal and enter:
