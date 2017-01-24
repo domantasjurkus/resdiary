@@ -7,9 +7,9 @@ def generate_recommendations(spark, bookings):
         raise TypeError('Recommender requires a DataFrame')
 
     ratings = get_bookings_with_score(spark, bookings)
-    ratings, test_ratings = ratings.randomSplit([0.9,0.1])
+    # ratings, test_ratings = ratings.randomSplit([0.9,0.1])
     model = ALS.train(ratings, 12, 10,0.1)
-    testdata = test_ratings.map(lambda p: (p[0], p[1]))
+    testdata = ratings.map(lambda p: (p[0], p[1]))
     print ""
     if testdata.isEmpty():
         raise ValueError('RDD is empty')
