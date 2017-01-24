@@ -1,23 +1,32 @@
 $(document).ready(function() {
-    var userIds = getUserIds();
-
-    userIds.forEach(function(id) {
-        var li = $('<li><a href="#" class="user-id">'+id+'</a></li>');
-
-        // Populate/update recommendations list on dropdown select
-        li.on('click', function() {
-            $("#rec-list").html('');
-            var id = $(this).children().html();
-            var recs = getRecommendations(id);
-        });
-
-        $("#user-id-ul").append(li);
+    
+    $.ajax({
+        url: '/data',
+        success: function(data) {
+            drawDropdown(data);
+        }, error: function() {
+            console.log("Error calling /data");
+        }
     });
 
-    // TODO: replace with API call
-    function getUserIds() {
-        return [6589241,34162351,13539951,5185025,32131221,7115883,15552195,32131221];
-    }
+    function drawDropdown(data) {
+        var userIds = data.map(function(object) {
+            return object.userID
+        })
+
+        userIds.forEach(function(id) {
+            var li = $('<li><a href="#" class="user-id">'+id+'</a></li>');
+
+            // Populate/update recommendations list on dropdown select
+            li.on('click', function() {
+                $("#rec-list").html('');
+                var id = $(this).children().html();
+                var recs = getRecommendations(id);
+            });
+
+            $("#user-id-ul").append(li);
+        });
+    }  
 
     function getRecommendations(id) {
         $.ajax({
@@ -37,23 +46,4 @@ $(document).ready(function() {
         });
     }
 
-    function csvJSON(csv){
-        var lines=csv.split("\n");
-        var result = [];
-        var headers=lines[0].split(",");
-
-        for(var i=1;i<lines.length;i++){
-
-            var obj = {};
-            var currentline=lines[i].split(",");
-
-            for(var j=0;j<headers.length;j++){
-                obj[headers[j]] = currentline[j];
-            }
-
-            result.push(obj);
-
-        }
-        return JSON.stringify(result);
-    }
 });

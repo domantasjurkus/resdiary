@@ -17,8 +17,8 @@ var config = {
 module.exports = {
     readCSV: function(id, res) {
         // read two files
-        fs.readFile('./data/Recommendations.csv', 'utf8', function(err1, recommendationsFile) {
-            fs.readFile('./data/Restaurant.csv', 'utf8', function(err2, restaurantsFile) {
+        fs.readFile('./src/data/Recommendations.csv', 'utf8', function(err1, recommendationsFile) {
+            fs.readFile('./src/data/Restaurant.csv', 'utf8', function(err2, restaurantsFile) {
                 // parse the files
                 parse(recommendationsFile, {}, function(err3, recommendations) {
                     parse(restaurantsFile, {columns: true}, function(err4, restaurants) {
