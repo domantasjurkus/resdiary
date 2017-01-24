@@ -21,6 +21,7 @@ class EvaluatorTest(BaseTestCase):
 	        nullValue='NULL'
 	    )
 
+
 	def test_no_recommendations(self):
 		score = evaluator.evaluate(
 			self.sc,
@@ -30,6 +31,7 @@ class EvaluatorTest(BaseTestCase):
 
 		# Data set should be too small to make any recommendations
 		self.assertTrue(score==0.0);
+
 
 	@classmethod
 	def tearDownClass(self):

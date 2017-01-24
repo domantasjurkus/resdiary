@@ -9,9 +9,9 @@ from test_superclass import *
 # Append the source directory to the system path
 # so that we can import the files for testing
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src/recommenders'))
-import initial as algorithm
+import ALS as algorithm
 
-class InitialAlgorithmTest(BaseTestCase):
+class ALSAlgorithmTest(BaseTestCase):
 
 	@classmethod
 	def setUpClass(self):
@@ -24,8 +24,8 @@ class InitialAlgorithmTest(BaseTestCase):
 
 
 	def test_main(self):
-		# Check that the propper class is returned
-		self.assertIsInstance(algorithm.generate_recommendations(self.sc, self.data), DataFrame)
+		# Check for detection of empty RDD
+		self.assertRaises(ValueError, algorithm.generate_recommendations, self.sc, self.data)
 
 		# Check that an exception is thrown if wrong argument provided
 		self.assertRaises(TypeError, algorithm.generate_recommendations, self.sc, ['foo', 'bar'])

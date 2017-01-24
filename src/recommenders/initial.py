@@ -1,9 +1,12 @@
 from collections import defaultdict
 from sets import Set
 from pyspark.sql import SQLContext
+from pyspark.sql.dataframe import DataFrame
 from data import read
 
 def generate_recommendations(spark, bookings):
+    if not isinstance(bookings, DataFrame):
+        raise TypeError('Recommender requires a DataFrame')
     '''Takes a SparkContext instance and a DataFrame of bookings and returns a
     DataFrame of recommendations.'''
     # extract all the relevant information from the bookings DataFrame
