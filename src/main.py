@@ -3,7 +3,8 @@ import data
 import argparse
 
 def get_bookings(filename):
-	bookings = data.filter_outliers(sc, data.read(sc, filename))
+	# bookings = data.filter_outliers(sc, data.read(sc, filename))
+	bookings = data.read(sc, filename)
 	return bookings
 
 
@@ -16,7 +17,7 @@ def execute_algorithm(algorithm,filename):
 # evaluation
 def evaluate_algorithm(algorithm,filename):
 	bookings = get_bookings(filename)
-	print '{}: {:.3f}%'.format(algorithm, evaluate(sc, algorithms[algorithm.lower()].generate_recommendations, bookings))
+	# print '{}: {:.3f}%'.format(algorithm, evaluate(sc, algorithms[algorithm.lower()].generate_recommendations, bookings))
 
 
 def get_absolute_path(filename):
@@ -39,10 +40,11 @@ if __name__ == "__main__":
 	# Import only if arguments were provided
 	from pyspark import SparkContext
 	from evaluator import evaluate
-	from recommenders import initial, ALS
+	from recommenders import initial, ALS, ALS_2
 
 	sc = SparkContext('local', 'Recommendation Engine')
-	algorithms = {"als":ALS,"initial":initial}
+	sc.setLogLevel("ERROR")
+	algorithms = {"als":ALS,"als2":ALS_2,"initial":initial}
 
 	execute_algorithm(args.alg,args.data)
 	evaluate_algorithm(args.alg,args.data)
