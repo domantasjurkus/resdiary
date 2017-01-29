@@ -3,10 +3,16 @@ from collections import Counter
 from pyspark.sql import SQLContext
 from pyspark.mllib.recommendation import Rating
 
+def get_bookings(spark, filename):
+    '''Takes a SparkContext instance and a filename and returns a DataFrame
+    of booking data without users that have too much data to be real. Use this
+    function to read Booking.csv'''
+    return filter_outliers(spark, read(spark, filename))
+
 def read(spark, filename):
     '''Takes a SparkContext instance and a filename and returns a DataFrame
     containing the parsed CSV file from the data/ directory.'''
-    return SQLContext(spark).read.csv(filename,
+    return SQLContext(spark).read.csv(os.path.join('data', filename),
                                       header=True, inferSchema=True,
                                       nullValue='NULL')
 
