@@ -2,7 +2,6 @@ from collections import defaultdict
 from sets import Set
 from pyspark.sql import SQLContext
 from pyspark.sql.dataframe import DataFrame
-from data import read
 
 def generate_recommendations(spark, bookings):
     if not isinstance(bookings, DataFrame):

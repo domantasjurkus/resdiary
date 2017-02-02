@@ -1,18 +1,17 @@
 import os, sys
-import data
 import argparse
+from data import Data
 
 def execute_algorithm(algorithm, filename):
-	bookings = data.get_bookings(sc, filename)
+	bookings = data.get_bookings(filename)
         algorithm = algorithms[algorithm.lower()]
 	data.write('Recommendations.csv',
                    algorithm.generate_recommendations(sc, bookings))
 
 def evaluate_algorithm(algorithm_name, filename):
-	bookings = data.get_bookings(sc, filename)
+	bookings = data.get_bookings(filename)
         algorithm = algorithms[algorithm_name.lower()].generate_recommendations
-	print '{}: {:.3f}%'.format(algorithm_name,
-                                   evaluate(sc, algorithm, bookings))
+	print '{}: {:.3f}%'.format(algorithm_name, evaluate(sc, algorithm, bookings))
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(
@@ -33,6 +32,7 @@ if __name__ == "__main__":
 
 	sc = SparkContext('local', 'Recommendation Engine')
 	sc.setLogLevel("ERROR")
+        data = Data(sc)
 	algorithms = {"als": ALS, "als2": ALS_2, "initial": initial,
                       "implicit": implicit_ALS}
 
