@@ -12,8 +12,7 @@ def get_bookings(spark, filename):
 def read(spark, filename):
     '''Takes a SparkContext instance and a filename and returns a DataFrame
     containing the parsed CSV file from the data/ directory.'''
-    return SQLContext(spark).read.csv(os.path.join('data', filename),
-                                      header=True, inferSchema=True,
+    return SQLContext(spark).read.csv(filename, header=True, inferSchema=True,
                                       nullValue='NULL')
 
 def write(filename, df):

@@ -25,10 +25,13 @@ class ALSAlgorithmTest(BaseTestCase):
 
 	def test_main(self):
 		# Check for detection of empty RDD
-		self.assertRaises(ValueError, algorithm.generate_recommendations, self.sc, self.data)
+		self.assertRaises(ValueError,
+                                  algorithm.generate_recommendations, self.sc,
+                                  SQLContext(self.sc).createDataFrame([], schema=self.data.schema))
 
 		# Check that an exception is thrown if wrong argument provided
-		self.assertRaises(TypeError, algorithm.generate_recommendations, self.sc, ['foo', 'bar'])
+		self.assertRaises(TypeError, algorithm.generate_recommendations,
+                                  self.sc, ['foo', 'bar'])
 
 
 	@classmethod
