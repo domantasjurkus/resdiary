@@ -21,8 +21,8 @@ if __name__ == "__main__":
 	parser.add_argument('--data', type=str, help='The data file.')
 	args = parser.parse_args()
 
-	if args.alg is None or args.data is None:
-		print "\nUsage: spark-submit src/main.py --alg=<intial, ALS> --data=Booking.csv\n"
+	if args.alg is None or args.data is None: # pragma: no cover
+		print "\nUsage: python main.py --alg=<intial, ALS> --data=data/Booking.csv\n"
 		sys.exit()
 
 	# Import only if arguments were provided

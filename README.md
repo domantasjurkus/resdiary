@@ -12,7 +12,7 @@ iTeam:
 #Usage
 To run the recommendations script:
 `cd src`
-`spark-submit main.py --alg=ALS --data=data/Booking.csv` provided there is a folder `src/data`
+`python main.py --alg=ALS --data=data/Booking.csv` provided there is a folder `src/data`
 
 Options for `--alg`: `initial` `ALS`
 `--data` path can be relative (`src/data/Booking.csv`) or absolute (`/home/steve/Booking.csv`)
