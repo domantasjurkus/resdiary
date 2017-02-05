@@ -1,5 +1,0 @@
-#!/bin/bash
-
-python tests/main.py
-
-exit 0
