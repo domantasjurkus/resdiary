@@ -9,13 +9,27 @@ iTeam:
 - Josh O'brien (Josh-Dev): 
 - Joseph O'Hagan (JosephOHagan): 2136120o 
 
-#Usage
-To run the recommendations script:
-`cd src`
-`python main.py --alg=ALS --data=data/Booking.csv` provided there is a folder `src/data`
 
-Options for `--alg`: `initial` `ALS`
-`--data` path can be relative (`src/data/Booking.csv`) or absolute (`/home/steve/Booking.csv`)
+#Generating recommendations
+To run the recommendations script (provided there is a directory `src/data/`):
+```
+cd src
+python main.py --alg=ALS --data=data/Booking.csv`
+```
+
+
+`--alg`: [`initial`, `ALS`]  
+`--data`: relative (`src/data/Booking.csv`) or absolute (`/home/steve/Booking.csv`) path.  
+
+
+#Presentation
+`node server.js` will launch a server on `http://localhost:3000`.  
+Recommendations are fetched by default from from `src/data/Recommendations.csv`.  
+
+
+##Testing
+`python test.py` triggers tests and produces coverage reports in `coverage/`.
+
 
 ###Outside of lab access Jenkins / Trac / VM
 Fire up the terminal and enter:
@@ -25,6 +39,7 @@ ssh -L 8000:130.209.251.67:80 -L 8080:130.209.251.67:8080 <yourGUID>@sibu.dcs.gl
 - To access Jenkins go to http://localhost:8080/
 - To access the Trac page visit http://localhost:8000/projects/myproject/
 - To access the VM sign in as you do in the lab: ssh -i teamkey.pem yourUsername@130.209.251.67
+
 
 ###Dissertation Notes
 - The dissertation must be prepared using the LaTeX template provided.
