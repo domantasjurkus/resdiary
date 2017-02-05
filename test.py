@@ -22,6 +22,7 @@ def cover():
     basedir = os.path.abspath(os.path.dirname(__file__))
     covdir = os.path.join(basedir, 'coverage')
     cov.html_report(directory=covdir)
+    cov.xml_report(outfile="coverage/coverage.xml")
     cov.erase()
 
 if __name__ == "__main__":
