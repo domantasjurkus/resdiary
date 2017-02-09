@@ -25,7 +25,7 @@ class EvaluatorTest(BaseTestCase):
 	def test_no_recommendations(self):
 		score = evaluator.evaluate(
 			self.sc,
-			stub_algorithm.get_recommendations,
+			stub_algorithm.StubRecommender,
 			self.data
 		)
 

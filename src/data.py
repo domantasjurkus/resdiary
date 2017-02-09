@@ -7,35 +7,42 @@ class Data(Base):
     '''Stores all the utility functions related to data handling'''
 
     def get_bookings(self, filename):
-        '''Takes a SparkContext instance and a filename and returns a DataFrame
-        of booking data without users that have too much data to be real. Use this
-        function to read Booking.csv'''
+        '''Takes a filename and returns a DataFrame of booking data without
+        users that have too much data to be real. Use this function to read
+        Booking.csv'''
         return self.filter_outliers(self.read(filename))
 
     def read(self, filename):
-        '''Takes a SparkContext instance and a filename and returns a DataFrame
-        containing the parsed CSV file from the data/ directory.'''
-        return SQLContext(self.spark).read.csv(filename, header=True, inferSchema=True,
+        '''Takes a filename and returns a DataFrame containing the parsed CSV
+        file.'''
+        return SQLContext(self.spark).read.csv(filename, header=True,
+                                               inferSchema=True,
                                                nullValue='NULL')
 
     def write(self, filename, df):
-        '''Takes a filename and a DataFrame and writes the contents of the DataFrame
-        to the specified CSV file.'''
+        '''Takes a filename and a DataFrame and writes the contents of the
+        DataFrame to the specified CSV file.'''
         df.toPandas().to_csv(os.path.join('data', filename), index=False)
 
     def get_bookings_with_score(self, data):
-        '''Takes a SparkContext instance and a DataFrame of bookings and returns an
-        RDD of Rating objects constructed from bookings that have non-null review
-        scores.'''
+        '''Takes a SparkContext instance and a DataFrame of bookings and
+        returns an RDD of Rating objects constructed from bookings that have
+        non-null review scores.'''
         return self.spark.parallelize([(row['Diner Id'], row['Restaurant Id'],
-                                        row['Review Score'])
-                                       for row in data.collect() if row['Review Score']])
+                                        row['Review Score']) for row in
+                                       data.collect() if row['Review Score']])
+
+    def available_restaurants(self, bookings):
+        '''Takes a DataFrame of bookings and returns and RDD list of
+        (diner ID, restaurant ID) tuples that represent reasonable restaurant
+        choices for each user. A temporary hack until the real deal is
+        finished.'''
+        return self.get_bookings_with_score(bookings).map(lambda r: (r[0], r[1]))
 
     def filter_outliers(self, df):
-        '''Takes a SparkContext instance and a DataFrame of bookings and returns a
-        new DataFrame without diners that have suspiciously frequent reservations.
-        Frequency is defined as
-        number_of_reservations / (last_visit - first_visit + 1),
+        '''Takes a DataFrame of bookings and returns a new DataFrame without
+        diners that have suspiciously frequent reservations. Frequency is
+        defined as number_of_reservations / (last_visit - first_visit + 1),
         where visit times are expressed in seconds.'''
         # collect relevant data
         first_visit = {}

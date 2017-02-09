@@ -1,13 +1,16 @@
 from pyspark.sql import SQLContext
 from collections import defaultdict
 from sets import Set
+from data import Data
 
-def evaluate(spark, algorithm, bookings_data):
-    '''Takes a SparkContext instance, an algorithm and a DataFrame of bookings,
-    feeds the earlier half of the data (for each user) to the algorithm and
-    returns a ratio right/total, where 'right' is the number of recommended
-    restaurants that were later visited and 'total' is the total number of
-    recommendations.'''
+def evaluate(spark, model, bookings_data):
+    '''Takes a SparkContext instance, a recommendation model and a DataFrame of
+    bookings, feeds the earlier half of the data (for each user) to the
+    algorithm and returns a ratio right/total, where 'right' is the number of
+    recommended restaurants that were later visited and 'total' is the total
+    number of recommendations.'''
+    model = model(spark)
+    data = Data(spark)
     # filter out half of the data to partial_data and store the remaining
     # restaurant IDs
     answers = defaultdict(Set)
@@ -33,8 +36,10 @@ def evaluate(spark, algorithm, bookings_data):
 
     # create a DataFrame of training data, call the algorithm, evaluate the
     # results
-    recommendations = algorithm(spark, SQLContext(spark).createDataFrame(
-        spark.parallelize(partial_data), schema=bookings_data.schema))
+    partial_data = spark.parallelize(partial_data)
+    model.train(SQLContext(spark).createDataFrame(partial_data,
+                                                  schema=bookings_data.schema))
+    recommendations = model.predict(data.available_restaurants(bookings_data))
 
     # Edge case - consider returning None
     if not recommendations:
