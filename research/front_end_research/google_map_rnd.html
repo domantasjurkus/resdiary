@@ -1,0 +1,96 @@
+<DOCTYPE html>
+<html>
+  <head>
+	<style>
+		#map {
+			height: 320px;
+			width: 320px;
+		}
+	</style>
+  </head>
+  <body>
+	<h3>Google Map Demo - Interactive Map</h3>
+	<div id="map"></div>
+
+
+	<script>
+
+	/* Plots the currently viewed recommendation on the map in green */
+	function plotSpecificRec(latRec, lngRec, gMap){
+		var marker = new google.maps.Marker({
+			icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+			position: {lat: latRec, lng: lngRec},
+			map: gMap
+		}); 
+		return marker;
+	}
+	
+	/* Plot additional recommendations made in blue */
+	function plotRecommendation(latRec, lngRec, gMap){
+		var marker = new google.maps.Marker({
+			icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+			position: {lat: latRec, lng: lngRec},
+			map: gMap
+		}); 
+		return marker;
+	}
+
+	/* Plots previously visited restaurants visited in red  */
+	function plotVisited(latVis, lngVis, gMap){
+		var marker = new google.maps.Marker({
+			icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+			position: {lat: latVis, lng: lngVis},
+			map: gMap
+		}); 
+		return marker;
+	}
+
+	function initMap() {
+		/* 
+			Unsure how will look on final version of site
+			so use arrays for the time being.
+		*/
+		var recommendations = [
+			['I', 55.8652729, -4.2542075],
+			['C', 55.8754989, -4.2951349],
+			['E', 55.8648564, -4.2649244]
+		];
+
+		var visited = [
+			['C', 55.8315368, -4.2790967],
+			['U', 55.7958038, -4.097241],
+			['B', 55.867207, -4.260964],
+			['E', 55.8609807, -4.2523803]
+		];
+
+		var specificRecommendation = [55.8577502, -4.2453985];
+
+		/* Setup the map environment */
+		var map = new google.maps.Map(document.getElementById('map'), {
+		  zoom: 15,
+		  center: {lat: specificRecommendation[0], lng: specificRecommendation[1]}		// Sets map centred on specific recommendation
+		});
+
+		/* Add recommendations, specific and previously visited on map */
+		for (var i = 0; i < recommendations.length; i++){
+			plotRecommendation(recommendations[i][1], recommendations[i][2], map);
+		}
+
+		plotSpecificRec(specificRecommendation[0], specificRecommendation[1], map);
+
+		for (var i = 0; i < visited.length; i++){
+			plotVisited(visited[i][1], visited[i][2], map);
+		}
+
+	}
+
+	</script>
+	
+
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCziD5ARWB4qZYh91VDQKdAprDvzSW-bMc&callback=initMap">
+	</script>
+
+  </body>
+</html>
+
