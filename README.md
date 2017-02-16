@@ -22,7 +22,7 @@ cd src
 spark-submit main.py --alg=ALS --data=data/Booking.csv
 ```
 
-`--alg`: [`initial`, `ALS`]  
+`--alg`: [`als`, `implicit`]  
 `--data`: relative (`src/data/Booking.csv`) or absolute (`/home/steve/Booking.csv`) path.  
 
 

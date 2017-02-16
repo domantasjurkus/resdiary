@@ -11,8 +11,13 @@ def execute_algorithm(algorithm, filename):
 
 def evaluate_algorithm(algorithm_name, filename):
 	bookings = data.get_bookings(filename)
-        algorithm = algorithms[algorithm_name.lower()]
+        algorithm = algorithms[algorithm_name.lower()](sc)
 	print '{}: {:.3f}%'.format(algorithm_name, evaluate(sc, algorithm, bookings))
+
+def train_algorithm(algorithm_name, filename):
+        bookings = data.get_bookings(filename)
+        algorithm = algorithms[algorithm_name.lower()](sc)
+        algorithm.learn_hyperparameters(bookings)
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(
@@ -29,13 +34,14 @@ if __name__ == "__main__":
 	# Import only if arguments were provided
 	from pyspark import SparkContext
 	from evaluator import evaluate
-	from recommenders import ALS, ImplicitALS
+	from recommenders import *
 
 	sc = SparkContext('local', 'Recommendation Engine')
 	sc.setLogLevel("ERROR")
         data = Data(sc)
-	algorithms = {"als": ALS, "implicit": ImplicitALS}
+	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System}
 
-	execute_algorithm(args.alg, args.data)
-	evaluate_algorithm(args.alg, args.data)
+	#execute_algorithm(args.alg, args.data)
+	#evaluate_algorithm(args.alg, args.data)
+        train_algorithm(args.alg, args.data)
 	sc.stop()
