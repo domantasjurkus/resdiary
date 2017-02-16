@@ -11,11 +11,11 @@ class EvaluatorTest(BaseTestCase):
 	@classmethod
 	def setUpClass(self):
 		self.data = SQLContext(self.sc).read.csv(
-	        os.path.dirname(__file__)+'/stubs/StubBookings.txt',
-	        header=True,
-	        inferSchema=True,
-	        nullValue='NULL'
-	    )
+			os.path.dirname(__file__)+'/stubs/StubBookings.txt',
+			header=True,
+			inferSchema=True,
+			nullValue='NULL'
+		)
 
 
 	def test_no_recommendations(self):

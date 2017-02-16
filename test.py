@@ -1,6 +1,7 @@
 import os, sys
 import unittest
 import coverage
+from src.config import Config
 
 # Runs the unit tests with coverage
 def cover():
@@ -13,6 +14,7 @@ def cover():
     unittest.TextTestRunner(verbosity=2).run(tests)
     cov.stop()
     cov.save()
+
     print 'Coverage Summary:'
     cov.report()
     basedir = os.path.abspath(os.path.dirname(__file__))
