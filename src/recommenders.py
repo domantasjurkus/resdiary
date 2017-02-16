@@ -29,11 +29,16 @@ class System(Recommender):
     def __init__(self, spark):
         super(System, self).__init__(spark)
         # initialize all the recommenders
-        self.recommenders = {'als': ALS(self.spark),
-                             'implicit': ImplicitALS(self.spark)}
-        # TODO: load the coefficients from a config file
-        self.coefficients = {'als': 1, 'implicit': 1}
-        self.recommendations_per_user = 3 # TODO: ditto
+        self.recommenders = {
+            'als': ALS(self.spark),
+            'implicit': ImplicitALS(self.spark)
+        }
+
+        self.coefficients = {
+            'als': Config.get("ALS", "weight"),
+            'implicit': Config.get("ImplicitALS", "weight")
+        }
+        self.recommendations_per_user = Config.get("Default", "recs_per_user")
 
     def train(self, data):
         for recommender in self.recommenders.values():

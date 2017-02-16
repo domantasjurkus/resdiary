@@ -15,12 +15,6 @@ class Config:
 
 	@staticmethod
 	def set(sec, name, value):
-		raise NotImplementedError("Setting config values not implemented yet")
-
-		'''
-		print "Setting "+name+" to", value
 		Config.rcfg.set(sec, name, str(value))
-
 		with open('default.cfg', 'wb') as configfile:
 			Config.rcfg.write(configfile)
-		'''
