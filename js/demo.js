@@ -40,10 +40,26 @@ $(document).ready(function() {
     function drawRecommendations(id, recs) {
         recs.forEach(function(rec) {
             // TODO: use a templating module and move HTML into another file
-            console.log(rec);
+            /*$.ajax({
+                mathod: "GET",
+                url: "/image-url",
+                data: {
+                    name: rec.Name,
+                    town: rec.Town
+                },
+                success: function(data) {
+                    console.log(data);
+                }, error: function() {
+                    console.log("Failed");
+                }
+            })*/
             var entry = $('<div class="rec-div"><img class="rec-image" src="https://resdiary.blob.core.windows.net/uploads/uk/3349/images/1430/Portal/Logo/img9216.png"><p class="rec-label">'+rec.Name+'</p><p class="small">'+rec.Town+'</p><p class="small">Price point: '+rec.PricePoint+'</p><hr class="rec-divider"/></div>');
             $("#rec-list").append(entry);
         });
+    }
+
+    function getImageUrl(keyword) {
+
     }
 
 });

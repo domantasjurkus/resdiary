@@ -2,6 +2,7 @@ from pyspark.sql import SQLContext
 from collections import defaultdict
 from sets import Set
 from data import Data
+from config import Config
 
 def evaluate(spark, model, bookings_data):
     '''Takes a SparkContext instance, a recommendation model and a DataFrame of
@@ -24,7 +25,12 @@ def evaluate(spark, model, bookings_data):
         if num_bookings < 2:
             # not enough bookings to use this user for evaluation
             continue
-        first_test_index = num_bookings / 2
+        
+        first_test_index = int(num_bookings * Config.get("Default", "training_percent", float))
+        #first_test_index = num_bookings / 2\
+        if first_test_index == num_bookings-1:
+            first_test_index -= 1
+
         # sort by visit time
         personal_bookings.sort(key=lambda r: r['Visit Time'])
         # the first half of the data is used for training/predictions
