@@ -9,6 +9,7 @@ from pyspark.sql.dataframe import DataFrame
 from base import Base
 from data import Data
 from evaluator import evaluate
+from config import Config
 
 class Recommender(Base):
     '''All recommenders should extend this class. Enforces a consistent
@@ -36,11 +37,16 @@ class System(Recommender):
     def __init__(self, spark):
         super(System, self).__init__(spark)
         # initialize all the recommenders
-        self.recommenders = {'als': ALS(self.spark),
-                             'implicit': ImplicitALS(self.spark)}
-        # TODO: load the coefficients from a config file
-        self.coefficients = {'als': 1, 'implicit': 1}
-        self.recommendations_per_user = 3 # TODO: ditto
+        self.recommenders = {
+            'als': ALS(self.spark),
+            'implicit': ImplicitALS(self.spark)
+        }
+
+        self.coefficients = {
+            'als': Config.get("ALS", "weight"),
+            'implicit': Config.get("ImplicitALS", "weight")
+        }
+        self.recommendations_per_user = Config.get("Default", "recs_per_user")
 
     def train(self, data):
         for recommender in self.recommenders.values():
@@ -98,7 +104,12 @@ class ALS(Recommender):
             raise TypeError('Recommender requires a DataFrame')
         data = Data(self.spark)
         ratings = data.get_bookings_with_score(bookings)
-        self.model = SparkALS.train(ratings, 12, 10, 0.1)
+
+        r = Config.get("ALS", "rank")
+        i = Config.get("ALS", "iterations")
+        l = Config.get("ALS", "lambda", float)
+
+        self.model = SparkALS.train(ratings, r, i, l)
 
     def predict(self, data):
         if data.isEmpty():
@@ -120,8 +131,13 @@ class ImplicitALS(Recommender):
         # transform that data into an RDD and train the model
         data = [(diner, restaurant, score) for diner, counter in data.items()
                 for restaurant, score in counter.iteritems()]
-        self.model = SparkALS.trainImplicit(self.spark.parallelize(data), 12, 10,
-                                            alpha=0.01)
+
+        r = Config.get("ImplicitALS", "rank")
+        i = Config.get("ImplicitALS", "iterations")
+        a = Config.get("ImplicitALS", "alpha", float)
+
+        self.model = SparkALS.trainImplicit(
+            self.spark.parallelize(data), r, i, alpha=a)
 
     def predict(self, data):
         predictions = self.model.predictAll(data)
