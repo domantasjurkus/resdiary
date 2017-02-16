@@ -10,7 +10,6 @@ def evaluate(spark, model, bookings_data):
     algorithm and returns a ratio right/total, where 'right' is the number of
     recommended restaurants that were later visited and 'total' is the total
     number of recommendations.'''
-    model = model(spark)
     data = Data(spark)
     # filter out half of the data to partial_data and store the remaining
     # restaurant IDs

@@ -1,5 +1,6 @@
 from collections import Counter, defaultdict
 import heapq
+import itertools
 
 from pyspark.mllib.recommendation import ALS as SparkALS
 from pyspark.sql import SQLContext
@@ -7,6 +8,7 @@ from pyspark.sql.dataframe import DataFrame
 
 from base import Base
 from data import Data
+from evaluator import evaluate
 from config import Config
 
 class Recommender(Base):
@@ -23,8 +25,14 @@ class Recommender(Base):
         Recommendation(userID, restaurantID, score).'''
         raise NotImplementedError("Don't use this class, extend it")
 
+    def learn_hyperparameters(self, data):
+        '''Takes a DataFrame of bookings and uses the evaluator to learn optimal
+        values for all the hyperparameters.'''
+        raise NotImplementedError("Don't use this class, extend it")
+
 class System(Recommender):
-    '''Combines other recommenders to issue the final recommendations for each user'''
+    '''Combines other recommenders to issue the final recommendations for each
+    user.'''
 
     def __init__(self, spark):
         super(System, self).__init__(spark)
@@ -59,6 +67,7 @@ class System(Recommender):
             recommendations[user] = heapq.nlargest(
                 self.recommendations_per_user, reviews.iteritems(),
                 key=lambda r: r[1])
+
         # put the recommendations into an appropriate format
         top_recommendations = [(user, restaurant)
                                for user, restaurants in recommendations.items()
@@ -66,6 +75,26 @@ class System(Recommender):
         schema = ['userID', 'restaurantID']
         return SQLContext(self.spark).createDataFrame(top_recommendations,
                                                       schema)
+
+    def learn_hyperparameters(self, data):
+        recommenders = self.recommenders.keys()
+        best_evaluation = 0
+        # for each combination of coefficients that we are considering
+        # (the last coefficient is calculated as
+        # range_stop_value - sum(coefficients))
+        top = 3 # TODO: transfer the range values into the config
+        combinations = itertools.product(range(1, top),
+                                         repeat=len(recommenders) - 1)
+        for coefficients in map(lambda c: c + (top - sum(c),), combinations):
+            # apply the coefficients
+            for i, recommender in enumerate(recommenders):
+                self.coefficients[recommender] = coefficients[i]
+            # keep track of the best coefficients
+            evaluation = evaluate(self.spark, self, data)
+            if evaluation > best_evaluation:
+                best_evaluation = evaluation
+                best_coefficients = coefficients
+        print best_coefficients # TODO: write them to a config file
 
 class ALS(Recommender):
     '''Generates recommendations based on review data.'''
