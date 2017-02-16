@@ -14,9 +14,13 @@ iTeam:
 To run the recommendations script (provided there is a directory `src/data/`):
 ```
 cd src
-python main.py --alg=ALS --data=data/Booking.csv`
+python main.py --alg=ALS --data=data/Booking.csv
 ```
-
+Alternatively if that fails...
+```
+cd src
+spark-submit main.py --alg=ALS --data=data/Booking.csv
+```
 
 `--alg`: [`initial`, `ALS`]  
 `--data`: relative (`src/data/Booking.csv`) or absolute (`/home/steve/Booking.csv`) path.  
@@ -24,7 +28,7 @@ python main.py --alg=ALS --data=data/Booking.csv`
 
 #Presentation
 `node server.js` will launch a server on `http://localhost:3000`.  
-Recommendations are fetched by default from from `src/data/Recommendations.csv`.  
+Recommendations are fetched by default from `src/data/Recommendations.csv`.  
 
 
 ##Testing
@@ -46,6 +50,7 @@ ssh -L 8000:130.209.251.67:80 -L 8080:130.209.251.67:8080 <yourGUID>@sibu.dcs.gl
 - The dissertation is a reflection on the team's experiences during the project.
 - The dissertation should be a single PDF document of a maximum of 20 pages including front matter and references.
 - The LaTeX source for the template, the dissertation and any assoicated figures must be present in your repository.
+- REFERENCES: We are looking for academic references over others such as Wikipedia or personal hunches. 
 - NOTE: The PDF itself should not be stored in the repository.  
 
 Deadline:  Friday 24th March 2017 at 4pm

@@ -6,11 +6,10 @@ class Recommender(Base):
 
     def train(self, data):
         """Takes a DataFrame of bookings. Doesn't return anything."""
-        if not isinstance(data, DataFrame):
-            raise TypeError('Recommender requires a DataFrame')
         raise NotImplementedError("Don't use this class, extend it")
 
     def predict(self, data):
-        '''Takes an RDD list of diner IDs. Returns a DataFrame with the schema:
+        '''Takes an RDD list of (userID, restaurantID) pairs and returns a
+        DataFrame with the schema:
         Recommendation(userID, restaurantID, score).'''
         raise NotImplementedError("Don't use this class, extend it")
