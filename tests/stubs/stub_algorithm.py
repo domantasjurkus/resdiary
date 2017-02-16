@@ -1,5 +1,5 @@
 from pyspark.sql import SQLContext
-from recommenders.recommender import Recommender
+from recommenders import Recommender
 
 class StubRecommender(Recommender):
 

@@ -8,8 +8,8 @@ from test_superclass import *
 
 # Append the source directory to the system path
 # so that we can import the files for testing
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src/recommenders'))
-import ALS as algorithm
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
+from recommenders import ALS as algorithm
 
 class ALSAlgorithmTest(BaseTestCase):
 
@@ -21,7 +21,7 @@ class ALSAlgorithmTest(BaseTestCase):
 	        inferSchema=True,
 	        nullValue='NULL'
                 )
-                self.model = algorithm.ALS(self.sc)
+                self.model = algorithm(self.sc)
 
 	def test_main(self):
 		# Check for detection of empty RDD
