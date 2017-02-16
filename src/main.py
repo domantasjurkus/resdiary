@@ -29,12 +29,12 @@ if __name__ == "__main__":
 	# Import only if arguments were provided
 	from pyspark import SparkContext
 	from evaluator import evaluate
-	from recommenders import ALS, ImplicitALS
+	from recommenders import *
 
 	sc = SparkContext('local', 'Recommendation Engine')
 	sc.setLogLevel("ERROR")
         data = Data(sc)
-	algorithms = {"als": ALS, "implicit": ImplicitALS}
+	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System}
 
 	execute_algorithm(args.alg, args.data)
 	evaluate_algorithm(args.alg, args.data)

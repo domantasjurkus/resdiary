@@ -1,4 +1,5 @@
 from collections import Counter, defaultdict
+import heapq
 
 from pyspark.mllib.recommendation import ALS as SparkALS
 from pyspark.sql import SQLContext
@@ -21,6 +22,45 @@ class Recommender(Base):
         DataFrame with the schema:
         Recommendation(userID, restaurantID, score).'''
         raise NotImplementedError("Don't use this class, extend it")
+
+class System(Recommender):
+    '''Combines other recommenders to issue the final recommendations for each user'''
+
+    def __init__(self, spark):
+        super(System, self).__init__(spark)
+        # initialize all the recommenders
+        self.recommenders = {'als': ALS(self.spark),
+                             'implicit': ImplicitALS(self.spark)}
+        # TODO: load the coefficients from a config file
+        self.coefficients = {'als': 1, 'implicit': 1}
+        self.recommendations_per_user = 3 # TODO: ditto
+
+    def train(self, data):
+        for recommender in self.recommenders.values():
+            recommender.train(data)
+
+    def predict(self, data):
+        # tally up the scores for each (user, restaurant) pair multiplied by the
+        # coefficients
+        scores = defaultdict(lambda: defaultdict(int))
+        for name, model in self.recommenders.iteritems():
+            for row in model.predict(data).collect():
+                partial_score = self.coefficients[name] * row['score']
+                scores[row['userID']][row['restaurantID']] += partial_score
+
+        # for each user find the top self.recommendations_per_user restaurants
+        recommendations = {}
+        for user, reviews in scores.iteritems():
+            recommendations[user] = heapq.nlargest(
+                self.recommendations_per_user, reviews.iteritems(),
+                key=lambda r: r[1])
+        # put the recommendations into an appropriate format
+        top_recommendations = [(user, restaurant)
+                               for user, restaurants in recommendations.items()
+                               for restaurant, rating in restaurants]
+        schema = ['userID', 'restaurantID']
+        return SQLContext(self.spark).createDataFrame(top_recommendations,
+                                                      schema)
 
 class ALS(Recommender):
     '''Generates recommendations based on review data.'''
