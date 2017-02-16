@@ -12,22 +12,66 @@ var config = {
     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 };
 
-/* A module for reading and writing data. Takes a Diner ID and sends the
+/* A module for reading and writing data from the CSV files. Takes a Diner ID and sends the
    recommended restaurants to the res object. */
 module.exports = {
-    readCSV: function(id, res) {
+    getRecommendations: function (userId) {
         // read two files
-        fs.readFile('./src/data/Recommendations.csv', 'utf8', function(err1, recommendationsFile) {
-            fs.readFile('./src/data/Restaurant.csv', 'utf8', function(err2, restaurantsFile) {
+        fs.readFile('./src/data/Recommendations.csv', 'utf8', function (err1, recommendationsFile) {
+            fs.readFile('./src/data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
                 // parse the files
-                parse(recommendationsFile, {}, function(err3, recommendations) {
-                    parse(restaurantsFile, {columns: true}, function(err4, restaurants) {
+                parse(recommendationsFile, {}, function (err3, recommendations) {
+                    parse(restaurantsFile, { columns: true }, function (err4, restaurants) {
                         // filter out the relevant recommendations
-                        res.send(recommendations.filter(function(recommendation) {
-                            return recommendation[0] == id;
-                        }).map(function(recommendation) {
+                        return recommendations.filter(function (recommendation) {
+                            return recommendation[0] == userId;
+                        }).map(function (recommendation) {
                             // find the information about each restaurant
-                            return restaurants.find(function(restaurant) {
+                            return restaurants.find(function (restaurant) {
+                                return restaurant['RestaurantId'] ==
+                                    recommendation[1];
+                            });
+                        })
+                    });
+                });
+            });
+        });
+    },
+    getRecentlyVisited: function (userId) {
+        // read two files
+        fs.readFile('./src/data/Booking.csv', 'utf8', function (err1, bookingsFile) {
+            fs.readFile('./src/data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
+                // parse the files
+                parse(bookingsFile, {}, function (err3, bookings) {
+                    parse(restaurantsFile, { columns: true }, function (err4, restaurants) {
+                        // filter out the relevant bookings
+                        return bookings.filter(function (booking) {
+                            return booking[0] == userId;
+                        }).map(function (booking) {
+                            // find the information about each restaurant
+                            return restaurants.find(function (restaurant) {
+                                return restaurant['Restaurant Id'] ==
+                                    booking[2];
+                            });
+                        })
+                    });
+                });
+            });
+        });
+    },
+    readCSV: function (id, res) {
+        // read two files
+        fs.readFile('./src/data/Recommendations.csv', 'utf8', function (err1, recommendationsFile) {
+            fs.readFile('./src/data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
+                // parse the files
+                parse(recommendationsFile, {}, function (err3, recommendations) {
+                    parse(restaurantsFile, { columns: true }, function (err4, restaurants) {
+                        // filter out the relevant recommendations
+                        res.send(recommendations.filter(function (recommendation) {
+                            return recommendation[0] == id;
+                        }).map(function (recommendation) {
+                            // find the information about each restaurant
+                            return restaurants.find(function (restaurant) {
                                 return restaurant['RestaurantId'] ==
                                     recommendation[1];
                             });
@@ -37,7 +81,7 @@ module.exports = {
             });
         });
     },
-    readDB: function(id, res) {
+    readDB: function (id, res) {
         var client = new pg.Client(config);
         // connect to our database
         client.connect(function (err) {
@@ -51,17 +95,17 @@ module.exports = {
                     FROM resdiary.recommendations rec 
                     LEFT JOIN resdiary.restaurants rest 
                     ON rec.restaurant_id = rest.restaurant_id WHERE user_id = $1`, [id], function (err, result) {
+                    if (err) throw err;
+
+                    // just print the result to the console
+                    console.log(result.rows);
+
+                    // disconnect the client
+                    client.end(function (err) {
                         if (err) throw err;
-
-                        // just print the result to the console
-                        console.log(result.rows);
-
-                        // disconnect the client
-                        client.end(function (err) {
-                            if (err) throw err;
-                        });
-                        res.send(result.rows);
                     });
+                    res.send(result.rows);
+                });
         });
     }
 };

@@ -9,6 +9,9 @@ app.use('/js', express.static(__dirname + '/js'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/img', express.static(__dirname + '/img'));
 
+app.set('views', './views')
+app.set('view engine', 'pug')
+
 app.get('/', function(req, res) {
     res.sendFile('views/demo.html', { root: __dirname });
 });
@@ -31,8 +34,22 @@ app.get('/netflix-hover-vertical', function(req, res){
 });
 
 /*New demo (23/02) links go here */
-app.get('/new_demo',function(req,res){
+app.get('/new_demo/',function(req,res){
     res.sendFile('views/new_demo_index.html', {root: __dirname});
+})
+
+app.get('/new_demo/user/:id',function(req,res){
+    var id = req.params.id; //Grab the ID 
+
+    data.getRecentlyVisited(id || 0).on('done',)
+    var visited = data.getRecentlyVisited(id || 0); //Gets the recently visited
+    var recs = data.getRecommendations(id || 0); //Gets the recommendations (and possibly reasons)
+
+    console.log("Recs: " + recs)
+
+    res.json({ userId: id, recent: visited, recommendations: recs})
+
+    //res.render('new_demo_user', { userId: id, recent: recent, recommendations: recommendations})
 })
 
 /* API ports */
