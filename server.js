@@ -30,6 +30,11 @@ app.get('/netflix-hover-vertical', function(req, res){
     res.sendFile('views/netflix-hover-vertical.html', {root: __dirname});
 });
 
+/*New demo (23/02) links go here */
+app.get('/new_demo',function(req,res){
+    res.sendFile('views/new_demo_index.html', {root: __dirname});
+})
+
 /* API ports */
 app.get('/recs/:id', function(req, res) {
     data.readCSV(req.params.id || 0, res);

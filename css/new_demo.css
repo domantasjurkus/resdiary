@@ -30,6 +30,11 @@ body {
         margin-left: auto;
         margin-right: auto;
     }
+
+    .res-underline-decor{
+        border-bottom: solid 3px #e849c8;
+        width: 400px;
+    }
     
     .res-nav-title {
         vertical-align: middle;
@@ -64,4 +69,11 @@ body {
         .res-center-xs {
             text-align: center;
         }
+    }
+
+    .res-recent-box{
+        background-color:#f9f9f9;
+        min-height:100px;
+        min-width:220px;
+        padding:10px;
     }
