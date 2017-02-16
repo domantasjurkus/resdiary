@@ -5,11 +5,7 @@ from pyspark.sql import SQLContext
 from pyspark.sql.dataframe import DataFrame
 from stubs import stub_algorithm
 from test_superclass import *
-
-# Append the source directory to the system path
-# so that we can import the files for testing
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src/other_recommenders'))
-import initial as algorithm
+from src.other_recommenders import initial as algorithm
 
 class InitialAlgorithmTest(BaseTestCase):
 

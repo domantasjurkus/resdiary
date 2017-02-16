@@ -3,11 +3,7 @@ import sys, os
 from pyspark.sql import SQLContext
 from stubs import stub_algorithm
 from test_superclass import *
-
-# Append the source directory to the system path
-# so that we can import the files for testing
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
-import evaluator
+from src import evaluator
 
 class EvaluatorTest(BaseTestCase):
 

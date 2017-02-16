@@ -2,10 +2,6 @@ import os, sys
 import unittest
 import coverage
 
-# Add source files to path so that imports work
-sys.path.append("src/")
-sys.path.append("src/recommenders")
-
 # Runs the unit tests with coverage
 def cover():
     cov = coverage.coverage(
