@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>Title Title Title</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <script type="text/javascript">
+
+    var keywords = ["Pizza", "Soup", "Baked Beans", "Fried Chicken", "Stir Fry", "Chocolate", "Rice Pudding", "Scrambled Eggs", "Porridge", "Sushi", "Scotch Egg"];
+    var keyword = keywords[ (Math.floor(Math.random() * keywords.length)) ];
+    console.log( keyword );
+    
+    $(document).ready(function(){
+
+        $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+        {
+            tags: keyword,
+            tagmode: "rest",
+            format: "json"
+        },
+        function(data) {
+            
+            var image_src = data.items[Math.floor(Math.random() * 7)]['media']['m'].replace("_m", "_b");
+            
+            var image = $('<img src="'+ image_src + '" style="width:130px;height:130px;" >');
+            $("#rec-list").append(image);
+ 
+        });
+
+    });
+    </script>
+</head>
+<body>
+
+    <div id="rec-list"></div>
+
+</body>
+</html>
