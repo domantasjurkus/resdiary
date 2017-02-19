@@ -39,11 +39,6 @@ class Data(Base):
         finished.'''
         return self.get_bookings_with_score(bookings).map(lambda r: (r[0], r[1]))
 
-    def get_all_customers(self,data):
-        '''Takes a SparkContext instance and a DataFrame of bookings and
-        returns an RDD of all customers'''
-        self.spark.parallelize([(row['Diner Id']) for row in data.collect()])
-
     def filter_outliers(self, df):
         '''Takes a DataFrame of bookings and returns a new DataFrame without
         diners that have suspiciously frequent reservations. Frequency is

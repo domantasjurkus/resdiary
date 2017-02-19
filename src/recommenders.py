@@ -114,6 +114,10 @@ class ALS(Recommender):
     def predict(self, data):
         if data.isEmpty():
             raise ValueError('RDD is empty')
+            
+        customer_id = self.spark.parallelize(data.take(100)).map(lambda r: (r[0]))
+        restaurant_id = self.spark.parallelize(data.take(100)).map(lambda r: (r[1]))
+        data = customer_id.distinct().cartesian(restaurant_id.distinct())
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
