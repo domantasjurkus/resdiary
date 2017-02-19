@@ -11,13 +11,13 @@ iTeam:
 
 
 #Generating recommendations
-To run the recommendations script (provided there is a directory `data/`):
+To run the recommendations script:
 ```
-python src/main.py --alg=ALS --data=data/Booking.csv
+python src/main.py --alg=ALS --data=data/Booking.csv --out=/home/user/data/recommendations.csv
 ```
 Alternatively if that fails...
 ```
-spark-submit src/main.py --alg=ALS --data=data/Booking.csv
+spark-submit src/main.py --alg=ALS --data=data/Booking.csv --out=/home/user/data/recommendations.csv
 ```
 
 `--alg`: [`als`, `implicit`]  

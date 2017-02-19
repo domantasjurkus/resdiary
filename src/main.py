@@ -2,13 +2,13 @@ import os, sys
 import argparse
 from data import Data
 
-def execute_algorithm(algorithm, filename):
+def execute_algorithm(algorithm, filename,output_file):
 	bookings = data.get_bookings(filename)
 	algorithm = algorithms[algorithm.lower()](sc)
 	algorithm.train(bookings)
 	predictions = algorithm.predict(data.available_restaurants(bookings))
-	with open('Recommendations.csv','w') as csv_file:
-		data.write('Recommendations.csv', predictions)
+	with open(output_file,'w') as csv_file:
+		data.write(output_file, predictions)
 	csv_file.close()
 
 def evaluate_algorithm(algorithm_name, filename):
@@ -26,7 +26,8 @@ if __name__ == "__main__":
 				description='Executes an algorithm on the selected data. The '
 				+ 'algorithm is usually a recommendation algorithm.')
 	parser.add_argument('--alg', type=str, help='Algorithm name')
-	parser.add_argument('--data', type=str, help='The data file.')
+	parser.add_argument('--data', type=str, help='Path to the input data.')
+	parser.add_argument('--out', type=str, help='Path to output file with recommednations.')
 	args = parser.parse_args()
 
 	if args.alg is None or args.data is None: # pragma: no cover
@@ -43,7 +44,7 @@ if __name__ == "__main__":
 	data = Data(sc)
 	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System}
 
-	execute_algorithm(args.alg, args.data)
+	execute_algorithm(args.alg, args.data,args.out)
 	#evaluate_algorithm(args.alg, args.data)
 	#train_algorithm(args.alg, args.data)
 	sc.stop()

@@ -22,7 +22,7 @@ class Data(Base):
     def write(self, filename, df):
         '''Takes a filename and a DataFrame and writes the contents of the
         DataFrame to the specified CSV file.'''
-        df.toPandas().to_csv(os.path.join('data', filename), index=False)
+        df.toPandas().to_csv(filename, index=False)
 
     def get_bookings_with_score(self, data):
         '''Takes a SparkContext instance and a DataFrame of bookings and
