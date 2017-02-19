@@ -21,7 +21,7 @@ def train_algorithm(algorithm_name, filename):
 	algorithm = algorithms[algorithm_name.lower()](sc)
 	algorithm.learn_hyperparameters(bookings)
 
-if __name__ == "__main__":
+def parse_arguments():
 	parser = argparse.ArgumentParser(
 				description='Executes an algorithm on the selected data. The '
 				+ 'algorithm is usually a recommendation algorithm.')
@@ -30,8 +30,15 @@ if __name__ == "__main__":
 	parser.add_argument('--out', type=str, help='Path to output file with recommednations.')
 	args = parser.parse_args()
 
+	if not args.out:
+		args.out = './recommendations.csv'
+	return args
+
+if __name__ == "__main__":
+	args = parse_arguments()
+	
 	if args.alg is None or args.data is None: # pragma: no cover
-		print "\nUsage: python main.py --alg=<intial, ALS> --data=data/Booking.csv\n"
+		print "\nUsage: python main.py --alg=<intial, ALS> --data=data/Booking.csv --out=/home/user/recommendations.csv\n"
 		sys.exit()
 
 	# Import only if arguments were provided
