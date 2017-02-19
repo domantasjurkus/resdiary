@@ -4,26 +4,28 @@ from data import Data
 
 def execute_algorithm(algorithm, filename):
 	bookings = data.get_bookings(filename)
-        algorithm = algorithms[algorithm.lower()](sc)
-        algorithm.train(bookings)
-        predictions = algorithm.predict(data.available_restaurants(bookings))
-	data.write('Recommendations.csv', predictions)
+	algorithm = algorithms[algorithm.lower()](sc)
+	algorithm.train(bookings)
+	predictions = algorithm.predict(data.available_restaurants(bookings))
+	with open('Recommendations.csv','w') as csv_file:
+		data.write('Recommendations.csv', predictions)
+	csv_file.close()
 
 def evaluate_algorithm(algorithm_name, filename):
 	bookings = data.get_bookings(filename)
-        algorithm = algorithms[algorithm_name.lower()](sc)
+	algorithm = algorithms[algorithm_name.lower()](sc)
 	print '{}: {:.3f}%'.format(algorithm_name, evaluate(sc, algorithm, bookings))
 
 def train_algorithm(algorithm_name, filename):
-        bookings = data.get_bookings(filename)
-        algorithm = algorithms[algorithm_name.lower()](sc)
-        algorithm.learn_hyperparameters(bookings)
+	bookings = data.get_bookings(filename)
+	algorithm = algorithms[algorithm_name.lower()](sc)
+	algorithm.learn_hyperparameters(bookings)
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(
-                description='Executes an algorithm on the selected data. The '
-                + 'algorithm is usually a recommendation algorithm.')
-        parser.add_argument('--alg', type=str, help='Algorithm name')
+				description='Executes an algorithm on the selected data. The '
+				+ 'algorithm is usually a recommendation algorithm.')
+	parser.add_argument('--alg', type=str, help='Algorithm name')
 	parser.add_argument('--data', type=str, help='The data file.')
 	args = parser.parse_args()
 
@@ -38,10 +40,10 @@ if __name__ == "__main__":
 
 	sc = SparkContext('local', 'Recommendation Engine')
 	sc.setLogLevel("ERROR")
-        data = Data(sc)
+	data = Data(sc)
 	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System}
 
-	#execute_algorithm(args.alg, args.data)
+	execute_algorithm(args.alg, args.data)
 	#evaluate_algorithm(args.alg, args.data)
-        train_algorithm(args.alg, args.data)
+	#train_algorithm(args.alg, args.data)
 	sc.stop()

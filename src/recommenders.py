@@ -108,7 +108,7 @@ class ALS(Recommender):
         r = Config.get("ALS", "rank")
         i = Config.get("ALS", "iterations")
         l = Config.get("ALS", "lambda", float)
-
+        self.spark.setCheckpointDir("./checkpoints/")
         self.model = SparkALS.train(ratings, r, i, l)
 
     def predict(self, data):

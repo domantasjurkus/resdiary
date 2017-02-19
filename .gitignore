@@ -6,3 +6,5 @@ node_modules/
 src/data/
 coverage/
 .coverage
+check/
+checkpoints/
