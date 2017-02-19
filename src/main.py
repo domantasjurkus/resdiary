@@ -7,10 +7,8 @@ def execute_algorithm(algorithm, filename,output_file):
 	algorithm = algorithms[algorithm.lower()](sc)
 	algorithm.train(bookings)
 	predictions = algorithm.predict(data.available_restaurants(bookings))
-	with open(output_file,'w') as csv_file:
-		data.write(output_file, predictions)
-	csv_file.close()
-
+	data.write(output_file, predictions)
+	
 def evaluate_algorithm(algorithm_name, filename):
 	bookings = data.get_bookings(filename)
 	algorithm = algorithms[algorithm_name.lower()](sc)
@@ -36,7 +34,7 @@ def parse_arguments():
 
 if __name__ == "__main__":
 	args = parse_arguments()
-	
+
 	if args.alg is None or args.data is None: # pragma: no cover
 		print "\nUsage: python main.py --alg=<intial, ALS> --data=data/Booking.csv --out=/home/user/recommendations.csv\n"
 		sys.exit()
