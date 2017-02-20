@@ -1,8 +1,9 @@
 from collections import Counter, defaultdict
 import heapq
 import itertools
+import os.path
 
-from pyspark.mllib.recommendation import ALS as SparkALS
+from pyspark.mllib.recommendation import  MatrixFactorizationModel,ALS as SparkALS
 from pyspark.sql import SQLContext
 from pyspark.sql.dataframe import DataFrame
 
@@ -109,14 +110,22 @@ class ALS(Recommender):
         i = Config.get("ALS", "iterations")
         l = Config.get("ALS", "lambda", float)
         self.spark.setCheckpointDir("./checkpoints/")
-        self.model = SparkALS.train(ratings, r, i, l)
+        model_location = "models/ALS/{rank}-{iterations}-{alpha}".format(rank=r,iterations=i,alpha=l)
+
+        if os.path.isdir(model_location):
+            self.model =  MatrixFactorizationModel.load(self.spark, model_location)
+        else:
+            self.model = SparkALS.train(ratings, r, i, l)
+            self.model.save(self.spark, model_location)
+
+
 
     def predict(self, data):
         if data.isEmpty():
             raise ValueError('RDD is empty')
             
         customer_id = self.spark.parallelize(data.take(100)).map(lambda r: (r[0]))
-        restaurant_id = self.spark.parallelize(data.take(100)).map(lambda r: (r[1]))
+        restaurant_id = data.map(lambda r: (r[1]))
         data = customer_id.distinct().cartesian(restaurant_id.distinct())
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
@@ -139,9 +148,15 @@ class ImplicitALS(Recommender):
         r = Config.get("ImplicitALS", "rank")
         i = Config.get("ImplicitALS", "iterations")
         a = Config.get("ImplicitALS", "alpha", float)
+        self.spark.setCheckpointDir("./checkpoints/")
+        model_location = "models/ImplicitALS/{rank}-{iterations}-{alpha}".format(rank=r,iterations=i,alpha=a)
 
-        self.model = SparkALS.trainImplicit(
-            self.spark.parallelize(data), r, i, alpha=a)
+        if os.path.isdir(model_location):
+            self.model =  MatrixFactorizationModel.load(self.spark, model_location)
+        else:
+            self.model = SparkALS.trainImplicit(self.spark.parallelize(data), r, i, alpha=a)
+            self.model.save(self.spark, model_location)
+        
 
     def predict(self, data):
         predictions = self.model.predictAll(data)
