@@ -116,7 +116,8 @@ class ALS(Recommender):
             self.model =  MatrixFactorizationModel.load(self.spark, model_location)
         else:
             self.model = SparkALS.train(ratings, r, i, l)
-            shutil.rmtree(model_location)
+            if os.path.isdir(model_location):
+                shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
 
     def predict(self, data, location):
@@ -124,11 +125,11 @@ class ALS(Recommender):
             raise ValueError('RDD is empty')
 
         customer_id =data.filter(lambda r: (location in r[4])).map(lambda r: (r[0])).distinct()
-        print customer_id.count()
+        print "Customers: " + str(customer_id.count())
         restaurant_id = data.filter(lambda r: (location in r[4])).map(lambda r: (r[1])).distinct()
-        print restaurant_id.count()
+        print "Restaurants: " + str(restaurant_id.count())
         data = customer_id.cartesian(restaurant_id)
-        print data.count()
+        print "Recommendations to be generated: " + str(data.count())
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
