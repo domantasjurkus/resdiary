@@ -24,6 +24,14 @@ class Data(Base):
         DataFrame to the specified CSV file.'''
         df.toPandas().to_csv(filename, index=False)
 
+    def get_bookings_full(self, data):
+        '''Takes a SparkContext instance and a DataFrame of bookings and
+        returns an RDD of those bookings with all existing columns'''
+        return self.spark.parallelize([(row['Diner Id'], row['Restaurant Id'],
+                                        row['Review Score'],row['Restaurant Name'],row['Town'],
+                                        row['Latitude'],row['Longtitude'],row['Price Point']) for row in
+                                       data.collect()])
+
     def get_bookings_with_score(self, data):
         '''Takes a SparkContext instance and a DataFrame of bookings and
         returns an RDD of Rating objects constructed from bookings that have

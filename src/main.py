@@ -2,14 +2,14 @@ import os, sys
 import argparse
 from data import Data
 
-def execute_algorithm(algorithm_name,filename,output_file,save):
-	bookings = data.get_bookings(filename)
+def execute_algorithm(algorithm_name,filename,output_file,save,location):
+	bookings = data.read(filename)
 	algorithm = algorithms[algorithm_name.lower()](sc)
 	if 'als' in algorithm_name.lower():
 		algorithm.train(bookings,save)
 	else:
 		algorithm.train(bookings)
-	predictions = algorithm.predict(data.available_restaurants(bookings))
+	predictions = algorithm.predict(data.get_bookings_full(bookings),location)
 	data.write(output_file, predictions)
 	
 def evaluate_algorithm(algorithm_name, filename):
@@ -30,17 +30,20 @@ def parse_arguments():
 	parser.add_argument('--data', type=str, help='Path to the input data.')
 	parser.add_argument('--out', type=str, help='Path to output file with recommednations.')
 	parser.add_argument('--save', type=str, help='Forcing to overwrite existing model.')
+	parser.add_argument('--location', type=str, help='Predict for a specific location.')
 	args = parser.parse_args()
 
 	if not args.out:
 		args.out = './recommendations.csv'
+	if not args.save:
+		args.save = 'False'
 	return args
 
 if __name__ == "__main__":
 	args = parse_arguments()
 
-	if args.alg is None or args.data is None: # pragma: no cover
-		print "\nUsage: python main.py --alg=<intial, ALS> --data=data/Booking.csv --out=/home/user/recommendations.csv\n"
+	if args.alg is None or args.data is None or args.location is None: # pragma: no cover
+		print "\nUsage: python main.py --alg=ALS --location=Glasgow ALS> --data=data/Booking.csv --out=/home/user/recommendations.csv\n"
 		sys.exit()
 
 	# Import only if arguments were provided
@@ -53,7 +56,7 @@ if __name__ == "__main__":
 	data = Data(sc)
 	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System}
 
-	execute_algorithm(args.alg,args.data,args.out,args.save)
+	execute_algorithm(args.alg,args.data,args.out,args.save,args.location)
 	#evaluate_algorithm(args.alg, args.data)
 	#train_algorithm(args.alg, args.data)
 	sc.stop()

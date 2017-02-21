@@ -119,13 +119,16 @@ class ALS(Recommender):
             shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
 
-    def predict(self, data):
+    def predict(self, data, location):
         if data.isEmpty():
             raise ValueError('RDD is empty')
 
-        customer_id =data.map(lambda r: (r[0]))
-        restaurant_id = data.map(lambda r: (r[1]))
-        data = customer_id.distinct().cartesian(restaurant_id.distinct())
+        customer_id =data.filter(lambda r: (location in r[4])).map(lambda r: (r[0])).distinct()
+        print customer_id.count()
+        restaurant_id = data.filter(lambda r: (location in r[4])).map(lambda r: (r[1])).distinct()
+        print restaurant_id.count()
+        data = customer_id.cartesian(restaurant_id)
+        print data.count()
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
