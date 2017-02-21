@@ -2,10 +2,13 @@ import os, sys
 import argparse
 from data import Data
 
-def execute_algorithm(algorithm, filename,output_file):
+def execute_algorithm(algorithm_name,filename,output_file,save):
 	bookings = data.get_bookings(filename)
-	algorithm = algorithms[algorithm.lower()](sc)
-	algorithm.train(bookings)
+	algorithm = algorithms[algorithm_name.lower()](sc)
+	if 'als' in algorithm_name.lower():
+		algorithm.train(bookings,save)
+	else:
+		algorithm.train(bookings)
 	predictions = algorithm.predict(data.available_restaurants(bookings))
 	data.write(output_file, predictions)
 	
@@ -26,6 +29,7 @@ def parse_arguments():
 	parser.add_argument('--alg', type=str, help='Algorithm name')
 	parser.add_argument('--data', type=str, help='Path to the input data.')
 	parser.add_argument('--out', type=str, help='Path to output file with recommednations.')
+	parser.add_argument('--save', type=str, help='Forcing to overwrite existing model.')
 	args = parser.parse_args()
 
 	if not args.out:
@@ -40,16 +44,16 @@ if __name__ == "__main__":
 		sys.exit()
 
 	# Import only if arguments were provided
-	from pyspark import SparkContext
+	from pyspark import SparkContext,SparkConf
 	from evaluator import evaluate
 	from recommenders import *
-
-	sc = SparkContext('local', 'Recommendation Engine')
+	sparkConf = SparkConf().set('spark.files.overwrite','True')
+	sc = SparkContext('local','Recommendation engine', conf=sparkConf)
 	sc.setLogLevel("ERROR")
 	data = Data(sc)
 	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System}
 
-	execute_algorithm(args.alg, args.data,args.out)
+	execute_algorithm(args.alg,args.data,args.out,args.save)
 	#evaluate_algorithm(args.alg, args.data)
 	#train_algorithm(args.alg, args.data)
 	sc.stop()

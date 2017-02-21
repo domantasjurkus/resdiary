@@ -1,7 +1,7 @@
 from collections import Counter, defaultdict
 import heapq
 import itertools
-import os.path
+import os.path,shutil
 
 from pyspark.mllib.recommendation import  MatrixFactorizationModel,ALS as SparkALS
 from pyspark.sql import SQLContext
@@ -100,7 +100,7 @@ class System(Recommender):
 class ALS(Recommender):
     '''Generates recommendations based on review data.'''
 
-    def train(self, bookings):
+    def train(self, bookings, save):
         if not isinstance(bookings, DataFrame):
             raise TypeError('Recommender requires a DataFrame')
         data = Data(self.spark)
@@ -112,19 +112,18 @@ class ALS(Recommender):
         self.spark.setCheckpointDir("./checkpoints/")
         model_location = "models/ALS/{rank}-{iterations}-{alpha}".format(rank=r,iterations=i,alpha=l)
 
-        if os.path.isdir(model_location):
+        if os.path.isdir(model_location) and save.lower() != 'true':
             self.model =  MatrixFactorizationModel.load(self.spark, model_location)
         else:
             self.model = SparkALS.train(ratings, r, i, l)
+            shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
-
-
 
     def predict(self, data):
         if data.isEmpty():
             raise ValueError('RDD is empty')
-            
-        customer_id = self.spark.parallelize(data.take(100)).map(lambda r: (r[0]))
+
+        customer_id =data.map(lambda r: (r[0]))
         restaurant_id = data.map(lambda r: (r[1]))
         data = customer_id.distinct().cartesian(restaurant_id.distinct())
         predictions = self.model.predictAll(data)
@@ -135,7 +134,7 @@ class ImplicitALS(Recommender):
     '''Generates recommendations based on how many times a diner visited a
     restaurant.'''
 
-    def train(self, bookings):
+    def train(self, bookings, save):
         # calculate how many times a diner visited each restaurant
         data = defaultdict(Counter)
         for booking in bookings.collect():
@@ -151,10 +150,11 @@ class ImplicitALS(Recommender):
         self.spark.setCheckpointDir("./checkpoints/")
         model_location = "models/ImplicitALS/{rank}-{iterations}-{alpha}".format(rank=r,iterations=i,alpha=a)
 
-        if os.path.isdir(model_location):
+        if os.path.isdir(model_location) and save.lower() != 'true':
             self.model =  MatrixFactorizationModel.load(self.spark, model_location)
         else:
             self.model = SparkALS.trainImplicit(self.spark.parallelize(data), r, i, alpha=a)
+            shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
         
 
