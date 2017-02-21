@@ -44,11 +44,11 @@ if __name__ == "__main__":
 		sys.exit()
 
 	# Import only if arguments were provided
-	from pyspark import SparkContext,SparkConf
+	from pyspark import SparkContext
 	from evaluator import evaluate
 	from recommenders import *
-	sparkConf = SparkConf().set('spark.files.overwrite','True')
-	sc = SparkContext('local','Recommendation engine', conf=sparkConf)
+
+	sc = SparkContext('local','Recommendation engine')
 	sc.setLogLevel("ERROR")
 	data = Data(sc)
 	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System}
