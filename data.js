@@ -1,5 +1,6 @@
 var fs = require('fs');
 var parse = require('csv-parse');
+var parse = require('csv-parse/lib/sync');
 var pg = require('pg');
 
 var config = {
@@ -15,7 +16,43 @@ var config = {
 /* A module for reading and writing data from the CSV files. Takes a Diner ID and sends the
    recommended restaurants to the res object. */
 module.exports = {
-    getRecommendations: function (userId) {
+    getRecommendationsSync: function (userId) {
+        var recommendationsFile = fs.readFileSync('./src/data/Recommendations.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var recommendations = parse(recommendationsFile, {});
+        var restaurants = parse(restaurantsFile, { columns: true });
+
+        // filter out the relevant recommendations
+        return recommendations.filter(function (recommendation) {
+            return recommendation[0] == userId;
+        }).map(function (recommendation) {
+            // find the information about each restaurant
+            return restaurants.find(function (restaurant) {
+                return restaurant['RestaurantId'] ==
+                    recommendation[1];
+            });
+        })
+    },
+    getRecentlyVisitedSync: function (userId) {
+        var bookingsFile = fs.readFileSync('./src/data/Booking.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var bookings = parse(bookingsFile, {});
+        var restaurants = parse(restaurantsFile, { columns: true });
+
+        // filter out the relevant bookings
+        return bookings.filter(function (booking) {
+            return booking[0] == userId;
+        }).map(function (booking) {
+            // find the information about each restaurant
+            return restaurants.find(function (restaurant) {
+                return restaurant['RestaurantId'] ==
+                    booking[2];
+            });
+        })
+
+    },
+    getRecommendations: function (userId, res) {
+
         // read two files
         fs.readFile('./src/data/Recommendations.csv', 'utf8', function (err1, recommendationsFile) {
             fs.readFile('./src/data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
@@ -23,7 +60,7 @@ module.exports = {
                 parse(recommendationsFile, {}, function (err3, recommendations) {
                     parse(restaurantsFile, { columns: true }, function (err4, restaurants) {
                         // filter out the relevant recommendations
-                        return recommendations.filter(function (recommendation) {
+                        return res.send(recommendations.filter(function (recommendation) {
                             return recommendation[0] == userId;
                         }).map(function (recommendation) {
                             // find the information about each restaurant
@@ -31,7 +68,7 @@ module.exports = {
                                 return restaurant['RestaurantId'] ==
                                     recommendation[1];
                             });
-                        })
+                        }));
                     });
                 });
             });
@@ -45,7 +82,7 @@ module.exports = {
                 parse(bookingsFile, {}, function (err3, bookings) {
                     parse(restaurantsFile, { columns: true }, function (err4, restaurants) {
                         // filter out the relevant bookings
-                        return bookings.filter(function (booking) {
+                        return res.send(bookings.filter(function (booking) {
                             return booking[0] == userId;
                         }).map(function (booking) {
                             // find the information about each restaurant
@@ -53,7 +90,7 @@ module.exports = {
                                 return restaurant['Restaurant Id'] ==
                                     booking[2];
                             });
-                        })
+                        }));
                     });
                 });
             });
