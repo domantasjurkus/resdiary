@@ -10,7 +10,7 @@ app.use('/css', express.static(__dirname + '/css'));
 app.use('/img', express.static(__dirname + '/img'));
 
 app.set('views', './views')
-app.set('view engine', 'pug')
+app.set('view engine', 'ejs')
 
 app.get('/', function(req, res) {
     res.sendFile('views/demo.html', { root: __dirname });
@@ -41,21 +41,26 @@ app.get('/new_demo/',function(req,res){
 app.get('/new_demo/user/:id',function(req,res){
     var id = req.params.id; //Grab the ID 
 
-    data.getRecentlyVisited(id || 0).on('done',)
-    var visited = data.getRecentlyVisited(id || 0); //Gets the recently visited
-    var recs = data.getRecommendations(id || 0); //Gets the recommendations (and possibly reasons)
-
-    console.log("Recs: " + recs)
+    var visited = data.getRecentlyVisitedSync(id || 0); //Gets the recently visited
+    var recs = data.getRecommendationsSync(id || 0); //Gets the recommendations (and possibly reasons)
 
     res.json({ userId: id, recent: visited, recommendations: recs})
 
-    //res.render('new_demo_user', { userId: id, recent: recent, recommendations: recommendations})
+    //res.render('new_demo_user', { userId: id, recent: visited, recommendations: recs})
 })
 
 /* API ports */
 app.get('/recs/:id', function(req, res) {
     data.readCSV(req.params.id || 0, res);
 });
+
+app.get('/recs/recent/:id',function(req,res){
+    data.readCSV(req.params.id)
+})
+
+app.get('/recs/recommendations/:id',function(req,res){
+    data.readCSV(req.params.id)
+})
 
 // Return all generated recommendations as a JSON
 app.get('/data', function(req, res) {
