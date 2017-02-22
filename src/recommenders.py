@@ -16,7 +16,7 @@ class Recommender(Base):
     '''All recommenders should extend this class. Enforces a consistent
     interface.'''
 
-    def train(self, data):
+    def train(self, data, load=False):
         """Takes a DataFrame of bookings. Doesn't return anything."""
         raise NotImplementedError("Don't use this class, extend it")
 
@@ -37,19 +37,12 @@ class System(Recommender):
 
     def __init__(self, spark):
         super(System, self).__init__(spark)
-        # initialize all the recommenders
-        self.recommenders = {
-            'als': ALS(self.spark),
-            'implicit': ImplicitALS(self.spark)
-        }
+        recommenders = Config.sections()
+        self.recommenders = dict((name, eval(name)(self.spark)) for name in recommenders)
+        self.coefficients = dict((name, Config.get(name, 'weight')) for name in recommenders)
+        self.recommendations_per_user = Config.get("DEFAULT", "recs_per_user")
 
-        self.coefficients = {
-            'als': Config.get("ALS", "weight"),
-            'implicit': Config.get("ImplicitALS", "weight")
-        }
-        self.recommendations_per_user = Config.get("Default", "recs_per_user")
-
-    def train(self, data):
+    def train(self, data, load=False):
         for recommender in self.recommenders.values():
             recommender.train(data)
 
@@ -100,7 +93,7 @@ class System(Recommender):
 class ALS(Recommender):
     '''Generates recommendations based on review data.'''
 
-    def train(self, bookings, save):
+    def train(self, bookings, load=False):
         if not isinstance(bookings, DataFrame):
             raise TypeError('Recommender requires a DataFrame')
         data = Data(self.spark)
@@ -112,25 +105,18 @@ class ALS(Recommender):
         self.spark.setCheckpointDir("./checkpoints/")
         model_location = "models/ALS/{rank}-{iterations}-{alpha}".format(rank=r,iterations=i,alpha=l)
 
-        if os.path.isdir(model_location) and save.lower() != 'true':
+        model_exists = os.path.isdir(model_location)
+        if load and model_exists:
             self.model =  MatrixFactorizationModel.load(self.spark, model_location)
         else:
             self.model = SparkALS.train(ratings, r, i, l)
-            if os.path.isdir(model_location):
+            if model_exists:
                 shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
 
-    def predict(self, data, location):
+    def predict(self, data):
         if data.isEmpty():
             raise ValueError('RDD is empty')
-
-        customer_id =data.filter(lambda r: (location in r[4])).map(lambda r: (r[0])).distinct()
-        restaurant_id = data.filter(lambda r: (location in r[4])).map(lambda r: (r[1])).distinct()
-        data = customer_id.cartesian(restaurant_id)
-        
-        print "Customers: " + str(customer_id.count())
-        print "Restaurants: " + str(restaurant_id.count())
-        print "Recommendations to be generated: " + str(data.count())
 
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
@@ -140,7 +126,7 @@ class ImplicitALS(Recommender):
     '''Generates recommendations based on how many times a diner visited a
     restaurant.'''
 
-    def train(self, bookings, save):
+    def train(self, bookings, load=False):
         # calculate how many times a diner visited each restaurant
         data = defaultdict(Counter)
         for booking in bookings.collect():
@@ -156,83 +142,75 @@ class ImplicitALS(Recommender):
         self.spark.setCheckpointDir("./checkpoints/")
         model_location = "models/ImplicitALS/{rank}-{iterations}-{alpha}".format(rank=r,iterations=i,alpha=a)
 
-        if os.path.isdir(model_location) and save.lower() != 'true':
+        model_exists = os.path.isdir(model_location)
+        if load and model_exists:
             self.model =  MatrixFactorizationModel.load(self.spark, model_location)
         else:
             self.model = SparkALS.trainImplicit(self.spark.parallelize(data), r, i, alpha=a)
-            shutil.rmtree(model_location)
+            if model_exists:
+                shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
-        
 
-    def predict(self, data, location):
+    def predict(self, data):
         if data.isEmpty():
             raise ValueError('RDD is empty')
-
-        customer_id =data.filter(lambda r: (location in r[4])).map(lambda r: (r[0])).distinct()
-        restaurant_id = data.filter(lambda r: (location in r[4])).map(lambda r: (r[1])).distinct()
-        data = customer_id.cartesian(restaurant_id)
-
-        print "Customers: " + str(customer_id.count())
-        print "Restaurants: " + str(restaurant_id.count())
-        print "Recommendations to be generated: " + str(data.count())
 
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
 
 class ContentBased(Recommender):
-    '''Generates recommendations based on a diner's prefered cuisine
-    types.'''
+    '''Generates recommendations based on a diner's prefered cuisine types.'''
     
-    def train(self, bookings):
-        dummyCode = 0
-        
-    def predict(self, bookings):
+    def train(self, bookings, load=False):
         data_transform = Data(self.spark)
-        restaurants = data_transform.read("/home/user/Downloads/Restaurant.csv")
-        restaurantCuisines = data_transform.read("/home/user/Downloads/RestaurantCuisineTypes.csv")
-        cuisineTypes = data_transform.read("/home/user/Downloads/CuisineTypes.csv")
+        restaurants = data_transform.read("data/Restaurant.csv")
+        restaurantCuisines = data_transform.read("data/RestaurantCuisineTypes.csv")
+        cuisineTypes = data_transform.read("data/CuisineTypes.csv")
 
-        restaurantCuisine ={}
-        visited = {}
+        self.restaurantCuisine = {}
+        self.visited = {}
         
         for entry in restaurantCuisines.collect():
             restaurant = entry['RestaurantId']
             cuisineType = entry['CuisineTypeId']
-            restaurantCuisine.setdefault(restaurant, [])
-            if cuisineType not in restaurantCuisine[restaurant]:
-                restaurantCuisine[restaurant].append(cuisineType)
+            self.restaurantCuisine.setdefault(restaurant, [])
+            if cuisineType not in self.restaurantCuisine[restaurant]:
+                self.restaurantCuisine[restaurant].append(cuisineType)
 
-        likedCuisine = {}
+        self.likedCuisine = {}
         MINIMUM_LIKE_SCORE = 4 #the minimum review score from a booking
-                                #for a restaurant's cuisine to be considered liked
+        #for a restaurant's cuisine to be considered liked
         
         for booking in bookings.collect():
-            diner = booking[0]
-            restaurant = booking[1]
-            score = booking[2]
-            visited.setdefault(diner, [])
-            if restaurant not in visited[diner]:
-                visited[diner].append(restaurant)
-            likedCuisine.setdefault(diner, [])
-            if score >= MINIMUM_LIKE_SCORE and restaurantCuisine.get(restaurant,None):
-                for cuisine in restaurantCuisine[restaurant]:
-                    if cuisine not in likedCuisine[diner]:
-                        likedCuisine[diner].append(cuisine)       
+            diner = booking['Diner Id']
+            restaurant = booking['Restaurant Id']
+            score = booking['Review Score']
+            self.visited.setdefault(diner, [])
+            if restaurant not in self.visited[diner]:
+                self.visited[diner].append(restaurant)
+            self.likedCuisine.setdefault(diner, [])
+            if score >= MINIMUM_LIKE_SCORE and self.restaurantCuisine.get(restaurant, None):
+                for cuisine in self.restaurantCuisine[restaurant]:
+                    if cuisine not in self.likedCuisine[diner]:
+                        self.likedCuisine[diner].append(cuisine)
 
+    def predict(self, users_restaurants):
+        # TODO: use the parameter
         data = defaultdict()
         recommendations = {}
-        for diner in likedCuisine:
+        for diner in self.likedCuisine:
             recommendations.setdefault(diner, [])
-            for restaurant in restaurantCuisine:
-                if restaurant not in visited[diner]:
+            for restaurant in self.restaurantCuisine:
+                if restaurant not in self.visited[diner]:
                     score = 0
-                    for cuisine in restaurantCuisine[restaurant]:
-                        if cuisine in likedCuisine[diner]:
-                            score += 1                
-                    recommendations[diner].append((restaurant,score))
+                    for cuisine in self.restaurantCuisine[restaurant]:
+                        if cuisine in self.likedCuisine[diner]:
+                            score += 1
+                    if score > 0:
+                        recommendations[diner].append((restaurant, score))
 
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(self.spark.parallelize(
-            [(diner,restaurant,score) for diner in recommendations
-             for restaurant,score in recommendations[diner]]), schema)
+            [(diner, restaurant, score) for diner in recommendations
+             for restaurant, score in recommendations[diner]]), schema)

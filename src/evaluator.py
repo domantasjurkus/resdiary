@@ -25,7 +25,7 @@ def evaluate(spark, model, bookings_data):
             # not enough bookings to use this user for evaluation
             continue
         
-        first_test_index = int(num_bookings * Config.get("Default", "training_percent", float))
+        first_test_index = int(num_bookings * Config.get("DEFAULT", "training_percent", float))
         #first_test_index = num_bookings / 2\
         if first_test_index == num_bookings-1:
             first_test_index -= 1

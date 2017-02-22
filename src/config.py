@@ -18,3 +18,9 @@ class Config:
 		Config.rcfg.set(sec, name, str(value))
 		with open('default.cfg', 'wb') as configfile:
 			Config.rcfg.write(configfile)
+
+        @staticmethod
+        def sections():
+                '''Returns a list of section names in the config file (except
+                Default). Also known as the names of all the recommenders.'''
+                return Config.rcfg.sections()
