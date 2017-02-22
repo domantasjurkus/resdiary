@@ -229,8 +229,9 @@ class ContentBased(Recommender):
                     score = 0
                     for cuisine in restaurantCuisine[restaurant]:
                         if cuisine in likedCuisine[diner]:
-                            score += 1                
-                    recommendations[diner].append((restaurant,score))
+                            score += 1
+                    if score>0:
+                        recommendations[diner].append((restaurant,score))
 
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(self.spark.parallelize(
