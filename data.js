@@ -16,6 +16,12 @@ var config = {
 /* A module for reading and writing data from the CSV files. Takes a Diner ID and sends the
    recommended restaurants to the res object. */
 module.exports = {
+    getRandomUserSync: function () {
+        var recommendationsFile = fs.readFileSync('./src/data/Recommendations.csv', 'utf8');
+        var recs = parse(recommendationsFile, {});
+        return recs[Math.floor(Math.random() * recs.length)][0];
+
+    },
     getRecommendationsSync: function (userId) {
         var recommendationsFile = fs.readFileSync('./src/data/Recommendations.csv', 'utf8');
         var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
@@ -43,11 +49,20 @@ module.exports = {
         return bookings.filter(function (booking) {
             return booking[0] == userId;
         }).map(function (booking) {
-            // find the information about each restaurant
-            return restaurants.find(function (restaurant) {
-                return restaurant['RestaurantId'] ==
-                    booking[2];
+            console.log("Before Filter - Name " + booking[1] + " Visit Time: " + booking[3]);
+
+            var rest = restaurants.find(function (restaurant) {
+                return restaurant['RestaurantId'] == booking[2];
             });
+
+            console.log("After Filter - Name " + booking[1] + " Visit Time: " + booking[3]);
+            //rest.Booking = booking;
+            bk = booking[3]; //Visit Date 
+            sc = (booking[5]=="NULL")? "Didn't Review" : booking[5]; //Review Score (if available)
+
+            console.log("Rest booking value time " + booking[3])
+            console.log(rest);
+            return {Restaurant:rest,Score:sc,BookingTime:bk};
         })
 
     },

@@ -72,8 +72,9 @@ body {
     }
 
     .res-recent-box{
-        background-color:#f9f9f9;
+        background-color:#f2f2f2;
         min-height:100px;
         min-width:220px;
         padding:10px;
+        margin-bottom:15px;
     }

@@ -35,7 +35,15 @@ app.get('/netflix-hover-vertical', function(req, res){
 
 /*New demo (23/02) links go here */
 app.get('/new_demo/',function(req,res){
-    res.sendFile('views/new_demo_index.html', {root: __dirname});
+    var users = {
+        user1:data.getRandomUserSync(),
+        user2:data.getRandomUserSync(),
+        user3:data.getRandomUserSync(),
+        user4:data.getRandomUserSync()
+    };
+
+    res.render('new_demo_index', { ids: users})
+    //res.sendFile('views/new_demo_index.html', {root: __dirname});
 })
 
 app.get('/new_demo/user/:id',function(req,res){
@@ -44,23 +52,15 @@ app.get('/new_demo/user/:id',function(req,res){
     var visited = data.getRecentlyVisitedSync(id || 0); //Gets the recently visited
     var recs = data.getRecommendationsSync(id || 0); //Gets the recommendations (and possibly reasons)
 
-    res.json({ userId: id, recent: visited, recommendations: recs})
+    //res.json({ userId: id, recent: visited, recommendations: recs})
 
-    //res.render('new_demo_user', { userId: id, recent: visited, recommendations: recs})
+    res.render('new_demo_user', { userId: id, recent: visited, recommendations: recs})
 })
 
 /* API ports */
 app.get('/recs/:id', function(req, res) {
     data.readCSV(req.params.id || 0, res);
 });
-
-app.get('/recs/recent/:id',function(req,res){
-    data.readCSV(req.params.id)
-})
-
-app.get('/recs/recommendations/:id',function(req,res){
-    data.readCSV(req.params.id)
-})
 
 // Return all generated recommendations as a JSON
 app.get('/data', function(req, res) {
