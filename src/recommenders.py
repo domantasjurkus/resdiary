@@ -179,3 +179,60 @@ class ImplicitALS(Recommender):
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
+
+class ContentBased(Recommender):
+    '''Generates recommendations based on a diner's prefered cuisine
+    types.'''
+    
+    def train(self, bookings):
+        dummyCode = 0
+        
+    def predict(self, bookings):
+        data_transform = Data(self.spark)
+        restaurants = data_transform.read("/home/user/Downloads/Restaurant.csv")
+        restaurantCuisines = data_transform.read("/home/user/Downloads/RestaurantCuisineTypes.csv")
+        cuisineTypes = data_transform.read("/home/user/Downloads/CuisineTypes.csv")
+
+        restaurantCuisine ={}
+        visited = {}
+        
+        for entry in restaurantCuisines.collect():
+            restaurant = entry['RestaurantId']
+            cuisineType = entry['CuisineTypeId']
+            restaurantCuisine.setdefault(restaurant, [])
+            if cuisineType not in restaurantCuisine[restaurant]:
+                restaurantCuisine[restaurant].append(cuisineType)
+
+        likedCuisine = {}
+        MINIMUM_LIKE_SCORE = 4 #the minimum review score from a booking
+                                #for a restaurant's cuisine to be considered liked
+        
+        for booking in bookings.collect():
+            diner = booking[0]
+            restaurant = booking[1]
+            score = booking[2]
+            visited.setdefault(diner, [])
+            if restaurant not in visited[diner]:
+                visited[diner].append(restaurant)
+            likedCuisine.setdefault(diner, [])
+            if score >= MINIMUM_LIKE_SCORE and restaurantCuisine.get(restaurant,None):
+                for cuisine in restaurantCuisine[restaurant]:
+                    if cuisine not in likedCuisine[diner]:
+                        likedCuisine[diner].append(cuisine)       
+
+        data = defaultdict()
+        recommendations = {}
+        for diner in likedCuisine:
+            recommendations.setdefault(diner, [])
+            for restaurant in restaurantCuisine:
+                if restaurant not in visited[diner]:
+                    score = 0
+                    for cuisine in restaurantCuisine[restaurant]:
+                        if cuisine in likedCuisine[diner]:
+                            score += 1                
+                    recommendations[diner].append((restaurant,score))
+
+        schema = ['userID', 'restaurantID', 'score']
+        return SQLContext(self.spark).createDataFrame(self.spark.parallelize(
+            [(diner,restaurant,score) for diner in recommendations
+             for restaurant,score in recommendations[diner]]), schema)

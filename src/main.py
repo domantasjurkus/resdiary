@@ -5,11 +5,13 @@ from data import Data
 def execute_algorithm(algorithm_name,filename,output_file,save,location):
 	bookings = data.read(filename)
 	algorithm = algorithms[algorithm_name.lower()](sc)
+	predictions = []
 	if 'als' in algorithm_name.lower():
 		algorithm.train(bookings,save)
+		predictions = algorithm.predict(data.get_bookings_full(bookings),location)
 	else:
 		algorithm.train(bookings)
-	predictions = algorithm.predict(data.get_bookings_full(bookings),location)
+		predictions = algorithm.predict(data.get_bookings_with_score(bookings))
 	data.write(output_file, predictions)
 	
 def evaluate_algorithm(algorithm_name, filename):
@@ -54,7 +56,7 @@ if __name__ == "__main__":
 	sc = SparkContext('local','Recommendation engine')
 	sc.setLogLevel("ERROR")
 	data = Data(sc)
-	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System}
+	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System,"cb":ContentBased}
 
 	execute_algorithm(args.alg,args.data,args.out,args.save,args.location)
 	#evaluate_algorithm(args.alg, args.data)
