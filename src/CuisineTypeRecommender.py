@@ -1,96 +1,74 @@
-import csv
+class ContentBased(Recommender):
+    '''Generates recommendations based on a diner's prefered cuisine
+    types.'''
+    
+    def train(self, bookings, save):
+        if not isinstance(bookings, DataFrame):
+            raise TypeError('Recommender requires a DataFrame')
+        
+        restaurants = read(self,"Restaurants.csv")
+        restaurantCuisines = read(self,"RestaurantCuisineTypes.csv")
+        cuisineTypes = read(self,"CuisineTypes.csv")
 
-#bookings format : [dinerId] [RestaurantName] [RestaurantID] [Time] [NumberOfPeople] [ReviewScore]
+        restaurantCuisine ={}
+        visited = {}
+        
+        for entry in restaurantCuisines.collect():
+            restaurant = entry['RestaurantId']
+            cuisineType = entry['CuisineTypeId']
+            restaurantCuisine.setdefault(restaurant, [])
+            if cuisineType not in restaurantCuisine[restaurant]:
+                restaurantCuisine[restaurant].append(cuisineType)
 
-with open('Booking.csv', 'rb') as b:
-    reader = csv.reader(b)
-    bookings = list(reader)
+        likedCuisine = {}
+        MINIMUM_LIKE_SCORE = 4 #the minimum review score from a booking
+                                #for a restaurant's cuisine to be considered liked
+        
+        for booking in bookings.collect():
+            diner = booking['Diner Id']
+            restaurant = booking['Restaurant Id']
+            score = booking['Review Score']
+            visited.setdefault(diner, [])
+            if restaurant not in visited[diner]:
+                visited[diner].append(restaurant)
+            likedCuisine.setdefault(diner, [])
+            if score >= MINIMUM_LIKE_SCORE:
+                for cuisine in restaurantCiusine[restaurant]:
+                    if cuisine not in likedCuisine[diner]:
+                        likedCuisine[diner].append(cuisine)       
 
+        data = []
+        recommendations = {}
+        
+        for diner in likedCuisine:
+            recommendations.setdefault(diner, [])
+            for restaurant in restaurantCuisine:
+                if restaurant not in visited[diner]:
+                    score = 0
+                    for cuisine in restaurantCuisine[restaurant]:
+                        if cuisine in likedCuisine[diner]:
+                            score++                    
+                    recommendations[diner].append((restaurant,score))
+        
+        data = [(diner,restaurant,score) for diner in recommendations
+                for restaurant,score in recommendations[diner]]
 
+        r = Config.get("ContentBased", "rank")
+        i = Config.get("ContentBased", "iterations")
+        l = Config.get("ContentBased", "lambda", float)
+        self.spark.setCheckpointDir("./checkpoints/")
+        model_location = "models/ContentBased/{rank}-{iterations}-{alpha}".format(rank=r,iterations=i,alpha=l)
 
-#restaurants format : [RestaurantID] [RestaurantName] [Town] [PricePoint] [Lat] [Lon]
-
-with open('Restaurant.csv', 'rb') as r:
-    reader = csv.reader(r)
-    restaurants = list(reader)
-
-
-
-#restaurant cuisine type format : [RestaurantID] [CuisineTypeID]
-
-with open('RestaurantCuisineTypes.csv', 'rb') as c:
-    reader = csv.reader(c)
-    cuisines = list(reader)
-
-
-
-#cuisineType format : [CuisineTypeID] [CuisineType Name]
-
-with open('CuisineTypes.csv', 'rb') as r:
-    reader = csv.reader(r)
-    cuisineTypes = list(reader)
-
-
-
-# dictionary with restaurant IDs as keys and cuisine types as values
-# [restaurantID] [cuisine types]
-
-restaurantCuisine ={}
-restaurantCounter = 1
-while restaurantCounter<len(restaurants):
-	restaurantCuisine.setdefault(restaurants[restaurantCounter][0], [])
-	for i in cuisines:
-		if i[0]==restaurants[restaurantCounter][0]:			
-			restaurantCuisine[i[0]].append(i[1])		
-	restaurantCounter=restaurantCounter+1
-
-
-
-# dictionary with userIDs as keys and visited restaurantIDs as values
-# [userID] [restaurants visited by said user]
-
-visited ={}
-bookingId = 0
-
-while bookingId<len(bookings):
-    visited.setdefault(bookings[bookingId][0], [])
-    if bookings[bookingId][2] not in visited[bookings[bookingId][0]]:
-        visited[bookings[bookingId][0]].append((bookings[bookingId][2],bookings[bookingId][5]))
-    bookingId=bookingId+1
-
-
-
-# Recommendation based on cuisine type from the user's reviews
-# [userID] [liked cuisineTypeIDs]
-
-userCuisine = {}
-for user in visited:
-	userCuisine.setdefault(user,[])
-	for restaurant in visited[user]:
-		for resCounter in restaurantCuisine:			
-			if (restaurant[0] == resCounter) and (restaurant[1]>=4) and (resCounter[1] not in userCuisine[user]):
-				userCuisine[user].append(resCounter[1])
-
-
-recommendations = {}
-for user in userCuisine:
-	recommendations.setdefault(user, [])
-	for j in userCuisine[user]:
-		for restaurant in restaurantCuisine:
-			if (restaurant not in visited[user]) and (j in restaurantCuisine[restaurant]):
-				recommendations[user].append(restaurant)
-
-
-with open('recommendations.csv', 'wb') as csvfile:
- 	recommendationWriter = csv.writer(csvfile, delimiter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-	for i in recommendations:
-		for j in recommendations[i]:
-			line = []
-			line.append(i)
-			line.append(j)
-			line.append(5) #dummy score value
-			recommendationWriter.writerow(line)
-
-				
-
+        if os.path.isdir(model_location) and save.lower() != 'true':
+            self.model =  MatrixFactorizationModel.load(self.spark, model_location)
+        else:
+            self.model = SparkContentBased.train(ratings, r, i, l)
+            if os.path.isdir(model_location):
+                shutil.rmtree(model_location)
+            self.model.save(self.spark, model_location)
+            
+    
+    def predict(self, data):
+        predictions = self.model.predictAll(data)
+        schema = ['userID', 'restaurantID', 'score']
+        return SQLContext(self.spark).createDataFrame(predictions, schema)
