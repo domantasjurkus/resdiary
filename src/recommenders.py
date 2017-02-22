@@ -125,11 +125,13 @@ class ALS(Recommender):
             raise ValueError('RDD is empty')
 
         customer_id =data.filter(lambda r: (location in r[4])).map(lambda r: (r[0])).distinct()
-        print "Customers: " + str(customer_id.count())
         restaurant_id = data.filter(lambda r: (location in r[4])).map(lambda r: (r[1])).distinct()
-        print "Restaurants: " + str(restaurant_id.count())
         data = customer_id.cartesian(restaurant_id)
+        
+        print "Customers: " + str(customer_id.count())
+        print "Restaurants: " + str(restaurant_id.count())
         print "Recommendations to be generated: " + str(data.count())
+
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
@@ -162,7 +164,18 @@ class ImplicitALS(Recommender):
             self.model.save(self.spark, model_location)
         
 
-    def predict(self, data):
+    def predict(self, data, location):
+        if data.isEmpty():
+            raise ValueError('RDD is empty')
+
+        customer_id =data.filter(lambda r: (location in r[4])).map(lambda r: (r[0])).distinct()
+        restaurant_id = data.filter(lambda r: (location in r[4])).map(lambda r: (r[1])).distinct()
+        data = customer_id.cartesian(restaurant_id)
+
+        print "Customers: " + str(customer_id.count())
+        print "Restaurants: " + str(restaurant_id.count())
+        print "Recommendations to be generated: " + str(data.count())
+
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
