@@ -17,13 +17,24 @@ var config = {
    recommended restaurants to the res object. */
 module.exports = {
     getRandomUserSync: function () {
-        var recommendationsFile = fs.readFileSync('./src/data/Recommendations.csv', 'utf8');
+        var recommendationsFile = fs.readFileSync('./src/data/Recommendations_ALSExplicit_Demo.csv', 'utf8');
         var recs = parse(recommendationsFile, {});
         return recs[Math.floor(Math.random() * recs.length)][0];
 
     },
-    getRecommendationsSync: function (userId) {
-        var recommendationsFile = fs.readFileSync('./src/data/Recommendations.csv', 'utf8');
+    getRandomUsersSync: function(num){
+        var bookingsFile = fs.readFileSync('./src/data/bookings_demo.csv', 'utf8');
+        var bookings = parse(bookingsFile, {}); 
+        var users = [];
+        for(i=0;i<num;i++){
+            var id = bookings[Math.floor(Math.random() * bookings.length)][0];
+            users.push(id)
+            console.log(id);
+        }
+        return users;
+    },
+    getRecommendationsContentSync: function (userId) {
+        var recommendationsFile = fs.readFileSync('./src/data/Recommendations_Content_Based.csv', 'utf8');
         var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
         var recommendations = parse(recommendationsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
@@ -33,14 +44,35 @@ module.exports = {
             return recommendation[0] == userId;
         }).map(function (recommendation) {
             // find the information about each restaurant
-            return restaurants.find(function (restaurant) {
+            var rest = restaurants.find(function (restaurant) {
                 return restaurant['RestaurantId'] ==
                     recommendation[1];
             });
+
+            return {Restaurant:rest,RecScore:recommendation[2]};
+        })
+    },
+    getRecommendationsAlsSync: function (userId) {
+        var recommendationsFile = fs.readFileSync('./src/data/Recommendations_ALSExplicit_Demo.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var recommendations = parse(recommendationsFile, {});
+        var restaurants = parse(restaurantsFile, { columns: true });
+
+        // filter out the relevant recommendations
+        return recommendations.filter(function (recommendation) {
+            return recommendation[0] == userId;
+        }).map(function (recommendation) {
+            // find the information about each restaurant
+            var rest = restaurants.find(function (restaurant) {
+                return restaurant['RestaurantId'] ==
+                    recommendation[1];
+            });
+
+            return {Restaurant:rest,RecScore:recommendation[2]};
         })
     },
     getRecentlyVisitedSync: function (userId) {
-        var bookingsFile = fs.readFileSync('./src/data/Booking.csv', 'utf8');
+        var bookingsFile = fs.readFileSync('./src/data/bookings_demo.csv', 'utf8');
         var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
         var bookings = parse(bookingsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
@@ -49,19 +81,15 @@ module.exports = {
         return bookings.filter(function (booking) {
             return booking[0] == userId;
         }).map(function (booking) {
-            console.log("Before Filter - Name " + booking[1] + " Visit Time: " + booking[3]);
 
             var rest = restaurants.find(function (restaurant) {
-                return restaurant['RestaurantId'] == booking[2];
+                return restaurant['RestaurantId'] == booking[1];
             });
 
-            console.log("After Filter - Name " + booking[1] + " Visit Time: " + booking[3]);
             //rest.Booking = booking;
-            bk = booking[3]; //Visit Date 
-            sc = (booking[5]=="NULL")? "Didn't Review" : booking[5]; //Review Score (if available)
+            bk = "Not available"//booking[3]; //Visit Date 
+            sc = (booking[2]=="NULL")? "Didn't Review" : booking[2]; //Review Score (if available)
 
-            console.log("Rest booking value time " + booking[3])
-            console.log(rest);
             return {Restaurant:rest,Score:sc,BookingTime:bk};
         })
 

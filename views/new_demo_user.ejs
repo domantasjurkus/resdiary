@@ -76,12 +76,26 @@
             <!--Recommended-->
             <div class="col-sm-6 col-xs-12">
                 <h3>Recommended Restaurants</h3>
+                <select id="recChange" style="margin-bottom:10px" class="form-control" onchange="changeRecs(this)">
+                    <option value="als">ALS Recommendations</option>
+                    <option value="content">Content-Based Recommendations</option>
+                </select>
                 <div class="row" id="recommendedList">
-                     <% recommendations.forEach(function(res) { %>
-                        <div class="col-xs-12">
-                            <div class="res-recent-box" data-lat="<%=res.Lat %>" data-lon="<%=res.Lon %>">
-                                <h4><strong>Restaurant Name: </strong><%=res.Name %></h4>
-                                <p><%=res.Town %></p>
+                     <% als.forEach(function(res) { %>
+                        <div class="col-xs-12" data-rec="als">
+                            <div class="res-recent-box" data-lat="<%=res.Restaurant.Lat %>" data-lon="<%=res.Restaurant.Lon %>">
+                                <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
+                                <p><%=res.Restaurant.Town %></p>
+                                <p>Recommended by: ALS || Score: <%=res.RecScore %></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                    <% contentBased.forEach(function(res) { %>
+                        <div class="col-xs-12" data-rec="content">
+                            <div class="res-recent-box" data-lat="<%=res.Restaurant.Lat %>" data-lon="<%=res.Restaurant.Lon %>">
+                                <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
+                                <p><%=res.Restaurant.Town %></p>
+                                <p>Recommended by: Content-Based || Score: <%=res.RecScore %></p>
                             </div>
                         </div>
                     <% }); %>
@@ -92,3 +106,18 @@
     </div>
     <!--//Main Content-->
 </body>
+<script>
+$(document).ready(function(){
+    $( "#recChange" ).trigger( "change" );
+})
+function changeRecs(select){
+    var val = $(select).val();
+    if(val=='content'){
+        $('[data-rec="content"]').show();
+        $('[data-rec="als"]').hide();
+    }else{
+        $('[data-rec="als"]').show();
+        $('[data-rec="content"]').hide();
+    }
+}
+</script>

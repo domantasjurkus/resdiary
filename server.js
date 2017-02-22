@@ -35,13 +35,14 @@ app.get('/netflix-hover-vertical', function(req, res){
 
 /*New demo (23/02) links go here */
 app.get('/new_demo/',function(req,res){
-    var users = {
+    var users = data.getRandomUsersSync(4);
+    /*var users = {
         user1:data.getRandomUserSync(),
         user2:data.getRandomUserSync(),
         user3:data.getRandomUserSync(),
         user4:data.getRandomUserSync()
-    };
-
+    };*/
+    //res.json({ ids: users})
     res.render('new_demo_index', { ids: users})
     //res.sendFile('views/new_demo_index.html', {root: __dirname});
 })
@@ -50,11 +51,12 @@ app.get('/new_demo/user/:id',function(req,res){
     var id = req.params.id; //Grab the ID 
 
     var visited = data.getRecentlyVisitedSync(id || 0); //Gets the recently visited
-    var recs = data.getRecommendationsSync(id || 0); //Gets the recommendations (and possibly reasons)
+    var recsALS = data.getRecommendationsAlsSync(id || 0); //Gets the recommendations (and possibly reasons)
+    var recsContent = data.getRecommendationsContentSync(id || 0); //Gets content-based recommendations
 
-    //res.json({ userId: id, recent: visited, recommendations: recs})
+    //res.json({ userId: id, recent: visited, contentBased:recsContent, als:recsALS})
 
-    res.render('new_demo_user', { userId: id, recent: visited, recommendations: recs})
+    res.render('new_demo_user', { userId: id, recent: visited, contentBased:recsContent, als:recsALS })
 })
 
 /* API ports */
