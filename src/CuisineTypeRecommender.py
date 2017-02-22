@@ -47,7 +47,7 @@ class ContentBased(Recommender):
                     score = 0
                     for cuisine in restaurantCuisine[restaurant]:
                         if cuisine in likedCuisine[diner]:
-                            score++                    
+                            score+=1                   
                     recommendations[diner].append((restaurant,score))
         
         data = [(diner,restaurant,score) for diner in recommendations
