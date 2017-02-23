@@ -53,7 +53,13 @@ app.get('/new_demo/user/:id',function(req,res){
     var visited = data.getRecentlyVisitedSync(id || 0); //Gets the recently visited
     var recsALS = data.getRecommendationsAlsSync(id || 0); //Gets the recommendations (and possibly reasons)
     var recsContent = data.getRecommendationsContentSync(id || 0); //Gets content-based recommendations
-
+    
+    recsALS.sort(function(a, b) {
+        return parseFloat(b.RecScore) - parseFloat(a.RecScore);
+    });
+    recsContent.sort(function(a, b) {
+        return parseFloat(b.RecScore) - parseFloat(a.RecScore);
+    });
     //res.json({ userId: id, recent: visited, contentBased:recsContent, als:recsALS})
 
     res.render('new_demo_user', { userId: id, recent: visited, contentBased:recsContent, als:recsALS })
