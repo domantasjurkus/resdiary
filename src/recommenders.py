@@ -115,9 +115,6 @@ class ALS(Recommender):
             self.model.save(self.spark, model_location)
 
     def predict(self, data):
-        if data.isEmpty():
-            raise ValueError('RDD is empty')
-
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
@@ -152,9 +149,6 @@ class ImplicitALS(Recommender):
             self.model.save(self.spark, model_location)
 
     def predict(self, data):
-        if data.isEmpty():
-            raise ValueError('RDD is empty')
-
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)

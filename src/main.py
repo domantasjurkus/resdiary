@@ -7,7 +7,7 @@ def execute_algorithm(algorithm_name, filename, output_file, load):
 	algorithm = algorithms[algorithm_name.lower()](sc)
 	predictions = []
         algorithm.train(bookings, load)
-        predictions = algorithm.predict(bookings)
+        predictions = algorithm.predict(data.available_restaurants(bookings))
 	data.write(output_file, predictions)
 	
 def evaluate_algorithm(algorithm_name, filename):
@@ -52,7 +52,7 @@ if __name__ == "__main__":
 	data = Data(sc)
 	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System,"cb":ContentBased}
 
-	#execute_algorithm(args.alg, args.data, args.out, args.load)
-	evaluate_algorithm(args.alg, args.data)
+	execute_algorithm(args.alg, args.data, args.out, args.load)
+	#evaluate_algorithm(args.alg, args.data)
 	#train_algorithm(args.alg, args.data)
 	sc.stop()
