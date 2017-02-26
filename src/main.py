@@ -1,6 +1,7 @@
 import os, sys
 import argparse
 from data import Data
+from config import Config
 
 def execute_algorithm(algorithm_name, filename, output_file, load):
 	bookings = data.get_bookings(filename)
@@ -50,7 +51,7 @@ if __name__ == "__main__":
 	sc = SparkContext('local','Recommendation engine')
 	sc.setLogLevel("ERROR")
 	data = Data(sc)
-	algorithms = {"als": ALS, "implicit": ImplicitALS, "system": System,"cb":ContentBased}
+	algorithms = dict([(s.lower(), eval(s)) for s in Config.sections()])
 
 	execute_algorithm(args.alg, args.data, args.out, args.load)
 	#evaluate_algorithm(args.alg, args.data)

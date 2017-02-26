@@ -107,7 +107,7 @@ class ALS(Recommender):
 
         model_exists = os.path.isdir(model_location)
         if load and model_exists:
-            self.model =  MatrixFactorizationModel.load(self.spark, model_location)
+            self.model = MatrixFactorizationModel.load(self.spark, model_location)
         else:
             self.model = SparkALS.train(ratings, r, i, l)
             if model_exists:
