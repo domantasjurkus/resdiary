@@ -20,8 +20,9 @@ Alternatively if that fails...
 spark-submit src/main.py --alg=ALS --data=data/Booking.csv --out=/home/user/data/recommendations.csv
 ```
 
-`--alg`: [`als`, `implicit`]  
-`--data`: relative (`src/data/Booking.csv`) or absolute (`/home/steve/Booking.csv`) path.  
+`--alg`: [`als`, `implicitals`, `contentbased`, `system`]  
+`--data` `--out`: relative (`src/data/Booking.csv`) or absolute (`/home/steve/Booking.csv`) paths.  
+`--func`: [`execute`, `evaluate`, `train`]  
 
 
 #Presentation
