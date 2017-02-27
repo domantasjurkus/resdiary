@@ -137,13 +137,14 @@ class ImplicitALS(Recommender):
         i = Config.get("ImplicitALS", "iterations")
         a = Config.get("ImplicitALS", "alpha", float)
         self.spark.setCheckpointDir("./checkpoints/")
-        model_location = "models/ImplicitALS/{rank}-{iterations}-{alpha}".format(rank=r,iterations=i,alpha=a)
+        model_location = "models/ImplicitALS/{rank}-{iterations}-{alpha}".format(rank=r, iterations=i, alpha=a)
 
         model_exists = os.path.isdir(model_location)
         if load and model_exists:
             self.model =  MatrixFactorizationModel.load(self.spark, model_location)
         else:
-            self.model = SparkALS.trainImplicit(self.spark.parallelize(data), r, i, alpha=a)
+            self.model = SparkALS.trainImplicit(self.spark.parallelize(data), r,
+                                                i, alpha=a, nonnegative=True)
             if model_exists:
                 shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
