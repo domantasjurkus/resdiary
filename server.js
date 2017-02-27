@@ -13,37 +13,28 @@ app.set('views', './views')
 app.set('view engine', 'ejs')
 
 app.get('/', function(req, res) {
-    res.sendFile('views/demo.html', { root: __dirname });
-});
-
-/* 
-    Possibly have the demo as the / for Wednesday.
-    Later change / to index and have the existing / new user split as discussed.
-    Also can have temporary links to RND dev work from index.
- */
-app.get('/index', function(req, res){
-    res.sendFile('views/index.html', {root: __dirname});
-});
-
-app.get('/netflix-hover-horizontal', function(req, res){
-	res.sendFile('views/netflix-hover-horizontal.html', {root: __dirname});
-});
-
-app.get('/netflix-hover-vertical', function(req, res){
-    res.sendFile('views/netflix-hover-vertical.html', {root: __dirname});
+    res.redirect('/new_demo/'); //Redirect to '/new_demo/' to generate random selection of users
 });
 
 /*New demo (23/02) links go here */
 app.get('/new_demo/',function(req,res){
     var users = data.getRandomUsersSync(4);
+    
+    var user_pics = [   "res_user_" + String(Math.floor(Math.random() * 3) + 1) + ".jpg",
+                        "res_user_" + String(Math.floor(Math.random() * 3) + 1) + ".jpg", 
+                        "res_user_" + String(Math.floor(Math.random() * 3) + 1) + ".jpg",
+                        "res_user_" + String(Math.floor(Math.random() * 3) + 1) + ".jpg"
+                    ];
+
+    
     /*var users = {
         user1:data.getRandomUserSync(),
         user2:data.getRandomUserSync(),
         user3:data.getRandomUserSync(),
         user4:data.getRandomUserSync()
     };*/
-    //res.json({ ids: users})
-    res.render('new_demo_index', { ids: users})
+    // res.json({ ids: users, genders: user_pics })
+    res.render('new_demo_index', { ids: users, genders: user_pics })
     //res.sendFile('views/new_demo_index.html', {root: __dirname});
 })
 

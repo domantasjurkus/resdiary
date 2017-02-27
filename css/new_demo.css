@@ -16,6 +16,13 @@ body {
         margin-bottom: 20px;
     }
     
+    .res-image {
+        max-height: 100px;
+        max-width: 100px;
+        margin-right: auto;
+        float: right;
+    }
+
     .res-title {
         text-align: center;
         margin-top: 20px;
@@ -54,6 +61,7 @@ body {
     
     .res-recommendation-user > img {
         max-width: 220px;
+        max-height: 220px;
         border-bottom: solid 4px #e849c8;
     }
     

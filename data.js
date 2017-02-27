@@ -94,7 +94,7 @@ module.exports = {
         })
 
     },
-    getRecommendations: function (userId, res) {
+/*    getRecommendations: function (userId, res) {
 
         // read two files
         fs.readFile('./src/data/Recommendations.csv', 'utf8', function (err1, recommendationsFile) {
@@ -139,6 +139,7 @@ module.exports = {
             });
         });
     },
+*/
     readCSV: function (id, res) {
         // read two files
         fs.readFile('./src/data/Recommendations.csv', 'utf8', function (err1, recommendationsFile) {
