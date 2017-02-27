@@ -25,9 +25,8 @@ class Data(Base):
         df.toPandas().to_csv(filename, index=False)
 
     def get_bookings_with_score(self, data):
-        '''Takes a SparkContext instance and a DataFrame of bookings and
-        returns an RDD of Rating objects constructed from bookings that have
-        non-null review scores.'''
+        '''Takes a DataFrame of bookings and returns an RDD of Rating objects
+        constructed from bookings that have non-null review scores.'''
         return self.spark.parallelize([(row['Diner Id'], row['Restaurant Id'],
                                         row['Review Score']) for row in
                                        data.collect() if row['Review Score']])
@@ -60,6 +59,9 @@ class Data(Base):
         # calculate frequencies
         frequencies = {}
         for diner_id in count:
+            if count[diner_id] == 1:
+                # a count of one doesn't really have a frequency
+                continue
             # +1 just to avoid division by 0
             frequencies[diner_id] = (count[diner_id] /
                                      ((last_visit[diner_id] -
