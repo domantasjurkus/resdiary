@@ -1,0 +1,55 @@
+This is a storage place for some notes / thoughts for the dissertation.
+
+NOTE: When I look at the wiki / retrospective notes I shall add more. 
+
+This is just stuff off the top of my head.
+
+#####
+MARKING SCHEME REFLECTIONS:
+
+Several sections that reflect on your experiences during the team project. Each section should discuss one theme, characterised by incidents or events that occurred during the team course of the project from which you learned (approximately 12-15 pages).
+
+Reflecting on your practice is the hardest part of writing the dissertation, so you are encouraged to talk to the course coordinators and demonstrators to find out what you could include in this section. A good source of examples of incidents for reflection is often the documentation from your retrospectives, because you used the retrospectives to identify areas of your process that could be changed or done better. You should also, try to relate your experiences to other studies available in the software engineering literature (the recommended reading is a good starting point for this).
+
+For example, if you found that you had to drop a feature during an iteration, discuss the reasons why the feature had to be dropped. Had you given yourselves too much work? Was the feature harder to implement than you realised? Had you got your priorities wrong? Then consider looking at the literature (see the recommended reading for PSD3) on project planning and estimation. Was your experience typical of a software project? What steps do other developers advocate for improving estimation?
+
+Alternatively, did you have to make some big design decisions or choice of software platforms early on in the project? What impact did these choices have? Were they the right ones? How might you have improved the decision making process to reduce uncertainty? Did you implement a prototype before proceeding to far with the main implementation? How much effort did this involve? What did you learn about the platform as a result?
+
+#####
+
+REFLECTION IS THE PART TO REALLY, REALLY NAIL.
+
+The rest of the dissertation is pretty standard and by the books - who is the customer - what were the goals - what was actually built - etc.
+
+#####
+POTENTIAL REFLECTION TOPICS:
+These are a list of things which occurred / were addressed over the development of the project
+
+- Dropped feature from initial plan 
+We decided against making recommendations for new users of the service. Initially we proposed a quiz, some research was done into this feature though it was ultimately dropped for the following reasons. 1. Time contstraints. 2. The customer wants similar user recommendations whereas this is a filtered recommendation / search problem.
+
+- Choice of Python / Spark
+We decided to use Python and Spark early on in the project. Simiarly for the front end. This impacted the development of the project. At the retrospective before Christmas break it was decided for everyone to spend time familiarising themselves with Spark as a platform so their was a base common knowledge of it within the team. In regards to the Python decision in particular the team felt that the alternatives were not properly discussed and so methods were taken to rectify this at later stages in the development process.
+
+- Similarly choice of machine learning - collab filter / content based - evalutor
+Early on we decided on the general structure the recommendator would follow. This was in part inspired from similar systems (reference them) and as such had an effect on the design of the system. Customer asked about training on only new data - limits of this particular model not allow this but others might. 
+
+- Ticketing issues
+Initially ticketing handled by 2 team members. Then others started creating tickets but not / slowly acting on them.
+
+- Pair programming
+Pair programming done for design / initial coding of front end of application. Similarly down for aspects of the back end development of the project - well somewhat pair programming where one guy would bounce ideas and assist another in the structure and functionality of that particular aspect of the project.
+
+- Testing
+Testing initially avoided but then picked up before dropping off before picking up again due to build passing but in reality there were issues with it breaking parts of the back end of the application. 
+
+- Team structure
+Initally it was anarchy. Eventually we split into sub-teams to focus primarily on the back end - front end - testing components of the system.
+
+- Conflicting opinions
+There was conflict with regards to deleting code (maybe do a code review style thing instead guys?) and general direction of development of aspects of the back end. Also in regards to the usefulness of the front end which ultimately helped really sell the application and system. In regards to the altering code conflicts I'm pretty sure that goes against the 'PSD' way.
+
+- Presentation structure
+Remember 'that demonstration'. Everything came across poorly and it was really pretty bad if we're being honest about it. Remember the excellent demonstration we had after it. What changed? We planned, prepared and knew exactly going in all the bases we needed to hit. We took on board the feedback of Jeremy and aced it.
+
+Other points to recall - consider the decisions made and the effect of making the decisions on the development of the project.
