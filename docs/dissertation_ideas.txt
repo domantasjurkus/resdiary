@@ -35,13 +35,13 @@ We decided to use Python and Spark early on in the project. Simiarly for the fro
 Early on we decided on the general structure the recommendator would follow. This was in part inspired from similar systems (reference them) and as such had an effect on the design of the system. Customer asked about training on only new data - limits of this particular model not allow this but others might. 
 
 - Ticketing issues
-Initially ticketing handled by 2 team members. Then others started creating tickets but not / slowly acting on them.
+Initially ticketing handled by 2 team members. Then others started creating tickets but not / slowly acting on them. Potentially also mention lack of formal ticket estimation done within project (planning poker) and similar strategies.
 
 - Pair programming
-Pair programming done for design / initial coding of front end of application. Similarly down for aspects of the back end development of the project - well somewhat pair programming where one guy would bounce ideas and assist another in the structure and functionality of that particular aspect of the project.
+Pair programming done for design / initial coding of front end of application. Similarly down for aspects of the back end development of the project - well somewhat pair programming where one guy would bounce ideas and assist another in the structure and functionality of that particular aspect of the project. Potential spin for the front end is that a more experienced front end developer Josh worked with a less expereienced developer Joseph and the benefits of this (see note on pair programming on wiki somewhere for similar argument)
 
 - Testing
-Testing initially avoided but then picked up before dropping off before picking up again due to build passing but in reality there were issues with it breaking parts of the back end of the application. 
+Testing initially avoided but then picked up before dropping off before picking up again due to build passing but in reality there were issues with it breaking parts of the back end of the application. Reference the conflict which arose due to passing all of the tests but not working with the evaluator aspect of the system. Potentailly reference test strategies which in hindsight could have been used within the project.
 
 - Team structure
 Initally it was anarchy. Eventually we split into sub-teams to focus primarily on the back end - front end - testing components of the system.
