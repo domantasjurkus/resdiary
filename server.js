@@ -63,7 +63,10 @@ app.get('/new_demo/user/:id/:resId',function(req,res){
     var id = req.params.id; 												// Grab the user ID 
    	var resId = req.params.resId;											// Grab restraunt ID
 
-    var visited = data.getRecentlyVisitedSync(id || 0); 					// Gets the user's recently visited restaurants
+    var visited = data.getRecentlyVisitedCoord(id || 0); 					// Gets the user's recently visited restaurants
+
+    // console.log(visited);
+
     var rest = data.getRecommendedRes(id, resId);							// Gets the specific restaurant info
 
     res.render('new_demo_res', { userId: id, restaurantId: resId, recent: visited, restaurant: rest })

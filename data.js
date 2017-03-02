@@ -93,6 +93,30 @@ module.exports = {
             return {Restaurant:rest,Score:sc,BookingTime:bk};
         })
     },
+
+    getRecentlyVisitedCoord: function (userId) {
+        var bookingsFile = fs.readFileSync('./src/data/bookings_demo.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var bookings = parse(bookingsFile, {});
+        var restaurants = parse(restaurantsFile, { columns: true });
+
+        // filter out the relevant bookings
+        return bookings.filter(function (booking) {
+            return booking[0] == userId;
+        }).map(function (booking) {
+
+            var rest = restaurants.find(function (restaurant) {
+                return restaurant['RestaurantId'] == booking[1];
+            });
+
+            var resId = rest['RestaurantId'];
+            var lat = rest["Lat"];
+            var lon = rest["Lon"];
+
+            return {Restaurant:resId,Lat:lat,Lon:lon};
+        })
+    },
+
     getRecommendedRes: function (userId, resId) {
         var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
         var restaurants = parse(restaurantsFile, { columns: true });
@@ -100,9 +124,8 @@ module.exports = {
         return restaurants.find(function (restaurant) {
             return restaurant['RestaurantId'] == resId;
         });
-
-//            return rest;
     },
+
 /*    getRecommendations: function (userId, res) {
 
         // read two files
