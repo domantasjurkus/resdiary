@@ -1,3 +1,4 @@
+from abc import ABCMeta, abstractmethod
 from collections import Counter, defaultdict
 import heapq
 import itertools
@@ -17,19 +18,18 @@ class Recommender(Base):
     '''All recommenders should extend this class. Enforces a consistent
     interface.'''
 
+    __metaclass__ = ABCMeta
+
+    @abstractmethod
     def train(self, data, load=False):
         """Takes a DataFrame of bookings. Doesn't return anything."""
         raise NotImplementedError("Don't use this class, extend it")
 
+    @abstractmethod
     def predict(self, data):
         '''Takes an RDD list of (userID, restaurantID) pairs and returns a
         DataFrame with the schema:
         Recommendation(userID, restaurantID, score).'''
-        raise NotImplementedError("Don't use this class, extend it")
-
-    def learn_hyperparameters(self, data):
-        '''Takes a DataFrame of bookings and uses the evaluator to learn optimal
-        values for all the hyperparameters.'''
         raise NotImplementedError("Don't use this class, extend it")
 
 class System(Recommender):
@@ -74,6 +74,8 @@ class System(Recommender):
                                                       schema)
 
     def learn_hyperparameters(self, data):
+        '''Takes a DataFrame of bookings and uses the evaluator to learn optimal
+        values for all the hyperparameters.'''
         recommenders = self.recommenders.keys()
         best_evaluation = 0
         maximum_weight = Config.get('System', 'maximum_weight')
