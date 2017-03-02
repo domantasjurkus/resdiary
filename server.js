@@ -13,10 +13,10 @@ app.set('views', './views')
 app.set('view engine', 'ejs')
 
 app.get('/', function(req, res) {
-    res.redirect('/new_demo/'); //Redirect to '/new_demo/' to generate random selection of users
+    res.redirect('/new_demo/'); 		/* Redirect to '/new_demo/' to generate random selection of users */
 });
 
-/*New demo (23/02) links go here */
+/* Demo homepage which displays random selection of users */
 app.get('/new_demo/',function(req,res){
     var users = data.getRandomUsersSync(4);
     
@@ -25,25 +25,26 @@ app.get('/new_demo/',function(req,res){
                         "res_user_" + String(Math.floor(Math.random() * 3) + 1) + ".jpg",
                         "res_user_" + String(Math.floor(Math.random() * 3) + 1) + ".jpg"
                     ];
-
-    
-    /*var users = {
+/*
+    var users = {
         user1:data.getRandomUserSync(),
         user2:data.getRandomUserSync(),
         user3:data.getRandomUserSync(),
         user4:data.getRandomUserSync()
-    };*/
+    };
+*/
     // res.json({ ids: users, genders: user_pics })
     res.render('new_demo_index', { ids: users, genders: user_pics })
-    //res.sendFile('views/new_demo_index.html', {root: __dirname});
+    
 })
 
+/* User specific recommendations and dining history */
 app.get('/new_demo/user/:id',function(req,res){
-    var id = req.params.id; //Grab the ID 
+    var id = req.params.id; 												// Grab the ID 
 
-    var visited = data.getRecentlyVisitedSync(id || 0); //Gets the recently visited
-    var recsALS = data.getRecommendationsAlsSync(id || 0); //Gets the recommendations (and possibly reasons)
-    var recsContent = data.getRecommendationsContentSync(id || 0); //Gets content-based recommendations
+    var visited = data.getRecentlyVisitedSync(id || 0); 					// Gets the recently visited
+    var recsALS = data.getRecommendationsAlsSync(id || 0); 					// Gets the recommendations (and possibly reasons)
+    var recsContent = data.getRecommendationsContentSync(id || 0); 			// Gets content-based recommendations
     
     recsALS.sort(function(a, b) {
         return parseFloat(b.RecScore) - parseFloat(a.RecScore);
@@ -51,9 +52,21 @@ app.get('/new_demo/user/:id',function(req,res){
     recsContent.sort(function(a, b) {
         return parseFloat(b.RecScore) - parseFloat(a.RecScore);
     });
-    //res.json({ userId: id, recent: visited, contentBased:recsContent, als:recsALS})
 
+    //res.json({ userId: id, recent: visited, contentBased:recsContent, als:recsALS})
     res.render('new_demo_user', { userId: id, recent: visited, contentBased:recsContent, als:recsALS })
+})
+
+/* User specific recommendations and dining history */
+app.get('/new_demo/user/:id/:resId',function(req,res){
+
+    var id = req.params.id; 												// Grab the user ID 
+   	var resId = req.params.resId;											// Grab restraunt ID
+
+    var visited = data.getRecentlyVisitedSync(id || 0); 					// Gets the user's recently visited restaurants
+    var rest = data.getRecommendedRes(id, resId);							// Gets the specific restaurant info
+
+    res.render('new_demo_res', { userId: id, restaurantId: resId, recent: visited, restaurant: rest })
 })
 
 /* API ports */
@@ -61,7 +74,7 @@ app.get('/recs/:id', function(req, res) {
     data.readCSV(req.params.id || 0, res);
 });
 
-// Return all generated recommendations as a JSON
+/* Return all generated recommendations as a JSON */
 app.get('/data', function(req, res) {
 	var data = [];
 	var filepath = path.join(__dirname, 'src/data/Recommendations.csv')
@@ -73,6 +86,7 @@ app.get('/data', function(req, res) {
 	    res.json(data);
 	})
 })
+
 
 var port = process.env.PORT || 3000;
 http.listen(port, function() {

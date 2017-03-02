@@ -84,7 +84,9 @@
                      <% als.forEach(function(res) { %>
                         <div class="col-xs-12" data-rec="als">
                             <div class="res-recent-box" data-lat="<%=res.Restaurant.Lat %>" data-lon="<%=res.Restaurant.Lon %>">
-                                <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
+                                <a href="/new_demo/user/<%= userId %>/<%= res.Restaurant.RestaurantId %>">
+                                    <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
+                                </a>
                                 <p><%=res.Restaurant.Town %></p>
                                 <p>Recommended by: ALS || Score: <%=res.RecScore %></p>
                             </div>
@@ -93,7 +95,9 @@
                     <% contentBased.forEach(function(res) { %>
                         <div class="col-xs-12" data-rec="content">
                             <div class="res-recent-box" data-lat="<%=res.Restaurant.Lat %>" data-lon="<%=res.Restaurant.Lon %>">
-                                <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
+                                <a href="/new_demo/user/<%= userId %>/<%= res.Restaurant.RestaurantId %>">
+                                    <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
+                                </a>
                                 <p><%=res.Restaurant.Town %></p>
                                 <p>Recommended by: Content-Based || Score: <%=res.RecScore %></p>
                             </div>

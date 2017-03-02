@@ -92,7 +92,16 @@ module.exports = {
 
             return {Restaurant:rest,Score:sc,BookingTime:bk};
         })
+    },
+    getRecommendedRes: function (userId, resId) {
+        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var restaurants = parse(restaurantsFile, { columns: true });
 
+        return restaurants.find(function (restaurant) {
+            return restaurant['RestaurantId'] == resId;
+        });
+
+//            return rest;
     },
 /*    getRecommendations: function (userId, res) {
 
@@ -188,5 +197,5 @@ module.exports = {
                     res.send(result.rows);
                 });
         });
-    }
+    } 
 };
