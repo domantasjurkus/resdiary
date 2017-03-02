@@ -60,7 +60,7 @@ if __name__ == "__main__":
 	sc.setLogLevel("ERROR")
 	data = Data(sc)
 
-	algorithms = dict([(s.lower(), eval(s)) for s in Config.sections()])
+	algorithms = dict([(s.lower(), eval(s)) for s in Config.rcfg.sections()])
 
 	# Invoke selected function
 	args.func(vars(args))

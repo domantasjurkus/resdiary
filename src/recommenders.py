@@ -1,9 +1,10 @@
 from collections import Counter, defaultdict
 import heapq
 import itertools
-import os.path,shutil
+import os.path
+import shutil
 
-from pyspark.mllib.recommendation import  MatrixFactorizationModel,ALS as SparkALS
+from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS as SparkALS
 from pyspark.sql import SQLContext
 from pyspark.sql.dataframe import DataFrame
 
@@ -37,22 +38,24 @@ class System(Recommender):
 
     def __init__(self, spark):
         super(System, self).__init__(spark)
-        recommenders = Config.sections()
-        self.recommenders = dict((name, eval(name)(self.spark)) for name in recommenders)
-        self.coefficients = dict((name, Config.get(name, 'weight')) for name in recommenders)
-        self.recommendations_per_user = Config.get("DEFAULT", "recs_per_user")
+        recommenders = Config.get_recommenders()
+        self.recommenders = dict((name, eval(name)(self.spark))
+                                 for name in recommenders)
+        self.weights = dict((name, Config.get(name, 'weight'))
+                                 for name in recommenders)
+        self.recommendations_per_user = Config.get("System", "recs_per_user")
 
     def train(self, data, load=False):
-        for recommender in self.recommenders.values():
-            recommender.train(data)
+        for name, recommender in self.recommenders.iteritems():
+                recommender.train(data)
 
     def predict(self, data):
         # tally up the scores for each (user, restaurant) pair multiplied by the
-        # coefficients
+        # weights
         scores = defaultdict(lambda: defaultdict(int))
         for name, model in self.recommenders.iteritems():
             for row in model.predict(data).collect():
-                partial_score = self.coefficients[name] * row['score']
+                partial_score = self.weights[name] * row['score']
                 scores[row['userID']][row['restaurantID']] += partial_score
 
         # for each user find the top self.recommendations_per_user restaurants
@@ -73,22 +76,33 @@ class System(Recommender):
     def learn_hyperparameters(self, data):
         recommenders = self.recommenders.keys()
         best_evaluation = 0
-        # for each combination of coefficients that we are considering
-        # (the last coefficient is calculated as
-        # range_stop_value - sum(coefficients))
-        top = 3 # TODO: transfer the range values into the config
-        combinations = itertools.product(range(1, top),
-                                         repeat=len(recommenders) - 1)
-        for coefficients in map(lambda c: c + (top - sum(c),), combinations):
-            # apply the coefficients
+        maximum_weight = Config.get('System', 'maximum_weight')
+        # for each combination of weights that we are considering
+        for weights in self.generate_weights(maximum_weight):
+            # apply the weights
             for i, recommender in enumerate(recommenders):
-                self.coefficients[recommender] = coefficients[i]
-            # keep track of the best coefficients
+                self.weights[recommender] = weights[i]
+            # keep track of the best weights
             evaluation = evaluate(self.spark, self, data)
             if evaluation > best_evaluation:
                 best_evaluation = evaluation
-                best_coefficients = coefficients
-        print best_coefficients # TODO: write them to a config file
+                best_weights = weights
+        # write the new combination to the config file
+        Config.set_weights(best_weights)
+
+    def generate_weights(self, maximum_weight):
+        '''Takes a maximum weight and generates all possible combinations of
+        weights from the range [0, maximum_weight], removing redundant
+        options.'''
+        num_recommenders = len(self.recommenders)
+        weights = set(itertools.product(range(maximum_weight + 1),
+                                        repeat=num_recommenders))
+        # remove unnecessary duplication
+        # (e.g., remove (2, 2, 2) if we already have (1, 1, 1))
+        weights.discard(tuple([0] * num_recommenders))
+        for k in range(2, maximum_weight + 1):
+            weights -= set([tuple(map(lambda c: k * c, t)) for t in weights])
+        return weights
 
 class ALS(Recommender):
     '''Generates recommendations based on review data.'''
@@ -103,7 +117,8 @@ class ALS(Recommender):
         i = Config.get("ALS", "iterations")
         l = Config.get("ALS", "lambda", float)
         self.spark.setCheckpointDir("./checkpoints/")
-        model_location = "models/ALS/{rank}-{iterations}-{alpha}".format(rank=r,iterations=i,alpha=l)
+        model_location = "models/ALS/{rank}-{iterations}-{alpha}".format(
+            rank=r, iterations=i, alpha=l)
 
         model_exists = os.path.isdir(model_location)
         if load and model_exists:
