@@ -226,3 +226,56 @@ class ContentBased(Recommender):
         return SQLContext(self.spark).createDataFrame(self.spark.parallelize(
             [(diner, restaurant, score) for diner in recommendations
              for restaurant, score in recommendations[diner]]), schema)
+
+class PricePoint(Recommender):
+    '''Generates recommendations based on a diner's prefered cuisine types.'''
+    
+    def train(self, bookings, load=False):
+        data_transform = Data(self.spark)
+        restaurants = data_transform.read("data/Restaurant.csv")
+
+        self.restaurantPricePoint = {}
+        self.visited = {}
+        self.userPricePoints = {}
+        
+        for entry in restaurants.collect():           
+            if entry['PricePoint'] is not None:
+				self.restaurantPricePoint.setdefault(entry['RestaurantId'], [])
+				self.restaurantPricePoint[entry['RestaurantId']].append(entry['PricePoint'])
+
+        MINIMUM_LIKE_SCORE = 4 #the minimum review score from a booking
+        #for a restaurant's cuisine to be considered liked
+        
+        for booking in bookings.collect():
+            diner = booking['Diner Id']
+            restaurant = booking['Restaurant Id']
+            score = booking['Review Score']
+            self.visited.setdefault(diner, [])
+            if restaurant not in self.visited[diner]:
+                self.visited[diner].append(restaurant)
+            self.userPricePoints.setdefault(diner, [])
+            if self.restaurantPricePoint.has_key(restaurant):
+                self.userPricePoints[diner].append(self.restaurantPricePoint[restaurant])
+
+                                                              
+    def predict(self, users_restaurants):
+        # TODO: use the parameter
+        data = defaultdict()
+        recommendations = {}
+        for diner in self.userPricePoints:
+			recommendations.setdefault(diner, [])
+			userAveragePricePoint = 0
+			counter = 0
+			for pricePoint in self.userPricePoints[diner]:
+				if pricePoint is not None :
+					userAveragePricePoint += pricePoint[0]
+					counter += 1
+			if counter>0:
+				userAveragePricePoint = userAveragePricePoint/counter
+			for restaurant in self.restaurantPricePoint:
+				recommendations[diner].append((restaurant, 5 - abs(self.restaurantPricePoint[restaurant][0]-userAveragePricePoint)))
+
+        schema = ['userID', 'restaurantID', 'score']
+        return SQLContext(self.spark).createDataFrame(self.spark.parallelize(
+            [(diner, restaurant, score) for diner in recommendations
+             for restaurant, score in recommendations[diner]]), schema)
