@@ -18,10 +18,13 @@
         Josh O'brien \\
 		Joseph O'Hagan}
 
-\date{1 January 2000}
+\date{31st March 2017}
 
 \maketitle
 
+% ##################################################
+% LAST EDIT: 	06/03/17	Joseph
+% ##################################################
 \begin{abstract}
 The abstract shall go here! Here is some things to keep in mind while writing it.
 \end{abstract}
@@ -43,6 +46,10 @@ The abstract shall go here! Here is some things to keep in mind while writing it
 \newpage
 
 %==============================================================================
+
+% ##################################################
+% LAST EDIT: 	06/03/17	Josh
+% ##################################################
 \section{Introduction}
 % An introduction, explaining the purpose of the document, a very brief outline of the project and a summary of the structure of the rest of the document (approximately 1-2 pages).
 
@@ -66,6 +73,7 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 \newpage
 
 %==============================================================================
+
 \section{Case Study Background}
 \label{sec:background}
 % A description of the case study background and context. This should include a description of the project customer (what was the nature of the organisation you were working for), their objectives for the project, and a summary of what was actually achieved. Where appropriate, this section should also make reference to similar related projects in order to make the context clear (approximately 4-5 pages).
@@ -73,6 +81,9 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 % MISC POINTS TO DISCUSS:
 % 1. Do we address the legal contract we signed. I.e. Initially it was proposed for integration into the site. It then changed and this we reflected in the contract we signed which outlined the final product and how it could be used be ResDiary - possibly get a more accurate summary of what ResDiary can do with the delivered product from them (ask them to summarise the contract essentially mentioning it is beneficial to our final report)
 
+% ##################################################
+% LAST EDIT: 	06/03/17	Joseph
+% ##################################################
 \subsection{Customer}
 \label{customer}
 % The customer organisation and background.
@@ -80,62 +91,42 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 % Here we want answer the question of who are ResDiary and what do they do.
 % Additionally answer who played the customer role of ResDiary to us on the project.
 
-% -- Old copy --
-% ResDiary is a Glasgow based online restruant reservation system which was founded in 2006. They are a commerical organisation whose service provides a commission-free online reservation system. Their aim is to provide a booking platform and table management system that is comprehensive and easy to use by both the hospitality industry and their guests. 
-% For the duration of the project ResDiary senior software engineer's Adam Connelly and Ian Strachan served as both the customer and contact for the project. 
-% --------------
 
-ResDiary are a Glasgow-based online restruant reservation system which founded in 2006. They are a commerical organisation whose service aims to provide a booking platform and table management system that is comprehensive and easy to use by both the hospitality industry and their guests.
-% This was largely copy and pasted from the ResDiary About section of their website so rewrite most likely needed. Try and summarise better than TripAdvisor for restruants. - Joseph 
+% Who are ResDiary?
+ResDiary are a Glasgow-based online restruant reservation founded in 2006. They are a commerical organisation whose service provides a comprehensive and easy to use booking platform and table management system that is used by both the hospitality industry and its guests. The service provides 24-hour reservation services via customer websites such as Facebook and Twitter. Their global service sees 9.7 million covers booked every month and their technology is in use in over 6,500 restaurants across 58 countries.
 
-For the duration of the project ResDiary senior software engineer's Adam Connelly and Ian Strachan served as the representatives of ResDairy for the project. 
-% served as the client on behalf of ResDiary for this project.
+For the duration of the project ResDiary senior software engineers Adam Connelly and Ian Strachan acted as the representatives of ResDairy. They served as the point of contact between our team and the customer and provided useful feedback and answers to our queries throughout the development of the project. They also provided supplies of data for use within the project upon request with steps taken by ResDairy to ensure anonaminity of the sensitive user data.
 
-Primarily our interacts were with Ian Strachan, as he was whom we initially met with during the requirements elicitation meeting and contacted to request additional data resources provided by ResDairy throughout the duration of the project.
-% Possibly mention the steps taken by ResDiary to anonymize the data here. I would like to mention it somewhere but it may not be necessary - Joseph
 
-Both Ian Strachan and Adam Conlley were in attendance at each iteration meeting, unless conflicting commitments rendered them otherwise unable to attend, and both provided useful feedback and insight whilst discussing some of the design decisions which we made as well as answering our queries throughout the duration of the project.
-% Outline the role played by Ian and Adam at the meetings. 
-
+% ##################################################
+% LAST EDIT: 	06/03/17	Joseph
+% ##################################################
 \subsection{Initial Objectives And Rationale}
 \label{initobjectives}
 % The rationale and initial objectives for the project.
 
-Essentially with the intro we want to introduce the company and the aims of the project. Mention similar real world examples such as the Netflix model as this was used as a reference / example similar project early on in our project. Talk out the specification, reference the dropped features of the specification in relation to what was actually developed and presented to the customer. Potentially mention points of future expansion as well and how project was setup to account for those future developments.
+% Essentially with the intro we want to introduce the company and the aims of the project. Mention similar real world examples such as the Netflix model as this was used as a reference / example similar project early on in our project. Talk out the specification, reference the dropped features of the specification in relation to what was actually developed and presented to the customer. Potentially mention points of future expansion as well and how project was setup to account for those future developments.
 
-Possibly reflect on the change in specification that occurred - how it was originally proposed to what it evenually became both from our perspective (in terms of what we would develop) and how ResDiary wished to use the project (in that they intially proposed either integrating it into their system or creating an API to eventually just wanting it as a proof of concept to learn from).
+% Possibly reflect on the change in specification that occurred - how it was originally proposed to what it evenually became both from our perspective (in terms of what we would develop) and how ResDiary wished to use the project (in that they intially proposed either integrating it into their system or creating an API to eventually just wanting it as a proof of concept to learn from).
 
-This section should address the final state of the project.
+% Essentially I want to introduce the customer and provide an overview of the motivation of the project.
+% Project motivation comes from three reasons:
+% 	1. Improve restaurant discover on existing service 
+%	2. Commerial reason as it is not something their competition does
+%	3. Big data proof of concept research - they have large amount of big data they do nothing with and would like to see if using it for such a purpose would be useful
 
-The initial customer requirements elicitation meeting was lead by ResDiary senior software engineer Ian Strachan. 
+% This is rough but I'm trying to mainly hit on the motives and tease on some later developments
 
-WIP Initial Meeting Notes : Justification / Pitch of Project
-At the meeting an overview was given of the ResDiary business and service. 
-They explained how their current portal allows diners to search for restaurants and available tables for dining but this requires users to select a specific date and general location. 
-They wish to improve restaurant discovery on their service and hope a restraurant recommendation engine could be created and at a later date integrated into the site.
-The goal of the project is to create a recommendation engine that accurately suggests places to eat based on previous restaurants visited by the user and other users with similar dining habits.
-The recommendations must be in close proximity to restaurants the user typically visits. A user who eats out in Glasgow should have recommendations to restraunts in Glasgow.
-They believed that none of their competition have a similar feature and feel it would give them the edge in the restaurant booking portal world.
-They wished to explore a potential use for their collection of big data which is currently not being used. 
 
-WIP NOTES : 
-From the offset we faced a decision to either use Python or C\# primarily for development. ResDiary uses C\# for their development but one of the team members with some experience working on recommendation systems and big data sets felt that Python was better suited at least initially for the project. 
+% Initial Meeting - Project Motivation - Initial Aims
+Our initial meeting with the customer was led by Ian Strachan and served as the customer requirements elicitation meeting. The meeting began with an overview of the ResDairy business (link to customer section) and the technologies currently in place. One shortcoming of their existing systems however is that the large quantity of big data gathered by ResDiary in their day-to-day operations is currently unused and dorminant. 
 
-WIP NOTES : 
-Legal Issues mention was handled in the intro
-How data was provided and how it was made anonymous by ResDiary.
-It was agreed from the offset that data would be provided to the team by ResDiary (through contact with Ian) in the form of anonymous user CSV files. Explain how they made the data anonymous such as through assignment of a user id to what was originally an email address field.
-As for security mention that an agreement was made between the two parties - brief summary of how they retain rights to use it commerically and we academically (probably get them to summarise it better than we can recall) and how it was signed at the start of January (iteration whatever).
-Explain this as the part on how ResDiary sent us the csv data dumps as our source of information in the the project.
+A proposed method (and our project) for utilising this data is to improve restaurant discovery of the ResDairy portal (found at ResDiary.com) by implementing a recommendation system into the service. They wished for recommendations to be made to suggest restaurants to a user based off other users with similar dining habits. They believed such a system would distinguish them from their competition as their research shows it is not a feature in place by their competition. Similar systems referenced in existing services include the Netflix model and Amazon model for making recommendations to users (reference via papers here). Hence our project was to create a restraunt recommendation system for ResDairy and should time allow it potentially integrate it into their existing service. This final goal would later change over the course of development (reference change around iteration 3 for project goal) as ResDiary wished to use the project to act as a proof of concept which they could use to assess its quality and usefulness to them and whether integration of a similar system into their own site would be beneficial.
 
-WIP NOTES :
-Intially it was unsure of how the final product would be used by ResDiary. 
-Both integration into their existing site and creation of an API to access the application were proposed during the initial stages. 
-Ultimately the customers mindset shifted and wished to use the project as a proof of concept and learning tool for their own use.
-They wished to be given the end product so they could then assess its usefulness and quality and investigate if integration of a similar service into their own site would be beneficial.
-They were also unaware of how to build such a service and so would like to sort of reverse engineer the project to understand how a similar system could be built into their existing service.
-The team also currently has a large quantity of big data they are currently not ultising for anything and so would like to use the project as a proof of concept for ultilising their big data resource for additional projects and services down the line.
 
+% ##################################################
+% LAST EDIT: 	06/03/17	Joseph
+% ##################################################
 \subsection{Delivered Software}
 \label{finsoftware}
 % Information on the final software that was delivered to the customer.
