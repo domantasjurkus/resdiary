@@ -12,6 +12,10 @@ class Config:
                 return int(Config.rcfg.get(sec, name))
 
         @staticmethod
+        def get_string(sec, name, type=str):
+                return str(Config.rcfg.get(sec, name))
+
+        @staticmethod
         def set(sec, name, value):
                 Config.rcfg.set(sec, name, str(value))
                 Config.save_changes()

@@ -57,7 +57,7 @@ if __name__ == "__main__":
 	from recommenders import *
 
 	sc = SparkContext('local','Recommendation engine')
-	sc.setLogLevel("ERROR")
+	sc.setLogLevel("WARN")
 	data = Data(sc)
 
 	algorithms = dict([(s.lower(), eval(s)) for s in Config.rcfg.sections()])

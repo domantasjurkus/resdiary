@@ -132,7 +132,30 @@ class ALS(Recommender):
             self.model.save(self.spark, model_location)
 
     def predict(self, data):
-        predictions = self.model.predictAll(data)
+        data_transform = Data(self.spark)
+        data_dir = Config.get_string("DEFAULT", "data_dir")
+        lat_diff =  Config.get("DEFAULT", "lat_diff",type=float)
+        long_diff = Config.get("DEFAULT", "long_diff",type=float)
+        recommendations = []
+        restaurants  = data_transform.read(data_dir + "Restaurant.csv")
+        restaurants_info = data_transform.get_restaurants_info(restaurants)
+        restaurants = self.spark.parallelize([( row['Restaurant Id'],
+                                        row['Lat'],row['Lon']) for row in
+                                       restaurants.collect()])
+        
+        for pair in data.collect():
+            current_restaurant = restaurants_info.get(pair[1],None)
+            if current_restaurant:
+                temp_restaurants = restaurants.filter(lambda r: (abs(current_restaurant[0]) - abs(r[1])) < lat_diff )
+                temp_restaurants = temp_restaurants.filter(lambda r: (abs(current_restaurant[1]) - abs(r[2])) < long_diff )
+                temp_recs = temp_restaurants.map(lambda r: r[0])
+                temp_recs = self.spark.parallelize([pair[0]]).cartesian(temp_recs)
+                recommendations.extend(temp_recs.collect())
+
+
+        recommendations = self.spark.parallelize(recommendations)
+        print recommendations.distinct().count()
+        predictions = self.model.predictAll(recommendations.distinct())
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
 
@@ -167,6 +190,9 @@ class ImplicitALS(Recommender):
             self.model.save(self.spark, model_location)
 
     def predict(self, data):
+        
+        # restaurants = restaurants.filter(lambda r: )
+        print data.collect()
         predictions = self.model.predictAll(data)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)

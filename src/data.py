@@ -24,6 +24,13 @@ class Data(Base):
         DataFrame to the specified CSV file.'''
         df.toPandas().to_csv(filename, index=False)
 
+    def get_restaurants_info(self,data):
+        '''Takes a DataFrame of restaurants and returns RDD of ID,Latitude and Longtitude.'''
+        restaurants = {}
+        for row in data.collect():
+            restaurants[row['Restaurant Id']] = [ float(row['Lat']),  float(row['Lon'])]
+        return restaurants
+
     def get_bookings_with_score(self, data):
         '''Takes a DataFrame of bookings and returns an RDD of Rating objects
         constructed from bookings that have non-null review scores.'''
