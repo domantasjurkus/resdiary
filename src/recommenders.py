@@ -155,8 +155,8 @@ class ALS(Recommender):
         return self.spark.parallelize(recommendations)
 
     def predict(self, data):
-        recommendations = self.location_filtering(data)
-        predictions = self.model.predictAll(recommendations.distinct())
+        recommendations = self.location_filtering(data).distinct()
+        predictions = self.model.predictAll(recommendations)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
 
