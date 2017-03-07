@@ -46,7 +46,7 @@ if __name__ == "__main__":
 	args = parse_arguments()
 
 	if args.alg is None or args.data is None: # pragma: no cover
-		print "\nUsage: python main.py\n--alg=[als, implicitals, contentbased, system]\n"\
+		print "\nUsage: python main.py\n--alg=[ExplicitALS, ImplicitALS, contentbased, system]\n"\
 			"--data=<bookings.csv>\n--out=<recommendations.csv>\n" \
 			"--func=[execute, evaluate, train]\n"
 		sys.exit()
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 	from recommenders import *
 
 	sc = SparkContext('local','Recommendation engine')
-	sc.setLogLevel("INFO")
+	sc.setLogLevel("ERROR")
 	data = Data(sc)
 
 	algorithms = dict([(s.lower(), eval(s)) for s in Config.rcfg.sections()])

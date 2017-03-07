@@ -28,7 +28,7 @@ class Data(Base):
         '''Takes a DataFrame of restaurants and returns RDD of ID,Latitude and Longtitude.'''
         restaurants = {}
         for row in data.collect():
-            restaurants[row['Restaurant Id']] = [ float(row['Lat']),  float(row['Lon'])]
+            restaurants[row['RestaurantId']] = [ float(row['Lat']),  float(row['Lon'])]
         return restaurants
 
     def get_bookings_with_score(self, data):

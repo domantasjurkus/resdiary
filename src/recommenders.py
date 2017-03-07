@@ -107,42 +107,42 @@ class System(Recommender):
         return weights
 
 class ALS(Recommender):
-    '''Generates recommendations based on review data.'''
-
+    
     def train(self, bookings, load=False):
-        if not isinstance(bookings, DataFrame):
-            raise TypeError('Recommender requires a DataFrame')
-        data = Data(self.spark)
-        ratings = data.get_bookings_with_score(bookings)
-
-        r = Config.get("ALS", "rank")
-        i = Config.get("ALS", "iterations")
-        l = Config.get("ALS", "lambda", float)
+        recommender_name = str(type(self).__name__)
+        r = Config.get(recommender_name, "rank")
+        i = Config.get(recommender_name, "iterations")
+        l = Config.get(recommender_name, "lambda", float)
         self.spark.setCheckpointDir("./checkpoints/")
-        model_location = "models/ALS/{rank}-{iterations}-{alpha}".format(
-            rank=r, iterations=i, alpha=l)
+        
+        model_location = "models/{name}/{rank}-{iterations}-{alpha}".format(
+            name=recommender_name, rank=r, iterations=i, alpha=l)
 
         model_exists = os.path.isdir(model_location)
         if load and model_exists:
             self.model = MatrixFactorizationModel.load(self.spark, model_location)
         else:
-            self.model = SparkALS.train(ratings, r, i, l)
+            if str(recommender_name) == "ExplicitALS":
+                self.model = SparkALS.train(bookings, r, i, l)
+            elif str(recommender_name) == "ImplicitALS":
+                self.model = SparkALS.trainImplicit(self.spark.parallelize(bookings), r,
+                                                    i, alpha=l, nonnegative=True)
             if model_exists:
                 shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
 
-    def predict(self, data):
+    def location_filtering(self,data):
         data_transform = Data(self.spark)
         data_dir = Config.get_string("DEFAULT", "data_dir")
         lat_diff =  Config.get("DEFAULT", "lat_diff",type=float)
         long_diff = Config.get("DEFAULT", "long_diff",type=float)
         recommendations = []
+
         restaurants  = data_transform.read(data_dir + "Restaurant.csv")
         restaurants_info = data_transform.get_restaurants_info(restaurants)
-        restaurants = self.spark.parallelize([( row['Restaurant Id'],
+        restaurants = self.spark.parallelize([( row['RestaurantId'],
                                         row['Lat'],row['Lon']) for row in
                                        restaurants.collect()])
-        
         for pair in data.collect():
             current_restaurant = restaurants_info.get(pair[1],None)
             if current_restaurant:
@@ -152,49 +152,49 @@ class ALS(Recommender):
                 temp_recs = self.spark.parallelize([pair[0]]).cartesian(temp_restaurants.map(lambda r: r[0]))
                 recommendations.extend(temp_recs.collect())
 
-        recommendations = self.spark.parallelize(recommendations)
-        print recommendations.distinct().count()
+        return self.spark.parallelize(recommendations)
+
+    def predict(self, data):
+        recommendations = self.location_filtering(data)
         predictions = self.model.predictAll(recommendations.distinct())
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
 
-class ImplicitALS(Recommender):
+class ExplicitALS(ALS):
+    '''Generates recommendations based on review data.'''
+
+    def train(self, bookings, load=False):
+        if not isinstance(bookings, DataFrame):
+            raise TypeError('Recommender requires a DataFrame')
+
+        data = Data(self.spark)
+        ratings = data.get_bookings_with_score(bookings)
+        super(ExplicitALS, self).train(ratings,load)
+
+    def predict(self, data):
+        return super(ExplicitALS, self).predict(data)
+
+class ImplicitALS(ALS):
     '''Generates recommendations based on how many times a diner visited a
     restaurant.'''
 
     def train(self, bookings, load=False):
+        if not isinstance(bookings, DataFrame):
+            raise TypeError('Recommender requires a DataFrame')
+
         # calculate how many times a diner visited each restaurant
         data = defaultdict(Counter)
         for booking in bookings.collect():
             data[booking['Diner Id']][booking['Restaurant Id']] += 1
-
         # transform that data into an RDD and train the model
         data = [(diner, restaurant, score) for diner, counter in data.items()
                 for restaurant, score in counter.iteritems()]
 
-        r = Config.get("ImplicitALS", "rank")
-        i = Config.get("ImplicitALS", "iterations")
-        a = Config.get("ImplicitALS", "alpha", float)
-        self.spark.setCheckpointDir("./checkpoints/")
-        model_location = "models/ImplicitALS/{rank}-{iterations}-{alpha}".format(rank=r, iterations=i, alpha=a)
-
-        model_exists = os.path.isdir(model_location)
-        if load and model_exists:
-            self.model =  MatrixFactorizationModel.load(self.spark, model_location)
-        else:
-            self.model = SparkALS.trainImplicit(self.spark.parallelize(data), r,
-                                                i, alpha=a, nonnegative=True)
-            if model_exists:
-                shutil.rmtree(model_location)
-            self.model.save(self.spark, model_location)
+        super(ImplicitALS, self).train(data,load)
 
     def predict(self, data):
+        return super(ImplicitALS, self).predict(data)
         
-        # restaurants = restaurants.filter(lambda r: )
-        print data.collect()
-        predictions = self.model.predictAll(data)
-        schema = ['userID', 'restaurantID', 'score']
-        return SQLContext(self.spark).createDataFrame(predictions, schema)
 
 class ContentBased(Recommender):
     '''Generates recommendations based on a diner's prefered cuisine types.'''
