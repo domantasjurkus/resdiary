@@ -146,12 +146,11 @@ class ALS(Recommender):
         for pair in data.collect():
             current_restaurant = restaurants_info.get(pair[1],None)
             if current_restaurant:
-                temp_restaurants = restaurants.filter(lambda r: (abs(current_restaurant[0]) - abs(r[1])) < lat_diff )
-                temp_restaurants = temp_restaurants.filter(lambda r: (abs(current_restaurant[1]) - abs(r[2])) < long_diff )
-                temp_recs = temp_restaurants.map(lambda r: r[0])
-                temp_recs = self.spark.parallelize([pair[0]]).cartesian(temp_recs)
+                temp_restaurants = restaurants.filter(lambda r:(
+                    (abs(current_restaurant[0]) - abs(r[1]) < lat_diff )) and
+                    (abs(current_restaurant[1]) - abs(r[2]) < long_diff)) 
+                temp_recs = self.spark.parallelize([pair[0]]).cartesian(temp_restaurants.map(lambda r: r[0]))
                 recommendations.extend(temp_recs.collect())
-
 
         recommendations = self.spark.parallelize(recommendations)
         print recommendations.distinct().count()
