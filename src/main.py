@@ -30,6 +30,7 @@ def parse_arguments():
 	parser.add_argument('--out',  type=str, help='Path to output file with recommednations.')
 	parser.add_argument('--load', type=str, help='Load the previously trained models.')
 	parser.add_argument('--func', type=str, help='Select between executing, evaluating and training the algorithm.')
+	parser.add_argument('--learn', type=str, help='Learn algorithm hyper parameters instead of predicting results.')
 	args = parser.parse_args()
 
 	if not args.out:

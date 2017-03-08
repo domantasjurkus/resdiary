@@ -4,6 +4,7 @@ import heapq
 import itertools
 import os.path
 import shutil
+import csv
 
 from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS as SparkALS
 from pyspark.sql import SQLContext
@@ -11,7 +12,7 @@ from pyspark.sql.dataframe import DataFrame
 
 from base import Base
 from data import Data
-from evaluator import evaluate
+from evaluator import *
 from config import Config
 
 class Recommender(Base):
@@ -160,6 +161,53 @@ class ALS(Recommender):
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
 
+    # Float range function
+    def frange(self,x, y, jump):
+      while x < y:
+        yield x
+        x += jump
+
+    def learn_hyperparameters(self,bookings):
+        self.spark.setCheckpointDir("./checkpoints/")
+        recommender_name = str(type(self).__name__)
+        results = open('result.csv', 'a')
+        csv_writer = csv.writer(results,delimiter=',')
+        data_transform = Data(self.spark)
+        bookings = data_transform.get_bookings_with_score(bookings)
+        data, test_ratings = bookings.randomSplit([0.8,0.2])
+        testdata = test_ratings.map(lambda r: (r[0],r[1]))
+        best_model = []
+
+        for rank in range(5,100):
+            for iterations in range(5,100):
+                for alpha in self.frange(0.01,1.00,0.01):
+                    model_location = "models/{name}/{rank}-{iterations}-{alpha}".format(
+                        name=recommender_name, rank=rank, iterations=iterations, alpha=alpha)
+                    model_exists = os.path.isdir(model_location)
+
+                    if str(recommender_name) == "ExplicitALS":
+                        self.model = SparkALS.train(data, rank, iterations, alpha)
+                    elif str(recommender_name) == "ImplicitALS":
+                        self.model = SparkALS.trainImplicit(self.spark.parallelize(data), rank,
+                                                            iterations, alpha=alpha, nonnegative=True)
+                    if model_exists:
+                        shutil.rmtree(model_location)
+                    self.model.save(self.spark, model_location)
+
+                    predictions = self.model.predictAll(testdata).map(lambda r: ((r[0], r[1]), r[2]))
+                    mse = calculate_mse(test_ratings,predictions)
+                    print rank,iterations,alpha,mse
+                    csv_writer.writerow([rank,iterations,alpha,mse])
+                    if len(best_model) == 0:
+                        best_model.append([rank,iterations,alpha,mse])
+                    elif best_model[0][3] > mse:
+                        best_model[0][0]  = rank
+                        best_model[0][1]  = iterations
+                        best_model[0][2]  = alpha
+                        best_model[0][3]  = mse
+        csv_writer.writerow(best_model[0])
+        print "The best model is: rank=" + str(best_model[0][0]) + ", iterations=" + str(best_model[0][1]) + ", alpha="  +str(best_model[0][2]) + ", mse=" + str(best_model[0][3])
+
 class ExplicitALS(ALS):
     '''Generates recommendations based on review data.'''
 
@@ -173,6 +221,9 @@ class ExplicitALS(ALS):
 
     def predict(self, data):
         return super(ExplicitALS, self).predict(data)
+
+    def learn_hyperparameters(self,data):
+        return super(ExplicitALS, self).learn_hyperparameters(data)
 
 class ImplicitALS(ALS):
     '''Generates recommendations based on how many times a diner visited a
@@ -194,6 +245,9 @@ class ImplicitALS(ALS):
 
     def predict(self, data):
         return super(ImplicitALS, self).predict(data)
+
+    def learn_hyperparameters(self,bookings):
+        return super(ImplicitALS, self).learn_hyperparameters(data)
         
 
 class ContentBased(Recommender):

@@ -57,3 +57,9 @@ def evaluate(spark, model, bookings_data):
         if recommendation['restaurantID'] in answers[recommendation['userID']]:
             right += 1
     return float(right) / total
+
+def calculate_mse(actual,predictions):
+    actual = actual.map(lambda r: ((r[0], r[1]), r[2]))
+    ratesAndPreds = actual.join(predictions)
+    MSE = ratesAndPreds.map(lambda r: (r[1][0] - r[1][1])**2).mean()
+    return MSE
