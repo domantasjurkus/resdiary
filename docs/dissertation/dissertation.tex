@@ -42,7 +42,7 @@ The abstract shall go here! Here is some things to keep in mind while writing it
 % Comment out this line if you do not wish to give consent for your work to be distributed in electronic format.
 % We hereby give consent - spread the knowledge - pending on result of project
 \educationalconsent
-
+s
 \newpage
 
 %==============================================================================
@@ -91,7 +91,6 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 % Here we want answer the question of who are ResDiary and what do they do.
 % Additionally answer who played the customer role of ResDiary to us on the project.
 
-
 % Who are ResDiary?
 ResDiary are a Glasgow-based online restruant reservation founded in 2006. They are a commerical organisation whose service provides a comprehensive and easy to use booking platform and table management system that is used by both the hospitality industry and its guests. The service provides 24-hour reservation services via customer websites such as Facebook and Twitter. Their global service sees 9.7 million covers booked every month and their technology is in use in over 6,500 restaurants across 58 countries.
 
@@ -99,7 +98,8 @@ For the duration of the project ResDiary senior software engineers Adam Connelly
 
 
 % ##################################################
-% LAST EDIT: 	06/03/17	Joseph
+% LAST EDIT: 	09/03/17	Joseph
+% NOTE:         Requires sub-section breakdowns
 % ##################################################
 \subsection{Initial Objectives And Rationale}
 \label{initobjectives}
@@ -119,10 +119,51 @@ For the duration of the project ResDiary senior software engineers Adam Connelly
 
 
 % Initial Meeting - Project Motivation - Initial Aims
-Our initial meeting with the customer was led by Ian Strachan and served as the customer requirements elicitation meeting. The meeting began with an overview of the ResDairy business (link to customer section) and the technologies currently in place. One shortcoming of their existing systems however is that the large quantity of big data gathered by ResDiary in their day-to-day operations is currently unused and dorminant. 
+
+% ?????
+% POTENTIALLY BREAK DOWN VIA BULLET POINTS   -- Joseph (09/03)
+% ?????
+
+The initial meeting with the customer occurred on October 19th and was led by Ian Strachan and
+served as the customer requirements elicitation meeting. The meeting
+began with an overview of the ResDairy business (link to customer
+section of report above) and the technologies currently in place. One
+shortcoming of their existing system however is that the large quantity of big data gathered by ResDiary in their day-to-day operations is currently unused and dormant. 
 
 A proposed method (and our project) for utilising this data is to improve restaurant discovery of the ResDairy portal (found at ResDiary.com) by implementing a recommendation system into the service. They wished for recommendations to be made to suggest restaurants to a user based off other users with similar dining habits. They believed such a system would distinguish them from their competition as their research shows it is not a feature in place by their competition. Similar systems referenced in existing services include the Netflix model and Amazon model for making recommendations to users (reference via papers here). Hence our project was to create a restraunt recommendation system for ResDairy and should time allow it potentially integrate it into their existing service. This final goal would later change over the course of development (reference change around iteration 3 for project goal) as ResDiary wished to use the project to act as a proof of concept which they could use to assess its quality and usefulness to them and whether integration of a similar system into their own site would be beneficial.
 
+% Our specification & goals for the project
+% - Initial specification goals
+% - Key refinements made to specification
+% - Mention changing nature of project
+% - Final state of project submitted
+
+% Outline what research performed told us
+Upon concluding the initial customer meeting the team decided to perform some
+background reading into the subject of machine learning and creating a recommendation
+engine (reference most relevant papers). Having performed the initial
+research the team then met to decided upon a specification to present
+to the customer at the next customer meeting on November 16th. The proposed
+aims for the project at this stage were as follows:
+\begin{itemize}
+\item The recommendation engine must accurately suggest places to eat
+  based on the user's own dining history and other users with similar
+  eating preferences. The recommendations should be made in close
+  proximity to where the user typically eats and the engine may allow
+  for recommendations to be made to where users have previously
+  visited but not eaten there recently.
+\item The system should be created to allow for easy integration into
+  the existing ResDiary system 
+\end{itemize}
+
+ With the initial research done the team then met to create an
+initial specification that was presented to the customer. Although
+the specification and aims of the project would change throughout
+its development the initially proposed main aims of the project were
+as follows:
+
+The specification was then refined and redrafted to incorporate the
+customer's feedback and  
 
 % ##################################################
 % LAST EDIT: 	06/03/17	Joseph
