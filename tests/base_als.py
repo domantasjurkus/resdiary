@@ -13,6 +13,7 @@ class ALSTest(BaseTestCase):
 	def setUpClass(self):
 		# Instantiate alg.model
 		self.alg = algorithm(self.sc)
+		self.data = Data(self.sc)
 
 
 	def test01_train(self):
@@ -26,17 +27,16 @@ class ALSTest(BaseTestCase):
 
 
 	def test02_location(self):
-		# TODO: ensure result is not empty
-		self.alg.location_filtering(self.bookings).count()
+		# Ensure there are locations returned
+		self.assertTrue(self.alg.location_filtering(
+			self.data.available_restaurants(self.bookings)).count() > 0)
 
 
-	# Test prediction after ensuring location filtering
-	# returns non-empty results
-	#def test03_predict():
-	#	pass
+	def test03_predict(self):
+		self.alg.predict(self.data.available_restaurants(self.bookings))
 
 	# Learning hyperparameters is currently very costly
-	#def test03_hyperparameters(self):
+	#def test04_hyperparameters(self):
 	#	pass
 
 

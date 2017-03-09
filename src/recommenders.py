@@ -167,7 +167,7 @@ class ALS(Recommender):
         yield x
         x += jump
 
-    def learn_hyperparameters(self,bookings):
+    def learn_hyperparameters(self,bookings): # pragma: no cover
         self.spark.setCheckpointDir("./checkpoints/")
         recommender_name = str(type(self).__name__)
         results = open('result.csv', 'a')
