@@ -273,65 +273,67 @@ class CuisineType(Recommender):
             if score >= minimum_like_score:
                 self.liked_cuisine[diner] |= self.restaurant_cuisine[restaurant]
 
-    def predict(self, users_restaurants):
+    def predict(self, diners_restaurants):
         # score is the number of cuisines that the diner and the restaurant
         # have in common
         recommendations = [(diner, restaurant,
                             len(self.restaurant_cuisine[restaurant] &
                                 self.liked_cuisine[diner]))
-                           for diner, restaurant in users_restaurants.collect()]
+                           for diner, restaurant in diners_restaurants.collect()]
         return SQLContext(self.spark).createDataFrame(
             self.spark.parallelize(recommendations), Config.get_schema())
 
 class PricePoint(Recommender):
-    '''Generates recommendations based on a diner's prefered cuisine types.'''
+    '''For each diner, generates recommendations based on the average price
+    point of all the visited restaurants.'''
     
     def train(self, bookings, load=False):
-        data_transform = Data(self.spark)
-        restaurants = data_transform.read("data/Restaurant.csv")
+        # record the price point of each restaurant
+        self.restaurant_price_point = {}
+        filename = os.path.join(Config.get('DEFAULT', 'data_dir', str),
+                                Config.get('PricePoint', 'filename', str))
+        for entry in Data(self.spark).read(filename).collect():
+            price_point = entry['PricePoint']
+            if price_point is not None:
+                self.restaurant_price_point[entry['RestaurantId']] = price_point
 
-        self.restaurantPricePoint = {}
-        self.visited = {}
-        self.userPricePoints = {}
-        
-        for entry in restaurants.collect():           
-            if entry['PricePoint'] is not None:
-				self.restaurantPricePoint.setdefault(entry['RestaurantId'], [])
-				self.restaurantPricePoint[entry['RestaurantId']].append(entry['PricePoint'])
-
-        MINIMUM_LIKE_SCORE = 4 #the minimum review score from a booking
-        #for a restaurant's cuisine to be considered liked
-        
+        # record the price points of all restaurants visited by each diner
+        diner_price_points = defaultdict(list)
         for booking in bookings.collect():
             diner = booking['Diner Id']
             restaurant = booking['Restaurant Id']
             score = booking['Review Score']
-            self.visited.setdefault(diner, [])
-            if restaurant not in self.visited[diner]:
-                self.visited[diner].append(restaurant)
-            self.userPricePoints.setdefault(diner, [])
-            if self.restaurantPricePoint.has_key(restaurant):
-                self.userPricePoints[diner].append(self.restaurantPricePoint[restaurant])
+            if restaurant in self.restaurant_price_point:
+                diner_price_points[diner].append(
+                    self.restaurant_price_point[restaurant])
 
-                                                              
-    def predict(self, users_restaurants):
-        # TODO: use the parameter
-        data = defaultdict()
-        recommendations = {}
-        for diner in self.userPricePoints:
-			recommendations.setdefault(diner, [])
-			userAveragePricePoint = 0
-			counter = 0
-			for pricePoint in self.userPricePoints[diner]:
-				if pricePoint is not None :
-					userAveragePricePoint += pricePoint[0]
-					counter += 1
-			if counter>0:
-				userAveragePricePoint = userAveragePricePoint/counter
-			for restaurant in self.restaurantPricePoint:
-				recommendations[diner].append((restaurant, 5 - abs(self.restaurantPricePoint[restaurant][0]-userAveragePricePoint)))
+        # stores the average price point of each diner's visited restaurants
+        self.diner_average_price_point = dict(
+            (diner, sum(diner_price_points[diner]) /
+             len(diner_price_points[diner])) for diner in diner_price_points)
 
-        schema = ['userID', 'restaurantID', 'score']
-        return SQLContext(self.spark).createDataFrame(self.spark.parallelize(
-            [(diner, restaurant, score) for diner in recommendations
-             for restaurant, score in recommendations[diner]]), schema)
+        # calculate averages if possible, otherwise resort to default price
+        # point value in the config file
+        default_price_point = Config.get('PricePoint', 'default_price_point')
+        self.restaurant_default_price_point = (
+            sum(self.restaurant_price_point.values()) /
+            len(self.restaurant_price_point.values())
+            if self.restaurant_price_point else default_price_point)
+        self.diner_default_price_point = (
+            sum(self.diner_average_price_point.values()) /
+            len(self.diner_average_price_point.values())
+            if self.diner_average_price_point else default_price_point)
+
+    def predict(self, diners_restaurants):
+        recommendations = []
+        for diner, restaurant in diners_restaurants.collect():
+            restaurant_price_point = self.restaurant_price_point.get(
+                restaurant, self.restaurant_default_price_point)
+            diner_price_point = self.diner_average_price_point.get(
+                diner, self.diner_default_price_point)
+            score = (Config.get('PricePoint', 'maximum_price_point') -
+                     abs(restaurant_price_point - diner_price_point))
+            recommendations.append((diner, restaurant, score))
+
+        return SQLContext(self.spark).createDataFrame(
+            self.spark.parallelize(recommendations), Config.get_schema())

@@ -47,7 +47,7 @@ if __name__ == "__main__":
 	args = parse_arguments()
 
 	if args.alg is None or args.data is None: # pragma: no cover
-		print "\nUsage: python main.py\n--alg=[ExplicitALS, ImplicitALS, CuisineType, system]\n"\
+		print "\nUsage: python main.py\n--alg=[ExplicitALS, ImplicitALS, CuisineType, PricePoint, system]\n"\
 			"--data=<bookings.csv>\n--out=<recommendations.csv>\n" \
 			"--func=[execute, evaluate, train]\n"
 		sys.exit()
