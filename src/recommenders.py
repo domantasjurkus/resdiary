@@ -134,9 +134,9 @@ class ALS(Recommender):
 
     def location_filtering(self,data):
         data_transform = Data(self.spark)
-        data_dir = Config.get_string("DEFAULT", "data_dir")
-        lat_diff =  Config.get("DEFAULT", "lat_diff",type=float)
-        long_diff = Config.get("DEFAULT", "long_diff",type=float)
+        data_dir = Config.get("DEFAULT", "data_dir", str)
+        lat_diff =  Config.get("DEFAULT", "lat_diff", float)
+        long_diff = Config.get("DEFAULT", "long_diff", float)
         recommendations = []
 
         restaurants  = data_transform.read(data_dir + "Restaurant.csv")
@@ -250,61 +250,38 @@ class ImplicitALS(ALS):
         return super(ImplicitALS, self).learn_hyperparameters(data)
         
 
-class ContentBased(Recommender):
+class CuisineType(Recommender):
     '''Generates recommendations based on a diner's prefered cuisine types.'''
     
     def train(self, bookings, load=False):
-        data_transform = Data(self.spark)
-        restaurants = data_transform.read("data/Restaurant.csv")
-        restaurantCuisines = data_transform.read("data/RestaurantCuisineTypes.csv")
-        cuisineTypes = data_transform.read("data/CuisineTypes.csv")
+        minimum_like_score = Config.get('CuisineType', 'minimum_score')
 
-        self.restaurantCuisine = {}
-        self.visited = {}
-        
-        for entry in restaurantCuisines.collect():
+        # stores a set of cuisines for each restaurant
+        self.restaurant_cuisine = defaultdict(set)
+        filename = os.path.join(Config.get('DEFAULT', 'data_dir', str),
+                                Config.get('CuisineType', 'filename', str))
+        for entry in Data(self.spark).read(filename).collect():
             restaurant = entry['RestaurantId']
-            cuisineType = entry['CuisineTypeId']
-            self.restaurantCuisine.setdefault(restaurant, [])
-            if cuisineType not in self.restaurantCuisine[restaurant]:
-                self.restaurantCuisine[restaurant].append(cuisineType)
+            self.restaurant_cuisine[restaurant].add(entry['CuisineTypeId'])
 
-        self.likedCuisine = {}
-        MINIMUM_LIKE_SCORE = 4 #the minimum review score from a booking
-        #for a restaurant's cuisine to be considered liked
-        
+        # what cuisine types does this diner like?
+        self.liked_cuisine = defaultdict(set)
         for booking in bookings.collect():
             diner = booking['Diner Id']
             restaurant = booking['Restaurant Id']
             score = booking['Review Score']
-            self.visited.setdefault(diner, [])
-            if restaurant not in self.visited[diner]:
-                self.visited[diner].append(restaurant)
-            self.likedCuisine.setdefault(diner, [])
-            if score >= MINIMUM_LIKE_SCORE and self.restaurantCuisine.get(restaurant, None):
-                for cuisine in self.restaurantCuisine[restaurant]:
-                    if cuisine not in self.likedCuisine[diner]:
-                        self.likedCuisine[diner].append(cuisine)
+            if score >= minimum_like_score:
+                self.liked_cuisine[diner] |= self.restaurant_cuisine[restaurant]
 
     def predict(self, users_restaurants):
-        # TODO: use the parameter
-        data = defaultdict()
-        recommendations = {}
-        for diner in self.likedCuisine:
-            recommendations.setdefault(diner, [])
-            for restaurant in self.restaurantCuisine:
-                if restaurant not in self.visited[diner]:
-                    score = 0
-                    for cuisine in self.restaurantCuisine[restaurant]:
-                        if cuisine in self.likedCuisine[diner]:
-                            score += 1
-                    if score > 0:
-                        recommendations[diner].append((restaurant, score))
-
-        schema = ['userID', 'restaurantID', 'score']
-        return SQLContext(self.spark).createDataFrame(self.spark.parallelize(
-            [(diner, restaurant, score) for diner in recommendations
-             for restaurant, score in recommendations[diner]]), schema)
+        # score is the number of cuisines that the diner and the restaurant
+        # have in common
+        recommendations = [(diner, restaurant,
+                            len(self.restaurant_cuisine[restaurant] &
+                                self.liked_cuisine[diner]))
+                           for diner, restaurant in users_restaurants.collect()]
+        return SQLContext(self.spark).createDataFrame(
+            self.spark.parallelize(recommendations), Config.get_schema())
 
 class PricePoint(Recommender):
     '''Generates recommendations based on a diner's prefered cuisine types.'''

@@ -7,13 +7,7 @@ class Config:
 
         @staticmethod
         def get(sec, name, type=int):
-                if type is float:
-                        return float(Config.rcfg.get(sec, name))
-                return int(Config.rcfg.get(sec, name))
-
-        @staticmethod
-        def get_string(sec, name, type=str):
-                return str(Config.rcfg.get(sec, name))
+                return type(Config.rcfg.get(sec, name))
 
         @staticmethod
         def set(sec, name, value):
@@ -28,6 +22,12 @@ class Config:
                 recommenders = Config.rcfg.sections()
                 recommenders.remove('System')
                 return recommenders
+
+        @staticmethod
+        def get_schema():
+                '''Returns a list of strings representing the attribute names
+                for the recommendation relation.'''
+                return Config.get('DEFAULT', 'schema', str).split(',')
 
         @staticmethod
         def set_weights(weights):
