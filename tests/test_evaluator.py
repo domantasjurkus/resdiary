@@ -1,9 +1,10 @@
 import unittest
 import sys, os
 from pyspark.sql import SQLContext
-from stubs import stub_algorithm
-from test_superclass import BaseTestCase
+
 from src import evaluator
+from base import BaseTestCase
+from stubs import stub_algorithm
 
 class EvaluatorTest(BaseTestCase):
 
@@ -13,7 +14,7 @@ class EvaluatorTest(BaseTestCase):
 		pass
 
 
-	def test_recommendations(self):
+	def test_evaluator(self):
 		score = evaluator.evaluate(
 			self.sc,
 			stub_algorithm.StubRecommender(self.sc),

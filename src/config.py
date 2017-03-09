@@ -1,6 +1,6 @@
-from ConfigParser import RawConfigParser
+from ConfigParser import RawConfigParser # pragma: no cover
 
-class Config:
+class Config: # pragma: no cover
 
         rcfg = RawConfigParser()
         rcfg.read("default.cfg")

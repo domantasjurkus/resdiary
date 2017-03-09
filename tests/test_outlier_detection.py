@@ -2,7 +2,7 @@ import unittest
 import sys, os
 from pyspark.sql import SQLContext
 
-from test_superclass import BaseTestCase
+from base import BaseTestCase
 from src import data
 
 class OutlierDetectionTest(BaseTestCase):

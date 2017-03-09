@@ -1,7 +1,6 @@
 import os, sys
 import unittest
 import coverage
-from src.config import Config
 
 # Runs the unit tests with coverage
 def cover():
