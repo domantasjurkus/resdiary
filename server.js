@@ -46,6 +46,8 @@ app.get('/new_demo/user/:id',function(req,res){
     var recsALS = data.getRecommendationsAlsSync(id || 0); 					// Gets the recommendations (and possibly reasons)
     var recsContent = data.getRecommendationsContentSync(id || 0); 			// Gets content-based recommendations
     
+    // console.log(recsALS);
+
     recsALS.sort(function(a, b) {
         return parseFloat(b.RecScore) - parseFloat(a.RecScore);
     });
@@ -67,7 +69,7 @@ app.get('/new_demo/user/:id/:resId',function(req,res){
 
     // console.log(visited);
 
-    var rest = data.getRecommendedRes(id, resId);							// Gets the specific restaurant info
+    var rest = data.getRecommendedRes(resId);							// Gets the specific restaurant info
 
     res.render('new_demo_res', { userId: id, restaurantId: resId, recent: visited, restaurant: rest })
 })

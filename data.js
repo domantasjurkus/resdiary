@@ -58,6 +58,12 @@ module.exports = {
         var recommendations = parse(recommendationsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
 
+        var cuisineFile = fs.readFileSync('./src/data/RestaurantCuisineTypes.csv', 'utf8');
+        var cuisines = parse(cuisineFile, { columns: true });
+
+        var cuisineTypeFile = fs.readFileSync('./src/data/CuisineTypes.csv', 'utf8');
+        var cuisineTypes = parse(cuisineTypeFile, { columns: true });
+
         // filter out the relevant recommendations
         return recommendations.filter(function (recommendation) {
             return recommendation[0] == userId;
@@ -68,7 +74,21 @@ module.exports = {
                     recommendation[1];
             });
 
-            return {Restaurant:rest,RecScore:recommendation[2]};
+            var cuisineID = cuisines.find(function (resId){
+                return resId['RestaurantId'] == recommendation[1] ;
+            });
+
+            var cuisineT = "Data Not Provided"
+
+            if (cuisineID !== undefined){
+                cuisineT = cuisineTypes.find(function (resId){
+                return resId[' Id'] == cuisineID['CuisineTypeId'];
+                });
+
+                cuisineT = cuisineT['Name'];                
+            }
+
+            return {Restaurant:rest,RecScore:recommendation[2],CuisineType:cuisineT};
         })
     },
     getRecentlyVisitedSync: function (userId) {
@@ -117,7 +137,16 @@ module.exports = {
         })
     },
 
-    getRecommendedRes: function (userId, resId) {
+    getRecommendedRes: function (resId) {
+        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var restaurants = parse(restaurantsFile, { columns: true });
+
+        return restaurants.find(function (restaurant) {
+            return restaurant['RestaurantId'] == resId;
+        });
+    },
+
+    getResCuisine: function (userId, resId) {
         var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
         var restaurants = parse(restaurantsFile, { columns: true });
 
