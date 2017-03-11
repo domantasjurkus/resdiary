@@ -13,6 +13,32 @@ var config = {
     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 };
 
+function getResCuisine (resId) {
+        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var restaurants = parse(restaurantsFile, { columns: true });
+
+        var cuisineFile = fs.readFileSync('./src/data/RestaurantCuisineTypes.csv', 'utf8');
+        var cuisines = parse(cuisineFile, { columns: true });
+
+        var cuisineTypeFile = fs.readFileSync('./src/data/CuisineTypes.csv', 'utf8');
+        var cuisineTypes = parse(cuisineTypeFile, { columns: true });
+
+        var cuisineID = cuisines.find(function (tempResID){
+                return tempResID['RestaurantId'] == resId ;
+            });
+
+        var cuisineT = "Data Not Provided";
+
+        if (cuisineID !== undefined){
+                cuisineT = cuisineTypes.find(function (tempResID){
+                return tempResID[' Id'] == cuisineID['CuisineTypeId'];
+                });
+                
+                cuisineT = cuisineT['Name'];                
+        }
+        return cuisineT;
+}
+
 /* A module for reading and writing data from the CSV files. Takes a Diner ID and sends the
    recommended restaurants to the res object. */
 module.exports = {
@@ -48,8 +74,9 @@ module.exports = {
                 return restaurant['RestaurantId'] ==
                     recommendation[1];
             });
+            var cuisineT = getResCuisine(recommendation[1]);
 
-            return {Restaurant:rest,RecScore:recommendation[2]};
+            return {Restaurant:rest,RecScore:recommendation[2],CuisineType:cuisineT};
         })
     },
     getRecommendationsAlsSync: function (userId) {
@@ -57,12 +84,6 @@ module.exports = {
         var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
         var recommendations = parse(recommendationsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
-
-        var cuisineFile = fs.readFileSync('./src/data/RestaurantCuisineTypes.csv', 'utf8');
-        var cuisines = parse(cuisineFile, { columns: true });
-
-        var cuisineTypeFile = fs.readFileSync('./src/data/CuisineTypes.csv', 'utf8');
-        var cuisineTypes = parse(cuisineTypeFile, { columns: true });
 
         // filter out the relevant recommendations
         return recommendations.filter(function (recommendation) {
@@ -73,20 +94,7 @@ module.exports = {
                 return restaurant['RestaurantId'] ==
                     recommendation[1];
             });
-
-            var cuisineID = cuisines.find(function (resId){
-                return resId['RestaurantId'] == recommendation[1] ;
-            });
-
-            var cuisineT = "Data Not Provided"
-
-            if (cuisineID !== undefined){
-                cuisineT = cuisineTypes.find(function (resId){
-                return resId[' Id'] == cuisineID['CuisineTypeId'];
-                });
-
-                cuisineT = cuisineT['Name'];                
-            }
+            var cuisineT = getResCuisine(recommendation[1]);
 
             return {Restaurant:rest,RecScore:recommendation[2],CuisineType:cuisineT};
         })
@@ -106,11 +114,12 @@ module.exports = {
                 return restaurant['RestaurantId'] == booking[1];
             });
 
-            //rest.Booking = booking;
+            var cuisineT = getResCuisine(booking[1]);
+
             bk = "Not available"//booking[3]; //Visit Date 
             sc = (booking[2]=="NULL")? "Didn't Review" : booking[2]; //Review Score (if available)
 
-            return {Restaurant:rest,Score:sc,BookingTime:bk};
+            return {Restaurant:rest,Score:sc,BookingTime:bk,CuisineType:cuisineT};
         })
     },
 
@@ -146,13 +155,30 @@ module.exports = {
         });
     },
 
-    getResCuisine: function (userId, resId) {
+    getResCuisine: function (resId) {
         var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
         var restaurants = parse(restaurantsFile, { columns: true });
 
-        return restaurants.find(function (restaurant) {
-            return restaurant['RestaurantId'] == resId;
-        });
+        var cuisineFile = fs.readFileSync('./src/data/RestaurantCuisineTypes.csv', 'utf8');
+        var cuisines = parse(cuisineFile, { columns: true });
+
+        var cuisineTypeFile = fs.readFileSync('./src/data/CuisineTypes.csv', 'utf8');
+        var cuisineTypes = parse(cuisineTypeFile, { columns: true });
+
+        var cuisineID = cuisines.find(function (tempResID){
+                return tempResID['RestaurantId'] == resId ;
+            });
+
+        var cuisineT = "Data Not Provided";
+
+        if (cuisineID !== undefined){
+                cuisineT = cuisineTypes.find(function (tempResID){
+                return tempResID[' Id'] == cuisineID['CuisineTypeId'];
+                });
+                
+                cuisineT = cuisineT['Name'];                
+        }
+        return {CuisineType:cuisineT};
     },
 
 /*    getRecommendations: function (userId, res) {
