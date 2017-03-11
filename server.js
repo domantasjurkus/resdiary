@@ -46,7 +46,7 @@ app.get('/new_demo/user/:id',function(req,res){
     var recsALS = data.getRecommendationsAlsSync(id || 0); 					// Gets the recommendations (and possibly reasons)
     var recsContent = data.getRecommendationsContentSync(id || 0); 			// Gets content-based recommendations
     
-    // console.log(recsALS);
+    //console.log(recsALS);
 
     recsALS.sort(function(a, b) {
         return parseFloat(b.RecScore) - parseFloat(a.RecScore);
@@ -66,11 +66,18 @@ app.get('/new_demo/user/:id/:resId',function(req,res){
    	var resId = req.params.resId;											// Grab restraunt ID
 
     var visited = data.getRecentlyVisitedCoord(id || 0); 					// Gets the user's recently visited restaurants
+    var rest = data.getRecommendedRes(resId);							    // Gets the specific restaurant info
+    var cus = data.getResCuisine(resId);                                    // Get the cuisine type of the restaurant
 
+    var scoreALS = data.getRecAlsScoreSync(id, resId);
+    var scoreContent = data.getRecContentScoreSync(id, resId);
+    
+    console.log(scoreALS);
+    console.log(scoreContent);
     // console.log(visited);
+    // console.log(cus);
 
-    var rest = data.getRecommendedRes(resId);							// Gets the specific restaurant info
-
+    //res.json({userId: id, restaurantId: resId, recent: visited, restaurant: rest})
     res.render('new_demo_res', { userId: id, restaurantId: resId, recent: visited, restaurant: rest })
 })
 
