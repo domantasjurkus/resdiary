@@ -82,7 +82,7 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 % 1. Do we address the legal contract we signed. I.e. Initially it was proposed for integration into the site. It then changed and this we reflected in the contract we signed which outlined the final product and how it could be used be ResDiary - possibly get a more accurate summary of what ResDiary can do with the delivered product from them (ask them to summarise the contract essentially mentioning it is beneficial to our final report)
 
 % ##################################################
-% LAST EDIT: 	06/03/17	Joseph
+% LAST EDIT: 	12/03/17	Joseph
 % ##################################################
 \subsection{Customer}
 \label{customer}
@@ -92,17 +92,15 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 % Additionally answer who played the customer role of ResDiary to us on the project.
 
 % Who are ResDiary?
-ResDiary are a Glasgow-based online restruant reservation founded in 2006. They are a commerical organisation whose service provides a comprehensive and easy to use booking platform and table management system that is used by both the hospitality industry and its guests. The service provides 24-hour reservation services via customer websites such as Facebook and Twitter. Their global service sees 9.7 million covers booked every month and their technology is in use in over 6,500 restaurants across 58 countries.
+ResDiary are a Glasgow-based online restaurant reservation system. They are a commercial organisation whose service provides a comprehensive, easy to use booking platform and table management system for use by both the hospitality industry and its guests. The service provides 24-hour reservation services via websites (!!! websites probably isn’t the right word here !!!) including Facebook and Twitter as well as their own booking portal ResDiary.com. Their global service sees 9.7 million covers booked every month and their technology is in use in over 6,500 restaurants across 58 countries.
 
-For the duration of the project ResDiary senior software engineers Adam Connelly and Ian Strachan acted as the representatives of ResDairy. They served as the point of contact between our team and the customer and provided useful feedback and answers to our queries throughout the development of the project. They also provided supplies of data for use within the project upon request with steps taken by ResDairy to ensure anonaminity of the sensitive user data.
-
+Throughout the duration of the project ResDiary senior software engineers Adam Connelly and Ian Strachan acted as the representatives of ResDairy. They served as the point of contact between our team and the customer and provided useful feedback and answers to our queries throughout the development of the project. Additionally they also provided supplies of data for use within the project with the necessary steps taken by ResDiary to ensure the anonymity of their sensitive customer data.
 
 % ##################################################
-% LAST EDIT: 	09/03/17	Joseph
-% NOTE:         Requires sub-section breakdowns
+% LAST EDIT: 	12/03/17	Joseph
 % ##################################################
-\subsection{Initial Objectives And Rationale}
-\label{initobjectives}
+\subsection{Customer Objectives And Rationale}
+\label{custobjectives}
 % The rationale and initial objectives for the project.
 
 % Essentially with the intro we want to introduce the company and the aims of the project. Mention similar real world examples such as the Netflix model as this was used as a reference / example similar project early on in our project. Talk out the specification, reference the dropped features of the specification in relation to what was actually developed and presented to the customer. Potentially mention points of future expansion as well and how project was setup to account for those future developments.
@@ -111,7 +109,7 @@ For the duration of the project ResDiary senior software engineers Adam Connelly
 
 % Essentially I want to introduce the customer and provide an overview of the motivation of the project.
 % Project motivation comes from three reasons:
-% 	1. Improve restaurant discover on existing service 
+% 1. Improve restaurant discover on existing service 
 %	2. Commerial reason as it is not something their competition does
 %	3. Big data proof of concept research - they have large amount of big data they do nothing with and would like to see if using it for such a purpose would be useful
 
@@ -120,18 +118,30 @@ For the duration of the project ResDiary senior software engineers Adam Connelly
 
 % Initial Meeting - Project Motivation - Initial Aims
 
-% ?????
-% POTENTIALLY BREAK DOWN VIA BULLET POINTS   -- Joseph (09/03)
-% ?????
+The initial customer meeting occurred on October 19th and was led by Ian Strachan. This was our first contact with the customer and served as the customer requirements elicitation meeting. The meeting began with an overview of the ResDairy business (link to customer section above) and some background was given of the technologies of their system currently in place. This included some information on the particular development languages being used (primarily C\#) though the primary justification was to provide background context for the large quantities of data being gathered by ResDiary from their day-to-day operations. This large mass of big data however is currently unused and dormant which ResDiary view as a significant shortcoming of their existing system. 
 
-The initial meeting with the customer occurred on October 19th and was led by Ian Strachan and
-served as the customer requirements elicitation meeting. The meeting
-began with an overview of the ResDairy business (link to customer
-section of report above) and the technologies currently in place. One
-shortcoming of their existing system however is that the large quantity of big data gathered by ResDiary in their day-to-day operations is currently unused and dormant. 
+(!!! ResDiary are currently exploring potential methods of utilising this massive quantity of data. -- Is this worth starting below paragraph with?  !!!)
 
-A proposed method (and our project) for utilising this data is to improve restaurant discovery of the ResDairy portal (found at ResDiary.com) by implementing a recommendation system into the service. They wished for recommendations to be made to suggest restaurants to a user based off other users with similar dining habits. They believed such a system would distinguish them from their competition as their research shows it is not a feature in place by their competition. Similar systems referenced in existing services include the Netflix model and Amazon model for making recommendations to users (reference via papers here). Hence our project was to create a restraunt recommendation system for ResDairy and should time allow it potentially integrate it into their existing service. This final goal would later change over the course of development (reference change around iteration 3 for project goal) as ResDiary wished to use the project to act as a proof of concept which they could use to assess its quality and usefulness to them and whether integration of a similar system into their own site would be beneficial.
+Through utilisation of this large quantity of data they believe they will be able to distinguish themselves and gain a commercial edge over their competition. Having conducted some research they have found that none of their competitors currently offer a restaurant recommendation service within their particular booking platform. They believe such as system which makes recommendations to users based off their previous dining habits and similarity to other users will give them the edge over their competition. Additionally their belief is that such a feature will increase restaurant discovery on their service which will be of benefit to both their customers and the organisation itself.
 
+The idea stems from the similar system provided by services such as Amazon and Netflix. The Netflix model in particular being the closest reference point for the system they wished to replicate due the intrinsic similarity between making recommendations based on a user’s history and similarity to other users tastes. As a starting point for our own research to understand attempts to solve similar problems they suggested looking into the 2009 Netflix Prize competition (!!! reference competition someone - talk what we took from from researching this later !!!). The goal competition was to produce the best algorithm which could accurately predict a user’s rating of a film based on previous ratings and no other additional information about the users or the films.
+
+(!!! Having trouble transitioning out - to the end goals for the project - so will need to look this over !!!) 
+
+While the primary focus of the project was to develop the recommendation system as a proof of concept for ResDiary, some time was spent discussing the potential of integrating the system into the existing ResDiary system. The proposed method was through the creation an API to link the two systems together though the customer elucidated our primary focus should be create the recommendation engine as this final goal was susceptible to change. This in part they explained was due to an internal transition in development technologies for the back end functionality of their service. As such whether the project would be integrated into the existing service or alternatively viewed as an R\&D project for a potential use of their big data had not yet been decided by the customer. 
+
+(!!! Really, really, really don’t like the transition out here -- FIX !!!)
+
+Ultimately it would be the latter of the two as the customer wished to view the project as a proof of concept to assess the benefits of utilising their big data in such a manner. Whether the additional development costs associated with integration would outweigh the benefits provided and whether the system could make smart recommendations based off the existing data provided to it. Through examining our system they believed they could answer such questions and use our system as a starting point to learn from so that a similar system could be integrating into their existing service.
+
+
+\subsection{Our Initial Objectives And Rationale}
+\label{ourinitobjectives}
+% ##################################################
+% LAST EDIT:  09/03/17  Joseph
+% NOTE:         Should be its own section
+% NOTE:         Needs a lot of reworking 
+% ##################################################
 % Our specification & goals for the project
 % - Initial specification goals
 % - Key refinements made to specification
