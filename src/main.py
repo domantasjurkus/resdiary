@@ -57,7 +57,7 @@ if __name__ == "__main__":
 	from evaluator import evaluate
 	from recommenders import *
 
-	sc = SparkContext('local','Recommendation engine')
+	sc = SparkContext('local[*]','Recommendation engine')
 	sc.setLogLevel("ERROR")
 	data = Data(sc)
 
