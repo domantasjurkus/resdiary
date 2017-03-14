@@ -36,13 +36,18 @@ class SystemAlgorithmTest(BaseTestCase):
 
 		weights = self.alg.generate_weights(self.maximum_weight)
 
-		# All coefficients are in [0, maximum_weight]
 		for tpl in weights:
+			# All coefficients are in [0, maximum_weight]
 			for val in tpl:
 				self.assertTrue(0<=val and val<=self.maximum_weight)
 
-		# Tuples that are integer multiples of other tuples are not present
-		# TODO: consider using vector collinearity
+			# Tuples that are integer multiples of other tuples are not present
+			for tpl2 in weights:
+				if tpl == tpl2:
+					continue
+
+				#print tpl, tpl2
+				
 
 		# Bring back stub recommender
 		self.alg.recommenders = temp
