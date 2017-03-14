@@ -138,9 +138,11 @@ Ultimately it would be the latter of the two as the customer wished to view the 
 \subsection{Our Initial Objectives And Rationale}
 \label{ourinitobjectives}
 % ##################################################
-% LAST EDIT:  13/03/17  Joseph
+% LAST EDIT:  14/03/17  Joseph
 % NOTE:         Requires subsectioning
-% NOTE:         Needs a lot of reworking 
+% NOTE:         Needs reworking
+% NOTE:			Needs referencing
+% NOTE:			Needs cutting down page count 
 % ##################################################
 
 % Present our initial takeaways and how we came to them
@@ -155,13 +157,13 @@ Ultimately it would be the latter of the two as the customer wished to view the 
 % There are 4 main stages - initial assumptions - refinements after first meeting - refinements after January meeting - final state of the project.
 
 
-Having conducted the requirements elicitation meeting the team dedicated to spend the next few weeks to performing the necessary background research associated with the project. This occurred in tandem with the production of a formal requirements specification which would serve as the project proposal document presented to the client at the next customer meeting on November 16th. This document included the proposed functional and nonfunctional requirements the team decided upon for the project and a set of user stories (ranked by priority) which were then subdivided into individual tasks. In addition a proposed high-level system UML diagram was included and a step-by-step workflow of how the system would generate recommendations was presented. 
+Having conducted the requirements elicitation meeting the team dedicated the next few weeks to performing the necessary background research associated with the project. This occurred in tandem with the production of a formal requirements specification which would serve as the project proposal document presented to the client at the next customer meeting on November 16th. This document contained the proposed functional and nonfunctional requirements the team decided upon for the project and a set of user stories (ranked by priority) which were then subdivided into individual tasks. In addition a proposed high-level system UML diagram was included and a step-by-step workflow of how the system would generate recommendations was presented. 
 
 (!!! That is what was presented - do we state functional and nonfunctional explicitly? !!!)
 (!!! Do you state user stories explicitly here !!!)
 (!!! Probably need to state why we created the proposal in this way with reference to some papers, etc !!!)
 
-The team agreed upon the functional and nonfunctional requirements of the project based upon our interpretation of the customer’s pitch at the requirements elicitation meeting. Although these would later be revised and refined as the project developed we initially proposed for the project to meet the following functional and nonfunctional requirements:
+The team agreed upon the functional and nonfunctional requirements of the project based upon our interpretation of the customer’s pitch at the requirements elicitation meeting. Although these would later be revised and refined as the project developed it was initially proposed for the project to meet the following functional and nonfunctional requirements:
 
 Initial functional requirements (!!! subsection !!!):
 \begin{itemize}
@@ -171,7 +173,6 @@ Initial functional requirements (!!! subsection !!!):
 \end{itemize}
 
 Initial nonfunctional requirements (!!! subsection !!!):
-(!!! easy integration explicitly stated C\# though that was miscommunication within the team and probably can be omitted? !!!)
 \begin{itemize}
 \item The engine should be written to allow for easy integration into the existing Resdiary system.
 \item The system should give a response within 1 second after receiving the request (provided data is stored locally).
@@ -181,16 +182,17 @@ Initial nonfunctional requirements (!!! subsection !!!):
 
 (!!! Flow I see here is to talk initial requirements - vague nature of end vision on our an customer side - hit on key technical challenge of ensuring we are building the correct system due to cost of building the wrong system being very costly for this type of project - present high level proposition with info on research and how it was based off similar systems - Netflix, Amazon, etc) 
 
-As the customer’s vision of the final state of the project suspect to change as the project developed the team decided to leave it intentionally vague at the offset of the project. As such the specification was written and the initial development of the project was focused on building and producing the most accurate recommendation for a given user. As this was deemed the most critical component of the application by both the team and customer, the team felt it necessary to devote the time during the beginning of the project to ensure the correct system was being built. (!!! Want to tie in a reference to prototyping and the costs of building the wrong system - reference papers. This covers addressing the key technical issues part of mark scheme. !!!)
+As the customer’s vision of the final state of the project was suspect to change, the proposed final state of the project was left it intentionally vague and the specification written to allow for flexibility on the customer’s part. Instead the focus was placed on building and producing the most accurate recommendation for a given user. As both the team and customer felt this to be the most critical aspect of the system a significant portion of time was devoted at the outset of the project to ensuring the proposed system was in fact the correct system to be built.  (!!! Want to tie in a reference to prototyping and the costs of building the wrong system - reference papers. This covers addressing the key technical issues part of mark scheme. !!!)
 
 The higher level system diagram was based upon... 
-(!!! Insert info about research conducted - started with Netflix contest - research into content and collab systems seemed appropriate - built to allow for a comparison in recommendations to be made - etc. !!!)
+(!!! Insert info about research conducted - started with Netflix contest - research into content and collab systems seemed appropriate - built to allow for a comparison in recommendations to be made - section off mainly to reflections section 3 !!!)
 
 (!!! Talk customer feedback and how this revised the nonfunctional requirements of the project. In addition say a lightweight front end was suggested to be created for demo / presentation purposes by the customer and their final vision of the system would be revisited at Christmas time where their final vision of the project was to view the project as a proof of concept and skip on the integration into the existing portal. Maybe mention customer now also gave us some data to play around with and so an ER diagram was created. !!!)
 
-Upon presentation to the customer, the customer felt we had a good understanding of their desire for the system. They agreed with our proposed functional requirements and could envision how the high level system would operate in relation to their existing system. The customer did express concern though regarding the proposed response rate of the system and felt the need to further clarify the volume of data the system would be expected to work with. As such they suggested a nightly build system opposed the proposed on demand system. In regards to our proposed high level system they expressed and interest in being able to “fine tune” the system by altering the significance place on specific recommenders. The final suggestion from the customer was to develop a lightweight front end application for displaying the recommendations. They conceded that such a development feature was entirely throwaway as their interest was the recommendation system itself but rationalised it with the belief that it would help demonstrate the functionality of the system and give a clear indication if it was producing sensible results. 
+Upon presentation to the customer, the customer felt we had a good understanding of their desire for the system. They agreed with our proposed functional requirements and envisioned how the high level system would operate in relation to their existing system. The customer did express concern however regarding the proposed response rate of the system and felt the need to further clarify the volume of data the system would be expected to work with. To combat this a nightly build system was suggested as this is what they anticipated should they wish to implement the system. Regarding our proposed high level system they particularly expressed interest in being able to “fine tune” the system through altering the significance place on individual recommenders. Finally the customer suggested developing a lightweight front end application to display the recommendations. They conceded that such a development feature was throwaway as their interest was in the recommendation system itself but rationalised its development with the belief that such an application would help them to better understand the system, to assist demonstrate the functionality of the system visually and give a clear indication of if the system was producing sensible results. 
 
-In response to the feedback the team felt the need to revise the nonfunctional requirements of the project. This saw the removal of the aforementioned 1 second local response rate requirement and the introduction of the following two requirements:
+Responding to this feedback the team felt the need to revise the nonfunctional requirements of the project. This saw the removal of the aforementioned “1 second local response 
+rate” and the introduction of the following two new requirements:
 
 \begin{itemize}
 \item Provided the data is not stored locally, the system should be setup to allow for nightly updates to the recommendations made.
@@ -198,14 +200,33 @@ In response to the feedback the team felt the need to revise the nonfunctional r
 reviews, etc.
 \end{itemize}
 
-In addition the team also decided to introduce the artificial aim of producing a lightweight front end application which could showcase the recommendation system. This was believed to beneficial for both showcasing the system to the customer during the scheduled meetings as well as for the academic demonstrations the team would be required to give of the project. As the customer was still yet unclear of the form the final system would take, proof of concept or actual integration, the team (!!! both parties !!!) decided to delay the decision of confronting the customer in this regard until the scheduled meeting on January 26th. This would allow time for substantial work on the recommendation system to commence and allow the customer time to determine what exactly they wished to do with the system in relation with their own business needs at the time. 
+In addition the team also introduced the aim of producing a lightweight front end display to showcase the recommendation system. We agreed with the customers belief that this would help showcase the system and provide a visual method for non-technical users to see the results of our work. As the customer was still unclear of the final form of the system, proof of concept or actual integration, both parties decided to delay the decision until the scheduled meeting on January 26th. This would allow for significant development time on the application to occur and would grant the customer more time to determine their use for the system in relation to their business needs at that time. 
 
-(!!! Talk about progress made between first meeting and Jan - maybe mention initial prototype and Spark !!!)
+(!!! Talk about progress made between first meeting and Jan - maybe mention initial prototype and Spark  -- Probably short section on deciding on Spark and referencing to section 3!!!)
 
 (!!! Talk January and change in aim of project once more - this is when customer had clearer vision in regards to what exactly the project was to be - proof of concept they can learn from !!!)
 
-Upon presenting the progress made in the system at the January 26th meeting the team pressed the customer regarding what they believed the final state of the system would be. (!!! Reference it is important to have clear vision via papers, etc !!!). Having discussed the issue with the customer it was clear they wished to view the project as “proof-of-concept” from which they could learn from should they choose to implement a similar system into their existing service, as an assessment of worth of creating such a system and finally as a prototype to justify the development costs to the non-technical members of their company. With the final state of the system to be handed over known the team decided to redesign the front alongside the continued development of the recommendation engine. (!!! reference throwaway code lecture from PSD lectures here !!!). The primary justification for the redesign came from an observation made whilst giving the demonstration during the January 26th meeting. As ResDiary software engineer Adam Connelly was unable to attend the meeting due to other commitments, a non-technical member of the ResDiary team joined Ian Strachan during the meeting. Through this non-technical perspective it was clear to the team that the system was not properly communicating the recommendations being made. As such it was not clear to a non-technical user how the system generally operated, if it was functioning correctly and if the results it produced looked sensible. This justified the front end redesign with the aim being to visually show the system was operating correctly and producing accurate predictions. Through making the end goal of the project be to create a prototype application the team had a clearly defined endpoint (!!! tie back into the importance of having a clearly defined end point !!!)
+Upon presenting the progress made at the January 26th meeting the team pressed the customer regarding what their vision for the final state of the system would be. (!!! Reference it is important to have clear vision via papers, etc !!!). Having discussed this issue with the customer it became clear they wished to view the project as “proof-of-concept” system. That their intended use of the system was to assess the worth of creating a similar system for their existing system. Additionally they wished to learn from the system as they have little experience in this particular field. Finally should they believe a similar system to be of use to their business, they wished to use our system as a prototype to justify the resources required for development of a similar system to the non-technical members of their company. (!!! Reference benefits of making a prototype if one is to explain something to a non-technical user !!!) 
 
+With the final handover state of the system known, the team decided a redesign of the front end of the application was necessary. (!!! reference throwaway code lecture from PSD lectures here !!!). The primary justification for this redesign came through an observation made while giving the demonstration at the January 26th meeting. As ResDiary software engineer Adam Connelly was unable to attend the meeting due to other commitments, a non-technical member of the ResDiary team joined Ian Strachan during the meeting. From this non-technical perspective it was clear to the team that the system was not properly communicating the recommendations being made. It was unclear to a non-technical user how the system generally operated, if it was functioning correctly and if the results it produced looked sensible. The aim of this redesign then was to visually show the system was operating correctly and producing accurate predictions. With a clearly defined end state for the system the following functional requirements were discovered and added to the project:
+
+Functional
+\begin{itemize}
+\item The front end display should display recommendations for a random pool of users to simulate typical use of the system.
+\end{itemize}
+
+Nonfunctional
+\begin{itemize}
+\item The front end be designed such that it is aesthetically clear that the recommendations made are sensible and accurate.
+\end{itemize}
+
+With this defined endpoint  (!!! tie back into the importance of having a clearly defined end point !!!) the development continued on until the end of the project.
+
+(!!! Need to mention dropped aim of new user recommendations being made !!!)
+
+Although development continued at a steady pace between the January 26th meeting and the final meeting scheduled for March 22nd the decision was in the aftermath of the January meeting to drop the proposed nonfunctional requirement of creating a quiz to make recommendations for new users. (!!! reference to section 3 on dropping features !!!) While this particular feature was viewed as a bonus feature (!!! reference PSD reading on types of features !!!) the team felt based on the customer’s feedback that they were not particularly interested in this feature. The earlier conducted research showed that making recommendations of this type was primarily a search based recommendation whereas the customer’s interests lay in recommendations made through user similarity. As such the development resources were instead focused on the aforementioned goals of producing a more accurate collaborative and content based recommendation system and the production of a high quality front end to professionally display system output. 
+
+(!!! Talk about the final state of the project and what was actually produced. !!!)
 
 % ##################################################
 % LAST EDIT: 	06/03/17	Joseph
