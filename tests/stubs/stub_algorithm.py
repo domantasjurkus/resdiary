@@ -1,13 +1,14 @@
 from pyspark.sql import SQLContext
 from src.recommenders import Recommender
 
-class StubRecommender(Recommender):
+# Existing name from config
+class StubCuisineType(Recommender):
 
     def train(self, data):
         pass
 
-    def predict(self, data):
+    def predict(self, dataframe):
         # "you're going to LOVE every restaurant"
-        predictions = data.map(lambda r: (r[0], r[1], 5))
+        predictions = map(lambda r: (r[0], r[1], 5), dataframe.collect())
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)

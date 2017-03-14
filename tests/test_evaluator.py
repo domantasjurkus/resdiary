@@ -4,7 +4,7 @@ from pyspark.sql import SQLContext
 
 from src import evaluator
 from base import BaseTestCase
-from stubs import stub_algorithm
+from stubs.stub_algorithm import StubCuisineType
 
 class EvaluatorTest(BaseTestCase):
 
@@ -17,7 +17,7 @@ class EvaluatorTest(BaseTestCase):
 	def test_evaluator(self):
 		score = evaluator.evaluate(
 			self.sc,
-			stub_algorithm.StubRecommender(self.sc),
+			StubCuisineType(self.sc),
 			self.bookings
 		)
 
