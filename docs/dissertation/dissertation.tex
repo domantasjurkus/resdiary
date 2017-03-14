@@ -151,7 +151,7 @@ Ultimately it would be the latter of the two as the customer wished to view the 
 % There are 4 main stages - initial assumptions - refinements after first meeting - refinements after January meeting - final state of the project.
 
 
-Having conducted the requirements elicitation meeting the team dedicated the next few weeks to performing the necessary background research associated with the project. This occurred in tandem with the production of a formal requirements specification which would serve as the project proposal document presented to the client at the next customer meeting on November 16th. This document contained the proposed functional and nonfunctional requirements the team decided upon for the project and a set of user stories (ranked by priority) which were then subdivided into individual tasks. In addition a proposed high-level system UML diagram was included and a step-by-step workflow of how the system would generate recommendations was presented. 
+Having conducted the requirements elicitation meeting the team dedicated the next few weeks to performing the necessary background research associated with the project. This occurred in tandem with the production of a formal requirements specification which would serve as the project proposal document presented to the client at the next customer meeting on November 16th. This document contained the proposed functional and nonfunctional requirements the team decided upon for the project and a set of user stories (ranked by priority) which were then subdivided into individual tasks. In addition a proposed high-level system UML diagram was included and a step-by-step workflow of how the system would generate recommendations was presented.
 
 The team agreed upon the functional and nonfunctional requirements of the project based upon our interpretation of the customer’s pitch at the requirements elicitation meeting. Although these would later be revised and refined as the project developed it was initially proposed for the project to meet the following functional and nonfunctional requirements:
 
@@ -170,7 +170,7 @@ Initial nonfunctional requirements (!!! subsection !!!):
 \item User and restaurant locations should be interpreted using coordinates rather than city  name as those are of arbitrary precision within the dataset.
 \end{itemize}
 
-As the customer’s vision of the final state of the project was suspect to change, the proposed final state of the project was left it intentionally vague and the specification written to allow for flexibility on the customer’s part. Instead the focus was placed on building and producing the most accurate recommendation for a given user. As both the team and customer felt this to be the most critical aspect of the system a significant portion of time was devoted at the outset of the project to ensuring the proposed system was in fact the correct system to be built.  
+As the customer’s vision of the final state of the project was suspect to change, the proposed final state of the project was left it intentionally vague and the specification written to allow for flexibility on the customer’s part. Instead the focus was placed on building and producing the most accurate recommendation for a given user. As both the team and customer felt this to be the most critical aspect of the system a significant portion of time was devoted at the outset of the project to ensuring the proposed system was in fact the correct system to be built.
 
 The higher level system diagram was based upon... 
 
@@ -185,11 +185,28 @@ rate” and the introduction of the following two new requirements:
 reviews, etc.
 \end{itemize}
 
-In addition the team also introduced the aim of producing a lightweight front end display to showcase the recommendation system. We agreed with the customers belief that this would help showcase the system and provide a visual method for non-technical users to see the results of our work. As the customer was still unclear of the final form of the system, proof of concept or actual integration, both parties decided to delay the decision until the scheduled meeting on January 26th. This would allow for significant development time on the application to occur and would grant the customer more time to determine their use for the system in relation to their business needs at that time. 
+In addition the team also introduced the aim of producing a lightweight front end display to showcase the recommendation system. We agreed with the customers belief that this would help showcase the system and provide a visual method for non-technical users to see the results of our work. As the customer was still unclear of the final form of the system, proof of concept or actual integration, both parties decided to delay the decision until the scheduled meeting on January 26th. This would allow for significant development time on the application to occur and would grant the customer more time to determine their use for the system in relation to their business needs at that time.
+
+A significant portion of the development time between the November 16th and January 26th customer meetings devoted, at the customer’s request, to the creation of a simple throwaway prototype in order to give the customer a general idea of how we would showcase the application to them. This prototype presented at an interim meeting on December 7th, while a naive solution to the problem, proved an excellent opportunity for familiarisation with the datasets the team would be working with throughout the project. As ResDiary currently do not operate with one all encompassing database, the data was provided in various separate csv files which we used in addition to a schema document provided by ResDiary to create a model of the data as can be seen below:
+
+One particular observation made at this stage was the compromised nature of some of the ResDiary data. Within the datasets there exists two primary conditions which result in invalid data, for our purposes, being added to the datasets:
+
+\begin{itemize}
+\item Should the user reschedule their reservation this results in new data being added to the database without the removal of the old data. For example if a user reschedules a 5pm reservation to 6pm then both the 5pm and 6pm reservations are present within the datasets.
+\item When a pool of reservations are entered into the system by a restaurant this typically results in a user within the dataset who has many (6, 10, etc) reservations for the same restaurant, on the same day, at approximately the same time of day.
+\end{itemize}
+
+While the former’s occurrence was not ideal, the latter the team deduced could be easily addressed through observing the statistical frequency of bookings made over a short period of time.
+
+[IMAGE PLACEHOLDER]
+
+Performing this statistical analysis on the initial data set which included 1735 users was reduced down to 1562 users. This is shown in Figure (!!! REFERENCE ABOVE IMAGE !!!) as a typical user will make reservations at a rate which exceeds 1 booking per second. The expected average booking per second rate for a user would likely be much lower than 1 booking per second. However as a proof of concept in combating the invalid data and as a means of reducing the quantity of data for computation of the system the above proposal gave a good baseline from which to work.
+
+In addition to the prototype’s creation the team also began development work on the longer term solution for the system. This included a familiarisation period and switchover to the Apache Spark framework which was to be utilised to efficiently process potentially massive quantities of data. This changeover was to replicate the nightly build system desired by the customer in addition to the benefits of vastly increased processing speeds and scalability concerns. Further details regarding the reasoning for selecting this service and the impact of it are discussed at length in Section (!!! REFERENCE SPARK SECTION 3 !!!). In addition the evaluation system for different recommenders was set up and a first attempt at a collaborative filtering model implemented. This switchover to Apache Spark and first iterations of the collaborative filter and evaluation system were presented to the customer during the January 26th meeting.
 
 Upon presenting the progress made at the January 26th meeting the team pressed the customer regarding what their vision for the final state of the system would be. Having discussed this issue with the customer it became clear they wished to view the project as “proof-of-concept” system. That their intended use of the system was to assess the worth of creating a similar system for their existing system. Additionally they wished to learn from the system as they have little experience in this particular field. Finally should they believe a similar system to be of use to their business, they wished to use our system as a prototype to justify the resources required for development of a similar system to the non-technical members of their company.
 
-With the final handover state of the system known, the team decided a redesign of the front end of the application was necessary. . The primary justification for this redesign came through an observation made while giving the demonstration at the January 26th meeting. As ResDiary software engineer Adam Connelly was unable to attend the meeting due to other commitments, a non-technical member of the ResDiary team joined Ian Strachan during the meeting. From this non-technical perspective it was clear to the team that the system was not properly communicating the recommendations being made. It was unclear to a non-technical user how the system generally operated, if it was functioning correctly and if the results it produced looked sensible. The aim of this redesign then was to visually show the system was operating correctly and producing accurate predictions. With a clearly defined end state for the system the following functional requirements were discovered and added to the project:
+With the final handover state of the system known, the team decided a redesign of the front end of the application was necessary. The primary justification for this redesign came through an observation made while giving the demonstration at the January 26th meeting. As ResDiary software engineer Adam Connelly was unable to attend the meeting due to other commitments, a non-technical member of the ResDiary team joined Ian Strachan during the meeting. From this non-technical perspective it was clear to the team that the system was not properly communicating the recommendations being made. It was unclear to a non-technical user how the system generally operated, if it was functioning correctly and if the results it produced looked sensible. The aim of this redesign then was to visually show the system was operating correctly and producing accurate predictions. With a clearly defined end state for the system the following functional requirements were discovered and added to the project: 
 
 Functional
 \begin{itemize}
@@ -203,7 +220,7 @@ Nonfunctional
 
 With this defined endpoint... the development continued on until the end of the project.
 
-Although development continued at a steady pace between the January 26th meeting and the final meeting scheduled for March 22nd the decision was in the aftermath of the January meeting to drop the proposed nonfunctional requirement of creating a quiz to make recommendations for new users. While this particular feature was viewed as a bonus feature the team felt based on the customer’s feedback that they were not particularly interested in this feature. The earlier conducted research showed that making recommendations of this type was primarily a search based recommendation whereas the customer’s interests lay in recommendations made through user similarity. As such the development resources were instead focused on the aforementioned goals of producing a more accurate collaborative and content based recommendation system and the production of a high quality front end to professionally display system output. 
+Although development continued at a steady pace between the January 26th meeting and the final meeting scheduled for March 22nd the decision was made in the aftermath of the January meeting to drop the proposed nonfunctional requirement of creating a quiz to make recommendations for new users. While this particular feature had been viewed as a bonus feature from the outset of development the team felt based on the customer’s feedback that the customers were not particularly interested in such a feature. Research conducted earlier had shown that making recommendations of this type were primarily a search based recommendation whereas the customer’s interests lay instead in recommendations based on similarity between users. As such the development resources were instead focused on the aforementioned goals of producing a more accurate collaborative and content based recommendation system and the production of a high quality front end to professionally display system output. 
 
 % ##################################################
 % LAST EDIT: 	06/03/17	Joseph
@@ -227,8 +244,51 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 %==============================================================================
 \section{Reflections}
 \label{sec:reflections}
+% ##################################################
+% LAST EDIT: 	14/03/17	Joseph
+% ##################################################
 
 % Several sections that reflect on your experiences during the team project. Each section should discuss one theme, characterised by incidents or events that occurred during the team course of the project from which you learned (approximately 12-15 pages).
+
+REFLECTION POINT - Scrum vs. XP
+This would be a reflection on using the Scrum system in comparison to another system such as Extreme Programming which might have been more suited to our project given its vague nature at the start and would also have helped combat the issues of code reviews / testing.
+
+We ended up with this weird cross system that was mainly Scrum.
+
+Probably pick one then compare against the other and determine if that would have worked better. Probably closer to Scrum of the above two.
+
+Misc points:
+Time between meetings served as a good sprint dates - working on smaller iterations may have ensured better communication within the team.
+Development typically did not change much within a sprint - XP difference here may not have made much of a difference though the dropped feature could have been explored earlier in the development cycle than the 2nd semester.
+Task priority was a bit of an issue as we didn’t really do proper task estimation - XP would have solved that issue as it forces strict policy and task estimation.
+Scrum has no engineering practices whereas our project definitely should have. XP would have forced pair programming from the start (rather than sporadic occurrences within sprints), ensured better, more thorough testing from an earlier stage in the project and avoided the whole code review “you deleted all my code you bastard” arguments.
+
+REFLECTION POINT - Anarchy into Structure (Team Structure)
+Initially the team had no real structure and instead utilised a developer anarchy team structure whereby someone would work on whatever system of the felt like at a given time. This eventually stopped working as the team subdivided into divisions - front end, back end and testing with back end being further divided into collaborative filter, evaluator, content based, NEO recommender.
+
+Anarchy would explain the lack of time estimates and product owner however.
+
+Reasons for the failure of the anarchy include the following reasons:
+Failure to communicate between the team - people weren’t discussing what they were actively working on, tickets didn’t reflect what people were working on, people didn’t yield results in an efficient enough manner.
+Failure to fully understand domain - anarchy structures require huge expertise of the problem domain which regardless of how smart you are you cannot gain a grasp of in a few weeks. There’s a reason we pay for years worth of experience in a field / industry.
+Motivation took a hit over Christmas (it was the holidays)
+Lack of trust between team as we had just met.
+
+Changing to a more structured development system did have an effect on productivity (testing improved - we actually had some, front end redesign was rad, more defined roles resulted in better communication within the team)
+
+REFLECTION POINT - Code Reviews & Branching
+We did not do code reviews and this resulted in some ‘tensions’ during the development of the project. Code reviews from the start of the development would have been beneficial for many reasons (see papers).
+
+Misc Points:
+The system was designed such that branching was unnecessary for the project. Branching was somewhat discouraged throughout the project in order to reduce merge costs / time. Whether the time saved outweighs the time spent fixing and altering other people’s code remains to be seen.
+Lack of code reviews meant that the code often had inconsistent styling.
+Lack of code reviews meant a significant portion of time was spent fixing or altering other people's code to work with parts of the system they did not realise they had broken.
+Lack of code reviews meant code which was WIP was deleted prior to it being fully implemented into the system - again lack of branching issue somewhat.
+
+REFLECTION POINT - Apache Spark
+
+Misc Points:
+Team decided the entire team should spend time over Christmas playing around with Apache Spark to ensure common understanding of the system between team members. This may not have been the best use of resource and instead team could have split earlier and the front end developers not bothered playing around with it as they did not end up touching it directly during the development of the project. Common knowledge was gained though but a more typical front end, back end split in focus may have been beneficial and resulted in an improved front end application sooner.
 
 %==============================================================================
 \section{Conclusions}
