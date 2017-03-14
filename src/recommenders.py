@@ -74,7 +74,7 @@ class System(Recommender):
         return SQLContext(self.spark).createDataFrame(top_recommendations,
                                                       schema)
 
-    def learn_hyperparameters(self, data):
+    def learn_hyperparameters(self, data, save=True):
         '''Takes a DataFrame of bookings and uses the evaluator to learn optimal
         values for all the hyperparameters.'''
         recommenders = self.recommenders.keys()
@@ -91,7 +91,8 @@ class System(Recommender):
                 best_evaluation = evaluation
                 best_weights = weights
         # write the new combination to the config file
-        Config.set_weights(best_weights)
+        if save == True:
+            Config.set_weights(best_weights)
 
     def generate_weights(self, maximum_weight):
         '''Takes a maximum weight and generates all possible combinations of

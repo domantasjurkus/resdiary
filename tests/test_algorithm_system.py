@@ -27,9 +27,8 @@ class SystemAlgorithmTest(BaseTestCase):
 		# Check for detection of empty RDD
 		self.assertRaises(ValueError, self.alg.predict, self.sc.parallelize([]))
 
-		# Methods to test:
-		# self.alg.learn_hyperparameters()
-		# self.alg.generate_weights(max_weight)
+		# Trigger hyperparameter learning without saving output
+		self.alg.learn_hyperparameters(self.bookings, False)
 
 
 	@classmethod
