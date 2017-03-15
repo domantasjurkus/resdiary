@@ -6,7 +6,7 @@ from src import evaluator
 from base import BaseTestCase
 from stubs.stub_algorithm import StubCuisineType
 
-class EvaluatorTest(BaseTestCase):
+class EvaluatorTest(unittest.TestCase, BaseTestCase):
 
 	# Set up fixtures that last for all test cases
 	@classmethod

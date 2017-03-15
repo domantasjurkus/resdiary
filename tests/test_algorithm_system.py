@@ -24,7 +24,7 @@ def has_scalar(tpl1, tpl2):
 	return False
 
 
-class SystemAlgorithmTest(BaseTestCase):
+class SystemAlgorithmTest(unittest.TestCase, BaseTestCase):
 
 	@classmethod
 	def setUpClass(self):

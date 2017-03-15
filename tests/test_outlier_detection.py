@@ -5,7 +5,7 @@ from pyspark.sql import SQLContext
 from base import BaseTestCase
 from src import data
 
-class OutlierDetectionTest(BaseTestCase):
+class OutlierDetectionTest(unittest.TestCase, BaseTestCase):
 
 	@classmethod
 	def setUpClass(self):

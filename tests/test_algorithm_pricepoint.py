@@ -1,5 +1,10 @@
-from base_content import ContentBaseTest
+import unittest
 
-class PricePointTest(ContentBaseTest):
-	# All tests will be called from the base class
-	pass
+from base_content import ContentBaseTest
+from src.recommenders import CuisineType
+
+class PricePointTest(ContentBaseTest, unittest.TestCase):
+	
+	@classmethod
+	def setUpClass(self):
+		self.alg = CuisineType(self.sc)
