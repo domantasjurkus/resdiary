@@ -73,39 +73,39 @@
                 </div>
 
             </div>
-            <!--//Col: Previous>
+            <!--//Col: Previous-->
             <!--Recommended-->
             <div class="col-sm-6 col-xs-12">
                 <h3>Recommended Restaurants</h3>
                 <select id="recChange" style="margin-bottom:10px" class="form-control" onchange="changeRecs(this)">
-                    <option value="als">ALS Recommendations</option>
-                    <option value="content">Content-Based Recommendations</option>
+                    <% recommenders.forEach(function(rec) { %>
+                        <option value="<%=rec.name%>"><%=rec.label%></option>
+                    <% }); %>
                 </select>
+
+                <!-- Old -->
+                <!--<select id="recChange" style="margin-bottom:10px" class="form-control" onchange="changeRecs(this)">
+                    <option value="explicitals">ALS Recommendations</option>
+                    <option value="cuisinetype">Content-Based Recommendations</option>
+                </select>-->
+
                 <div class="row" id="recommendedList">
-                     <% als.forEach(function(res) { %>
-                        <div class="col-xs-12" data-rec="als">
-                            <div class="res-recent-box" data-lat="<%=res.Restaurant.Lat %>" data-lon="<%=res.Restaurant.Lon %>">
-                                <a href="/new_demo/user/<%= userId %>/<%= res.Restaurant.RestaurantId %>">
-                                    <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
-                                </a>
-                                <p>Location : <%=res.Restaurant.Town %></p>
-                                <p>Cuisine Type: <%=res.CuisineType %></p>
-                                <p>Recommended by: ALS || Score: <%=res.RecScore %></p>
+
+                    <% recommenders.forEach(function(recommender) { %>
+                        <% recommender.data.forEach(function(res) { %>
+                            <div class="col-xs-12" data-rec="<%= recommender.name %>">
+                                <div class="res-recent-box" data-lat="<%=res.Restaurant.Lat %>" data-lon="<%=res.Restaurant.Lon %>">
+                                    <a href="/new_demo/user/<%= userId %>/<%= res.Restaurant.RestaurantId %>">
+                                        <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
+                                    </a>
+                                    <p>Location : <%=res.Restaurant.Town %></p>
+                                    <p>Cuisine Type: <%=res.CuisineType %></p>
+                                    <p>Recommended by: ALS || Score: <%=res.RecScore %></p>
+                                </div>
                             </div>
-                        </div>
+                        <% }); %>
                     <% }); %>
-                    <% contentBased.forEach(function(res) { %>
-                        <div class="col-xs-12" data-rec="content">
-                            <div class="res-recent-box" data-lat="<%=res.Restaurant.Lat %>" data-lon="<%=res.Restaurant.Lon %>">
-                                <a href="/new_demo/user/<%= userId %>/<%= res.Restaurant.RestaurantId %>">
-                                    <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
-                                </a>
-                                <p>Location : <%=res.Restaurant.Town %></p>
-                                <p>Cuisine Type: <%=res.CuisineType %></p>
-                                <p>Recommended by: Content-Based || Score: <%=res.RecScore %></p>
-                            </div>
-                        </div>
-                    <% }); %>
+
                 </div>
             </div>
             <!--//Col: Recommended-->
@@ -114,17 +114,12 @@
     <!--//Main Content-->
 </body>
 <script>
-$(document).ready(function(){
-    $( "#recChange" ).trigger( "change" );
-})
-function changeRecs(select){
-    var val = $(select).val();
-    if(val=='content'){
-        $('[data-rec="content"]').show();
-        $('[data-rec="als"]').hide();
-    }else{
-        $('[data-rec="als"]').show();
-        $('[data-rec="content"]').hide();
+    $(document).ready(function(){
+        $("#recChange").trigger("change");
+    })
+    function changeRecs(select) {
+        var val = $(select).val();
+        $('div[data-rec]').hide();
+        $('[data-rec="'+val+'"]').show();
     }
-}
 </script>
