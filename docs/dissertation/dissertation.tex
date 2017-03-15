@@ -84,14 +84,11 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 \label{sec:background}
 % A description of the case study background and context. This should include a description of the project customer (what was the nature of the organisation you were working for), their objectives for the project, and a summary of what was actually achieved. Where appropriate, this section should also make reference to similar related projects in order to make the context clear (approximately 4-5 pages).
 
-% MISC POINTS TO DISCUSS:
-% 1. Do we address the legal contract we signed. I.e. Initially it was proposed for integration into the site. It then changed and this we reflected in the contract we signed which outlined the final product and how it could be used be ResDiary - possibly get a more accurate summary of what ResDiary can do with the delivered product from them (ask them to summarise the contract essentially mentioning it is beneficial to our final report)
-
 % ##################################################
 % LAST EDIT: 	15/03/17	Dom
 % ##################################################
 \subsection{Customer}
-\label{customer}
+\label{sec:customer}
 % The customer organisation and background.
 
 % Here we want answer the question of who are ResDiary and what do they do.
@@ -110,31 +107,21 @@ ResDiary senior software engineers Adam Connelly and Ian Strachan acted as repre
 
 % ##################################################
 % LAST EDIT: 	15/03/17	Joseph
+% NOTE: 		Reference papers on Amazon / Netflix Models / Netflix Prize
 % ##################################################
 \subsection{Customer Objectives And Rationale}
 \label{custobjectives}
 % The rationale and initial objectives for the project.
 
-% Essentially with the intro we want to introduce the company and the aims of the project. Mention similar real world examples such as the Netflix model as this was used as a reference / example similar project early on in our project. Talk out the specification, reference the dropped features of the specification in relation to what was actually developed and presented to the customer. Potentially mention points of future expansion as well and how project was setup to account for those future developments.
+% Initial Meeting and the customer's motivation for the project.
 
-% Possibly reflect on the change in specification that occurred - how it was originally proposed to what it evenually became both from our perspective (in terms of what we would develop) and how ResDiary wished to use the project (in that they intially proposed either integrating it into their system or creating an API to eventually just wanting it as a proof of concept to learn from).
+The initial customer meeting occurred on October 19th and was led by Ian Strachan. This was our first contact with the customer and served as the customer requirements elicitation meeting. The meeting began with an overview of the ResDairy business \ref{sec:customer} and some information being given of the technologies in place within their system. This included information on the particular development languages being used though the primary reason being to provide the background context for the large quantities of data being gathered by ResDiary from their daily operation. This large mass of big data however is currently unused which the ResDiary developers view as a significant shortcoming of their system. 
 
-% Essentially I want to introduce the customer and provide an overview of the motivation of the project.
-% Project motivation comes from three reasons:
-% 1. Improve restaurant discover on existing service 
-%	2. Commerial reason as it is not something their competition does
-%	3. Big data proof of concept research - they have large amount of big data they do nothing with and would like to see if using it for such a purpose would be useful
+As such the company is exploring potential utilisation methods of this vast quantity of data which they believe they will be allow them to distinguish themselves from their competition and gain a commercial edge. Having conducted some research they have discovered that none of their competitors currently offer a restaurant recommendation service within their particular booking platform. ResDiary believe such as system, which would make recommendations to users based off their previous dining habits and similarity to other users, will give them an advantage over their competition. They believe such a feature will increase restaurant discovery on their service which is of benefit to both their customers and the organisation itself.
 
+The inspiration of the idea stems from the similar system provided by services such as Amazon and Netflix (!R! REFERENCE PAPERS ON NETFLIX AND AMAZON RECOMMENDATIONS MODELS !R!). The Netflix model in particular being the closest reference point for the system they wish to replicate due the similarity between making recommendations based on a user’s history and similarity to other users. As a starting point for our own research into creating such a system they suggested looking into the 2009 Netflix Prize competition (!R! REFERENCE SECTION ON RESEARCH INTO SIMILAR SYSTEMS AND HOW WE ARRIVED AT OUR MODEL !!!). The goal of this competition was to produce the best algorithm which could most accurately predict a user’s rating of a film based on previous ratings and no other additional information about the users or the films. This they felt would be a good starting point for the development of such a system.
 
-% Initial Meeting - Project Motivation - Initial Aims
-
-The initial customer meeting occurred on October 19th and was led by Ian Strachan. This was our first contact with the customer and served as the customer requirements elicitation meeting. The meeting began with an overview of the ResDairy business (link to customer section above) and some information being given of the technologies in place within their system. This included information on the particular development languages being used (primarily C\#) though the primary justification was to provide the background context for the large quantities of data being gathered by ResDiary from their daily operation. This large mass of big data however is currently unused and dormant which the ResDiary developers view as a significant shortcoming of their existing system. 
-
-As such the company is exploring potential utilisation methods of the vast quantity of data. Through its utilisation they believe they will be able to distinguish themselves from their competition and gain a commercial edge. Having conducted some research they have discovered that none of their competitors currently offer a restaurant recommendation service within their particular booking platform. ResDiary believe such as system, which would make recommendations to users based off their previous dining habits and similarity to other users, will give them an advantage over their competition. They believe such a feature will increase restaurant discovery on their service which will be of benefit to both their customers and the organisation itself.
-
-The inspiration of the idea stems from the similar system provided by services such as Amazon and Netflix (!R! REFERENCE PAPERS ON NETFLIX AND AMAZON RECOMMENDATIONS MODELS !R!). The Netflix model in particular being the closest reference point for the system they wish to replicate due the similarity between making recommendations based on a user’s history and similarity to other users of the service. As a starting point for our own research into creating such a system they suggested looking into the 2009 Netflix Prize competition (!R! REFERENCE SECTION ON RESEARCH INTO SIMILAR SYSTEMS AND HOW WE ARRIVED AT OUR MODEL !!!). The goal this competition was to produce the best algorithm which could most accurately predict a user’s rating of a film based on previous ratings and no other additional information about the users or the films. This they felt would be a good starting point into development of such a system.
-
-While the primary focus of the project was to be the development of the recommendation system, time was spent discussing what the customer viewed as the end state of the system, whether it be integration into the existing ResDiary portal or as a proof of concept prototype system. As the customer was currently undecided in this regard, partly due to an internal transition in development technologies, they elucidated our initial aim should be to focus on the creation of the recommendation system as the end state was currently susceptible to change. This decision would ultimately not be made until midway through the development cycle (!R! REFERENCE TO FINAL DECISION STATE OF SYSTEM SECTION !R!) where the customer would decide to view the project as the latter of the two initially proposed systems.
+While the primary focus of our project was to be the development of the recommendation system, time was spent discussing what the customer viewed as the end state of the system, whether it be integration into the existing ResDiary portal or as a proof of concept prototype. As the customer was currently undecided in this regard, partly due to an internal transition in development technologies, they elucidated our initial aim should be to focus on the creation of the recommendation system as the end state was currently susceptible to change. The decision regarding the final state of the project ultimately would not be made until midway through the development cycle (!R! REFERENCE TO FINAL DECISION STATE OF SYSTEM SECTION !R!) when the customer decided to view the project as the latter of the two initially proposed systems.
 
 % ################# Comment Log ####################
 % ##################################################
@@ -146,22 +133,9 @@ While the primary focus of the project was to be the development of the recommen
 % NOTE:         Needs reworking
 % NOTE:			Needs referencing
 % NOTE:			Needs cutting down page count 
-% ##################################################
+% ################################################## 
 
-% Present our initial takeaways and how we came to them
-% Tease some of the various changes which occurred along the way
-% Lead into the final state of the system 
-
-% Here is our interpretation of their requirements pitched above
-% Here are their adjustments based off our initial interpretation of their requirements
-
-% Reference the Netflix / additional research / similar systems here
-
-% There are 5 main stages - initial assumptions - refinements after first meeting - technical challenges and prototyping - refinements after January meeting - final delivered state of the project.
-
-Having conducted the requirements elicitation meeting production began on a formal requirements specification which would serve as the project proposal document to be presented to the client at the next customer meeting on November 16th. This occurred in tandem with conducting the initial necessary background research necessary for the project (!R! REFERENCE BACKGROUND RESEARCH SUBSECTION !R!) due risks and costs associated with a project of this nature.
-
-The proposal document contained the functional and nonfunctional requirements the team agreed upon based on our interpretation of the customer’s initial pitch of the project. Although these would be continually revised and refined as the project developed it was initially proposed for the project to meet the following functional and nonfunctional requirements:
+Having conducted the requirements elicitation meeting production began on a formal requirements specification which would serve as the project proposal document to be presented to the client at the next customer meeting on November 16th. This occurred in tandem with conducting the initial necessary background research necessary for the project (!R! REFERENCE BACKGROUND RESEARCH SUBSECTION !R!) due risks and costs associated with a project of this nature (!R! REFERENCE MINI REFLECTION ON IMPORTANCE OF INITIAL REQUIREMENTS GATHERING !R!). The proposal document included the functional and nonfunctional requirements the team agreed upon based on our interpretation of the customer’s initial pitch of the project. Although these would be continually revised and refined as the project developed it was initially proposed for the project to meet the following functional and nonfunctional requirements:
 
 Initial functional requirements (!!! subsection !!!):
 \begin{itemize}
@@ -178,9 +152,10 @@ Initial nonfunctional requirements (!!! subsection !!!):
 \item User and restaurant locations should be interpreted using coordinates rather than city  name as those are of arbitrary precision within the dataset.
 \end{itemize}
 
-A set of user stories (ranked by priority) which were then subdivided into individual tasks was also included in addition a proposed high-level system UML diagram (!R! REFERENCE UML DIAGRAM !R!) and a step-by-step workflow of how the system would generate recommendations. Due to the customer’s ambiguous vision for the final state of the system, the proposed system to be built left it intentionally vague in this regard to allow for flexibility in the customer’s vision of the final state of the system. Instead the emphasis was to build and produce the most accurate recommendation for a given user.
+A set of user stories (ranked by priority) which were then subdivided into individual tasks was also provided in addition a proposed high-level system UML diagram (!R! REFERENCE UML DIAGRAM !R!) and a step-by-step workflow of how the system would generate recommendations. Due to the customer’s ambiguous vision for the final state of the system, the proposed system to be built left it intentionally vague in this regard to allow for flexibility in the customer’s vision of the final state of the system. Instead the emphasis was to build and produce the most accurate recommendation for a given user.
 
 % ################# Comment Log ####################
+% If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point - we did it pretty well though there isn't much to improve in that regard
 % ##################################################
 
 \subsection{Customer Refinements To Initial Objectives}
@@ -205,35 +180,31 @@ reviews, etc.
 Furthermore a soft goal was set up within the team to produce a front end application to showcase the recommendation system. While some of the team believed this justified being defined formally within the specification the majority instead felt the focus of the project should be on creating the most accurate recommendations and delay defining a suitable end state until the customer had themselves defined their intended use for the system. Should the customer not provide clarity earlier it was decided to press on this issue during the scheduled January 26th meeting and define a agreed handover state for the project.
 
 % ################# Comment Log ####################
+% If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point - we did it pretty well though there isn't much to improve in that regard
 % ##################################################
 
 \subsection{Technical Research \& Prototyping}
 \label{techresearchproto}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
-% NOTE:         Needs reworking
-% NOTE:			Needs referencing
-% NOTE:			Needs cutting down page count 
+% NOTE:         Technical Research Primarily Comes From That Section of Presentation
+% NOTE:			Prototyping can be mentioned
+% NOTE:			Statistical filter (feature discovery) can be mentioned
 % ##################################################
 
-% UP TO HERE 
-
+% Probably needs complete rewrite but use parts in later sections
 A significant portion of the development time between the November 16th and January 26th customer meetings devoted, at the customer’s request, to the creation of a simple throwaway prototype in order to give the customer a general idea of how we would showcase the application to them. This prototype presented at an interim meeting on December 7th, while a naive solution to the problem, proved an excellent opportunity for familiarisation with the datasets the team would be working with throughout the project. As ResDiary currently do not operate with one all encompassing database, the data was provided in various separate csv files which we used in addition to a schema document provided by ResDiary to create a model of the data as can be seen below:
 
 One particular observation made at this stage was the compromised nature of some of the ResDiary data. Within the datasets there exists two primary conditions which result in invalid data, for our purposes, being added to the datasets:
 
-\begin{itemize}
-\item Should the user reschedule their reservation this results in new data being added to the database without the removal of the old data. For example if a user reschedules a 5pm reservation to 6pm then both the 5pm and 6pm reservations are present within the datasets.
-\item When a pool of reservations are entered into the system by a restaurant this typically results in a user within the dataset who has many (6, 10, etc) reservations for the same restaurant, on the same day, at approximately the same time of day.
-\end{itemize}
+Should the user reschedule their reservation this results in new data being added to the database without the removal of the old data. For example if a user reschedules a 5pm reservation to 6pm then both the 5pm and 6pm reservations are present within the datasets.
+When a pool of reservations are entered into the system by a restaurant this typically results in a user within the dataset who has many (6, 10, etc) reservations for the same restaurant, on the same day, at approximately the same time of day.
 
 While the former’s occurrence was not ideal, the latter the team deduced could be easily addressed through observing the statistical frequency of bookings made over a short period of time.
 
-[IMAGE PLACEHOLDER]
+Performing this statistical analysis on the initial data set which included 1735 users was reduced down to 1562 users. This is shown in Figure (!!! reference above image !!!)  as a typical user will make reservations at a rate which exceeds 1 booking per second. The expected average booking per second rate for a user would likely be much lower than 1 booking per second. However as a proof of concept in combating the invalid data and as a means of reducing the quantity of data for computation of the system the above proposal gave a good baseline from which to work.
 
-Performing this statistical analysis on the initial data set which included 1735 users was reduced down to 1562 users. This is shown in Figure (!!! REFERENCE ABOVE IMAGE !!!) as a typical user will make reservations at a rate which exceeds 1 booking per second. The expected average booking per second rate for a user would likely be much lower than 1 booking per second. However as a proof of concept in combating the invalid data and as a means of reducing the quantity of data for computation of the system the above proposal gave a good baseline from which to work.
-
-In addition to the prototype’s creation the team also began development work on the longer term solution for the system. This included a familiarisation period and switchover to the Apache Spark framework which was to be utilised to efficiently process potentially massive quantities of data. This changeover was to replicate the nightly build system desired by the customer in addition to the benefits of vastly increased processing speeds and scalability concerns. Further details regarding the reasoning for selecting this service and the impact of it are discussed at length in Section (!!! REFERENCE SPARK SECTION 3 !!!). In addition the evaluation system for different recommenders was set up and a first attempt at a collaborative filtering model implemented. This switchover to Apache Spark and first iterations of the collaborative filter and evaluation system were presented to the customer during the January 26th meeting.
+In addition to the prototype’s creation the team also began development work on the longer term solution for the system. This included a familiarisation period and switchover to the Apache Spark framework which was to be utilised to efficiently process potentially massive quantities of data. This changeover was to replicate the nightly build system desired by the customer in addition to the benefits of vastly increased processing speeds and scalability concerns. Further details regarding the reasoning for selecting this service and the impact of it are discussed at length in Section (!!! reference Spark choice reflection section !!!) . In addition the evaluation system for different recommenders was set up and a first attempt at a collaborative filtering model implemented. This switchover to Apache Spark and first iterations of the collaborative filter and evaluation system were presented to the customer during the January 26th meeting.
 
 % ################# Comment Log ####################
 % ##################################################
@@ -298,7 +269,19 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 
 % Several sections that reflect on your experiences during the team project. Each section should discuss one theme, characterised by incidents or events that occurred during the team course of the project from which you learned (approximately 12-15 pages).
 
-\subsection{REFLECTION POINT - Scrum vs XP}
+Start by stating that the team decided to use the Scrum methodology and reference reflection point of if this was the correct system to use. Give iteration overview (short summary of each iteration) with either a mini-reflection or reference to further reflection point for all key points which occurred.
+\begin{itemize}
+\item Iteration 1 - importance of getting the requirements correct - risks \& costs of fixing, etc (MINI REFLECTION).
+\item Research conducted and technical decisions - reference to reflection points.
+\item Dropped Feature - reference to reflection point.
+\item Testing - reference to reflection point.
+\item Front end redesign - throwaway code and prototyping (MINI REFLECTION)
+\item Pair Programming - reference to reflection point 
+\item ETC
+\item ETC
+\end{itemize}
+
+\subsection{FINAL REFLECTION POINT - Scrum vs XP - Was Scrum The Right Choice}
 \label{scrumvsxp}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
