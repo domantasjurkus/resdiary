@@ -16,13 +16,13 @@ var config = {
 // Match the restaurants id to its cuisine type then perfrom a cuisine type lookup
 // Could be extended to return all cuisine types as it currently only returns 1
 function getResCuisine (resId) {
-        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
         var restaurants = parse(restaurantsFile, { columns: true });
 
-        var cuisineFile = fs.readFileSync('./src/data/RestaurantCuisineTypes.csv', 'utf8');
+        var cuisineFile = fs.readFileSync('./data/RestaurantCuisineTypes.csv', 'utf8');
         var cuisines = parse(cuisineFile, { columns: true });
 
-        var cuisineTypeFile = fs.readFileSync('./src/data/CuisineTypes.csv', 'utf8');
+        var cuisineTypeFile = fs.readFileSync('./data/CuisineTypes.csv', 'utf8');
         var cuisineTypes = parse(cuisineTypeFile, { columns: true });
 
         var cuisineID = cuisines.find(function (tempResID){
@@ -44,26 +44,58 @@ function getResCuisine (resId) {
 /* A module for reading and writing data from the CSV files. Takes a Diner ID and sends the
    recommended restaurants to the res object. */
 module.exports = {
-    getRandomUserSync: function () {
-        var recommendationsFile = fs.readFileSync('./src/data/Recommendations_ALSExplicit_Demo.csv', 'utf8');
+    /* Added by Dom - single route for all recommendation CSV files */
+    getRecommendations: function (userId, recType) {
+        var recommendationsFile = fs.readFileSync('./data/recs_'+recType+'.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
+        var recommendations = parse(recommendationsFile, {});
+        var restaurants = parse(restaurantsFile, { columns: true });
+
+        // filter out the relevant recommendations
+        return recommendations.filter(function (recommendation) {
+        if (recommendation[0] == userId) {
+            return recommendation[0] == userId;
+        }
+        }).map(function (recommendation) {
+            // find the information about each restaurant
+            var rest = restaurants.find(function (restaurant) {
+                return restaurant['RestaurantId'] ==
+                    recommendation[1];
+            });
+            var cuisineT = getResCuisine(recommendation[1]);
+
+            return {
+                Restaurant: rest,
+                RecScore: recommendation[2],
+                CuisineType: cuisineT
+            };
+        })
+    },
+
+    /*getRandomUserSync: function () {
+        //var recommendationsFile = fs.readFileSync('./data/Recommendations_ALSExplicit_Demo.csv', 'utf8');
+        var recommendationsFile = fs.readFileSync('./data/recs_demo.csv', 'utf8');
         var recs = parse(recommendationsFile, {});
         return recs[Math.floor(Math.random() * recs.length)][0];
 
-    },
-    getRandomUsersSync: function(num){
-        var bookingsFile = fs.readFileSync('./src/data/bookings_demo.csv', 'utf8');
+    },*/
+    getRandomUsersSync: function(num) {
+        // Get users from the System recommender
+        // These will surely have plenty of recommendations to show
+        var bookingsFile = fs.readFileSync('./data/recs_explicitals.csv', 'utf8');
         var bookings = parse(bookingsFile, {}); 
         var users = [];
-        for(i=0;i<num;i++){
+        for (i=0; i<num; i++) {
             var id = bookings[Math.floor(Math.random() * bookings.length)][0];
             users.push(id)
-            console.log(id);
+            console.log("User id", id);
         }
         return users;
     },
-    getRecommendationsContentSync: function (userId) {
-        var recommendationsFile = fs.readFileSync('./src/data/Recommendations_Content_Based.csv', 'utf8');
-        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+    /*getRecommendationsContentSync: function (userId) {
+        //var recommendationsFile = fs.readFileSync('./data/Recommendations_Content_Based.csv', 'utf8');
+        var recommendationsFile = fs.readFileSync('./data/recs_cuisinetype.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
         var recommendations = parse(recommendationsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
 
@@ -80,10 +112,12 @@ module.exports = {
 
             return {Restaurant:rest,RecScore:recommendation[2],CuisineType:cuisineT};
         })
-    },
-    getRecommendationsAlsSync: function (userId) {
-        var recommendationsFile = fs.readFileSync('./src/data/Recommendations_ALSExplicit_Demo.csv', 'utf8');
-        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+    },*/
+    /*getRecommendationsAlsSync: function (userId) {
+        //var recommendationsFile = fs.readFileSync('./data/Recommendations_ALSExplicit_Demo.csv', 'utf8');
+        var recommendationsFile = fs.readFileSync('./data/recs_explicitals.csv', 'utf8');
+
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
         var recommendations = parse(recommendationsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
 
@@ -100,35 +134,56 @@ module.exports = {
 
             return {Restaurant:rest,RecScore:recommendation[2],CuisineType:cuisineT};
         })
-    },
+    },*/
     getRecentlyVisitedSync: function (userId) {
-        var bookingsFile = fs.readFileSync('./src/data/bookings_demo.csv', 'utf8');
-        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var bookingsFile = fs.readFileSync('./data/bookings_demo.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
         var bookings = parse(bookingsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
 
-        // filter out the relevant bookings
+        /* Booking file columns:
+            [0] user id
+            [1] restaurant name
+            [2] restaurant id
+            [3] visit time
+            [4] covers
+            [5] review score
+        */
+
+        // Filter out the relevant bookings
         return bookings.filter(function (booking) {
             return booking[0] == userId;
+
+        // Ensure restaurant can be found
+        }).filter(function (booking) {
+            return restaurants.find(function (restaurant) {
+                return restaurant['RestaurantId'] == booking[2];
+            });
+
         }).map(function (booking) {
 
             var rest = restaurants.find(function (restaurant) {
-                return restaurant['RestaurantId'] == booking[1];
+                return restaurant['RestaurantId'] == booking[2];
             });
 
-            var cuisineT = getResCuisine(booking[1]);
+            var cuisineT = getResCuisine(booking[2]);
 
-            bk = "Not available" //booking[3];                              // Visit Date 
-            sc = (booking[2]=="NULL")? "Didn't Review" : booking[2];        // Review Score (if available)
+            bk = "Not available"; //booking[3];                             // Visit Date 
+            sc = (booking[5]=="NULL")? "Didn't Review" : booking[5];        // Review Score (if available)
 
-            return {Restaurant:rest,Score:sc,BookingTime:bk,CuisineType:cuisineT};
+            return {
+                Restaurant: rest,
+                Score: sc,
+                BookingTime: bk,
+                CuisineType: cuisineT
+            };
         })
     },
 
     // Need recently visited for google map lat & lon plotting - individual restaurant page
     getRecentlyVisitedCoord: function (userId) {
-        var bookingsFile = fs.readFileSync('./src/data/bookings_demo.csv', 'utf8');
-        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var bookingsFile = fs.readFileSync('./data/bookings_demo.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
         var bookings = parse(bookingsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
 
@@ -138,10 +193,10 @@ module.exports = {
         }).map(function (booking) {
 
             var rest = restaurants.find(function (restaurant) {
-                return restaurant['RestaurantId'] == booking[1];
+                return restaurant['RestaurantId'] == booking[2];
             });
 
-            var resId = rest['RestaurantId'];
+            var resId = rest['Restaurant Id'];
             var lat = rest["Lat"];
             var lon = rest["Lon"];
 
@@ -150,7 +205,7 @@ module.exports = {
     },
 
     getRecommendedRes: function (resId) {
-        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
         var restaurants = parse(restaurantsFile, { columns: true });
 
         var rest = restaurants.find(function (restaurant) {
@@ -160,13 +215,13 @@ module.exports = {
     },
 
     getResCuisine: function (resId) {
-        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
         var restaurants = parse(restaurantsFile, { columns: true });
 
-        var cuisineFile = fs.readFileSync('./src/data/RestaurantCuisineTypes.csv', 'utf8');
+        var cuisineFile = fs.readFileSync('./data/RestaurantCuisineTypes.csv', 'utf8');
         var cuisines = parse(cuisineFile, { columns: true });
 
-        var cuisineTypeFile = fs.readFileSync('./src/data/CuisineTypes.csv', 'utf8');
+        var cuisineTypeFile = fs.readFileSync('./data/CuisineTypes.csv', 'utf8');
         var cuisineTypes = parse(cuisineTypeFile, { columns: true });
 
         var cuisineID = cuisines.find(function (tempResID){
@@ -186,8 +241,10 @@ module.exports = {
     },
 
     getRecAlsScoreSync: function (userId, resId) {
-        var recommendationsFile = fs.readFileSync('./src/data/Recommendations_ALSExplicit_Demo.csv', 'utf8');
-        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        //var recommendationsFile = fs.readFileSync('./data/Recommendations_ALSExplicit_Demo.csv', 'utf8');
+        var recommendationsFile = fs.readFileSync('./data/recs_explicitals.csv', 'utf8');
+
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
         var recommendations = parse(recommendationsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
 
@@ -205,8 +262,10 @@ module.exports = {
     },
 
     getRecContentScoreSync: function (userId, resId) {
-        var recommendationsFile = fs.readFileSync('./src/data/Recommendations_Content_Based.csv', 'utf8');
-        var restaurantsFile = fs.readFileSync('./src/data/Restaurant.csv', 'utf8');
+        //var recommendationsFile = fs.readFileSync('./data/Recommendations_Content_Based.csv', 'utf8');
+        var recommendationsFile = fs.readFileSync('./data/recs_cuisinetype.csv', 'utf8');
+
+        var restaurantsFile = fs.readFileSync('./data/Restaurant.csv', 'utf8');
         var recommendations = parse(recommendationsFile, {});
         var restaurants = parse(restaurantsFile, { columns: true });
 
@@ -224,8 +283,8 @@ module.exports = {
 /*    getRecommendations: function (userId, res) {
 
         // read two files
-        fs.readFile('./src/data/Recommendations.csv', 'utf8', function (err1, recommendationsFile) {
-            fs.readFile('./src/data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
+        fs.readFile('./data/Recommendations.csv', 'utf8', function (err1, recommendationsFile) {
+            fs.readFile('./data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
                 // parse the files
                 parse(recommendationsFile, {}, function (err3, recommendations) {
                     parse(restaurantsFile, { columns: true }, function (err4, restaurants) {
@@ -246,8 +305,8 @@ module.exports = {
     },
     getRecentlyVisited: function (userId) {
         // read two files
-        fs.readFile('./src/data/Booking.csv', 'utf8', function (err1, bookingsFile) {
-            fs.readFile('./src/data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
+        fs.readFile('./data/Booking.csv', 'utf8', function (err1, bookingsFile) {
+            fs.readFile('./data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
                 // parse the files
                 parse(bookingsFile, {}, function (err3, bookings) {
                     parse(restaurantsFile, { columns: true }, function (err4, restaurants) {
@@ -269,8 +328,8 @@ module.exports = {
 */
     readCSV: function (id, res) {
         // read two files
-        fs.readFile('./src/data/Recommendations.csv', 'utf8', function (err1, recommendationsFile) {
-            fs.readFile('./src/data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
+        fs.readFile('./data/Recommendations.csv', 'utf8', function (err1, recommendationsFile) {
+            fs.readFile('./data/Restaurant.csv', 'utf8', function (err2, restaurantsFile) {
                 // parse the files
                 parse(recommendationsFile, {}, function (err3, recommendations) {
                     parse(restaurantsFile, { columns: true }, function (err4, restaurants) {

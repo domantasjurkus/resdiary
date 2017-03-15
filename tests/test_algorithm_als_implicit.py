@@ -1,5 +1,12 @@
-from base_als import ALSTest
+import unittest
 
-class ALSImplicitTest(ALSTest):
-	# All tests will be called from the ALSTest class
-	pass
+from base_als import ALSTest
+from src.recommenders import ImplicitALS
+from src.data import Data
+
+class ALSImplicitTest(ALSTest, unittest.TestCase):
+	
+	@classmethod
+	def setUpClass(self):
+		self.alg = ImplicitALS(self.sc)
+		self.data = Data(self.sc)

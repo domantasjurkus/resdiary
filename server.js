@@ -42,21 +42,39 @@ app.get('/new_demo/',function(req,res){
 app.get('/new_demo/user/:id',function(req,res){
     var id = req.params.id; 												// Grab the ID 
 
-    var visited = data.getRecentlyVisitedSync(id || 0); 					// Gets the recently visited
-    var recsALS = data.getRecommendationsAlsSync(id || 0); 					// Gets the recommendations (and possibly reasons)
-    var recsContent = data.getRecommendationsContentSync(id || 0); 			// Gets content-based recommendations
+    var recentlyVisited = data.getRecentlyVisitedSync(id || 0); 			// Gets the recently visited
+    //var recsALS = data.getRecommendationsAlsSync(id || 0); 					// Gets the recommendations (and possibly reasons)
+    //var recsContent = data.getRecommendationsContentSync(id || 0); 			// Gets content-based recommendations
     
-    //console.log(recsALS);
+    var recommenders = [
+        {name: "explicitals", label: "Explicit ALS", data: data.getRecommendations(id || 0, "explicitals")},
+        {name: "implicitals", label: "Implicit ALS", data: data.getRecommendations(id || 0, "implicitals")},
+        {name: "cuisinetype", label: "Cuisine Type", data: data.getRecommendations(id || 0, "cuisinetype")},
+        {name: "pricepoint",  label: "Price Point",  data: data.getRecommendations(id || 0, "pricepoint")},
+        {name: "system",      label: "System",       data: data.getRecommendations(id || 0, "system")}
+    ]
+    recommenders.forEach(function(r) {
+        r.data.sort(function(a, b) {
+            return parseFloat(b.RecScore) - parseFloat(a.RecScore);
+        });
+        console.log(r.data.length, r.name, "recommendations");
+    });
 
-    recsALS.sort(function(a, b) {
+    /*recsALS.sort(function(a, b) {
         return parseFloat(b.RecScore) - parseFloat(a.RecScore);
     });
     recsContent.sort(function(a, b) {
         return parseFloat(b.RecScore) - parseFloat(a.RecScore);
-    });
+    });*/
 
     //res.json({ userId: id, recent: visited, contentBased:recsContent, als:recsALS})
-    res.render('new_demo_user', { userId: id, recent: visited, contentBased:recsContent, als:recsALS })
+    res.render('new_demo_user', {
+        userId: id,
+        recent: recentlyVisited,
+        //contentBased: recsContent,
+        //als: recsALS,
+        recommenders: recommenders
+    });
 })
 
 /* User specific recommendations and dining history */
@@ -72,31 +90,13 @@ app.get('/new_demo/user/:id/:resId',function(req,res){
     var scoreALS = data.getRecAlsScoreSync(id, resId);
     var scoreContent = data.getRecContentScoreSync(id, resId);
     
-    console.log(scoreALS);
-    console.log(scoreContent);
+    //console.log(scoreALS);
+    //console.log(scoreContent);
     // console.log(visited);
     // console.log(cus);
 
     //res.json({userId: id, restaurantId: resId, recent: visited, restaurant: rest})
     res.render('new_demo_res', { userId: id, restaurantId: resId, recent: visited, restaurant: rest })
-})
-
-/* API ports */
-app.get('/recs/:id', function(req, res) {
-    data.readCSV(req.params.id || 0, res);
-});
-
-/* Return all generated recommendations as a JSON */
-app.get('/data', function(req, res) {
-	var data = [];
-	var filepath = path.join(__dirname, 'src/data/Recommendations.csv')
-
-	csv().fromFile(filepath).on('json', function(jsonObj) {
-	    data.push(jsonObj);
-	    
-	}).on('done', function(error) {
-	    res.json(data);
-	})
 })
 
 
