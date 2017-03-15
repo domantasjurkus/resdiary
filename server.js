@@ -81,24 +81,6 @@ app.get('/new_demo/user/:id/:resId',function(req,res){
     res.render('new_demo_res', { userId: id, restaurantId: resId, recent: visited, restaurant: rest })
 })
 
-/* API ports */
-app.get('/recs/:id', function(req, res) {
-    data.readCSV(req.params.id || 0, res);
-});
-
-/* Return all generated recommendations as a JSON */
-app.get('/data', function(req, res) {
-	var data = [];
-	var filepath = path.join(__dirname, 'src/data/Recommendations.csv')
-
-	csv().fromFile(filepath).on('json', function(jsonObj) {
-	    data.push(jsonObj);
-	    
-	}).on('done', function(error) {
-	    res.json(data);
-	})
-})
-
 
 var port = process.env.PORT || 3000;
 http.listen(port, function() {
