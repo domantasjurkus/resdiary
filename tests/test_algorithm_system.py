@@ -7,6 +7,23 @@ from src.recommenders import System as algorithm
 from stubs.stub_algorithm import StubCuisineType
 from src.data import Data
 
+# Do 2 tuples have a common scalar?
+def has_scalar(tpl1, tpl2):
+	if len(tpl1) != len(tpl2):
+		return False
+
+	arr = []
+	for i in range(0, len(tpl1)):
+		# Avoid division by 0 by adding 1
+		arr.append((tpl1[i]+1.0)/(tpl2[i]+1.0))
+
+	# Convert list to set, if it has one element - scalar found
+	if len(set(arr)) == 1:
+		return True
+
+	return False
+
+
 class SystemAlgorithmTest(BaseTestCase):
 
 	@classmethod
@@ -41,13 +58,12 @@ class SystemAlgorithmTest(BaseTestCase):
 			for val in tpl:
 				self.assertTrue(0<=val and val<=self.maximum_weight)
 
-			# Tuples that are integer multiples of other tuples are not present
+			# Ensure tuples that are integer multiples
+			# of other tuples are not present
 			for tpl2 in weights:
 				if tpl == tpl2:
 					continue
-
-				#print tpl, tpl2
-				
+				self.assertFalse(has_scalar(tpl, tpl2))
 
 		# Bring back stub recommender
 		self.alg.recommenders = temp
