@@ -14,16 +14,8 @@ class ALSTest(BaseTestCase):
 		self.assertTrue(hasattr(self.alg, 'model'))
 		self.assertTrue(type(self.alg.model) in [MatrixFactorizationModel, ALS])
 
-
-	def test02_location(self):
-		# Ensure there are locations returned
-		self.assertTrue(self.alg.location_filtering(
-			self.data.available_restaurants(self.bookings)).count() > 0)
-
-
 	def test03_predict(self):
-		self.alg.predict(self.data.available_restaurants(self.bookings))
-
+		self.alg.predict(self.data.nearby_restaurants(self.bookings))
 
 	@classmethod
 	def tearDownClass(self):

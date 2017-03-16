@@ -7,7 +7,7 @@ def execute_algorithm(args):
 	bookings = data.get_bookings(args['data'])
 	algorithm = algorithms[args['alg'].lower()](sc)
 	algorithm.train(bookings, args['load'])
-	predictions = algorithm.predict(data.available_restaurants(bookings))
+	predictions = algorithm.predict(data.nearby_restaurants(bookings))
 	data.write(args['out'], predictions)
 	
 def evaluate_algorithm(args):

@@ -1,7 +1,10 @@
 import os
-from collections import Counter
+from collections import Counter, defaultdict
+
 from pyspark.sql import SQLContext
+
 from base import Base
+from config import Config
 
 class Data(Base):
     '''Stores all the utility functions related to data handling'''
@@ -24,13 +27,6 @@ class Data(Base):
         DataFrame to the specified CSV file.'''
         df.toPandas().to_csv(filename, index=False)
 
-    def get_restaurants_info(self,data):
-        '''Takes a DataFrame of restaurants and returns RDD of ID,Latitude and Longtitude.'''
-        restaurants = {}
-        for row in data.collect():
-            restaurants[row['RestaurantId']] = [ float(row['Lat']),  float(row['Lon'])]
-        return restaurants
-
     def get_bookings_with_score(self, data):
         '''Takes a DataFrame of bookings and returns an RDD of Rating objects
         constructed from bookings that have non-null review scores.'''
@@ -38,12 +34,44 @@ class Data(Base):
                                         row['Review Score']) for row in
                                        data.collect() if row['Review Score']])
 
-    def available_restaurants(self, bookings):
-        '''Takes a DataFrame of bookings and returns and RDD list of
+    def nearby_restaurants(self, bookings):
+        '''Takes a DataFrame of bookings and returns an RDD list of
         (diner ID, restaurant ID) tuples that represent reasonable restaurant
-        choices for each user. A temporary hack until the real deal is
-        finished.'''
-        return self.get_bookings_with_score(bookings).map(lambda r: (r[0], r[1]))
+        choices for each user.'''
+        data_transform = Data(self.spark)
+        data_dir  = Config.get("DEFAULT", "data_dir", str)
+        lat_diff  = Config.get("DEFAULT", "lat_diff", float)
+        long_diff = Config.get("DEFAULT", "long_diff", float)
+        restaurant_file = Config.get('DEFAULT', 'restaurant_file', str)
+        restaurants  = data_transform.read(
+            os.path.join(data_dir, restaurant_file)).collect()
+
+        # maps each restaurant to its location expressed as a (lat, lon) tuple
+        restaurants_info = dict((row['RestaurantId'], (float(row['Lat']),
+                                                       float(row['Lon'])))
+                                for row in restaurants)
+
+        # maps each restaurant to a set of nearby restaurants
+        nearby_restaurants = defaultdict(set)
+        for i, current_restaurant in enumerate(restaurants):
+            for r in restaurants[i:]:
+                if (abs(current_restaurant['Lat'] - r['Lat']) < lat_diff and
+                    abs(current_restaurant['Lon'] - r['Lon']) < long_diff):
+                    current = current_restaurant['RestaurantId']
+                    nearby_restaurants[current].add(r['RestaurantId'])
+                    nearby_restaurants[r['RestaurantId']].add(current)
+
+        recommendations = defaultdict(set)
+        for booking in bookings.collect():
+            current_restaurant = restaurants_info.get(booking['Restaurant Id'],
+                                                      None)
+            if current_restaurant:
+                nearby = nearby_restaurants[booking['Restaurant Id']]
+                recommendations[booking['Diner Id']] |= nearby
+        return self.spark.parallelize([
+            (diner, restaurant)
+            for diner, restaurants in recommendations.iteritems()
+            for restaurant in restaurants])
 
     def filter_outliers(self, df):
         '''Takes a DataFrame of bookings and returns a new DataFrame without

@@ -44,7 +44,7 @@ def evaluate(spark, model, bookings_data):
     partial_data = spark.parallelize(partial_data)
     model.train(SQLContext(spark).createDataFrame(partial_data,
                                                   schema=bookings_data.schema))
-    recommendations = model.predict(data.available_restaurants(bookings_data))
+    recommendations = model.predict(data.nearby_restaurants(bookings_data))
 
     # Edge case - consider returning None
     if not recommendations:
