@@ -33,6 +33,37 @@ class Recommender(Base):
         Recommendation(userID, restaurantID, score).'''
         raise NotImplementedError("Don't use this class, extend it")
 
+    def location_filtering(self,data):
+        data_transform = Data(self.spark)
+        data_dir  = Config.get("DEFAULT", "data_dir", str)
+        lat_diff  = Config.get("DEFAULT", "lat_diff", float)
+        long_diff = Config.get("DEFAULT", "long_diff", float)
+        recommendations = []
+        existing_pairs = {}
+        restaurants  = data_transform.read(data_dir + "uk_restaurants.csv")
+        restaurants_info = data_transform.get_restaurants_info(restaurants)
+        restaurants = self.spark.parallelize([( row['RestaurantId'],
+                                        row['Lat'],row['Lon'],row['PricePoint']) for row in
+                                       restaurants.collect()])
+        nearby_restaurants = {}
+        restaurants = restaurants.collect()
+        for current_restaurant in restaurants:
+            nearby_restaurants[current_restaurant[0]] = []
+            for r in restaurants:
+                if (abs(abs(current_restaurant[1]) - abs(r[1])) < lat_diff ) and (abs(abs(current_restaurant[2]) - abs(r[2])) < long_diff):
+                    nearby_restaurants[current_restaurant[0]].append(r[0])
+
+        for pair in data.collect():
+            if not existing_pairs.get(pair[0],None):
+                existing_pairs[pair[0]] = []
+            current_restaurant = restaurants_info.get(pair[1],None)
+            if current_restaurant:
+                for restaurant in nearby_restaurants[pair[1]]:
+                    if restaurant not in existing_pairs[pair[0]]:
+                        recommendations.append((pair[0],restaurant))
+                        existing_pairs[pair[0]].append(restaurant)
+        return self.spark.parallelize(recommendations)
+
 class System(Recommender):
     '''Combines other recommenders to issue the final recommendations for each
     user.'''
@@ -133,31 +164,8 @@ class ALS(Recommender):
                 shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
 
-    def location_filtering(self,data):
-        data_transform = Data(self.spark)
-        data_dir = Config.get("DEFAULT", "data_dir", str)
-        lat_diff =  Config.get("DEFAULT", "lat_diff", float)
-        long_diff = Config.get("DEFAULT", "long_diff", float)
-        recommendations = []
-
-        restaurants  = data_transform.read(data_dir + "Restaurant.csv")
-        restaurants_info = data_transform.get_restaurants_info(restaurants)
-        restaurants = self.spark.parallelize([( row['RestaurantId'],
-                                        row['Lat'],row['Lon']) for row in
-                                       restaurants.collect()])
-        for pair in data.collect():
-            current_restaurant = restaurants_info.get(pair[1],None)
-            if current_restaurant:
-                temp_restaurants = restaurants.filter(lambda r:(
-                    (abs(current_restaurant[0]) - abs(r[1]) < lat_diff )) and
-                    (abs(current_restaurant[1]) - abs(r[2]) < long_diff)) 
-                temp_recs = self.spark.parallelize([pair[0]]).cartesian(temp_restaurants.map(lambda r: r[0]))
-                recommendations.extend(temp_recs.collect())
-
-        return self.spark.parallelize(recommendations)
-
     def predict(self, data):
-        recommendations = self.location_filtering(data).distinct()
+        recommendations = super(ALS, self).location_filtering(data)
         predictions = self.model.predictAll(recommendations)
         schema = ['userID', 'restaurantID', 'score']
         return SQLContext(self.spark).createDataFrame(predictions, schema)
@@ -241,7 +249,7 @@ class ImplicitALS(ALS):
         # transform that data into an RDD and train the model
         data = [(diner, restaurant, score) for diner, counter in data.items()
                 for restaurant, score in counter.iteritems()]
-
+                
         super(ImplicitALS, self).train(data,load)
 
     def predict(self, data):
@@ -277,12 +285,14 @@ class CuisineType(Recommender):
     def predict(self, diners_restaurants):
         # score is the number of cuisines that the diner and the restaurant
         # have in common
+        diners_restaurants = super(CuisineType, self).location_filtering(diners_restaurants).collect()
         recommendations = [(diner, restaurant,
                             len(self.restaurant_cuisine[restaurant] &
                                 self.liked_cuisine[diner]))
-                           for diner, restaurant in diners_restaurants.collect()]
+                           for diner, restaurant in diners_restaurants]
+        recommendations =  self.spark.parallelize(recommendations).filter(lambda r: r[2] != 0)
         return SQLContext(self.spark).createDataFrame(
-            self.spark.parallelize(recommendations), Config.get_schema())
+           recommendations, Config.get_schema())
 
 class PricePoint(Recommender):
     '''For each diner, generates recommendations based on the average price
@@ -326,8 +336,9 @@ class PricePoint(Recommender):
             if self.diner_average_price_point else default_price_point)
 
     def predict(self, diners_restaurants):
+        diners_restaurants = super(PricePoint, self).location_filtering(diners_restaurants).collect()
         recommendations = []
-        for diner, restaurant in diners_restaurants.collect():
+        for diner, restaurant in diners_restaurants:
             restaurant_price_point = self.restaurant_price_point.get(
                 restaurant, self.restaurant_default_price_point)
             diner_price_point = self.diner_average_price_point.get(
