@@ -154,9 +154,9 @@ class ALS(Recommender):
         testdata = test_ratings.map(lambda r: (r[0],r[1]))
         best_model = []
 
-        for rank in range(5,100):
-            for iterations in range(5,100):
-                for alpha in self.frange(0.01,1.00,0.01):
+        for rank in range(8,9,10):
+            for iterations in range(300,301,10):
+                for alpha in self.frange(0.11,0.12,0.02):
                     model_location = "models/{name}/{rank}-{iterations}-{alpha}".format(
                         name=recommender_name, rank=rank, iterations=iterations, alpha=alpha)
                     model_exists = os.path.isdir(model_location)
