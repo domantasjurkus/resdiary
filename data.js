@@ -82,7 +82,7 @@ module.exports = {
     getRandomUsersSync: function(num) {
         // Get users from the System recommender
         // These will surely have plenty of recommendations to show
-        var bookingsFile = fs.readFileSync('./data/recs_explicitals.csv', 'utf8');
+        var bookingsFile = fs.readFileSync('./data/recs_system.csv', 'utf8');
         var bookings = parse(bookingsFile, {}); 
         var users = [];
         for (i=0; i<num; i++) {

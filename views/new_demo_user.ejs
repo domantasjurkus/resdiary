@@ -100,7 +100,9 @@
                                     </a>
                                     <p>Location : <%=res.Restaurant.Town %></p>
                                     <p>Cuisine Type: <%=res.CuisineType %></p>
-                                    <p>Recommended by: ALS || Score: <%=res.RecScore %></p>
+                                    <% if (recommender.name != "system") { %>
+                                        <p>Recommendation score: <%=parseFloat(res.RecScore).toFixed(2)%></p>
+                                    <% } %>
                                 </div>
                             </div>
                         <% }); %>
