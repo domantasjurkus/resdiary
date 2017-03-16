@@ -26,7 +26,6 @@ def evaluate(spark, model, bookings_data):
             continue
         
         first_test_index = int(num_bookings * Config.get("DEFAULT", "training_percent", float))
-        #first_test_index = num_bookings / 2\
         if first_test_index == num_bookings-1:
             first_test_index -= 1
 
@@ -58,8 +57,7 @@ def evaluate(spark, model, bookings_data):
             right += 1
     return float(right) / total
 
-def calculate_mse(actual,predictions):
+def calculate_mse(actual, predictions):
     actual = actual.map(lambda r: ((r[0], r[1]), r[2]))
-    ratesAndPreds = actual.join(predictions)
-    MSE = ratesAndPreds.map(lambda r: (r[1][0] - r[1][1])**2).mean()
-    return MSE
+    rates_and_preds = actual.join(predictions)
+    return rates_and_preds.map(lambda r: (r[1][0] - r[1][1])**2).mean()

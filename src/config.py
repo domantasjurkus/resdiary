@@ -40,6 +40,16 @@ class Config: # pragma: no cover
                 Config.save_changes()
 
         @staticmethod
+        def set_hyperparameters(recommender, parameters):
+                '''Takes the name of the recommender
+                (ImplicitALS or ExplicitALS) and a dictionary mapping
+                hyperparameter names to their optimal values and writes them to
+                the config file.'''
+                for name, value in parameters.items():
+                        Config.rcfg.set(recommender, name, str(value))
+                Config.save_changes()
+
+        @staticmethod
         def save_changes():
                 '''Saves changes to the file. All set methods call this helper
                 function. It's more efficient this way.'''
