@@ -55,14 +55,9 @@ The abstract shall go here! Here is some things to keep in mind while writing it
 
 The Professional Software Development (PSD3) course at The University of Glasgow requires students to engage with the practices and methodologies used in modern large-scale software engineering. The purpose of this dissertation is to document the development of the software project created as part of this course by Team I. 
 
+% ---------- A ----------
 The project was to build, over the course of several months, a recommendation engine for the Glasgow-based company ResDiary.
 The main deliverable was a system capable of producing sensible restaurant recommendations for existing ResDiary users; a system that could be integrated into the existing ResDiary platform at a later date. 
-% Do we delay mentioning the integration at this stage? - Joseph?
-% Do mention integration, it solidifies the idea that
-% what we made will actually be used - Dom
-
-% Do we make it clear here it was recommendations based on similar users? - Joseph?
-% Probably not - technical details like these should go later - Dom
 
 Our team consisted of six third-year Computing Science students. Within the group there was a broad range of skills, interests and experience - with two members actively working as software professionals, and another having participated in an internship. For some members, however, this was a first opportunity to interact with a real client. 
 
@@ -77,6 +72,9 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 \newpage
 
 % ################# Comment Log ####################
+% 	A. 	We mention the integration but the final 
+%		state of the system is for it to be used
+%		as a proof of concept / prototype by RD.		<--	Joseph 
 % ##################################################
 
 %==============================================================================
@@ -153,7 +151,7 @@ Initial nonfunctional requirements (!!! subsection !!!):
 \item User and restaurant locations should be interpreted using coordinates rather than city  name as those are of arbitrary precision within the dataset.
 \end{itemize}
 
-A set of user stories (ranked by priority) which were then subdivided into individual tasks was also provided in addition a proposed high-level system UML diagram (!R! REFERENCE UML DIAGRAM !R!) and a step-by-step workflow of how the system would generate recommendations. Due to the customer’s ambiguous vision for the final state of the system, the proposed system to be built left it intentionally vague in this regard to allow for flexibility in the customer’s vision of the final state of the system. Instead the emphasis was to build and produce the most accurate recommendation for a given user.
+A set of user stories (ranked by priority) which were then subdivided into individual tasks was also provided in addition a proposed high-level system UML diagram (!R! REFERENCE UML DIAGRAM !R!) and a step-by-step workflow of how the system would generate recommendations. Due to the customer’s ambiguity regarding the final state of the system, the proposed endpoint for the system was left intentionally vague to allow for flexibility in the customer’s vision. Instead the emphasis was to build and produce the most accurate recommendation for a given user.
 
 % ################# Comment Log ####################
 % If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point - we did it pretty well though there isn't much to improve in that regard
@@ -168,9 +166,11 @@ A set of user stories (ranked by priority) which were then subdivided into indiv
 % NOTE:			Needs cutting down page count 
 % ##################################################
 
-Presenting our proposal to the customer they felt we had a good understanding of their view for the system. They agreed with the proposed functional requirements and could envision how our high level system would operate and integrate with their existing one. Concern was expressed though with the proposed response rate as the customer felt the need to further clarify the volume of data the system would be expected to work with in a real world deployment. The suggestion of a nightly build system was made as this was their expected from the system would operate under in a real world setting. Additionally, the customer expressed particular interest in the high level system and the ability to potentially “fine tune” the system by altering the significance place on individual recommenders. In addition they also suggested developing a lightweight front end application to display the recommendations. They rationalised its throwaway nature with the with the belief that such an application would help them to better understand the system, assist with demonstrating the functionality of the system and provide a clear indication of if the system could produce sensible results. 
+% The suggested alternative was to use a nightly build system which the team would utilise in the final version of the system (!R! REFERENCE TO SPARK REFLECTION !R!).
 
-Incorporating this this feedback into the specification  the team felt the need to revise the nonfunctional requirements of the project. This saw the removal of the aforementioned “1 second local response rate” (!R! REFERENCE ORIGINAL NONFUNCTIONAL REQUIREMENTS !R!) and the introduction of the following two requirements:
+Presenting our proposal to the customer, they felt we had a good grasp of their vision as they agreed with the proposed functional requirements and could envision how our high level system would operate and integrate into their existing one. In particular they expressed interest in the potential to “fine tune” the system through altering the significance place on individual recommenders. Concern was expressed though with the (!!! proposed response rate / local computation of recommendations !!!) as the customer felt the need to further clarify the volume of data the system would be expected to work with in a real world deployment. The suggested alternative was to use a nightly build system as this was their expected from the system would operate under in a real world setting. In addition they suggested developing a lightweight front end application to display the recommendations. They rationalised its throwaway nature with the with the belief that such an application would help them to better understand the system, assist with demonstrating the functionality of the system and provide a clear indication of if the system could produce sensible results. 
+
+Incorporating this this feedback into the specification  the team felt the need to revise the nonfunctional requirements of the project. This saw the removal of the aforementioned “1 second local response rate” (!R! REFERENCE ORIGINAL NONFUNCTIONAL REQUIREMENTS !R!) in place of the following two requirements:
 
 \begin{itemize}
 \item Provided the data is not stored locally, the system should be setup to allow for nightly updates to the recommendations made.
@@ -178,34 +178,20 @@ Incorporating this this feedback into the specification  the team felt the need 
 reviews, etc.
 \end{itemize}
 
-Furthermore a soft goal was set up within the team to produce a front end application to showcase the recommendation system. While some of the team believed this justified being defined within the specification the majority instead felt the focus of the project should be on creating the most accurate recommendations and delay defining a suitable end state until the customer had themselves defined their intended use for the system. Should the customer not provide clarity earlier it was decided to press on this issue during the scheduled January 26th meeting and define a agreed handover state for the project.
+Furthermore a soft goal developed within the team to produce a front end application to showcase the recommendation system. While some of the team felt this justified being defined within the specification the majority instead felt the focus of the project should be on creating the most accurate recommendations and delay defining an end state until it was defined by the customer. Should the customer not provide clarity earlier it was decided to press for clarity on this issue during the scheduled January 26th meeting and define a agreed handover state for the project.
+
+Prior to the January meeting the development efforts were split between the creation of this throwaway application and on the long term solution to the problem. The prototype system was also used during an interim meeting on December 7th where the technical decisions of the long term solution discussed at length as they were being finalised and implementation of them commenced (!R! REFERENCE TECHNICAL REFLECTIONS !R!).  
 
 % ################# Comment Log ####################
 % If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point - we did it pretty well though there isn't much to improve in that regard
 % ##################################################
 
-\subsection{Technical Research \& Prototyping}
-\label{sec:techresearchproto}
+% \subsection{Technical Research \& Prototyping}
+% \label{sec:techresearchproto}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
-% NOTE:         Technical Research Primarily Comes From That Section of Presentation
-% NOTE:			Prototyping can be mentioned
-% NOTE:			Statistical filter (feature discovery) can be mentioned
+% NOTE:         Perhaps best to merge with above subsection
 % ##################################################
-
-% Probably needs complete rewrite but use parts in later sections
-A significant portion of the development time between the November 16th and January 26th customer meetings devoted, at the customer’s request, to the creation of a simple throwaway prototype in order to give the customer a general idea of how we would showcase the application to them. This prototype presented at an interim meeting on December 7th, while a naive solution to the problem, proved an excellent opportunity for familiarisation with the datasets the team would be working with throughout the project. As ResDiary currently do not operate with one all encompassing database, the data was provided in various separate csv files which we used in addition to a schema document provided by ResDiary to create a model of the data as can be seen below:
-
-One particular observation made at this stage was the compromised nature of some of the ResDiary data. Within the datasets there exists two primary conditions which result in invalid data, for our purposes, being added to the datasets:
-
-Should the user reschedule their reservation this results in new data being added to the database without the removal of the old data. For example if a user reschedules a 5pm reservation to 6pm then both the 5pm and 6pm reservations are present within the datasets.
-When a pool of reservations are entered into the system by a restaurant this typically results in a user within the dataset who has many (6, 10, etc) reservations for the same restaurant, on the same day, at approximately the same time of day.
-
-While the former’s occurrence was not ideal, the latter the team deduced could be easily addressed through observing the statistical frequency of bookings made over a short period of time.
-
-Performing this statistical analysis on the initial data set which included 1735 users was reduced down to 1562 users. This is shown in Figure (!!! reference above image !!!)  as a typical user will make reservations at a rate which exceeds 1 booking per second. The expected average booking per second rate for a user would likely be much lower than 1 booking per second. However as a proof of concept in combating the invalid data and as a means of reducing the quantity of data for computation of the system the above proposal gave a good baseline from which to work.
-
-In addition to the prototype’s creation the team also began development work on the longer term solution for the system. This included a familiarisation period and switchover to the Apache Spark framework which was to be utilised to efficiently process potentially massive quantities of data. This changeover was to replicate the nightly build system desired by the customer in addition to the benefits of vastly increased processing speeds and scalability concerns. Further details regarding the reasoning for selecting this service and the impact of it are discussed at length in Section (!!! reference Spark choice reflection section !!!) . In addition the evaluation system for different recommenders was set up and a first attempt at a collaborative filtering model implemented. This switchover to Apache Spark and first iterations of the collaborative filter and evaluation system were presented to the customer during the January 26th meeting.
 
 % ################# Comment Log ####################
 % ##################################################
@@ -219,7 +205,7 @@ In addition to the prototype’s creation the team also began development work o
 % NOTE:			Needs cutting down page count 
 % ##################################################
 
-Upon presenting the progress made at the January 26th meeting the team pressed the customer regarding what their vision of the final state of the system. Through this discussion it became clear the customer wished to view the project as “proof-of-concept” with their intended use being to assess the worth of creating a similar system for their existing system. Additionally they wished to learn from the system, as they have little experience in this particular field,and should they believe a similar system to be of use to their business they wished to use our system as a prototype to justify the development resources required. 
+Upon presenting the progress made at the January 26th meeting the team pressed the customer regarding what their vision of the final state of the system. Through this discussion it became clear the customer wished to view the project as “proof-of-concept” with their intended use being to assess the worth of creating a similar system for their existing system. Additionally they wished to learn from the system, as they have little experience in this particular field, and should they believe a similar system to be of use to their business they wished to use our system as a prototype to justify the development resources required. 
 
 With the final handover state of the system known, the team decided a redesign of the front end of the application was necessary. (!R! TIE IN / REFERENCE BENEFITS OF STARTING AFRESH !R!). The primary justification for the redesign coming through an observation made while giving the demonstration at the January 26th meeting to a non-technical member of the ResDiary team. Through this non-technical perspective it was clear that the system was not properly communicating the recommendations being made as it was unclear to a non-technical user how the system generally operated, if it was functioning correctly and if the results it produced were sensible. As the end state of the system was now clearly defined end state the following functional requirements were discovered and added to the project with the aim of producing a front end redesign which visually showed the system was operating correctly and producing accurate predictions:
 
@@ -346,7 +332,7 @@ Misc Points:
 \item Lack of code reviews meant that the code often had inconsistent styling.
 \item Lack of code reviews meant a significant portion of time was spent fixing or altering other people's code to work with parts of the system they did not realise they had broken.
 \item Lack of code reviews meant code which was WIP was deleted prior to it being fully implemented into the system - again lack of branching issue somewhat.
-\item Suggested at the first retrospective but ended up avoiding. Would have reduced a number of 'problems' with development cycle but you can't be perfect.
+\item Suggested at the first retrospective but ended up avoiding. Would have reduced a number of problems with development cycle but you can't be perfect.
 \item Highlighted in retrospective 3 with the code integration being highlighted.
 \item Highlighted even more in retrospective 4 with code integration really being highlighted.
 \end{itemize}
