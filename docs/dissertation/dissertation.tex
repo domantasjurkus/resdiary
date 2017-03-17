@@ -331,7 +331,8 @@ Changing to a more structured development system did have an effect on productiv
 % ################# Comment Log ####################
 % ##################################################
 
-\subsection{REFLECTION POINT - Code Reviews \& Branching}
+
+\subsection{REFLECTION POINT - Code Reviews \& Branching \& Pair Programming}
 \label{sec:codereviewbranch}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
@@ -348,10 +349,57 @@ Misc Points:
 \item Suggested at the first retrospective but ended up avoiding. Would have reduced a number of problems with development cycle but you can't be perfect.
 \item Highlighted in retrospective 3 with the code integration being highlighted.
 \item Highlighted even more in retrospective 4 with code integration really being highlighted.
+\item Reference potential methods or strategies for code reviews which could have integrated into the development.
+\item Reference how other and often professional developers recommend doing code reviews.
+\item Mention that pair programming was conducted and the benefits of doing it. Mention it should have been conducted more frequently, reference that it was beneficial when suggesting if XP was potentially better than Scrum.
+\item Code reviews might have improved development efficency as less time spent refactoring and fixing broken code. Reduced arguments caused due to deleting other people's code prior to full implementation. Branching also would have fixed this as only get back to master upon passing all tests. This would require testing to have been more efficent as well thus suggesting test strategy should have been utilised to improve test efficency.
 \end{itemize}
 
 % ################# Comment Log ####################
 % ##################################################
+
+
+\subsection{REFLECTION POINT - Python}
+\label{sec:pyreflection}
+% ##################################################
+% LAST EDIT:  15/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ##################################################
+Misc Points:
+\begin{itemize}
+\item What alternatives did we consider - C Sharp / Scala
+\item What were the benefits of using it - already familiar / libraries / industry standard
+\item The choice of Python is mentioned in a retrospective as the choice was slow and not well discussed and we just jumped into it - how did we ensure this did not occur with other major technical decisions
+\item Did Python influence other later choices - Spark, etc.
+\item What were the limitations of using Python
+\item Was using Python the correct choice in the long term 
+\item Reference papers and libarires to justify why Python 
+\end{itemize}
+
+% ################# Comment Log ####################
+% ##################################################
+
+
+\subsection{REFLECTION POINT - Models}
+\label{sec:modelreflection}
+% ##################################################
+% LAST EDIT:  15/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ##################################################
+Misc Points:
+\begin{itemize}
+\item Explain why collaborative filter
+\item Explain why content based filter
+\item Reference papers and other models (Netflix) to justify choice
+\item What were the limits of the models - customer asked to only retrain on new data but limit of model disallows this - need for specific type of data that is not always present within the data set.
+\item Did we choose the right models
+\item Did the models impact later decisions
+\item Probably suggest some alternative models which could have been explored
+\end{itemize}
+
+% ################# Comment Log ####################
+% ##################################################
+
 
 \subsection{REFLECTION POINT - Apache Spark}
 \label{sec:sparkreflection}
@@ -363,6 +411,13 @@ Misc Points:
 \begin{itemize}
 \item Team decided the entire team should spend time over Christmas playing around with Apache Spark to ensure common understanding of the system between team members. This may not have been the best use of resource and instead team could have split earlier and the front end developers not bothered playing around with it as they did not end up touching it directly during the development of the project. 
 \item Common knowledge was gained though but a more typical front end, back end split in focus may have been beneficial and resulted in an improved front end application sooner.
+\item Why was the decision made to use Spark?
+\item Did any previous decisions (models / languages / tools) influence our choice of Spark
+\item What were the alternatives to using Spark
+\item What were the benefits of using it?
+\item What were the limitations of using it?
+\item Was Spark the right choice?
+\item What impact did deciding to use Spark have on the project?
 \end{itemize}
 
 % ################# Comment Log ####################
@@ -380,10 +435,12 @@ Misc note from section 2:
 While this particular feature had been viewed as a bonus feature from the outset of development the team felt based on the customer’s feedback that the customers were not particularly interested in such a feature. Research conducted earlier had shown that making recommendations of this type were primarily a search based recommendation whereas the customer’s interests lay instead in recommendations based on similarity between users. As such the development resources were instead focused on the aforementioned goals of producing a more accurate collaborative and content based recommendation system and the production of a high quality front end to professionally display system output. 
 \begin{itemize}
 \item Recommendation reasons dropped due to lack of time.
-\item Proof of better than random suggestions.
+\item Proof of better than random suggestions also dropped.
+\item New user recommendations dropped due to feature creep as it was not the customers desire and we suggested it and added it to the project. Additionally it is not a recommendation made off similarity between users rather a search based filter. This was found during research phase and development halted there which was good.
 \end{itemize}
 % ################# Comment Log ####################
 % ##################################################
+
 
 \subsection{REFLECTION POINT - Communication Breakdown \& Task Backlog}
 \label{sec:communicationbreakdown}
@@ -408,6 +465,7 @@ Misc Notes:
 
 % ################# Comment Log ####################
 % ##################################################
+
 
 \subsection{REFLECTION POINT - MISC POINTS FROM PSD NOTES}
 \label{sec:miscpsd}
