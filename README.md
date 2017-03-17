@@ -52,3 +52,9 @@ ssh -L 8000:130.209.251.67:80 -L 8080:130.209.251.67:8080 <yourGUID>@sibu.dcs.gl
 - NOTE: The PDF itself should not be stored in the repository.  
 
 Deadline:  Friday 31st March 2017
+
+
+### Configuration
+- Training ranges for ALS recommenders. Adjust them if the optimal value is very close to the min or max range value. Max should always be strictly greater than min because the grid search interval is [min, max).
+- The minimum review score from a booking for a cuisine type to be considered liked.
+- Default price point to use if there is not enough data to calculate averages (only used in exceptional circumstances with very little data).
