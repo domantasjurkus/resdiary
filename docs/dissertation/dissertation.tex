@@ -84,7 +84,7 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 % A description of the case study background and context. This should include a description of the project customer (what was the nature of the organisation you were working for), their objectives for the project, and a summary of what was actually achieved. Where appropriate, this section should also make reference to similar related projects in order to make the context clear (approximately 4-5 pages).
 
 % ##################################################
-% LAST EDIT: 	15/03/17	Dom
+% LAST EDIT: 	18/03/17	Josh
 % ##################################################
 \subsection{Customer}
 \label{sec:customer}
@@ -96,7 +96,7 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 % Who are ResDiary?
 ResDiary are a Glasgow-based online restaurant reservation service; a commercial organisation providing a comprehensive, easy to use booking and table management platform for use by the hospitality industry. The company provides 24-hour reservation services through both social media and their own booking portal ResDiary.com. Diners can browse restaurants, book tables and place reviews. Restaurants can access tools which let them optimize their yields, manage their reservations and attract new diners. Their global service sees 9.7 million bookings every month, and their platform is used by over 6,500 restaurants across 58 countries. 
 
-ResDiary senior software engineers Adam Connelly and Ian Strachan acted as customer representatives throughout the duration of the project. They helped us understand the company line-of-thought behind the project, in addition to providing useful feedback, answering queries and supplying the team with the anonymised ResDiary booking data we required.
+ResDiary senior software engineers Adam Connelly and Ian Strachan acted as customer representatives throughout the duration of the development. They helped us understand the company line-of-thought behind the project, in addition to providing useful feedback, answering queries and supplying the team with the anonymised ResDiary booking data we required.
 
 % ################# Comment Log ####################
 % Mention their names? you sure? - Dom
@@ -105,8 +105,10 @@ ResDiary senior software engineers Adam Connelly and Ian Strachan acted as custo
 % ##################################################
 
 % ##################################################
-% LAST EDIT: 	15/03/17	Joseph
+% LAST EDIT: 	18/03/17    JOSH
 % NOTE: 		Reference papers on Amazon / Netflix Models / Netflix Prize
+% NOTE:         Added more specifics on Netflix Recommendations - make sure to tie in to our final output
+%               Need to demonstrate that the research was RELEVANT
 % ##################################################
 \subsection{Customer Objectives And Rationale}
 \label{sec:custobjectives}
@@ -118,9 +120,11 @@ The initial customer meeting occurred on October 19th and was led by Ian Stracha
 
 As such, therefore, the company is exploring potential ways to exploit this vast quantity of valuable data. The developers had conducted some research into the area, and discovered that none of their competitors currently offer a restaurant recommendation service within their booking platform. Thus, if they were able to develop a system which would make recommendations to users based on their previous dining habits and similarity to other users, they would gain a competitive edge. It would also help increase restaurant discovery on their platform, which is beneficial to both restaurants and potential clientele. 
 
-The inspiration of the idea stems from the similar system provided by services such as Amazon and Netflix (!R! REFERENCE PAPERS ON NETFLIX AND AMAZON RECOMMENDATIONS MODELS !R!). The Netflix model in particular being the closest reference point for the system they wish to replicate due the similarity between making recommendations based on a user’s history and similarity to other users. As a starting point for our own research into creating such a system they suggested looking into the 2009 Netflix Prize competition (!R! REFERENCE SECTION ON RESEARCH INTO SIMILAR SYSTEMS AND HOW WE ARRIVED AT OUR MODEL !!!). The goal of this competition was to produce the best algorithm which could most accurately predict a user’s rating of a film based on previous ratings and no other additional information about the users or the films. This they felt would be a good starting point for the development of such a system.
+The inspiration for the idea stems from the similar system provided by online services such as Amazon and Netflix, which push recommended products and films respectively to their users. The Netflix model, in particular, was the closest reference point for the system they wished to develop. A parallel between making recommendations based on a user's film history and their similarity to other users, and a similar recommendation engine using ResDiary's dining history is easy to see. As a starting point for our own research, they suggested looking into the Netflix Prize - a competition held by Netflix starting in 2006 challenging participants to better their own recommendation algorithm. 
 
-While the primary focus of our project was to be the development of the recommendation system, time was spent discussing what the customer viewed as the end state of the system, whether it be integration into the existing ResDiary portal or as a proof of concept prototype. As the customer was currently undecided in this regard, partly due to an internal transition in development technologies, they elucidated our initial aim should be to focus on the creation of the recommendation system as the end state was currently susceptible to change. The decision regarding the final state of the project ultimately would not be made until midway through the development cycle (!R! REFERENCE TO FINAL DECISION STATE OF SYSTEM SECTION !R!) when the customer decided to view the project as the latter of the two initially proposed systems.
+The goal of the algorithm was to accurately predict a user's rating of a film based solely on previous user ratings and no additional information about either the users or films. A set of training data (a subset of Netflix's real user data) with half a million user ratings was provided to participants, with the algorithm using this data to predict user ratings for a disjoint subset of the data. No information other than user ID, film ID and date of rating was provided. Our Resdiary project followed a similar structure. ResDiary's users, as with Netflix's, leave review scores ranging from 1 to 5. We were given a subset of their user data which we split into further subsets for training and for evaluation. The research provided an excellent springboard from which to launch our own collaborative filtering model. With such a strong similarity between the requirements of our system and theirs, it was a natural choice.
+
+We also spent time discussing what the customer viewed as the end state of the system - whether it would be integreated into the existing ResDiary portal or whether the output would suffice as a proof-of-concept prototype. They were initially undecided in this regard, partially due to an internal transition in their own development frameworks, and thus suggested our initial aim should be to focus on the creation of the recommendation engine. The decision regarding the final state of the project ultimately would not be made until midway through the development cycle when the customer decided to view the project as simply a proof-of-concept. Nonetheless, at all points during development, due consideration was given to the future integration of our system with ResDiary. 
 
 % ################# Comment Log ####################
 % ##################################################
