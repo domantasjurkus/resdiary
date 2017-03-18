@@ -58,6 +58,6 @@ def evaluate(spark, model, bookings_data):
     return float(right) / total
 
 def calculate_mse(actual, predictions):
-    actual = actual.map(lambda r: ((r[0], r[1]), r[2]))
-    rates_and_preds = actual.join(predictions)
+    actual = actual.rdd.map(lambda r: ((r[0], r[1]), r[2]))
+    rates_and_preds = actual.join(predictions.rdd)
     return rates_and_preds.map(lambda r: (r[1][0] - r[1][1])**2).mean()

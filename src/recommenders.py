@@ -72,7 +72,7 @@ class System(Recommender):
                 key=lambda r: r[1])
 
         # put the recommendations into an appropriate format
-        top_recommendations = [(user, restaurant, score)
+        top_recommendations = [(user, restaurant, float(score))
                                for user, restaurants in recommendations.items()
                                for restaurant, score in restaurants]
         return SQLContext(self.spark).createDataFrame(top_recommendations,
@@ -111,29 +111,34 @@ class System(Recommender):
         return weights
 
 class ALS(Recommender):
+
+    __metaclass__ = ABCMeta
     
-    def train(self, bookings, load=False):
-        recommender_name = str(type(self).__name__)
-        r = Config.get(recommender_name, "rank")
-        i = Config.get(recommender_name, "iterations")
-        l = Config.get(recommender_name, "lambda", float)
-        self.spark.setCheckpointDir("./checkpoints/")
-        
-        model_location = "models/{name}/{rank}-{iterations}-{alpha}".format(
-            name=recommender_name, rank=r, iterations=i, alpha=l)
+    def train(self, bookings, parameters=None, load=False):
+        recommender_name = type(self).__name__
+        if parameters is None:
+            parameters = dict((name, Config.get(recommender_name, name, t))
+                              for name, t in [('rank', int),
+                                              ('iterations', int),
+                                              ('lambda', float)])
+        model_location = "models/{}/".format(recommender_name) + '-'.join(
+            map(str, parameters.values()))
 
         model_exists = os.path.isdir(model_location)
         if load and model_exists:
-            self.model = MatrixFactorizationModel.load(self.spark, model_location)
+            self.model = MatrixFactorizationModel.load(self.spark,
+                                                       model_location)
         else:
-            if str(recommender_name) == "ExplicitALS":
-                self.model = SparkALS.train(bookings, r, i, l)
-            elif str(recommender_name) == "ImplicitALS":
-                self.model = SparkALS.trainImplicit(self.spark.parallelize(bookings), r,
-                                                    i, alpha=l, nonnegative=True)
+            self.model = self.create_model(bookings, parameters)
             if model_exists:
                 shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
+
+    @abstractmethod
+    def create_model(self, bookings, parameters):
+        '''Takes a DataFrame of bookings and a dictionary of parameters
+        Returns a trained model.'''
+        raise NotImplementedError("Each subclass should extend this")
 
     def predict(self, data):
         return SQLContext(self.spark).createDataFrame(
@@ -146,45 +151,26 @@ class ALS(Recommender):
         x += jump
 
     def learn_hyperparameters(self, bookings): # pragma: no cover
-        self.spark.setCheckpointDir("./checkpoints/")
-        recommender_name = str(type(self).__name__)
-        data_transform = Data(self.spark)
-        bookings = data_transform.get_bookings_with_score(bookings)
+        bookings = Data(self.spark).get_bookings_with_score(bookings)
         data, test_ratings = bookings.randomSplit([0.8, 0.2])
-        testdata = test_ratings.map(lambda r: (r[0], r[1]))
+        testdata = test_ratings.rdd.map(lambda r: (r[0], r[1]))
         best_mse = float('inf')
-        parameters = ['rank', 'iterations', 'lambda']
+        parameter_names = ['rank', 'iterations', 'lambda']
         types = [int, int, float]
         range_values = [(Config.get('DEFAULT', 'min_' + parameter, t),
                          Config.get('DEFAULT', 'max_' + parameter, t),
                          Config.get('DEFAULT', parameter + '_step', t))
-                        for parameter, t in zip(parameters, types)]
-        for model in map(lambda v: dict(zip(parameters, v)),
-                         product(*range_values)):
-            model_location = "models/{name}/{rank}-{iterations}-{alpha}".format(
-                name=recommender_name, rank=model['rank'],
-                iterations=model['iterations'], alpha=model['lambda'])
-            model_exists = os.path.isdir(model_location)
-
-            if recommender_name == "ExplicitALS":
-                self.model = SparkALS.train(data, *model.values())
-            elif recommender_name == "ImplicitALS":
-                self.model = SparkALS.trainImplicit(data, model['rank'],
-                                                    model['iterations'],
-                                                    alpha=model['lambda'],
-                                                    nonnegative=True)
-            if model_exists:
-                shutil.rmtree(model_location)
-                self.model.save(self.spark, model_location)
-
-            predictions = self.model.predictAll(testdata).map(
-                lambda r: ((r[0], r[1]), r[2]))
+                        for parameter, t in zip(parameter_names, types)]
+        for parameters in map(lambda v: dict(zip(parameter_names, v)),
+                              product(*range_values)):
+            self.train(data, parameters)
+            predictions = self.predict(testdata)
             mse = calculate_mse(test_ratings, predictions)
             if mse < best_mse:
-                best_model = model
+                best_parameters = parameters
                 best_mse = mse
         if best_mse < float('inf'):
-            Config.set_hyperparameters(recommender_name, best_model)
+            Config.set_hyperparameters(type(self).__name__, best_parameters)
 
 class ExplicitALS(ALS):
     '''Generates recommendations based on review data.'''
@@ -193,9 +179,12 @@ class ExplicitALS(ALS):
         if not isinstance(bookings, DataFrame):
             raise TypeError('Recommender requires a DataFrame')
 
-        data = Data(self.spark)
-        ratings = data.get_bookings_with_score(bookings)
-        super(ExplicitALS, self).train(ratings,load)
+        super(ExplicitALS, self).train(
+            Data(self.spark).get_bookings_with_score(bookings), load=load)
+
+    def create_model(self, bookings, parameters):
+        return SparkALS.train(bookings, parameters['rank'],
+                              parameters['iterations'], parameters['lambda'])
 
 class ImplicitALS(ALS):
     '''Generates recommendations based on how many times a diner visited a
@@ -213,7 +202,13 @@ class ImplicitALS(ALS):
         data = [(diner, restaurant, score) for diner, counter in data.items()
                 for restaurant, score in counter.iteritems()]
                 
-        super(ImplicitALS, self).train(data,load)
+        super(ImplicitALS, self).train(self.spark.parallelize(data), load=load)
+
+    def create_model(self, bookings, parameters):
+        return SparkALS.trainImplicit(bookings, parameters['rank'],
+                                      parameters['iterations'],
+                                      alpha=parameters['lambda'],
+                                      nonnegative=True)
 
 class CuisineType(Recommender):
     '''Generates recommendations based on a diner's prefered cuisine types.'''

@@ -515,9 +515,37 @@ Misc Notes:
 \item (Lecture 7) Perhaps burn down charts per sprints would have been a good idea and would have improved prediction of task completion, backlog management, communication and prioritisation of backlog tasks.
 \end{itemize}
 
+
+\subsection{REFLECTION POINT - Testing}
+\label{testing}
+% ##################################################
+% LAST EDIT:  16/03/17  Dom
+% NOTE:       TODO
+% ##################################################
+A suite of unit tests was written to ensure that each commit did not break the execution of the project.
+
+% What testing model was used?
+
+% Was it easy/hard to test and why?
+
+The unit tests were set up to run on Jenkins, a continuous integration environment.
+Jenkins was set up to push notifications to the team's communication channel whenever a test case would fail. This enabled early notification of issues, allowing the team to patch up bugs early on.
+Jenkins also provided coverage reports for the source files, indicating the percentage of classes, conditionals and lines covered.
+Overlap between testing and evaluation.
+Although there were considerations on testing the front-end portion of the project, it was agreed that such tests were not essential for the presentation of the recommendations.
+
+Integration testing:
+The System recommender was tested in conjunction with other recommenders for integration.
+
+Regressiong testing:
+A regression test for hyperparameter learning was written.
+
+What could have been improved:
+A notable shortcoming was that tests were not written under any particular testing strategy. This lead to the discovery of several modules missing tests cases, and some tests using untested modules. Following a stricter test plan would have led to more systematic test development, allowing to uncover the beforementioned problems earlier.
+Mutation tests were considered but not used.
+
 % ################# Comment Log ####################
 % ##################################################
-
 
 \subsection{REFLECTION POINT - MISC POINTS FROM PSD NOTES}
 \label{sec:miscpsd}

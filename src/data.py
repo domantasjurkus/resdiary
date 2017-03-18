@@ -28,11 +28,12 @@ class Data(Base):
         df.toPandas().to_csv(filename, index=False)
 
     def get_bookings_with_score(self, data):
-        '''Takes a DataFrame of bookings and returns an RDD of Rating objects
-        constructed from bookings that have non-null review scores.'''
-        return self.spark.parallelize([(row['Diner Id'], row['Restaurant Id'],
-                                        row['Review Score']) for row in
-                                       data.collect() if row['Review Score']])
+        '''Takes a DataFrame of bookings and returns an DataFrame of Rating
+        objects constructed from bookings that have non-null review scores.'''
+        return data.filter(
+            data['Review Score'].isNotNull()).select('Diner Id',
+                                                     'Restaurant Id',
+                                                     'Review Score')
 
     def nearby_restaurants(self, bookings):
         '''Takes a DataFrame of bookings and returns an RDD list of
