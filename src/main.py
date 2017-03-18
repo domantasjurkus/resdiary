@@ -6,7 +6,7 @@ from config import Config
 def execute_algorithm(args):
 	bookings = data.get_bookings(args['data'])
 	algorithm = algorithms[args['alg'].lower()](sc)
-	algorithm.train(bookings, args['load'])
+	algorithm.train(bookings, load=args['load'])
 	predictions = algorithm.predict(data.nearby_restaurants(bookings))
 	data.write(args['out'], predictions)
 	
@@ -57,6 +57,7 @@ if __name__ == "__main__":
 
 	sc = SparkContext('local[*]','Recommendation engine')
 	sc.setLogLevel("ERROR")
+        sc.setCheckpointDir("./checkpoints/")
 	data = Data(sc)
 
 	algorithms = dict([(s.lower(), eval(s)) for s in Config.rcfg.sections()])
