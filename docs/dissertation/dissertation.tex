@@ -266,7 +266,7 @@ As for the general structure of Section 3 the way I envision it. Regarding the o
 \item Communication and Task Backlog - communication came up again and again in retrospectives and so should feature.
 \item Code Reviews - code reviews came up and were the thing our project really lacked as far as markers are concerned. Would also have prevented several issues the team faced during the development process.
 \item Scrum vs XP / etc - was using the Scrum system the correct system? This I feel leads naturally into the conclusion from the third section as its a reflection that can tie in the other reflection points as well. Ties them all together and leads out of the reflection section somewhat naturally.
-\end{itemize}
+\end{itemize} 
 
 
 Start by stating that the team decided to use the Scrum methodology and reference reflection point of if this was the correct system to use. Potentially give iteration overview (short summary of each iteration) with either a mini-reflection or reference to further reflection point for all key points which occurred.
@@ -280,6 +280,26 @@ Start by stating that the team decided to use the Scrum methodology and referenc
 \item ETC
 \item ETC
 \end{itemize}
+
+
+\subsection{REFLECTION POINT - Requirements Engineering}
+\label{sec:teamstructure}
+% ##################################################
+% LAST EDIT:  18/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ##################################################
+
+In this regard I believe the team did fairly well as we had a good grasp of the customer's expectations and desire for the system. We made some suggestions that they themselves had not though of (rerecommend locations / new user recommendations via quiz / restrictions on recommendations (i.e. only recommend vegan or restaurants)) though the majority of the suggested additional features did not see implementation due to poor time management for some and striving too far away from the customer's vision for others.
+
+\begin{itemize}
+\item (Lecture 13) Requirements gathering is an on-going iterative process that runs concurrently alongside requirements analysis and capture - our project saw this in real effect due to the changing nature of the requirements of our project.
+\item (Lecture 14) Requirements engineering is an iterative process of elicitation, capture and validation - talk about how we did this to ensure we were gathering the correct requirements.
+\item (Lecture 3) Causes of software project failing - building system for wrong reason, building the wrong system, building the system wrong. We could tie in the dropped new user recommendation to a proposed goal which was later determined to be a requirement which would be built for the wrong reason. As such the feature was dropped to avoid building an incorrect system.
+\end{itemize}
+
+% ################# Comment Log ####################
+% ##################################################
+
 
 \subsection{FINAL REFLECTION POINT - Scrum vs XP - Was Scrum The Right Choice}
 \label{sec:scrumvsxp}
@@ -324,6 +344,9 @@ Reasons for the failure of the anarchy include the following reasons:
 \item Failure to fully understand domain - anarchy structures require huge expertise of the problem domain which regardless of how smart you are you cannot gain a grasp of in a few weeks. There’s a reason we pay for years worth of experience in a field / industry.
 \item Motivation took a hit over Christmas (it was the holidays)
 \item Lack of trust between team as this was the first time we worked together as a team on a long term project.
+\item (Lecture 6) The sports model of role based development structure - the team adopted this model in the second half of development.
+\item (Lecture 6) Are any of the other models such as Laissez-faire suitable?
+\item (Lecture 6 / Lecture 7) The team paid measure to the Mythical Man Month text in order to avoid too many cooks entering the back end development after the team split to focus on the front and back end split.
 \end{itemize}
 
 Changing to a more structured development system did have an effect on productivity (testing improved - we actually had some, front end redesign was rad, more defined roles resulted in better communication within the team)
@@ -353,9 +376,34 @@ Misc Points:
 \item Reference how other and often professional developers recommend doing code reviews.
 \item Mention that pair programming was conducted and the benefits of doing it. Mention it should have been conducted more frequently, reference that it was beneficial when suggesting if XP was potentially better than Scrum.
 \item Code reviews might have improved development efficency as less time spent refactoring and fixing broken code. Reduced arguments caused due to deleting other people's code prior to full implementation. Branching also would have fixed this as only get back to master upon passing all tests. This would require testing to have been more efficent as well thus suggesting test strategy should have been utilised to improve test efficency.
+\item (Lecture 26) Outline of inspection methods - should probably mention which we should have used in the code reviews.
+\item (Lecture 8) Change management and the conflicts caused from developers working in parallel and contributions are made to the master branch which are not fully implemented or break some aspect of the system. In hindsight this probably should have justified a separate branch which would be integrated into the master upon passing all of the tests with a successful build in Jenkins the continuous integration system.
 \end{itemize}
 
 % ################# Comment Log ####################
+% ##################################################
+
+
+\subsection{REFLECTION POINT - Technical Overview Section}
+\label{sec:techoverviewreflection}
+% ##################################################
+% LAST EDIT:  18/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ##################################################
+I see this being an overview of the technical decision making process with the three major technical decisions (Dev Language, Models, Spark) being sub-categories and reflection points to themselves. This is mainly concerned with the process of making decisions as a whole (the Python decison was made poorly according to a retrospective whereas the others were not). Very brief but might flow into the technical section better.
+
+Technical decisions are a major factor of the development cycle, especially for a project such as ours, here is generally how we did it and here we present the three major techical standpoints of our project and reflect on the specifics of those individually...
+
+\begin{itemize}
+\item (Lecture 13) Avoid early commitments to particular design solutions during requirements elicitation - there are dangerous assoicated with early commitment to the wrong design decision. We were at risk of that so spent the time at the outset ensuring we were developing the right system based off our research of the various models.
+\end{itemize}
+
+% ################# Comment Log ####################
+% Perhaps this will go but I like the idea of a
+% short transision reflection to bridge the gap
+% technical reflection and process reflections.
+% This is sort of a hybird reflection that is both
+% technical and non-technical.
 % ##################################################
 
 
@@ -437,6 +485,7 @@ While this particular feature had been viewed as a bonus feature from the outset
 \item Recommendation reasons dropped due to lack of time.
 \item Proof of better than random suggestions also dropped.
 \item New user recommendations dropped due to feature creep as it was not the customers desire and we suggested it and added it to the project. Additionally it is not a recommendation made off similarity between users rather a search based filter. This was found during research phase and development halted there which was good.
+\item (Lecture 16) Planning poker would have been good to have been played and task cost estimation should have been under constant review as new information is uncovered and work on the project develops - this would have been another use for frequent stand up meetings.
 \end{itemize}
 % ################# Comment Log ####################
 % ##################################################
@@ -476,19 +525,9 @@ Misc Notes:
 This is just a collection of quotes and notes taken from the PSD notes that will likely be included as reflection points. These are some of the key PSD points which we'll need to hit on with the reflections PSD literature.
 \begin{itemize}
 \item (Lecture 10) Continuous integration practices minimise the disruption caused by rapid, concurrent changes to software systems - explain why this was suitable for our purposes, concurrent development of aspects of the system (evaluator and recommender), etc.
-\item (Lecture 13) Avoid early commitments to particular design solutions during requirements elicitation - there are dangerous assoicated with early commitment to the wrong design decision. We were at risk of that so spent the time at the outset ensuring we were developing the right system based off our research of the various models.
-\item (Lecture 13) Requirements gathering is an on-going iterative process that runs concurrently alongside requirements analysis and capture - our project saw this in real effect due to the changing nature of the requirements of our project.
-\item (Lecture 14) Requirements engineering is an iterative process of elicitation, capture and validation - talk about how we did this to ensure we were gathering the correct requirements.
-\item (Lecture 3) Causes of software project failing - building system for wrong reason, building the wrong system, building the system wrong. We could tie in the dropped new user recommendation to a proposed goal which was later determined to be a requirement which would be built for the wrong reason. As such the feature was dropped to avoid building an incorrect system.
-\item (Lecture 6) The sports model of role based development structure - the team adopted this model in the second half of development.
-\item (Lecture 6) Are any of the other models such as Laissez-faire suitable?
-\item (Lecture 6 / Lecture 7) The team paid measure to the Mythical Man Month text in order to avoid too many cooks entering the back end development after the team split to focus on the front and back end split.
 \item (Lecture 7) Perhaps burn down charts per sprints would have been a good idea and would have improved prediction of task completion, backlog management, communication and prioritisation of backlog tasks.
-\item (Lecture 8) Change management and the conflicts caused from developers working in parallel and contributions are made to the master branch which are not fully implemented or break some aspect of the system. In hindsight this probably should have justified a separate branch which would be integrated into the master upon passing all of the tests with a successful build in Jenkins the continuous integration system.
-\item (Lecture 16) Planning poker would have been good to have been played and task cost estimation should have been under constant review as new information is uncovered and work on the project develops - this would have been another use for frequent stand up meetings.
 \item (Lecture 19) Throw-away front end prototype was used and was good as it gave a better understanding of the requirements the front end would require upon it becoming the final state of the system. This knowledge and the discovered failures fed into the redesigned system and so the throw-away prototype was very beneficial to the project. (MINI REFLECTION POINT ?)
 \item (Lecture 19) Prototyping is used to reduce risks caused by uncertainty in software projects, not introduce more risk - to some extent this was done for components of the back end system as well.
-\item (Lecture 26) Outline of inspection methods - should probably mention which we should have used in the code reviews.
 \item (Lecture 30) Formal specification is a specific thing so probably don't just refer to a specification document as being formal loosely.
 \item (Lecture 32) Refactoring is an important process which went on over the course of development.
 \end{itemize}
