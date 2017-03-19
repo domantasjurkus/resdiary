@@ -122,40 +122,42 @@ As such, therefore, the company is exploring potential ways to exploit this vast
 
 The inspiration for the idea stems from the similar system provided by online services such as Amazon and Netflix, which push recommended products and films respectively to their users. The Netflix model, in particular, was the closest reference point for the system they wished to develop. A parallel between making recommendations based on a user's film history and their similarity to other users, and a similar recommendation engine using ResDiary's dining history is easy to see. As a starting point for our own research, they suggested looking into the Netflix Prize - a competition held by Netflix starting in 2006 challenging participants to better their own recommendation algorithm. 
 
-The goal of the algorithm was to accurately predict a user's rating of a film based solely on previous user ratings and no additional information about either the users or films. A set of training data (a subset of Netflix's real user data) with half a million user ratings was provided to participants, with the algorithm using this data to predict user ratings for a disjoint subset of the data. No information other than user ID, film ID and date of rating was provided. Our Resdiary project followed a similar structure. ResDiary's users, as with Netflix's, leave review scores ranging from 1 to 5. We were given a subset of their user data which we split into further subsets for training and for evaluation. The research provided an excellent springboard from which to launch our own collaborative filtering model. With such a strong similarity between the requirements of our system and theirs, it was a natural choice.
+The goal of the algorithm was to accurately predict a user's rating of a film based solely on previous user ratings and no additional information about either the users or films. A set of training data (a subset of Netflix's real user data) with half a million user ratings was provided to participants, with the algorithm using this data to predict user ratings for a disjoint subset of the user data. No information other than user ID, film ID and date of rating was provided. Our Resdiary project followed a similar structure. ResDiary's users, as with Netflix's, leave review scores ranging from 1 to 5. We were given a subset of their user data which we split into further subsets for training and for evaluation. The research provided an excellent springboard from which to launch our own collaborative filtering model. With such a strong similarity between the requirements of our system and theirs, it was a natural choice.
 
 We also spent time discussing what the customer viewed as the end state of the system - whether it would be integreated into the existing ResDiary portal or whether the output would suffice as a proof-of-concept prototype. They were initially undecided in this regard, partially due to an internal transition in their own development frameworks, and thus suggested our initial aim should be to focus on the creation of the recommendation engine. The decision regarding the final state of the project ultimately would not be made until midway through the development cycle when the customer decided to view the project as simply a proof-of-concept. Nonetheless, at all points during development, due consideration was given to the future integration of our system with ResDiary. 
 
 % ################# Comment Log ####################
 % ##################################################
 
-\subsection{Our Initial Objectives}
+\subsection{Project Scoping}
 \label{sec:ourinitobjectives}
 % ##################################################
-% LAST EDIT:  15/03/17  Joseph
-% NOTE:         Needs reworking
-% NOTE:			Needs referencing
-% NOTE:			Needs cutting down page count 
+% LAST EDIT:  18/03/17  Josh
+% NOTE:         JOSH: Expanded on importance of requirements.
+% NOTE:         References: importance of requirements gathering, cost of making corrections 
 % ################################################## 
+The risks and costs associated with a project of this nature demand thorough background investigation and cogent planning before development proper commences. The cost of correcting errors grows enormously in the latter stages of a software project.
 
-Having conducted the requirements elicitation meeting production began on a requirements specification which would serve as the project proposal document to be presented to the client at the next customer meeting on November 16th. This occurred in tandem with conducting the initial necessary background research necessary for the project (!R! REFERENCE BACKGROUND RESEARCH SUBSECTION !R!) due risks and costs associated with a project of this nature (!R! REFERENCE MINI REFLECTION ON IMPORTANCE OF INITIAL REQUIREMENTS GATHERING !R!). The proposal document included the functional and nonfunctional requirements the team agreed upon based on our interpretation of the customer’s initial pitch of the project. Although these would be continually revised and refined as the project developed it was initially proposed for the project to meet the following functional and nonfunctional requirements:
+Our first major task was to formalise our discussions with the client and produce a requirements specification to serve as a project proposal document. The goal was to have a clear outline of the scope of the project and a set of deliverables to present to the client at the next meeting on November 16th. Our requirements gathering occurred in tandem with conducting the necessary initial background research on machine learning and recommendation systems. 
 
-Initial functional requirements (!!! subsection !!!):
+The proposal document included an array of requirements that the team agreed upon, based on our interpretation of the customer's initial project pitch. It was important that our requirements were reasonably comprehensive and realistic, but we accepted that they would be continually revised and refined as the project developed. 
+
+\subsubsection{Initial functional requirements:}
 \begin{itemize}
-\item The recommendation engine must accurately suggest restaurants based on the user’s dining history and similarity to other users with similar eating preferences.
+\item The recommendation engine must accurately suggest restaurants based on the users' dining history and similarity to other users with similar eating preferences.
 \item Recommended restaurants should be in close proximity to where the user typically eats or the geographical location of where they are currently searching.
-\item The recommendation engine may recommend restaurants the user has previously visited should the user optionally select for this to occur.
+\item The recommendation engine may recommend restaurants that  the user has previously visited should the user allow this option.
 \end{itemize}
 
-Initial nonfunctional requirements (!!! subsection !!!):
+\subsubsection{Initial nonfunctional requirements:}
 \begin{itemize}
-\item The engine should be written to allow for easy integration into the existing Resdiary system.
-\item The system should give a response within 1 second after receiving the request (provided data is stored locally).
+\item The engine should be written to allow for easy integration into the existing ResDiary system.
+\item The system should give a response within one second after receiving the request (provided data is stored locally).
 \item New users should be presented an optional quick questionnaire to gather initial data.
-\item User and restaurant locations should be interpreted using coordinates rather than city  name as those are of arbitrary precision within the dataset.
+\item User and restaurant locations should be interpreted using coordinates rather than city name as those are of arbitrary precision within the dataset.
 \end{itemize}
 
-A set of user stories (ranked by priority) which were then subdivided into individual tasks was also provided in addition a proposed high-level system UML diagram (!R! REFERENCE UML DIAGRAM !R!) and a step-by-step workflow of how the system would generate recommendations. Due to the customer’s ambiguity regarding the final state of the system, the proposed endpoint for the system was left intentionally vague to allow for flexibility in the customer’s vision. Instead the emphasis was to build and produce the most accurate recommendation for a given user.
+To help us understand the actual scenarios in which the system might be used, we prepared a set of user stories (ranked by priority). They provided a quick, intuitive way to ensure we had covered all the conceivable use cases the customer may require. We also prepared a high-level system UML diagram and a step-by-step work-flow of how the system would generate the actual recommendations. Due to the customer's ambiguity regarding the final state of the system, the endpoint was left intentionally vague to allow for flexibility. Instead the emphasis was to build and produce the most accurate recommendation for a given user. 
 
 % ################# Comment Log ####################
 % If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point - we did it pretty well though there isn't much to improve in that regard
