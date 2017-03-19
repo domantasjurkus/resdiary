@@ -159,7 +159,7 @@ The proposal document included an array of requirements that the team agreed upo
 To help us understand the actual scenarios in which the system might be used, we prepared a set of user stories (ranked by priority). They provided a quick, intuitive way to ensure we had covered all the conceivable use cases the customer may require. We also prepared a high-level system UML diagram and a step-by-step work-flow of how the system would generate the actual recommendations. Due to the customer's ambiguity regarding the final state of the system, the endpoint was left intentionally vague to allow for flexibility. Instead the emphasis was to build and produce the most accurate recommendation for a given user. 
 
 
-\subsection{Customer Refinements To Initial Objectives}
+\subsection{Refinement of Requirements}
 \label{sec:custrefineinitobj}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
@@ -171,19 +171,25 @@ To help us understand the actual scenarios in which the system might be used, we
 
 % The suggested alternative was to use a nightly build system which the team would utilise in the final version of the system (!R! REFERENCE TO SPARK REFLECTION !R!).
 
-Presenting our proposal to the customer, they felt we had a good grasp of their vision as they agreed with the proposed functional requirements and could envision how our high level system would operate and integrate into their existing one. In particular they expressed interest in the potential to “fine tune” the system through altering the significance place on individual recommenders. Concern was expressed though with the (!!! proposed response rate / local computation of recommendations !!!) as the customer felt the need to further clarify the volume of data the system would be expected to work with in a real world deployment. The suggested alternative was to use a nightly build system as this was their expected from the system would operate under in a real world setting. In addition they suggested developing a lightweight front end application to display the recommendations. They rationalised its throwaway nature with the with the belief that such an application would help them to better understand the system, assist with demonstrating the functionality of the system and provide a clear indication of if the system could produce sensible results. 
+At the November 16th meeting we presented and discussed our project proposal with the customer.
 
-Incorporating this this feedback into the specification  the team felt the need to revise the nonfunctional requirements of the project. This saw the removal of the aforementioned “1 second local response rate” (!R! REFERENCE ORIGINAL NONFUNCTIONAL REQUIREMENTS !R!) in place of the following two requirements:
+They felt we had a good understanding of their vision. They broadly agreed with the proposed requirements and could envision how our high level system would operate (and potentially integrate into their existing one). We briefly explained that there were two major models for building recommendation systems: collaborative-based filtering and content-based filtering. The high level system architecture accounts for this by allowing multiple 'recommenders' to each implement a different approach to producing recommendations. These recommendations are then combined and filtered for the final output. The customer expressed strong interest in the potential of "fine tuning" this system, through altering the significance placed on individual recommenders. 
+
+There were, of course, areas of concern. Our proposed response rate of one second to respond to a request was queried. They felt that they needed to further clarify the volume of data the system would be expected to work with in a real world deployment. This may put a constraint on our ability to realise that performance. We discussed the alternative of using a nightly build system, as this how they expected the system would operate in a real world setting. In addition, they recommended developing a lightweight front-end application to display the recommendations. This would be a lightweight app, rather than any actual integration with their system, but they rationalised its throwaway nature by suggesting it would help them better understand our system, assist with demonstrating its functionality and most importantly provide a clear indication it was producing sensible results. 
+
+We made modifications to the specification document to incorporate the customer feedback. In particular, the team felt the need to revise the non-functional requirements of the project. The disputed "one second local response rate" requirement was rescinded and in its place we inserted two new requirements:
 
 \begin{itemize}
-\item Provided the data is not stored locally, the system should be setup to allow for nightly updates to the recommendations made.
+\item Provided the data is not stored locally, the system should be set up to allow for nightly updates to the recommendations.
 \item Have the ability to “fine tune” the recommendation engine by altering the weighting significance of different components of the recommendation such as distance, price, 
 reviews, etc.
 \end{itemize}
 
-Furthermore a soft goal developed within the team to produce a front end application to showcase the recommendation system. While some of the team felt this justified being defined within the specification the majority instead felt the focus of the project should be on creating the most accurate recommendations and delay defining an end state until it was defined by the customer. Should the customer not provide clarity earlier it was decided to press for clarity on this issue during the scheduled January 26th meeting and define a agreed handover state for the project.
+Furthermore, a soft goal developed within the team to produce a more comprehensive front end application to showcase the recommendation system. While some members felt this justified being included and defined formally within the specification document, the majority instead felt the focus of the project should be on creating the most accurate recommendations. We elected to delay defining an exact end state until the customer clarified exactly what they required. We agreed, eventually, that should clarify not be forthcoming, we would press for clarity on the issue during the scheduled January 26th meeting, and define an agreed handover state for the project. 
 
-Prior to the January meeting the development efforts were split between the creation of this throwaway application and on the long term solution to the problem. The prototype system was also used during an interim meeting on December 7th where the technical decisions of the long term solution discussed at length as they were being finalised and implementation of them commenced (!R! REFERENCE TECHNICAL REFLECTIONS !R!).  
+While some of the team felt this justified being defined within the specification the majority instead felt the focus of the project should be on creating the most accurate recommendations and delay defining an end state until it was defined by the customer. Should the customer not provide clarity earlier it was decided to press for clarity on this issue during the scheduled January 26th meeting and define a agreed handover state for the project. 
+
+Thus, prior to this meeting, development efforts were split between the creation of a prototype system (which implemented a basic content-based filtering model) and on the long-term solution (with multiple recommenders) to the project. The prototype system was demonstrated during an interim meeting on December 7th, where the technical decisions of the long term solution were discussed at length. Following this meeting, implementation of the system proper commenced. 
 
 
 % \subsection{Technical Research \& Prototyping}
