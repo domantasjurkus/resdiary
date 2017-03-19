@@ -15,7 +15,7 @@
         Paulius Dilkas \\
         Domantas Jurkus \\
         Eduard Kalfov \\
-        Josh O'brien \\
+        Josh O'Brien \\
 		Joseph O'Hagan}
 
 \date{31st March 2017}
@@ -24,6 +24,7 @@
 
 % ##################################################
 % LAST EDIT: 	06/03/17	Joseph
+% ################# Comment Log ####################
 % ##################################################
 \begin{abstract}
 The abstract shall go here! Here is some things to keep in mind while writing it.
@@ -48,6 +49,10 @@ The abstract shall go here! Here is some things to keep in mind while writing it
 
 % ##################################################
 % LAST EDIT: 	06/03/17	Josh
+% ################# Comment Log ####################
+% 	A. 	We mention the integration but the final 
+%		state of the system is for it to be used
+%		as a proof of concept / prototype by RD.		<--	Joseph 
 % ##################################################
 \section{Introduction}
 \label{sec:intro}
@@ -71,23 +76,19 @@ In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we 
 
 \newpage
 
-% ################# Comment Log ####################
-% 	A. 	We mention the integration but the final 
-%		state of the system is for it to be used
-%		as a proof of concept / prototype by RD.		<--	Joseph 
-% ##################################################
-
 %==============================================================================
 
 \section{Case Study Background}
 \label{sec:background}
 % A description of the case study background and context. This should include a description of the project customer (what was the nature of the organisation you were working for), their objectives for the project, and a summary of what was actually achieved. Where appropriate, this section should also make reference to similar related projects in order to make the context clear (approximately 4-5 pages).
 
-% ##################################################
-% LAST EDIT: 	18/03/17	Josh
-% ##################################################
 \subsection{Customer}
 \label{sec:customer}
+% ##################################################
+% LAST EDIT: 	18/03/17	Josh
+% ################# Comment Log ####################
+% ##################################################
+
 % The customer organisation and background.
 
 % Here we want answer the question of who are ResDiary and what do they do.
@@ -98,20 +99,17 @@ ResDiary are a Glasgow-based online restaurant reservation service; a commercial
 
 ResDiary senior software engineers Adam Connelly and Ian Strachan acted as customer representatives throughout the duration of the development. They helped us understand the company line-of-thought behind the project, in addition to providing useful feedback, answering queries and supplying the team with the anonymised ResDiary booking data we required.
 
-% ################# Comment Log ####################
-% Mention their names? you sure? - Dom
-%	-> Other dissertations did it so sure - Joseph
-% Served as SLAVES - Dom
-% ##################################################
 
+\subsection{Customer Objectives And Rationale}
+\label{sec:custobjectives}
 % ##################################################
 % LAST EDIT: 	18/03/17    JOSH
 % NOTE: 		Reference papers on Amazon / Netflix Models / Netflix Prize
 % NOTE:         Added more specifics on Netflix Recommendations - make sure to tie in to our final output
 %               Need to demonstrate that the research was RELEVANT
+% ################# Comment Log ####################
 % ##################################################
-\subsection{Customer Objectives And Rationale}
-\label{sec:custobjectives}
+
 % The rationale and initial objectives for the project.
 
 % Initial Meeting and the customer's motivation for the project.
@@ -126,16 +124,17 @@ The goal of the algorithm was to accurately predict a user's rating of a film ba
 
 We also spent time discussing what the customer viewed as the end state of the system - whether it would be integreated into the existing ResDiary portal or whether the output would suffice as a proof-of-concept prototype. They were initially undecided in this regard, partially due to an internal transition in their own development frameworks, and thus suggested our initial aim should be to focus on the creation of the recommendation engine. The decision regarding the final state of the project ultimately would not be made until midway through the development cycle when the customer decided to view the project as simply a proof-of-concept. Nonetheless, at all points during development, due consideration was given to the future integration of our system with ResDiary. 
 
-% ################# Comment Log ####################
-% ##################################################
-
 \subsection{Project Scoping}
 \label{sec:ourinitobjectives}
 % ##################################################
 % LAST EDIT:  18/03/17  Josh
 % NOTE:         JOSH: Expanded on importance of requirements.
 % NOTE:         References: importance of requirements gathering, cost of making corrections 
-% ################################################## 
+% ################# Comment Log ####################
+% If required (page count) maybe cut down requirements engineering and incorporating customer 
+% feedback in reflection point - we did it pretty well though so there wasn't much to improve
+% ##################################################
+
 The risks and costs associated with a project of this nature demand thorough background investigation and cogent planning before development proper commences. The cost of correcting errors grows enormously in the latter stages of a software project.
 
 Our first major task was to formalise our discussions with the client and produce a requirements specification to serve as a project proposal document. The goal was to have a clear outline of the scope of the project and a set of deliverables to present to the client at the next meeting on November 16th. Our requirements gathering occurred in tandem with conducting the necessary initial background research on machine learning and recommendation systems. 
@@ -159,9 +158,6 @@ The proposal document included an array of requirements that the team agreed upo
 
 To help us understand the actual scenarios in which the system might be used, we prepared a set of user stories (ranked by priority). They provided a quick, intuitive way to ensure we had covered all the conceivable use cases the customer may require. We also prepared a high-level system UML diagram and a step-by-step work-flow of how the system would generate the actual recommendations. Due to the customer's ambiguity regarding the final state of the system, the endpoint was left intentionally vague to allow for flexibility. Instead the emphasis was to build and produce the most accurate recommendation for a given user. 
 
-% ################# Comment Log ####################
-% If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point - we did it pretty well though there isn't much to improve in that regard
-% ##################################################
 
 \subsection{Customer Refinements To Initial Objectives}
 \label{sec:custrefineinitobj}
@@ -169,7 +165,8 @@ To help us understand the actual scenarios in which the system might be used, we
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Needs reworking
 % NOTE:			Needs referencing
-% NOTE:			Needs cutting down page count 
+% ################# Comment Log ####################
+% If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point
 % ##################################################
 
 % The suggested alternative was to use a nightly build system which the team would utilise in the final version of the system (!R! REFERENCE TO SPARK REFLECTION !R!).
@@ -188,17 +185,12 @@ Furthermore a soft goal developed within the team to produce a front end applica
 
 Prior to the January meeting the development efforts were split between the creation of this throwaway application and on the long term solution to the problem. The prototype system was also used during an interim meeting on December 7th where the technical decisions of the long term solution discussed at length as they were being finalised and implementation of them commenced (!R! REFERENCE TECHNICAL REFLECTIONS !R!).  
 
-% ################# Comment Log ####################
-% If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point - we did it pretty well though there isn't much to improve in that regard
-% ##################################################
 
 % \subsection{Technical Research \& Prototyping}
 % \label{sec:techresearchproto}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Perhaps best to merge with above subsection
-% ##################################################
-
 % ################# Comment Log ####################
 % ##################################################
 
@@ -208,7 +200,7 @@ Prior to the January meeting the development efforts were split between the crea
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Needs reworking
 % NOTE:			Needs referencing
-% NOTE:			Needs cutting down page count 
+% ################# Comment Log ####################
 % ##################################################
 
 Upon presenting the progress made at the January 26th meeting the team pressed the customer regarding what their vision of the final state of the system. Through this discussion it became clear the customer wished to view the project as “proof-of-concept” with their intended use being to assess the worth of creating a similar system for their existing system. Additionally they wished to learn from the system, as they have little experience in this particular field, and should they believe a similar system to be of use to their business they wished to use our system as a prototype to justify the development resources required. 
@@ -227,20 +219,22 @@ Nonfunctional
 
 With the addition of the above requirements the decision was made in the aftermath of the January 26th meeting to drop the proposed nonfunctional requirement of implementing recommendations for new users. A more detailed account into this decision can be found in Section (!R! REFERENCE DROPPED FEATURE REFLECTION POINT !R!) though the general belief was that such a feature was of particular interest to the customer and thus should be dropped from the intended implementation of the project.
 
+
+\subsection{Delivered Software}
+\label{sec:finsoftware}
+% ##################################################
+% LAST EDIT: 	06/03/17	Joseph
 % ################# Comment Log ####################
 % ##################################################
 
-% ##################################################
-% LAST EDIT: 	06/03/17	Joseph
-% ##################################################
-\subsection{Delivered Software}
-\label{sec:finsoftware}
 % Information on the final software that was delivered to the customer.
+In Section \ref{sec:ourinitobjectives} we discuss the specifics of Netflix Recommendations and the Netflix Prize competition so we need to make sure to tie this, the influence and similarity between that system and our final output. 
+
+Additionally we need to demonstrate that the research conducted was RELEVANT.
+
 This section can only be written after the software is in its final handover state.
 \newpage
 
-% ################# Comment Log ####################
-% ##################################################
 
 %==============================================================================
 \section{Alice}
@@ -252,12 +246,14 @@ This is a example of how to include an image from the figures directory.
 
 This is an example of how to reference an inlcuded figure (see Figure \ref{fig:alice}).
 
+
 %==============================================================================
 \section{Reflections}
 \label{sec:reflections}
 % ##################################################
 % LAST EDIT: 	14/03/17	Joseph
 % NOTE:	Currently misc. thoughts / notes
+% ################# Comment Log ####################
 % ##################################################
 
 % Several sections that reflect on your experiences during the team project. Each section should discuss one theme, characterised by incidents or events that occurred during the team course of the project from which you learned (approximately 12-15 pages).
@@ -283,7 +279,6 @@ Start by stating that the team decided to use the Scrum methodology and referenc
 \item Front end redesign - throwaway code and prototyping (MINI REFLECTION)
 \item Pair Programming - reference to reflection point 
 \item ETC
-\item ETC
 \end{itemize}
 
 
@@ -292,6 +287,7 @@ Start by stating that the team decided to use the Scrum methodology and referenc
 % ##################################################
 % LAST EDIT:  18/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
 
 In this regard I believe the team did fairly well as we had a good grasp of the customer's expectations and desire for the system. We made some suggestions that they themselves had not though of (rerecommend locations / new user recommendations via quiz / restrictions on recommendations (i.e. only recommend vegan or restaurants)) though the majority of the suggested additional features did not see implementation due to poor time management for some and striving too far away from the customer's vision for others.
@@ -304,16 +300,15 @@ Potential spin here is to say that the team realised the importance of the requi
 \item (Lecture 3) Causes of software project failing - building system for wrong reason, building the wrong system, building the system wrong. We could tie in the dropped new user recommendation to a proposed goal which was later determined to be a requirement which would be built for the wrong reason. As such the feature was dropped to avoid building an incorrect system.
 \end{itemize}
 
-% ################# Comment Log ####################
-% ##################################################
-
 
 \subsection{FINAL REFLECTION POINT - Scrum vs XP - Was Scrum The Right Choice}
 \label{sec:scrumvsxp}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
+
 This would be a reflection on using the Scrum system in comparison to another system such as Extreme Programming which might have been more suited to our project given its vague nature at the start and would also have helped combat the issues of code reviews / testing.
 
 We ended up with this weird cross system that was mainly Scrum.
@@ -328,15 +323,13 @@ Misc points:
 \item Scrum has no engineering practices whereas our project definitely should have. XP would have forced pair programming from the start (rather than sporadic occurrences within sprints), ensured better, more thorough testing from an earlier stage in the project and avoided the whole code review “you deleted all my code you bastard” arguments.
 \end{itemize}
 
-% ################# Comment Log ####################
-% ##################################################
-
 
 \subsection{REFLECTION POINT - Team Structure}
 \label{sec:teamstructure}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
 
 REFLECTION POINT - Anarchy into Structure (Team Structure)
@@ -358,16 +351,15 @@ Reasons for the failure of the anarchy include the following reasons:
 
 Changing to a more structured development system did have an effect on productivity (testing improved - we actually had some, front end redesign was rad, more defined roles resulted in better communication within the team)
 
-% ################# Comment Log ####################
-% ##################################################
-
 
 \subsection{REFLECTION POINT - Code Reviews \& Branching \& Pair Programming}
 \label{sec:codereviewbranch}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
+
 We did not do code reviews and this resulted in some ‘tensions’ during the development of the project. Code reviews from the start of the development would have been beneficial for many reasons (see papers).
 
 Misc Points:
@@ -388,31 +380,25 @@ Misc Points:
 \item Pair programming done for design / initial coding of front end of application. Similarly done for aspects of the back end development of the project - well somewhat pair programming where one guy would bounce ideas and assist another in the structure and functionality of that particular aspect of the project. Potential spin for the front end is that a more experienced front end developer Josh worked with a less expereienced developer Joseph and the benefits of this (see note on pair programming on wiki somewhere for similar argument)
 \end{itemize}
 
-% ################# Comment Log ####################
-% ##################################################
-
 
 \subsection{REFLECTION POINT - Technical Overview Section}
 \label{sec:techoverviewreflection}
 % ##################################################
 % LAST EDIT:  18/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
+% Perhaps this will go but I like the idea of a short transision reflection to bridge the gap technical reflection and process reflections.
+% This is sort of a hybird reflection that is both technical and non-technical.
 % ##################################################
+
 I see this being an overview of the technical decision making process with the three major technical decisions (Dev Language, Models, Spark) being sub-categories and reflection points to themselves. This is mainly concerned with the process of making decisions as a whole (the Python decison was made poorly according to a retrospective whereas the others were not). Very brief but might flow into the technical section better.
 
 Technical decisions are a major factor of the development cycle, especially for a project such as ours, here is generally how we did it and here we present the three major techical standpoints of our project and reflect on the specifics of those individually...
 
 \begin{itemize}
 \item (Lecture 13) Avoid early commitments to particular design solutions during requirements elicitation - there are dangerous assoicated with early commitment to the wrong design decision. We were at risk of that so spent the time at the outset ensuring we were developing the right system based off our research of the various models.
+\item Demonstrate that the research conducted was relevant
 \end{itemize}
-
-% ################# Comment Log ####################
-% Perhaps this will go but I like the idea of a
-% short transision reflection to bridge the gap
-% technical reflection and process reflections.
-% This is sort of a hybird reflection that is both
-% technical and non-technical.
-% ##################################################
 
 
 \subsection{REFLECTION POINT - Python}
@@ -420,7 +406,9 @@ Technical decisions are a major factor of the development cycle, especially for 
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
+
 Misc Points:
 \begin{itemize}
 \item What alternatives did we consider - C Sharp / Scala
@@ -430,10 +418,8 @@ Misc Points:
 \item What were the limitations of using Python
 \item Was using Python the correct choice in the long term 
 \item Reference papers and libarires to justify why Python 
+\item Demonstrate that the research conducted was relevant
 \end{itemize}
-
-% ################# Comment Log ####################
-% ##################################################
 
 
 \subsection{REFLECTION POINT - Models}
@@ -441,7 +427,9 @@ Misc Points:
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
+
 Misc Points:
 \begin{itemize}
 \item Explain why collaborative filter
@@ -451,10 +439,9 @@ Misc Points:
 \item Did we choose the right models
 \item Did the models impact later decisions
 \item Probably suggest some alternative models which could have been explored
+\item Demonstrate that the research conducted was relevant
+\item Tie in the Netflix competetion and Netflix model as referenced in \ref{sec:initcustobjectives}
 \end{itemize}
-
-% ################# Comment Log ####################
-% ##################################################
 
 
 \subsection{REFLECTION POINT - Apache Spark}
@@ -462,8 +449,9 @@ Misc Points:
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
-Misc Points:
+
 \begin{itemize}
 \item Team decided the entire team should spend time over Christmas playing around with Apache Spark to ensure common understanding of the system between team members. This may not have been the best use of resource and instead team could have split earlier and the front end developers not bothered playing around with it as they did not end up touching it directly during the development of the project. 
 \item Common knowledge was gained though but a more typical front end, back end split in focus may have been beneficial and resulted in an improved front end application sooner.
@@ -474,10 +462,8 @@ Misc Points:
 \item What were the limitations of using it?
 \item Was Spark the right choice?
 \item What impact did deciding to use Spark have on the project?
+\item Demonstrate that the research conducted was relevant
 \end{itemize}
-
-% ################# Comment Log ####################
-% ##################################################
 
 
 \subsection{REFLECTION POINT - Dropping Features}
@@ -485,6 +471,7 @@ Misc Points:
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
 
 Misc note from section 2:
@@ -495,8 +482,6 @@ While this particular feature had been viewed as a bonus feature from the outset
 \item New user recommendations dropped due to feature creep as it was not the customers desire and we suggested it and added it to the project. Additionally it is not a recommendation made off similarity between users rather a search based filter. This was found during research phase and development halted there which was good.
 \item (Lecture 16) Planning poker would have been good to have been played and task cost estimation should have been under constant review as new information is uncovered and work on the project develops - this would have been another use for frequent stand up meetings.
 \end{itemize}
-% ################# Comment Log ####################
-% ##################################################
 
 
 \subsection{REFLECTION POINT - Communication Breakdown \& Task Backlog}
@@ -504,7 +489,9 @@ While this particular feature had been viewed as a bonus feature from the outset
 % ##################################################
 % LAST EDIT:  16/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
+
 This was an issue which occurred throughout most of the retrospectives.
 
 Misc Notes:
@@ -525,54 +512,79 @@ Misc Notes:
 \subsection{REFLECTION POINT - Testing}
 \label{testing}
 % ##################################################
-% LAST EDIT:  16/03/17  Dom
+% LAST EDIT:  19/03/17  Joseph
 % NOTE:       TODO
+% ################# Comment Log ####################
 % ##################################################
+
 A suite of unit tests was written to ensure that each commit did not break the execution of the project.
 
-% What testing model was used?
-
+% Was a testing model used?
+% Should a testing model have been used?
+% Why was testing important for this project?
+% When did the testing process start in the development cycle? 
 % Was it easy/hard to test and why?
+% Discuss why continuous integration was particularly important for the project
+% Would a TDD test strategy have been suitable?
+% Would the XP test strategy have been suitable?
+% Are there test strategies specifically for machine learning projects which could have been followed
+% Could we have used test scenarios with and determined the levels of outcomes are acceptable for each scenario
+% Could we have set objective acceptance criteria and established the amount of error you and your users are willing to accept
+% What statistical level of confidence do we have regarding the accuracy of the system in relation to our conducted testing
+
+% Should our testing have better utilised statisical measures in relation to the system accuracy
+
+% Could the testing have provided internal feedback on the efforts of the application. First, evaluate the application according to the acceptance criteria. Second, be prepared to support those assertions in statistical terms; for example, be 95 percent confident that the application will produce an answer within a given range. Last, have a high-level understanding of the underpinnings of the application, so that any deficiencies might be able to be ascribed to a particular application component.
+
+
+% TODO: READ THE FOLLOWING AND NOTE ANY IDEAS
+% http://pages.cs.wisc.edu/~dpage/cs760/evaluating.pdf
+% 
+
+Talk about why testing was significant for this project.
+
+\begin{itemize}
+\item (Lecture 10) Continuous integration practices minimise the disruption caused by rapid, concurrent changes to software systems - explain why this was suitable for our purposes, concurrent development of aspects of the system (evaluator and recommender), etc - Testing / Code Reviews
+\item Overlap between testing and evaluation.
+\item Although there were considerations on testing the front-end portion of the project, it was agreed that such tests were not essential for the presentation of the recommendations.
+\item Integration testing: The System recommender was tested in conjunction with other recommenders for integration.
+\item Regression testing: A regression test for hyperparameter learning was written.
+\item Mutation tests were considered but not used.
+\end{itemize}
 
 The unit tests were set up to run on Jenkins, a continuous integration environment.
 Jenkins was set up to push notifications to the team's communication channel whenever a test case would fail. This enabled early notification of issues, allowing the team to patch up bugs early on.
 Jenkins also provided coverage reports for the source files, indicating the percentage of classes, conditionals and lines covered.
-Overlap between testing and evaluation.
-Although there were considerations on testing the front-end portion of the project, it was agreed that such tests were not essential for the presentation of the recommendations.
-
-Integration testing:
-The System recommender was tested in conjunction with other recommenders for integration.
-
-Regressiong testing:
-A regression test for hyperparameter learning was written.
 
 What could have been improved:
 A notable shortcoming was that tests were not written under any particular testing strategy. This lead to the discovery of several modules missing tests cases, and some tests using untested modules. Following a stricter test plan would have led to more systematic test development, allowing to uncover the beforementioned problems earlier.
-Mutation tests were considered but not used.
 
-% ################# Comment Log ####################
-% ##################################################
 
 \subsection{REFLECTION POINT - MISC POINTS FROM PSD NOTES}
 \label{sec:miscpsd}
 % ##################################################
 % LAST EDIT:  16/03/17  Joseph
 % NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
 % ##################################################
+
 This is just a collection of quotes and notes taken from the PSD notes that will likely be included as reflection points. These are some of the key PSD points which we'll need to hit on with the reflections PSD literature.
 \begin{itemize}
-\item (Lecture 10) Continuous integration practices minimise the disruption caused by rapid, concurrent changes to software systems - explain why this was suitable for our purposes, concurrent development of aspects of the system (evaluator and recommender), etc <-- Testing / Code Reviews
 \item (Lecture 19) Throw-away front end prototype was used and was good as it gave a better understanding of the requirements the front end would require upon it becoming the final state of the system. This knowledge and the discovered failures fed into the redesigned system and so the throw-away prototype was very beneficial to the project. (MINI REFLECTION POINT ?)
 \item (Lecture 19) Prototyping is used to reduce risks caused by uncertainty in software projects, not introduce more risk - to some extent this was done for components of the back end system as well.
 \item (Lecture 30) Formal specification is a specific thing so probably don't just refer to a specification document as being formal loosely.
 \item (Lecture 32) Refactoring is an important process which went on over the course of development.
 \end{itemize}
-% ################# Comment Log ####################
-% ##################################################
+
 
 %==============================================================================
 \section{Conclusions}
 \label{sec:conclusions}
+% ##################################################
+% LAST EDIT:  
+% ################# Comment Log ####################
+% ##################################################
+
 % A conclusion that draws general and wider lessons from the case study (approximately 1-2 pages)
 
 Explain the wider lessons that you learned about software engineering,
