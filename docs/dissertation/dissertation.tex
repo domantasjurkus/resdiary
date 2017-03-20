@@ -297,16 +297,28 @@ Start by stating that the team decided to use the Scrum methodology and referenc
 \subsection{REFLECTION POINT - Requirements Engineering}
 \label{sec:teamstructure}
 % ##################################################
-% LAST EDIT:  19/03/17  Joseph
+% LAST EDIT:  20/03/17  Joseph
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
 % ##################################################
 
-In this regard I believe the team did fairly well as we had a good grasp of the customer's expectations and desire for the system. We made some suggestions that they themselves had not though of (rerecommend locations / new user recommendations via quiz / restrictions on recommendations (i.e. only recommend vegan or restaurants)) though the majority of the suggested additional features did not see implementation due to poor time management for some and striving too far away from the customer's vision for others.
+From the outset of the project the team were aware of the need to properly capture the requirements of the project. It is widely documented that two of the primary reasons for software failure is due to building the wrong system and building the system incorrectly (said in lecture 3 - get academic proof) both of which were major threats to the development of our project. The team was aware of how easily building an incorrect system, one not based off similarity between users, or selection of the incorrect machine learning model could occur which would lead to project failure.
 
-Potential spin here is to say that the team realised the importance of the requirements engineering stage and the importance of making the correct design decision in relation to the risks and costs assoicated with jumping into development without planning, selecting the wrong system design, etc.
+Adhering to the advice of avoiding early commitments to particular design solutions during the requirements elicitation process the team left the decision regarding the specific models and tools to be used until after this was conducted. Although the requirements would evolve as the project developed, as is to be expected, the team felt with the correct initial system goals in place the decision to use particular models, etc could be justified in relation to the end goal of the system. Details of such technical decisions are discussed in Section (reference technical decisions). 
 
-From the outset of the project the team were aware of the need to properly capture the requirements of the project. 
+Knowing the significance of the requirements engineering phase of the project, the team dedicated the first milestone to ensuring the proposed system to be built was correct. This occurred in parallel with some technical research into similar systems and their creation (reference Netflix research from section 2). To ensure the team capture all the vital aspects of the system the team employed:
+
+\begin{itemize}
+\item Initial interview and later Q&A regarding aspects of the system
+\item User Stories
+\item User Story Task Breakdown (No real estimation)
+\end{itemize}
+
+In this regard I believe the team did fairly well as we had a good grasp of the customer's expectations and desire for the system. We made some suggestions that they themselves had not thought of (re-recommend locations / new user recommendations via quiz / restrictions on recommendations (i.e. only recommend vegan or restaurants)) though the majority of the suggested additional features did not see implementation due to poor time management for some and striving too far away from the customer's vision for others.
+
+Potential spin here is to say that the team realised the importance of the requirements engineering stage and the importance of making the correct design decision in relation to the risks and costs associated with jumping into development without planning, selecting the wrong system design, etc.
+
+Could potentially talk software planning in this section as well.
 
 Explain why it was important for the team to get this stage right and what techniques - user stories, etc.
 
@@ -317,10 +329,16 @@ Scenarios of potential use -> test scenarios with and determined the levels of o
 Requirements validity could have also been done. 
 
 \begin{itemize}
-\item (Lecture 13) Requirements gathering is an on-going iterative process that runs concurrently alongside requirements analysis and capture - our project saw this in real effect due to the changing nature of the requirements of our project.
+\item (Lecture 13) Requirements gathering is an ongoing iterative process that runs concurrently alongside requirements analysis and capture - our project saw this in real effect due to the changing nature of the requirements of our project.
 \item (Lecture 14) Requirements engineering is an iterative process of elicitation, capture and validation - talk about how we did this to ensure we were gathering the correct requirements.
 \item (Lecture 3) Causes of software project failing - building system for wrong reason, building the wrong system, building the system wrong. We could tie in the dropped new user recommendation to a proposed goal which was later determined to be a requirement which would be built for the wrong reason. As such the feature was dropped to avoid building an incorrect system.
+\item (Lecture 13) Cultural differences between engineers and customers - although the developers were technical they don’t know anything regarding machine learning or the development of a system such as ours - Requirements Risk
+\item (Lecture 13) Vague requirements specification of end state of system / customer uncertainty regarding the final state of the system - Requirements Risk
+\item (Lecture 13) A means of investigating poorly understood requirements (prototyping) - Managing Requirements Risk - perhaps we could have prototyped both a front end display and an integration method / discussed this with the customer earlier. This would have defined a determined end state of the system prior to January which would have allowed for an earlier split in development focus and resulted in either integration or improved front end. Granted one must also consider that technical decisions were still ongoing at this time.
+\item (Lecture 13) Requirements evolution - occurred when we discovered potential features which were ultimately dropped (new user recommendations)
+\item (Lecture 14)  Avoid early commitments to particular design solutions during requirements elicitation
 \end{itemize}
+
 
 
 \subsection{FINAL REFLECTION POINT - Scrum vs XP - Was Scrum The Right Choice}
@@ -343,6 +361,7 @@ Misc points:
 \item Development typically did not change much within a sprint - XP difference here may not have made much of a difference though the dropped feature could have been explored earlier in the development cycle than the 2nd semester.
 \item Task priority was a bit of an issue as we didn’t really do proper task estimation - XP would have solved that issue as it forces strict policy and task estimation.
 \item Scrum has no engineering practices whereas our project definitely should have. XP would have forced pair programming from the start (rather than sporadic occurrences within sprints), ensured better, more thorough testing from an earlier stage in the project and avoided the whole code review “you deleted all my code you bastard” arguments.
+\item User stories are originally from XP programming (https://en.wikipedia.org/wiki/User_story)
 \end{itemize}
 
 
