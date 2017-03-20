@@ -496,6 +496,7 @@ Misc Points:
 \item Was using Python the correct choice in the long term 
 \item Reference papers and libarires to justify why Python 
 \item Demonstrate that the research conducted was relevant
+\item Was Python the correct choice - research conducted proved Python and C\# integration wouldn't be an issue. However as the customer lacked Python knowledge it probably deterred them from wishing to integrate our system into their existing one. Had the system been created in C\# then perhaps this would have been different. Perhaps this should have been better discussed with the customer in the initial stages of the project.
 \end{itemize}
 
 
@@ -518,6 +519,7 @@ Misc Points:
 \item Probably suggest some alternative models which could have been explored
 \item Demonstrate that the research conducted was relevant
 \item Tie in the Netflix competetion and Netflix model as referenced in \ref{sec:initcustobjectives}
+\item Knowing the complaints of lacking various fields, columns, data was the model choice actually correct? From the outset it was the more obvious choice but would an alternative have yielded better results working with the data sets we were being given?
 \end{itemize}
 
 
@@ -540,6 +542,7 @@ Misc Points:
 \item Was Spark the right choice?
 \item What impact did deciding to use Spark have on the project?
 \item Demonstrate that the research conducted was relevant
+\item Spark seemed fine for our purposes.
 \end{itemize}
 
 
@@ -553,12 +556,33 @@ Misc Points:
 
 Misc note from section 2:
 While this particular feature had been viewed as a bonus feature from the outset of development the team felt based on the customer’s feedback that the customers were not particularly interested in such a feature. Research conducted earlier had shown that making recommendations of this type were primarily a search based recommendation whereas the customer’s interests lay instead in recommendations based on similarity between users. As such the development resources were instead focused on the aforementioned goals of producing a more accurate collaborative and content based recommendation system and the production of a high quality front end to professionally display system output. 
+
+As cost estimation is its own reflection point - summarise and reference away. Instead focus here on why the features were dropped, feature creep, incorrect priorities, etc.
+
 \begin{itemize}
 \item Talk feature discovery (feature creep from us) and feature dropping.
 \item Recommendation reasons dropped due to lack of time.
 \item Proof of better than random suggestions also dropped.
 \item New user recommendations dropped due to feature creep as it was not the customers desire and we suggested it and added it to the project. Additionally it is not a recommendation made off similarity between users rather a search based filter. This was found during research phase and development halted there which was good.
 \item (Lecture 16) Planning poker would have been good to have been played and task cost estimation should have been under constant review as new information is uncovered and work on the project develops - this would have been another use for frequent stand up meetings.
+\end{itemize}
+
+
+\subsection{REFLECTION POINT - Cost Estimation}
+\label{sec:droppingreflection}
+% ##################################################
+% LAST EDIT:  20/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
+% ##################################################
+
+Lead in summaries the other failure points / reflection points that cost estimation caused on the project. For example say it was a significant factor in the dropping of features and reference away. 
+
+\begin{itemize}
+\item This comes up a lot and should be its own reflection point
+\item Discuss that it was not properly conducted and explain the benefits of employing it
+\item Talk potential cost estimation techniques we could have employed (planning poker)
+\item Discuss what other developers advocate in this regard and how they could have been incorporated into our project
 \end{itemize}
 
 
@@ -571,6 +595,8 @@ While this particular feature had been viewed as a bonus feature from the outset
 % ##################################################
 
 This was an issue which occurred throughout most of the retrospectives.
+
+I current envision this as a mixture of improving the communication within the team (it was poor some steps were taken but it remained poor) in relation to the lack of communication effecting the task backlog being worked on effectively. Then suggest potential strategies for combatting the communication hurdle and task backlog.
 
 Misc Notes:
 \begin{itemize}
@@ -595,8 +621,6 @@ Misc Notes:
 % ################# Comment Log ####################
 % ##################################################
 
-A suite of unit tests was written to ensure that each commit did not break the execution of the project.
-
 % Was a testing model used?
 % Should a testing model have been used?
 % Why was testing important for this project?
@@ -620,6 +644,8 @@ A suite of unit tests was written to ensure that each commit did not break the e
 % 
 
 Talk about why testing was significant for this project.
+
+A suite of unit tests was written to ensure that each commit did not break the execution of the project.
 
 \begin{itemize}
 \item (Lecture 10) Continuous integration practices minimise the disruption caused by rapid, concurrent changes to software systems - explain why this was suitable for our purposes, concurrent development of aspects of the system (evaluator and recommender), etc - Testing / Code Reviews
