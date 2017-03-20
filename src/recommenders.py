@@ -155,6 +155,7 @@ class ALS(Recommender):
     def get_model_location(self,recommender_name):
         return "models/{}/".format(recommender_name) + '-'.join(
             map(str, self.get_parameters(recommender_name).values()))
+        
     # float range function
     def frange(self,x, y, jump):
       while x < y:
