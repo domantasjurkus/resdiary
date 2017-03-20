@@ -300,19 +300,31 @@ Start by stating that the team decided to use the Scrum methodology and referenc
 % LAST EDIT:  20/03/17  Joseph
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
+% - References the cost estimation reflection point as an improvement - tie those two together
+% - References scenarios which flows to testing via test scenarios / acceptance testing - ties those two together
+% Reference back in subsequent reflection points to reduce lead in repetition 
 % ##################################################
+
+% Perhaps tie in the requirements risks and perhaps suggest methods of dealing with such risks via papers
 
 From the outset of the project the team were aware of the need to properly capture the requirements of the project. It is widely documented that two of the primary reasons for software failure is due to building the wrong system and building the system incorrectly (said in lecture 3 - get academic proof) both of which were major threats to the development of our project. The team was aware of how easily building an incorrect system, one not based off similarity between users, or selection of the incorrect machine learning model could occur which would lead to project failure.
 
 Adhering to the advice of avoiding early commitments to particular design solutions during the requirements elicitation process the team left the decision regarding the specific models and tools to be used until after this was conducted. Although the requirements would evolve as the project developed, as is to be expected, the team felt with the correct initial system goals in place the decision to use particular models, etc could be justified in relation to the end goal of the system. Details of such technical decisions are discussed in Section (reference technical decisions). 
 
-Knowing the significance of the requirements engineering phase of the project, the team dedicated the first milestone to ensuring the proposed system to be built was correct. This occurred in parallel with some technical research into similar systems and their creation (reference Netflix research from section 2). To ensure the team capture all the vital aspects of the system the team employed:
+Knowing the significance of the requirements engineering phase of the project, the team dedicated the first milestone to ensuring the proposed system to be built was correct. This occurred in parallel with some technical research into similar systems and their creation (reference Netflix research from section 2). To ensure the team captured all the vital system requirements the team employed having conducted the first customer interview the team prepared a requirements specification document which was later refined through discussions with the customer (reference section 2 requirements section). 
 
-\begin{itemize}
-\item Initial interview and later Q&A regarding aspects of the system
-\item User Stories
-\item User Story Task Breakdown (No real estimation)
-\end{itemize}
+Within this document the team elected to use the user stories method of requirements specification in order to create an all encompassing set of stories which reflected the proposed features and functionality of the system. As the recommendations are made to ResDiary customers the team felt user stories provided a good a boundary artifact between the proposed users, customers and developers (taken from PSD lecture 15 key point) and seemed the natural choice opposed to alternative specification techniques such as use case diagrams because… 
+ 
+Although some modifications were necessary, as is to be expected, the team found that proposed the user stories modelled the system requirements with a good level of accuracy (reference section 2 refinements after initial meeting). 
+
+Although some measure of priority was attached to each user stories, and the subsequent task breakdown by association, no formal task estimation stage was conducted beyond the breakdown of the user stories into smaller, more general tasks. This was in part due to the lack of technical knowledge into the subject area from the team at this stage in development though the team should have conducted this process to assist with project planning and management as is discussed here (reference planning and cost estimation reflection point). 
+
+Another area of improvement in the requirement engineering process would have been the inclusion of use scenarios in the “Given, When, Then” format. This is a natural progression of user stories as it expands upon an individual story to provide an example of it in action. Such scenarios could then be utilised to allow for further refinement discussions to occur with the customer in order to establish conditions of system acceptance and thus form the basis of acceptance and scenario testing to be conducted on our system. Such tests are absent and would have improved our testing process as is discussed in Section (reference testing reflection point).  
+
+% Tidy up the end better
+Although the team believes the initial aims established for the project captured the customer’s intent fairly accurately it is agreed within the team that aforementioned techniques should have been utilized (exploited) which in turn would have improved both the team’s cost estimation but also the testing process of the project.
+
+% Here downwards is notes
 
 In this regard I believe the team did fairly well as we had a good grasp of the customer's expectations and desire for the system. We made some suggestions that they themselves had not thought of (re-recommend locations / new user recommendations via quiz / restrictions on recommendations (i.e. only recommend vegan or restaurants)) though the majority of the suggested additional features did not see implementation due to poor time management for some and striving too far away from the customer's vision for others.
 
@@ -336,7 +348,7 @@ Requirements validity could have also been done.
 \item (Lecture 13) Vague requirements specification of end state of system / customer uncertainty regarding the final state of the system - Requirements Risk
 \item (Lecture 13) A means of investigating poorly understood requirements (prototyping) - Managing Requirements Risk - perhaps we could have prototyped both a front end display and an integration method / discussed this with the customer earlier. This would have defined a determined end state of the system prior to January which would have allowed for an earlier split in development focus and resulted in either integration or improved front end. Granted one must also consider that technical decisions were still ongoing at this time.
 \item (Lecture 13) Requirements evolution - occurred when we discovered potential features which were ultimately dropped (new user recommendations)
-\item (Lecture 14)  Avoid early commitments to particular design solutions during requirements elicitation
+\item (Lecture 14) Avoid early commitments to particular design solutions during requirements elicitation
 \end{itemize}
 
 
@@ -361,7 +373,8 @@ Misc points:
 \item Development typically did not change much within a sprint - XP difference here may not have made much of a difference though the dropped feature could have been explored earlier in the development cycle than the 2nd semester.
 \item Task priority was a bit of an issue as we didn’t really do proper task estimation - XP would have solved that issue as it forces strict policy and task estimation.
 \item Scrum has no engineering practices whereas our project definitely should have. XP would have forced pair programming from the start (rather than sporadic occurrences within sprints), ensured better, more thorough testing from an earlier stage in the project and avoided the whole code review “you deleted all my code you bastard” arguments.
-\item User stories are originally from XP programming (https://en.wikipedia.org/wiki/User_story)
+\item User stories are originally from XP 
+\item Scenarios are from XP - discussed in requirements engineering reflection point  
 \end{itemize}
 
 
