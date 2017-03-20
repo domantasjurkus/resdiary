@@ -3,7 +3,7 @@ from collections import Counter, defaultdict
 import heapq
 from itertools import product, starmap
 import os.path
-import shutil
+import shutil,sys
 import csv
 
 from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS as SparkALS
@@ -53,12 +53,8 @@ class System(Recommender):
 
     def train(self, data, load=False):
         for name, recommender in self.recommenders.iteritems():
-            if not load:
-                recommender.train(data)
-            else:
-                recommender = recommender.load_model(name)
-
-
+            recommender.train(data)
+            
     def predict(self, data):
         # tally up the scores for each (user, restaurant) pair multiplied by the
         # weights
@@ -120,16 +116,14 @@ class ALS(Recommender):
     
     def train(self, bookings, parameters=None, load=False):
         recommender_name = type(self).__name__
-        self.model = self.load_model(recommender_name)
         if load:
-            self.model = self.load_model(recommender_name,parameters)
+            self.model = self.load_model(recommender_name)
         else:
             self.model = self.create_model(bookings, self.get_parameters(recommender_name))
             model_location = self.get_model_location(recommender_name)
             if os.path.isdir(model_location):
                 shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
-            print "Model trained"
 
     @abstractmethod
     def create_model(self, bookings, parameters):
@@ -143,8 +137,8 @@ class ALS(Recommender):
         model_location = self.get_model_location(recommender_name)
 
         if os.path.isdir(model_location):
-            self.model = MatrixFactorizationModel.load(self.spark, model_location)
-            return self.model
+            self.model  = MatrixFactorizationModel.load(self.spark, model_location) 
+            return self.model 
         else:
             return None
 
