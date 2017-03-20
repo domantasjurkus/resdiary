@@ -53,7 +53,11 @@ class System(Recommender):
 
     def train(self, data, load=False):
         for name, recommender in self.recommenders.iteritems():
+            if not load:
                 recommender.train(data)
+            else:
+                recommender = recommender.load_model(name)
+
 
     def predict(self, data):
         # tally up the scores for each (user, restaurant) pair multiplied by the
@@ -116,23 +120,16 @@ class ALS(Recommender):
     
     def train(self, bookings, parameters=None, load=False):
         recommender_name = type(self).__name__
-        if parameters is None:
-            parameters = dict((name, Config.get(recommender_name, name, t))
-                              for name, t in [('rank', int),
-                                              ('iterations', int),
-                                              ('lambda', float)])
-        model_location = "models/{}/".format(recommender_name) + '-'.join(
-            map(str, parameters.values()))
-
-        model_exists = os.path.isdir(model_location)
-        if load and model_exists:
-            self.model = MatrixFactorizationModel.load(self.spark,
-                                                       model_location)
+        self.model = self.load_model(recommender_name)
+        if load:
+            self.model = self.load_model(recommender_name,parameters)
         else:
-            self.model = self.create_model(bookings, parameters)
-            if model_exists:
+            self.model = self.create_model(bookings, self.get_parameters(recommender_name))
+            model_location = self.get_model_location(recommender_name)
+            if os.path.isdir(model_location):
                 shutil.rmtree(model_location)
             self.model.save(self.spark, model_location)
+            print "Model trained"
 
     @abstractmethod
     def create_model(self, bookings, parameters):
@@ -140,10 +137,30 @@ class ALS(Recommender):
         Returns a trained model.'''
         raise NotImplementedError("Each subclass should extend this")
 
+    def load_model(self, recommender_name, parameters=None):
+        ''' Takes recommender's name, loads an existing model and returns it.
+        If the model does not exist it returns None'''
+        model_location = self.get_model_location(recommender_name)
+
+        if os.path.isdir(model_location):
+            self.model = MatrixFactorizationModel.load(self.spark, model_location)
+            return self.model
+        else:
+            return None
+
     def predict(self, data):
         return SQLContext(self.spark).createDataFrame(
             self.model.predictAll(data), Config.get_schema())
 
+    def get_parameters(self, recommender_name):
+        return  dict((name, Config.get(recommender_name, name, t))
+                              for name, t in [('rank', int),
+                                              ('iterations', int),
+                                              ('lambda', float)])
+
+    def get_model_location(self,recommender_name):
+        return "models/{}/".format(recommender_name) + '-'.join(
+            map(str, self.get_parameters(recommender_name).values()))
     # float range function
     def frange(self,x, y, jump):
       while x < y:
