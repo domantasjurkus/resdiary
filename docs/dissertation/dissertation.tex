@@ -265,54 +265,87 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 % LAST EDIT: 	14/03/17	Joseph
 % NOTE:	Currently misc. thoughts / notes
 % ################# Comment Log ####################
-% I definitely would like to start stating the team used Scrum though the rest of this may not be necessary.
 % ##################################################
 
 % Several sections that reflect on your experiences during the team project. Each section should discuss one theme, characterised by incidents or events that occurred during the team course of the project from which you learned (approximately 12-15 pages).
 
-% Now see this as a general lead in saying we used Scrum, highlight the overall performance and tease the key failures of our use of Scrum. Finish with a tie in to the final reflection point on whether Scrum was the correct practice to use for the project. 
+% STRUCTURE PLAN ???
+% Currently I see the layout of Section 3 as follows:
 
-Could have taken a purer scrum master role (rather than the hybrid scrum master - developer role) and established a product owner within the team. Conducted sprint planning meetings at the start of each sprint. Conducted sprint retrospective meetings at the end of each sprint. Sprint reviews were sort of conducted as we presented completed work to the customer and discussed incompleted work and the next sprint (sort of blended into the planning meeting which is bad)
+% Section on technical choices containing the major decisions - Models / Python / Spark
 
-Agile methods require discipline and effort to apply successfully. The team frequently laxed on our discipline and the result showed through the dropping of features, etc.
+% Section on Scrum methods and general practices which could have been done better
 
-Lead in with a general why Agile...
+% End with discussion on whether Scrum was correct method to use or if it would have worked better if followed more strictly - leads into conclusion as I expect it will feature a discussion of this point 
 
-As is often a common practice in industry (get a reference backing up claim) the team did not adhere strictly to one specfic agile framework. 
+% -> Where does testing section go (its kind of technical so do we do it at the start with technical decisions before more team focused reflections?) ???
+% -> Can you think of a better order / structure ???
 
-Instead the Scrum methodology was used as the overarching framework with additional practices from alternative methods, such as prototyping and extreme programming, being adopted as the team felt their use necessary and applicable.
 
-While such behavior ensured a flexibile production environment  - and the team found moderate success in it but it was not without its issues.
+\subsection{REFLECTION POINT - Technical Overview Section}
+\label{sec:techoverviewreflection}
+% ##################################################
+% LAST EDIT:  18/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
+% I think this is best as a transision paragraph talking about the dangers of making decisions too early
+% and so with that in mind here is the research and reflections of the key decsions that we made
 
-Primary issue stemmed from lack of discipline to keep with all of the key Scrum methods (produce owner missing, mix of scrum master and developer role - partly due to nature of project in an academic setting, stand ups cancelled midway through semester one, reviews were light on reviewing incompleted work and instead focused on completed work.
+% Development Langauges, Models and Spark being 3 sub-sub-categories within this encompassing category.
 
-Instead perhaps it would have been better to adopt additional Scrum extensions of backlog refinement and burn down charts in addition to having more defined roles and stand up meetings.
-Reference throughout to relevant subsection reflection points tackling each specific issue.
+% Reference general importance of design decisions here
+% Reference specific sub-sub-category when applicable
+% ##################################################
 
-Although the team did not conform to the Scrum practice of holding daily, or frequent, stand up meetings and the consequences of this practice are discussed at length in Section (reference lack of stand ups / poor communication).
-
-Look into Scrumban and Agilo for Trac - did a light version informally but it would may have improved the process to got all out and use this.
+Preemptive commitment to particular design choices too early in the software development cycle leaves a software project at high risk of failure (reference a case study where an incorrect design decision lead to failure - lecture 1 / 3 recommended reading?). Summary of how this system failed in relation to incorrect design choice. Say the team used this as a warning for the major design decisions - Development language, Models, Spark - that were involved with our project which are detailed below.
 
 \begin{itemize}
-\item SCRUM Overview - start with an overview stating the team used Scrum and maybe a brief sprint summary with reflection references or mini-reflections. The sprint summary may not be necessary as a good deal of context is provided above in relation to the development of the project.
-\item Technical Decisions - this will be three sub reflections regarding 1. Choice of language 2. Choice of collab / content models 3. Choice of Spark
-\item Testing - a section on testing and whether a better testing strategy could have been used.
-\item Dropped Features - features were dropped and this raises the question why? So of the reasons were our own fault and some were not. This is worth hitting on and also provides a transision into reflection on our failures for why the features were cut from the project.
-\item Team Structure - this was a significant shift in how the team internally thought of the project and is worth mentioning.
-\item Communication and Task Backlog - communication came up again and again in retrospectives and so should feature.
-\item Code Reviews - code reviews came up and were the thing our project really lacked as far as markers are concerned. Would also have prevented several issues the team faced during the development process.
-\item Scrum vs XP / etc - was using the Scrum system the correct system? This I feel leads naturally into the conclusion from the third section as its a reflection that can tie in the other reflection points as well. Ties them all together and leads out of the reflection section somewhat naturally.
-\end{itemize} 
+\item Demonstrate that the research conducted was relevant
+\end{itemize}
 
-Start by stating that the team decided to use the Scrum methodology and reference reflection point of if this was the correct system to use. Potentially give iteration overview (short summary of each iteration) with either a mini-reflection or reference to further reflection point for all key points which occurred.
+
+\subsection{REFLECTION POINT - Python}
+\label{sec:pyreflection}
+% ##################################################
+% LAST EDIT:  15/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
+% ##################################################
+
+Misc Points:
 \begin{itemize}
-\item Sprint 1 - importance of getting the requirements correct - risks \& costs of fixing, etc (MINI REFLECTION).
-\item Research conducted and technical decisions - reference to reflection points.
-\item Dropped Feature - reference to reflection point.
-\item Testing - reference to reflection point.
-\item Front end redesign - throwaway code and prototyping (MINI REFLECTION)
-\item Pair Programming - reference to reflection point 
-\item ETC
+\item What alternatives did we consider - C Sharp / Scala
+\item What were the benefits of using it - already familiar / libraries / industry standard
+\item The choice of Python is mentioned in a retrospective as the choice was slow and not well discussed and we just jumped into it - how did we ensure this did not occur with other major technical decisions
+\item Did Python influence other later choices - Spark, etc.
+\item What were the limitations of using Python
+\item Was using Python the correct choice in the long term 
+\item Reference papers and libarires to justify why Python 
+\item Demonstrate that the research conducted was relevant
+\item Was Python the correct choice - research conducted proved Python and C\# integration wouldn't be an issue. However as the customer lacked Python knowledge it probably deterred them from wishing to integrate our system into their existing one. Had the system been created in C\# then perhaps this would have been different. Perhaps this should have been better discussed with the customer in the initial stages of the project.
+\end{itemize}
+
+
+\subsection{REFLECTION POINT - Models}
+\label{sec:modelreflection}
+% ##################################################
+% LAST EDIT:  15/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
+% ##################################################
+
+Misc Points:
+\begin{itemize}
+\item Explain how the collaborative filter works and WHY it is applicable for our needs
+\item Explain how the content based filter works and WHY it is applicable for our needs
+\item Reference papers and other models (Netflix) to justify choice
+\item What were the limits of the models - customer asked to only retrain on new data but limit of model disallows this - need for specific type of data that is not always present within the data set.
+\item Did we choose the right models
+\item Did the models impact later decisions
+\item Probably suggest some alternative models which could have been explored
+\item Demonstrate that the research conducted was relevant
+\item Tie in the Netflix competetion and Netflix model as referenced in \ref{sec:initcustobjectives}
+\item Knowing the complaints of lacking various fields, columns, data was the model choice actually correct? From the outset it was the more obvious choice but would an alternative have yielded better results working with the data sets we were being given?
 \end{itemize}
 
 
@@ -328,6 +361,8 @@ Start by stating that the team decided to use the Scrum methodology and referenc
 % ##################################################
 
 % Perhaps tie in the requirements risks and perhaps suggest methods of dealing with such risks via papers
+
+% Basically we've reflected on the technical choices now why was it important that the requirements were engineering properly to better inform the technical choices and what could have been done to do this process even better
 
 From the outset of the project the team were aware of the need to properly capture the requirements of the project. It is widely documented that two of the primary reasons for software failure is due to building the wrong system and building the system incorrectly (said in lecture 3 - get academic proof) both of which were major threats to the development of our project. The team was mindful of how easily building an incorrect system, one not based off similarity between users, or selection of the incorrect machine learning model and subsequent project failure could occur in our project. 
 
@@ -362,6 +397,23 @@ Although the team believes the initial aims established for the project captured
 \end{itemize}
 
 
+\subsection{REFLECTION POINT - Scrum Lead In}
+\label{sec:teamstructure}
+% ##################################################
+% LAST EDIT:  21/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
+% Ending is real clunky but I like the idea of a lead in general reflection via references to the Scrum
+% ##################################################
+
+% Now see this as a general lead in saying we used Scrum, highlight the overall performance and tease the key failures of our use of Scrum. Finish with a tie in to the final reflection point on whether Scrum was the correct practice to use for the project. 
+
+Lead in with a general why Agile is used for large projects such as ours.
+
+As is often a common practice in industry (get a reference backing up claim) the team did not adhere strictly to one specfic agile framework. Instead the Scrum methodology was used as the overarching framework the team followed with additional practices from alternative methods, such as prototyping and extreme programming, being adopted as the team felt their use necessary and applicable. While this behaviour ensuresd a flexibile production envirnoment and the team found modertate success with the loose methodology it was not without its issues. Primarily this was due to the lack of discipline within the team to hold all of the key Scrum methods, as weekly stand up style meetings were cancelled in favour of a more open source style of development environment, and roles, as the team employed no product owner role and the scrum master was additionally on the development team. 
+
+Ultimately this would come at a cost of the teams ability to collaborate effectively on the project as the lack of stand ups led to communication issues as is discussed in Section (reference communication issue). Additionally the lack of product owner and focused scrum master roles played into some disfunctionality within the team organisation structure as highlighted in Section (reference team structure). By not conducting incomplete work and priority reviews at the each sprint's end the team inevitably saw proposed features be dropped as is discussed in Section (reference dropping features) and examined more thoroughly in Section (reference backlog management). This however may also be a consequence of the lack of formal cost estimation procedures conducted during the project as examined in Section (reference cost estimation) and not the teams approach to the Scrum methodology. Finally the issue of if whether such failures could have been avoided through use of a different agile framework, the Extreme Programming framework, is considered in comparision to following the Scrum methodology more strictly and closely than was conducted by the team in Section (reference stricter Scrum vs XP - final reflection point).
+
 
 \subsection{FINAL REFLECTION POINT - Scrum vs XP - Was Scrum The Right Choice}
 \label{sec:scrumvsxp}
@@ -386,7 +438,11 @@ Misc points:
 \item Task priority was a bit of an issue as we didn’t really do proper task estimation - XP would have solved that issue as it forces strict policy and task estimation.
 \item Scrum has no engineering practices whereas our project definitely should have. XP would have forced pair programming from the start (rather than sporadic occurrences within sprints), ensured better, more thorough testing from an earlier stage in the project and avoided the whole code review “you deleted all my code you bastard” arguments.
 \item User stories are originally from XP 
-\item Scenarios are from XP - discussed in requirements engineering reflection point  
+\item Scenarios are from XP - discussed in requirements engineering reflection point 
+\item Instead perhaps it would have been better to adopt additional Scrum extensions of backlog refinement and burn down charts in addition to having more defined roles and stand up meetings.
+\item Reference throughout to relevant subsection reflection points tackling each specific issue.
+\item Although the team did not conform to the Scrum practice of holding daily, or frequent, stand up meetings and the consequences of this practice are discussed at length in Section (reference lack of stand ups / poor communication).
+\item Look into Scrumban and Agilo for Trac - did a light version informally but it would may have improved the process to got all out and use this.
 \end{itemize}
 
 
@@ -475,96 +531,6 @@ Misc Points:
 \item (Lecture 26) Outline of inspection methods - should probably mention which we should have used in the code reviews.
 \item (Lecture 8) Change management and the conflicts caused from developers working in parallel and contributions are made to the master branch which are not fully implemented or break some aspect of the system. In hindsight this probably should have justified a separate branch which would be integrated into the master upon passing all of the tests with a successful build in Jenkins the continuous integration system.
 \item Pair programming done for design / initial coding of front end of application. Similarly done for aspects of the back end development of the project - well somewhat pair programming where one guy would bounce ideas and assist another in the structure and functionality of that particular aspect of the project. Potential spin for the front end is that a more experienced front end developer Josh worked with a less expereienced developer Joseph and the benefits of this (see note on pair programming on wiki somewhere for similar argument)
-\end{itemize}
-
-
-\subsection{REFLECTION POINT - Technical Overview Section}
-\label{sec:techoverviewreflection}
-% ##################################################
-% LAST EDIT:  18/03/17  Joseph
-% NOTE:         Temp notes / thoughts
-% ################# Comment Log ####################
-% I think this is best as a transision paragraph talking about the dangers of making decisions too early
-% and so with that in mind here is the research and reflections of the key decsions that we made
-
-% Development Langauges, Models and Spark being 3 sub-sub-categories within this encompassing category.
-
-% Reference general importance of design decisions here
-% Reference specific sub-sub-category when applicable
-% ##################################################
-
-Preemptive commitment to particular design choices too early in the software development cycle leaves a software project at high risk of failure (reference a case study where an incorrect design decision lead to failure - lecture 1 / 3 recommended reading?). Summary of how this system failed in relation to incorrect design choice. Say the team used this as a warning for the major design decisions - Development language, Models, Spark - that were involved with our project which are detailed below.
-
-\begin{itemize}
-\item Demonstrate that the research conducted was relevant
-\end{itemize}
-
-
-\subsection{REFLECTION POINT - Python}
-\label{sec:pyreflection}
-% ##################################################
-% LAST EDIT:  15/03/17  Joseph
-% NOTE:         Temp notes / thoughts
-% ################# Comment Log ####################
-% ##################################################
-
-Misc Points:
-\begin{itemize}
-\item What alternatives did we consider - C Sharp / Scala
-\item What were the benefits of using it - already familiar / libraries / industry standard
-\item The choice of Python is mentioned in a retrospective as the choice was slow and not well discussed and we just jumped into it - how did we ensure this did not occur with other major technical decisions
-\item Did Python influence other later choices - Spark, etc.
-\item What were the limitations of using Python
-\item Was using Python the correct choice in the long term 
-\item Reference papers and libarires to justify why Python 
-\item Demonstrate that the research conducted was relevant
-\item Was Python the correct choice - research conducted proved Python and C\# integration wouldn't be an issue. However as the customer lacked Python knowledge it probably deterred them from wishing to integrate our system into their existing one. Had the system been created in C\# then perhaps this would have been different. Perhaps this should have been better discussed with the customer in the initial stages of the project.
-\end{itemize}
-
-
-\subsection{REFLECTION POINT - Models}
-\label{sec:modelreflection}
-% ##################################################
-% LAST EDIT:  15/03/17  Joseph
-% NOTE:         Temp notes / thoughts
-% ################# Comment Log ####################
-% ##################################################
-
-Misc Points:
-\begin{itemize}
-\item Explain how the collaborative filter works and WHY it is applicable for our needs
-\item Explain how the content based filter works and WHY it is applicable for our needs
-\item Reference papers and other models (Netflix) to justify choice
-\item What were the limits of the models - customer asked to only retrain on new data but limit of model disallows this - need for specific type of data that is not always present within the data set.
-\item Did we choose the right models
-\item Did the models impact later decisions
-\item Probably suggest some alternative models which could have been explored
-\item Demonstrate that the research conducted was relevant
-\item Tie in the Netflix competetion and Netflix model as referenced in \ref{sec:initcustobjectives}
-\item Knowing the complaints of lacking various fields, columns, data was the model choice actually correct? From the outset it was the more obvious choice but would an alternative have yielded better results working with the data sets we were being given?
-\end{itemize}
-
-
-\subsection{REFLECTION POINT - Apache Spark}
-\label{sec:sparkreflection}
-% ##################################################
-% LAST EDIT:  15/03/17  Joseph
-% NOTE:         Temp notes / thoughts
-% ################# Comment Log ####################
-% ##################################################
-
-\begin{itemize}
-\item Team decided the entire team should spend time over Christmas playing around with Apache Spark to ensure common understanding of the system between team members. This may not have been the best use of resource and instead team could have split earlier and the front end developers not bothered playing around with it as they did not end up touching it directly during the development of the project. 
-\item Common knowledge was gained though but a more typical front end, back end split in focus may have been beneficial and resulted in an improved front end application sooner.
-\item Why was the decision made to use Spark?
-\item Did any previous decisions (models / languages / tools) influence our choice of Spark
-\item What were the alternatives to using Spark
-\item What were the benefits of using it?
-\item What were the limitations of using it?
-\item Was Spark the right choice?
-\item What impact did deciding to use Spark have on the project?
-\item Demonstrate that the research conducted was relevant
-\item Spark seemed fine for our purposes.
 \end{itemize}
 
 
