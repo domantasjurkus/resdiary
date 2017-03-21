@@ -253,7 +253,7 @@ class CuisineType(Recommender):
                             len(self.restaurant_cuisine[restaurant] &
                                 self.liked_cuisine[diner]))
                            for diner, restaurant in diners_restaurants]
-        recommendations =  self.spark.parallelize(recommendations).filter(lambda r: r[2] != 0)
+        recommendations =  self.spark.parallelize(recommendations)
         return SQLContext(self.spark).createDataFrame(
            recommendations, Config.get_schema())
 
