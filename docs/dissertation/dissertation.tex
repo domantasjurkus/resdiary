@@ -269,17 +269,16 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 
 % Several sections that reflect on your experiences during the team project. Each section should discuss one theme, characterised by incidents or events that occurred during the team course of the project from which you learned (approximately 12-15 pages).
 
-% STRUCTURE PLAN ???
+% STRUCTURE PLAN ??? -> Unless you propose something better
+
 % Currently I see the layout of Section 3 as follows:
 
-% Section on technical choices containing the major decisions - Models / Python / Spark
+% Section on technical choices containing the major decisions - Models / Python / Spark - tie in requirements engineering (closely associated with technical decisions) and testing as a technical reflection (this leaves remaining reflection points Agile, non-technical and process focused)
 
 % Section on Scrum methods and general practices which could have been done better
 
 % End with discussion on whether Scrum was correct method to use or if it would have worked better if followed more strictly - leads into conclusion as I expect it will feature a discussion of this point 
 
-% -> Where does testing section go (its kind of technical so do we do it at the start with technical decisions before more team focused reflections?) ???
-% -> Can you think of a better order / structure ???
 
 
 \subsection{REFLECTION POINT - Technical Overview Section}
@@ -288,16 +287,29 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 % LAST EDIT:  18/03/17  Joseph
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
-% I think this is best as a transision paragraph talking about the dangers of making decisions too early
-% and so with that in mind here is the research and reflections of the key decsions that we made
-
 % Development Langauges, Models and Spark being 3 sub-sub-categories within this encompassing category.
 
 % Reference general importance of design decisions here
 % Reference specific sub-sub-category when applicable
+
+% If we tie in testing and requirements engineering here the remaining reflections are less technical and
+% more agile reflections
 % ##################################################
 
-Preemptive commitment to particular design choices too early in the software development cycle leaves a software project at high risk of failure (reference a case study where an incorrect design decision lead to failure - lecture 1 / 3 recommended reading?). Summary of how this system failed in relation to incorrect design choice. Say the team used this as a warning for the major design decisions - Development language, Models, Spark - that were involved with our project which are detailed below.
+1. Talk about why the technical choices are significant development points in the software development process.
+2. Talk about how preemptive commitment too early is bad and should be avoided - reference case study - saying team used this as an warning. Use this as reference throw over to requirements engineering reflection point. 
+3. Introduce the three major technical decisions of our project
+4. Tie in testing and use as a reference throw over
+
+Preemptive commitment to particular design choices too early in the software development cycle leaves a software project at high risk of failure (reference a case study where an incorrect design decision lead to failure - lecture 1 / 3 recommended reading?). Summary of how this system failed in relation to incorrect design choice. 
+
+Aay the team used this as a warning for the major design decisions - Development language, Models, Spark - that were involved with our project which are detailed below.
+
+State how the technical choices do not occur in isolation rather they are heavily work with the requirements gathering stage (reference lead in)
+
+Additionally discuss how they are related to the testing of the system (reference lead in) 
+
+However the technical choices of a software project are not made in isolation rather they are heavily influenced by the requirements engineering process of the 
 
 \begin{itemize}
 \item Demonstrate that the research conducted was relevant
@@ -366,7 +378,7 @@ Misc Points:
 
 From the outset of the project the team were aware of the need to properly capture the requirements of the project. It is widely documented that two of the primary reasons for software failure is due to building the wrong system and building the system incorrectly (said in lecture 3 - get academic proof) both of which were major threats to the development of our project. The team was mindful of how easily building an incorrect system, one not based off similarity between users, or selection of the incorrect machine learning model and subsequent project failure could occur in our project. 
 
-Adhering to the advice of avoiding early commitment to a particular design solutions during the requirements elicitation process the team left the decision regarding the specific models and tool choice until after this was conducted. Although the requirements would evolve as the project developed, as is to be expected, the team felt with the correct initial system goals established the team could easily justify decision designs in relation to the key goals of the system. Details of such technical decisions are discussed in Section (reference technical decisions). 
+Adhering to the advice of avoiding early commitment to a particular design solutions during the requirements elicitation process as is discussed in Section (reference case study reflection at technical overview point) the team left the decision regarding the specific models and tool choice until after this phase was conducted. Although the requirements would evolve as the project developed, as is to be expected, the team felt with the correct initial system goals established the team could easily justify decision designs in relation to the key goals of the system. Such technical decisions, specifically the choice of development language, machine learning models and clustered computing framework, are discussed in Sections (reference all three technical reflections) respectively. 
 
 Knowing the significance of the requirements engineering process for the sucessful development of the project, the team dedicated the first milestone to ensuring the proposed system to be built was correct. This occurred in parallel with technical research into similar systems and their creation (reference Netflix research from section 2). To ensure the team captured all functionality of the system the team, having conducted the initial customer interview, prepared a requirements specification document which was later refined through customer discussions (reference section 2 requirements section). 
 
@@ -397,6 +409,57 @@ Although the team believes the initial aims established for the project captured
 \end{itemize}
 
 
+\subsection{REFLECTION POINT - Testing}
+\label{testing}
+% ##################################################
+% LAST EDIT:  19/03/17  Joseph
+% NOTE:       TODO
+% ################# Comment Log ####################
+% ##################################################
+
+% Was a testing model used?
+% Should a testing model have been used?
+% Why was testing important for this project?
+% When did the testing process start in the development cycle? 
+% Was it easy/hard to test and why?
+% Discuss why continuous integration was particularly important for the project
+% Would a TDD test strategy have been suitable?
+% Would the XP test strategy have been suitable?
+% Are there test strategies specifically for machine learning projects which could have been followed
+% Could we have used test scenarios with and determined the levels of outcomes are acceptable for each scenario
+% Could we have set objective acceptance criteria and established the amount of error you and your users are willing to accept
+% What statistical level of confidence do we have regarding the accuracy of the system in relation to our conducted testing
+
+% Should our testing have better utilised statisical measures in relation to the system accuracy
+
+% Could the testing have provided internal feedback on the efforts of the application. First, evaluate the application according to the acceptance criteria. Second, be prepared to support those assertions in statistical terms; for example, be 95 percent confident that the application will produce an answer within a given range. Last, have a high-level understanding of the underpinnings of the application, so that any deficiencies might be able to be ascribed to a particular application component.
+
+
+% TODO: READ THE FOLLOWING AND NOTE ANY IDEAS
+% http://pages.cs.wisc.edu/~dpage/cs760/evaluating.pdf
+% 
+
+Talk about why testing was significant for this project.
+
+A suite of unit tests was written to ensure that each commit did not break the execution of the project.
+
+\begin{itemize}
+\item (Lecture 10) Continuous integration practices minimise the disruption caused by rapid, concurrent changes to software systems - explain why this was suitable for our purposes, concurrent development of aspects of the system (evaluator and recommender), etc - Testing / Code Reviews
+\item Overlap between testing and evaluation.
+\item Although there were considerations on testing the front-end portion of the project, it was agreed that such tests were not essential for the presentation of the recommendations.
+\item Integration testing: The System recommender was tested in conjunction with other recommenders for integration.
+\item Regression testing: A regression test for hyperparameter learning was written.
+\item Mutation tests were considered but not used.
+\end{itemize}
+
+The unit tests were set up to run on Jenkins, a continuous integration environment.
+Jenkins was set up to push notifications to the team's communication channel whenever a test case would fail. This enabled early notification of issues, allowing the team to patch up bugs early on.
+Jenkins also provided coverage reports for the source files, indicating the percentage of classes, conditionals and lines covered.
+
+What could have been improved:
+A notable shortcoming was that tests were not written under any particular testing strategy. This lead to the discovery of several modules missing tests cases, and some tests using untested modules. Following a stricter test plan would have led to more systematic test development, allowing to uncover the beforementioned problems earlier.
+
+
 \subsection{REFLECTION POINT - Scrum Lead In}
 \label{sec:teamstructure}
 % ##################################################
@@ -405,6 +468,23 @@ Although the team believes the initial aims established for the project captured
 % ################# Comment Log ####################
 % Ending is real clunky but I like the idea of a lead in general reflection via references to the Scrum
 % ##################################################
+
+
+% !!!!!!!!!!!!!!! IMPORTANT NOTE TO SELF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%
+% Scrum reflection story
+%
+% The way I envision the general reflection for the Scrum method being 
+% examine each of our shortcomings in terms of team workflow (task backlog, communication, etc)
+% and to possibly suggest Scrum / XP methods / extensions which could have been employed
+% to avoid such failures from the team. This can then be used in the final reflection
+% point comparing which framework we should have followed more closely. For example 
+% following Scrum more closely with daily (very frequent) stand up meetings would have
+% avoided the issue of lack of communication of what you are actively working on.
+% Additionally Scrum task and priortiy reviews would have handled that issue, etc.
+%
+% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 % Now see this as a general lead in saying we used Scrum, highlight the overall performance and tease the key failures of our use of Scrum. Finish with a tie in to the final reflection point on whether Scrum was the correct practice to use for the project. 
 
@@ -423,16 +503,13 @@ Ultimately this would come at a cost of the teams ability to collaborate effecti
 % ################# Comment Log ####################
 % ##################################################
 
-This would be a reflection on using the Scrum system in comparison to another system such as Extreme Programming which might have been more suited to our project given its vague nature at the start and would also have helped combat the issues of code reviews / testing.
+Comparision I see here being made now is should we have stuck with Scrum but follow the practice more closely with stand ups, product owner and scrum master - ensure to explain academic nature of project affecting that one in some regard, extensions to Scrum methods which could have been used to tackle specific problems, etc.
 
-We ended up with this weird cross system that was mainly Scrum.
-
-Probably pick one then compare against the other and determine if that would have worked better. Probably closer to Scrum of the above two.
-
-I'd probably conclude that work worked best for us in the development cycle was the XP techniques and so the team should have adhered to that system closer.
+Contrast this against using the XP system for example.
 
 Misc points:
 \begin{itemize}
+\item Our prototyping was beneficial - gave good understanding of working with the data sets in addition to seeing how and what the front end application would need to convey to non-technical people and people not familiar with the nature of the project. Spin here is to implement more forms of prototyping as this was beneficial and perhaps should have been conducted more. Not Scrum or XP but another framework that could have been adapted in. 
 \item Time between meetings served as a good sprint dates - working on smaller iterations may have ensured better communication within the team.
 \item Development typically did not change much within a sprint - XP difference here may not have made much of a difference though the dropped feature could have been explored earlier in the development cycle than the 2nd semester.
 \item Task priority was a bit of an issue as we didn’t really do proper task estimation - XP would have solved that issue as it forces strict policy and task estimation.
@@ -455,6 +532,13 @@ Misc points:
 % REFERENCE: Developer Anarchy - article || paper on it
 % REFERENCE: Sports model of team structure - roles
 % ##################################################
+
+% Mention Scrum master hybird role in this section
+% Mention lack of product manager in this section
+% Reflect on if a more focused scrum master would have improved the process
+% Reflect on if a product owner would have improved the process
+
+% Reflect on the transision from Anarchy to a sports model and how it improved the development efficency - improved communication / workflow / etc.
 
 Initially the team elected to use an 'developer anarchy' team structure whereby any team member was free to work on whichever aspect of the system they were currently interested in working on. Despite being an unconventionally structure the team felt confident in our ability to effectively communicate and organise development resources. Anarchy also looked promising due all of the team feeling comfortable to work on both the back and front end functionality of the application as needed. Finally as the proposed system design allowed for concurrent development on different back end recommenders to occur the team believed that the anarchy development style was suited to the project.
 
@@ -599,57 +683,6 @@ Misc Notes:
 \item Talk about the benefits a product owner would have had on the development of our specific project - improved efficiency of tackling task backlog (tasks were avoided from one milestone to the next)
 \item (Lecture 7) Perhaps burn down charts per sprints would have been a good idea and would have improved prediction of task completion, backlog management, communication and prioritisation of backlog tasks.
 \end{itemize}
-
-
-\subsection{REFLECTION POINT - Testing}
-\label{testing}
-% ##################################################
-% LAST EDIT:  19/03/17  Joseph
-% NOTE:       TODO
-% ################# Comment Log ####################
-% ##################################################
-
-% Was a testing model used?
-% Should a testing model have been used?
-% Why was testing important for this project?
-% When did the testing process start in the development cycle? 
-% Was it easy/hard to test and why?
-% Discuss why continuous integration was particularly important for the project
-% Would a TDD test strategy have been suitable?
-% Would the XP test strategy have been suitable?
-% Are there test strategies specifically for machine learning projects which could have been followed
-% Could we have used test scenarios with and determined the levels of outcomes are acceptable for each scenario
-% Could we have set objective acceptance criteria and established the amount of error you and your users are willing to accept
-% What statistical level of confidence do we have regarding the accuracy of the system in relation to our conducted testing
-
-% Should our testing have better utilised statisical measures in relation to the system accuracy
-
-% Could the testing have provided internal feedback on the efforts of the application. First, evaluate the application according to the acceptance criteria. Second, be prepared to support those assertions in statistical terms; for example, be 95 percent confident that the application will produce an answer within a given range. Last, have a high-level understanding of the underpinnings of the application, so that any deficiencies might be able to be ascribed to a particular application component.
-
-
-% TODO: READ THE FOLLOWING AND NOTE ANY IDEAS
-% http://pages.cs.wisc.edu/~dpage/cs760/evaluating.pdf
-% 
-
-Talk about why testing was significant for this project.
-
-A suite of unit tests was written to ensure that each commit did not break the execution of the project.
-
-\begin{itemize}
-\item (Lecture 10) Continuous integration practices minimise the disruption caused by rapid, concurrent changes to software systems - explain why this was suitable for our purposes, concurrent development of aspects of the system (evaluator and recommender), etc - Testing / Code Reviews
-\item Overlap between testing and evaluation.
-\item Although there were considerations on testing the front-end portion of the project, it was agreed that such tests were not essential for the presentation of the recommendations.
-\item Integration testing: The System recommender was tested in conjunction with other recommenders for integration.
-\item Regression testing: A regression test for hyperparameter learning was written.
-\item Mutation tests were considered but not used.
-\end{itemize}
-
-The unit tests were set up to run on Jenkins, a continuous integration environment.
-Jenkins was set up to push notifications to the team's communication channel whenever a test case would fail. This enabled early notification of issues, allowing the team to patch up bugs early on.
-Jenkins also provided coverage reports for the source files, indicating the percentage of classes, conditionals and lines covered.
-
-What could have been improved:
-A notable shortcoming was that tests were not written under any particular testing strategy. This lead to the discovery of several modules missing tests cases, and some tests using untested modules. Following a stricter test plan would have led to more systematic test development, allowing to uncover the beforementioned problems earlier.
 
 
 \subsection{REFLECTION POINT - MISC POINTS FROM PSD NOTES}
