@@ -103,11 +103,12 @@ ResDiary senior software engineers Adam Connelly and Ian Strachan acted as custo
 \subsection{Customer Objectives And Rationale}
 \label{sec:custobjectives}
 % ##################################################
-% LAST EDIT: 	18/03/17    JOSH
+% LAST EDIT: 	23/03/17    Joseph
 % NOTE: 		Reference papers on Amazon / Netflix Models / Netflix Prize
 % NOTE:         Added more specifics on Netflix Recommendations - make sure to tie in to our final output
 %               Need to demonstrate that the research was RELEVANT
 % ################# Comment Log ####################
+%   Really explain why the project is beneficial to the customer - why would recommendations increase business, etc. - this was question / critique of project motives section of the presentation -- Joseph  
 % ##################################################
 
 % The rationale and initial objectives for the project.
@@ -296,6 +297,13 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 % more agile reflections
 % ##################################################
 
+% This section should be a mainly postive reflection of the technical choices of the project.
+
+% The occasional limitation can be mentioned in the passing such as the use of Python scaring the customer off integration (theory) 
+% and the drawbacks of the collab not allowing for training based on only new data (this if anything is a requirements engineering failure
+% that could have been picked up earlier but customer did not consider until after seeing operation of prototype and use of data in its creation)
+% Spark was fine. I have no gripes about using Spark.
+
 1. Talk about why the technical choices are significant development points in the software development process.
 2. Talk about how preemptive commitment too early is bad and should be avoided - reference case study - saying team used this as an warning. Use this as reference throw over to requirements engineering reflection point. 
 3. Introduce the three major technical decisions of our project
@@ -358,6 +366,33 @@ Misc Points:
 \item Demonstrate that the research conducted was relevant
 \item Tie in the Netflix competetion and Netflix model as referenced in \ref{sec:initcustobjectives}
 \item Knowing the complaints of lacking various fields, columns, data was the model choice actually correct? From the outset it was the more obvious choice but would an alternative have yielded better results working with the data sets we were being given?
+\item Jeremy asked about the reusability of our system and the models during the presentation - mention ours is tailored to our specific system and results to improve the accuracy of the results and predictions
+\end{itemize}
+
+
+\subsection{REFLECTION POINT - Apache Spark}
+\label{sec:sparkreflection}
+% ##################################################
+% LAST EDIT:  15/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
+% Readded after accidental deletion
+% ##################################################
+
+\begin{itemize}
+\item Team decided the entire team should spend time over Christmas playing around with Apache Spark to ensure common understanding of the system between team members. This may not have been the best use of resource and instead team could have split earlier and the front end developers not bothered playing around with it as they did not end up touching it directly during the development of the project. 
+\item Common knowledge was gained though but a more typical front end, back end split in focus may have been beneficial and resulted in an improved front end application sooner.
+\item Why was the decision made to use Spark?
+\item Did any previous decisions (models / languages / tools) influence our choice of Spark
+\item What were the alternatives to using Spark
+\item What were the benefits of using it?
+\item What were the limitations of using it?
+\item Was Spark the right choice?
+\item What impact did deciding to use Spark have on the project?
+\item Demonstrate that the research conducted was relevant
+\item Spark seemed fine for our purposes.
+\item Future proposal for system / talk about scalability and benefits of using Spark
+\item Quote the numbers Mason! The numbers! (You know the ones Eduard likes to mention)
 \end{itemize}
 
 
@@ -385,7 +420,7 @@ Knowing the significance of the requirements engineering process for the sucessf
 Within this document the team elected to use the user stories method of requirements specification in order to create an all encompassing set of stories which reflected the proposed features and functionality of the system. As the recommendations are made to ResDiary customers the team felt user stories provided a good a boundary artifact between the proposed users, customers and developers (taken from PSD lecture 15 key point) and that user stories were a natural choice opposed to alternative specification techniques such as use case diagrams because… 
 % Try to sell the idea that user stories are the natural choice for our project as user stories are written from the customer perspective and the recommendations are being made to the end customers
 
-Although some modifications were necessary, as is to be expected, the team found that proposed the user stories modelled the customer requirements with a good level of accuracy (reference section 2 refinements after initial meeting). 
+Although some modifications were necessary, as is to be expected, the team found that proposed the user stories modelled the customer requirements with a good level of accuracy (reference section 2 refinements after initial meeting). In addition to this the additional proposed features, generating recommendations for new users and the ability to recommend previously visted restraunts, that the team suggested were recieved with good feedback by the customer. They believed such features tackled aspects of the problem they themselves had not yet considered and felt we had a good understanding of the system. 
 
 % Establish that task estimation was not properly conducted then reference away to specific reflection into that topic
 One shortcoming of the use of stories however was the measure of priority attached to each user stories and the subsequent task breakdown by association. The team did not conduct a formal task estimation procedure beyond the breakdown of the user stories into smaller, more general tasks. This was in part due to the lack of technical knowledge into the subject area from the team at this stage in development though the team should have conducted proper task estimation to assist with project planning and management as is discussed here (reference planning and cost estimation reflection point). 
@@ -393,8 +428,8 @@ One shortcoming of the use of stories however was the measure of priority attach
 % Transision into this better and potentially expand on
 Another area of improvement in the requirement gathering process would have been the inclusion of use scenarios in the “Given, When, Then” format. This is a natural progression of user stories as it expands upon an individual story to provide an example of it in action. Such scenarios could then be utilised to allow for further refinement discussions to occur with the customer in order to establish conditions of system acceptance and thus form the basis of acceptance and scenario testing to be conducted on our system. Such tests are absent and would have improved our testing process as is discussed in Section (reference testing reflection point).  
 
-% Tidy up the end better
-Although the team believes the initial aims established for the project captured the customer’s intent fairly accurately it is agreed within the team that aforementioned techniques should have been utilized (exploited) which in turn would have improved both the team’s cost estimation but also the testing process of the project.
+% Tidy up the ending better - more postive - team did well in this regard and so should end on positive note
+Although the aforementioned could have utilised to improve the team's cost estimation and test process for the project, the team established a good understanding of the customer's vision and corresponding system requirements. This ultimately showed during the various customer demonstration where by second to last meeting they encouraged to the team to follow where we saw the development of the system going as they were already impressed and pleased with the results. This level of confidence placed in the team we feel showed we had a good initial grasp of the system and thus were able to deliver and take steer the project in the direction we saw it heading towards the later stages of the project. 
 
 % Here downwards is notes
 \begin{itemize}
@@ -544,6 +579,8 @@ Initially the team elected to use an 'developer anarchy' team structure whereby 
 
 During the December 8th retrospective which saw the closure of the first true development milestone, the team was optimistic about the team structure and felt a natural order had fallen into place. The team felt, however, that the organisation and communication could be improved as open communication regarding what developers where actively working on and opinions shared on completed work was absent. (This should have been a sign for code reviews). In addition it was highlighted that task allocation did not actively reflect what developers were actively working on and the team felt this too was adversely affecting the development efforts. Although measures were taken to refectify such behaviors, as is discussed in Section (LINK COMMUNICATION / TASK BACKLOG REFELCTION), at the next retrospective on January 26th it was highlighted that the same issues had occurred once more. Furthermore some team members began to feel underutilised and it was noted that components of the system, the front end, testing and content based recommender, had not seen as much attention as required. To combat this the decision was made to adopt the sports model of role based development structure as the team split into two separate development subteams (reference sports + role model). 
 
+% After change to role system reflect on improvement to development (positive reflections)
+
 The decision was made to focus testing on the back end.
 There was a clear front end and back end team.
 Back end employed naturally developed roles - content based, collaborative, system, evaluator, testing  
@@ -581,6 +618,10 @@ Changing to a more structured development system did have an effect on productiv
 % Struggling to explain why it appeared that commits were fine which were in fact broken
 % REFERENCE: Good Agile code commit practices
 % ##################################################
+
+% Code reviews - negative reflection (we should have done code reviews)
+% Branching - neutral reflection (tutor guy didn't seem to like that we were all commiting to master so maybe talk cons of doing that in relation to lack of code reviews resulting in tensions with deleted code)
+% Pair programming - positive reflection (that should have been done more often)
 
 Story to paint here is the following:
 \begin{itemize}
@@ -627,7 +668,7 @@ Misc Points:
 % Currently a pool of notes
 % Two types of feature dropping:
 %  1. Dropped due to straying from cutomer vision - new user recommendations
-%  2. Dropped due to lack of time / project management / planning - recommendation reasons / system recommender saying contribution states from various other recommenders on the system recommendation / comparision of our system against other methods such as random guessing, etc.
+%  2. Dropped due to lack of time / project management / planning - recommendation reasons / system recommender saying contribution states from various other recommenders on the system recommendation / comparision of our system against other methods such as random guessing, etc - mention then fire off to relevant reflection point section 
 % ##################################################
 
 For example, if you found that you had to drop a feature during an iteration, discuss the reasons why the feature had to be dropped. Had you given yourselves too much work? Was the feature harder to implement than you realised? Had you got your priorities wrong? Then consider looking at the literature (see the recommended reading for PSD3) on project planning and estimation. Was your experience typical of a software project? What steps do other developers advocate for improving estimation?
