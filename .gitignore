@@ -9,6 +9,7 @@ coverage/
 .coverage
 check/
 checkpoints/
+tests/checkpoints/
 models/
 dissertation.pdf
 dissertation.out

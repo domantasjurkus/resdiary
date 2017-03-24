@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
 	sc = SparkContext('local[*]','Recommendation engine')
 	sc.setLogLevel("ERROR")
-        sc.setCheckpointDir("./checkpoints/")
+	sc.setCheckpointDir("./checkpoints/")
 	data = Data(sc)
 
 	algorithms = dict([(s.lower(), eval(s)) for s in Config.rcfg.sections()])
