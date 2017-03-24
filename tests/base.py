@@ -9,7 +9,7 @@ class BaseTestCase(object):
 	sc.setCheckpointDir("./tests/checkpoints/")
 
 	bookings = SQLContext(sc).read.csv(
-		os.path.dirname(__file__)+'/stubs/StubBookings.txt',
+		os.path.dirname(__file__)+'/stubs/data/stub_bookings.txt',
 		header=True,
 		inferSchema=True,
 		nullValue='NULL'

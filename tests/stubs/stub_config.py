@@ -2,7 +2,6 @@ from ConfigParser import RawConfigParser
 
 class StubConfig:
 
-	print "\n\nStub config loaded"
 	rcfg = RawConfigParser()
 	rcfg.read("tests/stubs/stub_config.cfg")
 

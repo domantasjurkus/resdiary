@@ -9,6 +9,10 @@ from config import Config
 class Data(Base):
     '''Stores all the utility functions related to data handling'''
 
+    def __init__(self, sc, config=Config):
+        super(Data, self).__init__(sc)
+        self.config = config
+
     def get_bookings(self, filename):
         '''Takes a filename and returns a DataFrame of booking data without
         users that have too much data to be real. Use this function to read
@@ -39,12 +43,12 @@ class Data(Base):
         '''Takes a DataFrame of bookings and returns an RDD list of
         (diner ID, restaurant ID) tuples that represent reasonable restaurant
         choices for each user.'''
-        data_transform = Data(self.spark)
-        data_dir  = Config.get("DEFAULT", "data_dir", str)
-        lat_diff  = Config.get("DEFAULT", "lat_diff", float)
-        long_diff = Config.get("DEFAULT", "long_diff", float)
-        restaurant_file = Config.get('DEFAULT', 'restaurant_file', str)
-        restaurants  = data_transform.read(
+        #DOM: data_transform = Data(self.spark)
+        data_dir  = self.config.get("DEFAULT", "data_dir", str)
+        lat_diff  = self.config.get("DEFAULT", "lat_diff", float)
+        long_diff = self.config.get("DEFAULT", "long_diff", float)
+        restaurant_file = self.config.get('DEFAULT', 'restaurant_file', str)
+        restaurants  = self.read(
             os.path.join(data_dir, restaurant_file)).collect()
 
         # maps each restaurant to its location expressed as a (lat, lon) tuple

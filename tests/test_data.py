@@ -4,13 +4,14 @@ from pyspark.rdd import RDD
 from pyspark.sql.dataframe import DataFrame
 
 from base import BaseTestCase
+from stubs.stub_config import StubConfig
 from src.data import Data
 
 class DataTest(unittest.TestCase, BaseTestCase):
 
 	@classmethod
 	def setUpClass(self):
-		self.data = Data(self.sc)
+		self.data = Data(self.sc, StubConfig)
 
 	def test_main(self):
 		# Test nearby restaurant detection

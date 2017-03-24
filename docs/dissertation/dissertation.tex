@@ -453,17 +453,37 @@ Although the aforementioned could have utilised to improve the team's cost estim
 % ##################################################
 
 % Was a testing model used?
+%	No
 % Should a testing model have been used?
+%	...
 % Why was testing important for this project?
-% When did the testing process start in the development cycle? 
-% Was it easy/hard to test and why?
+%	Testing helped ensure a consistent interface between classes and functions
+% When did the testing process start in the development cycle?
+%On the later part of the project lifetime
+% Was it easy/hard to test and why? Hard:
+% 	, it is not always easy to determine
+%	whether particular functions return sensible values, for example whether a
+%	a sensible subset of restaurants are filtered out for being too far. As such,
+%	the test suite of the project focuses on invoking such functions and inspecting
+%	the returned type.
 % Discuss why continuous integration was particularly important for the project
+% 	Jenkins, the continuous integration environment for this project, was useful for
+%	automatically running test cases after each comming to the source code. The integration
+%	of Cobertura provided coverage reports that helped indicating the parts of the project
+%	that required additional testing.
 % Would a TDD test strategy have been suitable?
+%	A test-driven development strategy would not have been sufficient due to the project
+%	being of R\&D nature. The project structure, class definitios and method signatures
+%	changed significantly throught the project - a TDD approach would have most likely
+%	caused continuous test case rewritting, slowing the entire project down.
 % Would the XP test strategy have been suitable?
-% Are there test strategies specifically for machine learning projects which could have been followed
+%	...
+% Are there test strategies specifically for machine learning projects which could have been followed?
+%	...
 % Could we have used test scenarios with and determined the levels of outcomes are acceptable for each scenario
 % Could we have set objective acceptance criteria and established the amount of error you and your users are willing to accept
-% What statistical level of confidence do we have regarding the accuracy of the system in relation to our conducted testing
+% What statistical level of confidence do we have regarding the accuracy of the system in relation to our conducted testing?
+%	Coverage percentage which, although different for classes, lines and conditionals, stands above 50%.
 
 % Should our testing have better utilised statisical measures in relation to the system accuracy
 
