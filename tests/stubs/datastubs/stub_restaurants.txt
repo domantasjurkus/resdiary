@@ -1,0 +1,26 @@
+RestaurantId,Name,Town,PricePoint,Lat,Lon
+4824,The Kitchin,Edinburgh,4,55.9770251,-3.1727333
+4825,Castle Terrace Restaurant,Edinburgh,NULL,55.9470942,-3.202605
+4835,Chaophraya Edinburgh,Edinburgh,3,55.9521411,-3.2029056
+4913,Rang Mahal,Dubai,3,25.1934701,55.2633306
+4915,Tong Thai,Dubai,3,25.1856,55.2566
+4943,Tayyabs,London,1,51.5170973,-0.0659835
+4974,Boteco do Brasil Glasgow,Glasgow,3,55.8572672,-4.2457382
+4984,The Dalziel Park Hotel,Motherwell,1,55.7985722,-3.9422849
+4993,James Street South,Belfast,2,54.5953805,-5.932214
+5015,Cristal Restaurant,Glasgow,NULL,55.9209118,-4.4787504
+5022,Barbarossa Pizzeria,Glasgow,3,55.8177185,-4.2616404
+5023,The Scran & Scallie,Edinburgh,NULL,55.9592744,-3.214688
+5027,Ashoka Ashton Lane,Glasgow,2,55.8746502,-4.2930578
+5030,Green Chilli Cafe,Glasgow,3,55.8663591,-4.2898287
+5031,Ashoka Westend (Argyle Street),Glasgow,3,55.8666894,-4.2899826
+5035,Ashoka Bearsden,Glasgow,3,55.9206268,-4.3328224
+5037,Ashoka Southside,Glasgow,3,55.8121795,-4.2695866
+5042,Operetta Restaurant,Glasgow,NULL,55.8604768,-4.2617528
+5043,Tony Macaroni City Centre,Glasgow,3,55.8623752,-4.2567165
+5050,Crewe Hall -The Brasserie,Crewe,3,53.0841628,-2.4233842
+5081,Palomino,Glasgow,2,55.864537,-4.2626035
+5086,The Meat Bar,Glasgow,NULL,55.863542,-4.260045
+5088,Angels Hotel,Glasgow,2,55.8225142,-4.0838496
+5089,The Parkville Hotel,Glasgow,2,55.7958038,-4.097241
+5113,Champagne Central,Glasgow,2,55.8604758,-4.2576916
