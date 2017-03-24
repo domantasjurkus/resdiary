@@ -67,7 +67,8 @@ module.exports = {
             return {
                 Restaurant: rest,
                 RecScore: recommendation[2],
-                CuisineType: cuisineT
+                CuisineType: cuisineT,
+                PricePoint: rest['PricePoint']
             };
         })
     },
@@ -175,7 +176,8 @@ module.exports = {
                 Restaurant: rest,
                 Score: sc,
                 BookingTime: bk,
-                CuisineType: cuisineT
+                CuisineType: cuisineT,
+                PricePoint: rest['PricePoint']
             };
         })
     },

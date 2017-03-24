@@ -56,6 +56,7 @@
                                 <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4> 
                                 <p>Location: <%=res.Restaurant.Town %></p>
                                 <p>Cuisine Type: <%=res.CuisineType %></p>
+                                <p>Price Point: <%=res.PricePoint %></p>
                                 <p>Visit Date: <%=res.BookingTime %></p>
                                 <p>User Rating: <%=res.Score %></p>
                             </div>
@@ -95,11 +96,11 @@
                         <% recommender.data.forEach(function(res) { %>
                             <div class="col-xs-12" data-rec="<%= recommender.name %>">
                                 <div class="res-recent-box" data-lat="<%=res.Restaurant.Lat %>" data-lon="<%=res.Restaurant.Lon %>">
-                                    <a href="/new_demo/user/<%= userId %>/<%= res.Restaurant.RestaurantId %>">
-                                        <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
-                                    </a>
+                                    <!-- <a href="/new_demo/user/<%= userId %>/<%= res.Restaurant.RestaurantId %>">  </a>-->
+                                    <h4><strong>Restaurant Name: </strong><%=res.Restaurant.Name %></h4>
                                     <p>Location : <%=res.Restaurant.Town %></p>
                                     <p>Cuisine Type: <%=res.CuisineType %></p>
+                                    <p>Price Point: <%=res.PricePoint %></p>
                                     <% if (recommender.name != "system") { %>
                                         <p>Recommendation score: <%=parseFloat(res.RecScore).toFixed(2)%></p>
                                     <% } %>
