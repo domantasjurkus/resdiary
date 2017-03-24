@@ -628,7 +628,7 @@ Reasons for the failure of the anarchy include the following reasons:
 Changing to a more structured development system did have an effect on productivity (testing improved - we actually had some, front end redesign was rad, more defined roles resulted in better communication within the team)
 
 
-\subsection{REFLECTION POINT - Code Reviews \& Branching \& Pair Programming}
+\subsection{REFLECTION POINT - Code Reviews \& Branching}
 \label{sec:codereviewbranch}
 % ##################################################
 % LAST EDIT:  19/03/17  Joseph
@@ -637,18 +637,22 @@ Changing to a more structured development system did have an effect on productiv
 % Very, very, rough
 % Struggling to explain why it appeared that commits were fine which were in fact broken
 % REFERENCE: Good Agile code commit practices
+
+% Decided to make pair programming its own reflection point as it had positive effect on development
+% Reasonable to suggest some team members used it in place of code reviews due to system design, need for guide for inexperienced developers 
+% getting into unfamiliar component fast 
+
 % ##################################################
 
 % Code reviews - negative reflection (we should have done code reviews)
 % Branching - neutral reflection (tutor guy didn't seem to like that we were all commiting to master so maybe talk cons of doing that in relation to lack of code reviews resulting in tensions with deleted code)
-% Pair programming - positive reflection (that should have been done more often)
 
 Story to paint here is the following:
 \begin{itemize}
 \item Start by explaining why the lack of branching
 \item Explain why code reviews were needed
 \item Explain how and why code reviews would have been beneficial - allow for branching and have code reviews upon merging / semi regularly
-\item Suggest pair programming as an alternative to code reviews
+\item Suggest pair programming as an alternative to code reviews and fire off reference to reflection point
 \item Summarise the pair programming which occurred and why it was beneficial ending with it should have been done more
 \end{itemize}
 
@@ -675,8 +679,29 @@ Misc Points:
 \item Code reviews might have improved development efficency as less time spent refactoring and fixing broken code. Reduced arguments caused due to deleting other people's code prior to full implementation. Branching also would have fixed this as only get back to master upon passing all tests. This would require testing to have been more efficent as well thus suggesting test strategy should have been utilised to improve test efficency.
 \item (Lecture 26) Outline of inspection methods - should probably mention which we should have used in the code reviews.
 \item (Lecture 8) Change management and the conflicts caused from developers working in parallel and contributions are made to the master branch which are not fully implemented or break some aspect of the system. In hindsight this probably should have justified a separate branch which would be integrated into the master upon passing all of the tests with a successful build in Jenkins the continuous integration system.
-\item Pair programming done for design / initial coding of front end of application. Similarly done for aspects of the back end development of the project - well somewhat pair programming where one guy would bounce ideas and assist another in the structure and functionality of that particular aspect of the project. Potential spin for the front end is that a more experienced front end developer Josh worked with a less expereienced developer Joseph and the benefits of this (see note on pair programming on wiki somewhere for similar argument)
 \end{itemize}
+
+
+\subsection{REFLECTION POINT - Pair Programming \& Mini Front End Technical Reflection}
+\label{sec:pairprogramming}
+% ##################################################
+% LAST EDIT:  20/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
+% Pair programming was benefical to the project and developers
+% Yes... it was
+% This talks about the practice in general and the specific incidents and why they were beneficial to us
+% Also mini reflection on front end technology choice (we had all used Node from IS project though embedded JS was new)
+% ##################################################
+
+% This had a positive effect for the padawan developers of the unfamilar aspects of the system and getting them to a confidence level where they felt better
+% prepared to jump in and figure things out for themselves - back up this as a legit practive via references.
+
+Start with the suggestion some of the team wished to conduct the practice for primarily two reasons. 1. Used in place of code reviews in later stages of project where time was precious and establishing a proper code review procedure not beneficial (no point when there's only N weeks remaining and code reviews sparsely). 2. Used by unconfident developers (Dom with back end system - brought up to a level where ready to jump into testing and configuration work) / (Joseph with front end development having mainly only done back end web development / very little JavaScript in the past) to bring them up to a confidence level where they felt better prepared with an initially scary aspect of the system.
+
+The idea to get across here is pair programming allowed inexperienced developers to learn a great deal in a short period of time and then have the confidence levels and basic knowledge to take up the reigns and start running.
+
+With the front end especially this allows for a mini-technical retrospective regarding the choice of Node and embedded JavaScript. All of team had used Node from past IS project though embedded JavaScript was new. Could talk about how this introduced an additional learning curve from the front end. Explain why it was used (lead developer Josh very familar and allowed him to work faster in getting all the key functionality setup).
 
 
 \subsection{REFLECTION POINT - Dropping Features}
@@ -706,6 +731,10 @@ Why does scope creep occur?
 Discuss which of these made their way into our project and methods of avoiding them. End with the team did well to kill the feature in the crib at the RnD stage.
 
 Potentially reflect on case studies of examples where scope creep / feature creep went bad
+
+This should include information on the features of the front end - Google map integration / restraunt specific page - originally planned. However the version presented which only show restraunt names with some additional info (cuisine type, price point, etc.) presented the recommendations in a convincing enough manner that the proposed feature seemed overkill / unnecessary and the time refocused to other aspects of the application - the documentation (Josh and Joseph), updating the existing front end to work with additional systems and show other cuisine types and price point (Dom and Joseph) and testing (Dom).
+
+When saying a feature was dropped reflect where the time went instead and why. E.g. front end example above. E.g. Evaluation of system recommender stating where the recommendations (which recommenders primarily made up) cam from - time was refocused on auto configurating and code refactoring instead. Justify why the time was better spent than attempting to rush a feature and back up the claim there isn't point in rushing out a feature with academic sources. Positive response from the team to a bad situation of being forced to drop features.    
 
 Misc note from section 2:
 While this particular feature had been viewed as a bonus feature from the outset of development the team felt based on the customer’s feedback that the customers were not particularly interested in such a feature. Research conducted earlier had shown that making recommendations of this type were primarily a search based recommendation whereas the customer’s interests lay instead in recommendations based on similarity between users. As such the development resources were instead focused on the aforementioned goals of producing a more accurate collaborative and content based recommendation system and the production of a high quality front end to professionally display system output. 
