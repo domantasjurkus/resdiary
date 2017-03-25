@@ -5,6 +5,7 @@ from pyspark.sql import SQLContext
 from src import evaluator
 from base import BaseTestCase
 from stubs.stub_algorithm import StubCuisineType
+from stubs.stub_config import StubConfig
 
 class EvaluatorTest(unittest.TestCase, BaseTestCase):
 
@@ -18,7 +19,8 @@ class EvaluatorTest(unittest.TestCase, BaseTestCase):
 		score = evaluator.evaluate(
 			self.sc,
 			StubCuisineType(self.sc),
-			self.bookings
+			self.bookings,
+			StubConfig
 		)
 
 		self.assertTrue(isinstance(score, float));
