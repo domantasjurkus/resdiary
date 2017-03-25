@@ -1,0 +1,3 @@
+Pair programming:
+https://collaboration.csc.ncsu.edu/laurie/Papers/XPSardinia.PDF  -- benefits & costs
+http://www.extremeprogramming.org/rules/pair.html  -- benefits & costs
