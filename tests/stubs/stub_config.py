@@ -26,14 +26,17 @@ class StubConfig:
 
 	@staticmethod
 	def set_weights(weights):
-		print "StubConfig::set_weights"
-		print weights
 		for recommender, weight in zip(StubConfig.get_recommenders(), weights):
-			print "From config:", recommender, weight
 			StubConfig.rcfg.set(recommender, 'weight', str(weight))
 		StubConfig.save_changes()
 
 	@staticmethod
+	def set_hyperparameters(recommender, parameters):
+		for name, value in parameters.items():
+			StubConfig.rcfg.set(recommender, name, str(value))
+		StubConfig.save_changes()
+
+	@staticmethod
 	def save_changes():
-		with open('default.cfg', 'wb') as configfile:
+		with open('tests/stubs/stub_config.cfg', 'wb') as configfile:
 			StubConfig.rcfg.write(configfile)

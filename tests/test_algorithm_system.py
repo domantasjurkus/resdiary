@@ -67,8 +67,12 @@ class SystemAlgorithmTest(unittest.TestCase, BaseTestCase):
 		self.alg.recommenders = temp
 
 	def test03_learn(self):
-		# Trigger hyperparameter learning without saving the config values
-		self.alg.learn_hyperparameters(self.bookings, save=False)
+		# Set all weights to -1
+
+		# Trigger hyperparameter learning
+		self.alg.learn_hyperparameters(self.bookings)
+
+		# Inspect if the weights have changed
 
 
 	@classmethod

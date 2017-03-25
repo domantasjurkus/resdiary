@@ -21,19 +21,23 @@ class Recommender(Base):
 
     __metaclass__ = ABCMeta
 
+    def __init__(self, spark, config=Config):
+        super(Recommender, self).__init__(spark)
+        self.config = config
+
     @abstractmethod
-    def train(self, data, load=False):
+    def train(self, data, load=False): # pragma: no cover
         """Takes a DataFrame of bookings. Doesn't return anything."""
         raise NotImplementedError("Don't use this class, extend it")
 
     @abstractmethod
-    def predict(self, data):
+    def predict(self, data): # pragma: no cover
         '''Takes an RDD list of (userID, restaurantID) pairs and returns a
         DataFrame with the schema:
         Recommendation(userID, restaurantID, score).'''
         raise NotImplementedError("Don't use this class, extend it")
 
-    def learn_hyperparameters(self, data, save=True):
+    def learn_hyperparameters(self, data, save=True): # pragma: no cover
         '''Takes a DataFrame of bookings and learns optimal values for all the
         hyperparameters.'''
         raise NotImplementedError("Don't use this class, extend it")
@@ -44,12 +48,12 @@ class System(Recommender):
 
     def __init__(self, spark):
         super(System, self).__init__(spark)
-        recommenders = Config.get_recommenders()
+        recommenders = self.config.get_recommenders()
         self.recommenders = dict((name, eval(name)(self.spark))
                                  for name in recommenders)
-        self.weights = dict((name, Config.get(name, 'weight'))
+        self.weights = dict((name, self.config.get(name, 'weight'))
                                  for name in recommenders)
-        self.recommendations_per_user = Config.get("System", "recs_per_user")
+        self.recommendations_per_user = self.config.get("System", "recs_per_user")
 
     def train(self, data, load=False):
         for name, recommender in self.recommenders.iteritems():
@@ -76,12 +80,12 @@ class System(Recommender):
                                for user, restaurants in recommendations.items()
                                for restaurant, score in restaurants]
         return SQLContext(self.spark).createDataFrame(top_recommendations,
-                                                      Config.get_schema())
+                                                      self.config.get_schema())
 
-    def learn_hyperparameters(self, data, save=True):
+    def learn_hyperparameters(self, data):
         recommenders = self.recommenders.keys()
         best_evaluation = 0
-        maximum_weight = Config.get('System', 'maximum_weight')
+        maximum_weight = self.config.get('System', 'maximum_weight')
         # for each combination of weights that we are considering
         for weights in self.generate_weights(maximum_weight):
             # apply the weights
@@ -93,8 +97,7 @@ class System(Recommender):
                 best_evaluation = evaluation
                 best_weights = weights
         # write the new combination to the config file
-        if save == True:
-            Config.set_weights(best_weights)
+        self.config.set_weights(best_weights)
 
     def generate_weights(self, maximum_weight):
         '''Takes a maximum weight and generates all possible combinations of
@@ -144,10 +147,10 @@ class ALS(Recommender):
 
     def predict(self, data):
         return SQLContext(self.spark).createDataFrame(
-            self.model.predictAll(data), Config.get_schema())
+            self.model.predictAll(data), self.config.get_schema())
 
     def get_parameters(self, recommender_name):
-        return  dict((name, Config.get(recommender_name, name, t))
+        return  dict((name, self.config.get(recommender_name, name, t))
                               for name, t in [('rank', int),
                                               ('iterations', int),
                                               ('lambda', float)])
@@ -162,16 +165,16 @@ class ALS(Recommender):
         yield x
         x += jump
 
-    def learn_hyperparameters(self, bookings): # pragma: no cover
+    def learn_hyperparameters(self, bookings):
         bookings = Data(self.spark).get_bookings_with_score(bookings)
         data, test_ratings = bookings.randomSplit([0.8, 0.2])
         testdata = test_ratings.rdd.map(lambda r: (r[0], r[1]))
         best_mse = float('inf')
         parameter_names = ['rank', 'iterations', 'lambda']
         types = [int, int, float]
-        range_values = [(Config.get('DEFAULT', 'min_' + parameter, t),
-                         Config.get('DEFAULT', 'max_' + parameter, t),
-                         Config.get('DEFAULT', parameter + '_step', t))
+        range_values = [(self.config.get('DEFAULT', 'min_' + parameter, t),
+                         self.config.get('DEFAULT', 'max_' + parameter, t),
+                         self.config.get('DEFAULT', parameter + '_step', t))
                         for parameter, t in zip(parameter_names, types)]
         for parameters in map(lambda v: dict(zip(parameter_names, v)),
                               product(*range_values)):
@@ -182,7 +185,7 @@ class ALS(Recommender):
                 best_parameters = parameters
                 best_mse = mse
         if best_mse < float('inf'):
-            Config.set_hyperparameters(type(self).__name__, best_parameters)
+            self.config.set_hyperparameters(type(self).__name__, best_parameters)
 
 class ExplicitALS(ALS):
     '''Generates recommendations based on review data.'''
@@ -226,12 +229,12 @@ class CuisineType(Recommender):
     '''Generates recommendations based on a diner's prefered cuisine types.'''
     
     def train(self, bookings, load=False):
-        minimum_like_score = Config.get('CuisineType', 'minimum_score')
+        minimum_like_score = self.config.get('CuisineType', 'minimum_score')
 
         # stores a set of cuisines for each restaurant
         self.restaurant_cuisine = defaultdict(set)
-        filename = os.path.join(Config.get('DEFAULT', 'data_dir', str),
-                                Config.get('CuisineType', 'filename', str))
+        filename = os.path.join(self.config.get('DEFAULT', 'data_dir', str),
+                                self.config.get('CuisineType', 'filename', str))
         for entry in Data(self.spark).read(filename).collect():
             restaurant = entry['RestaurantId']
             self.restaurant_cuisine[restaurant].add(entry['CuisineTypeId'])
@@ -255,7 +258,7 @@ class CuisineType(Recommender):
                            for diner, restaurant in diners_restaurants]
         recommendations =  self.spark.parallelize(recommendations)
         return SQLContext(self.spark).createDataFrame(
-           recommendations, Config.get_schema())
+           recommendations, self.config.get_schema())
 
 class PricePoint(Recommender):
     '''For each diner, generates recommendations based on the average price
@@ -264,8 +267,8 @@ class PricePoint(Recommender):
     def train(self, bookings, load=False):
         # record the price point of each restaurant
         self.restaurant_price_point = {}
-        filename = os.path.join(Config.get('DEFAULT', 'data_dir', str),
-                                Config.get('DEFAULT', 'restaurant_file', str))
+        filename = os.path.join(self.config.get('DEFAULT', 'data_dir', str),
+                                self.config.get('DEFAULT', 'restaurant_file', str))
         for entry in Data(self.spark).read(filename).collect():
             price_point = entry['PricePoint']
             if price_point is not None:
@@ -288,7 +291,7 @@ class PricePoint(Recommender):
 
         # calculate averages if possible, otherwise resort to default price
         # point value in the config file
-        default_price_point = Config.get('PricePoint', 'default_price_point')
+        default_price_point = self.config.get('PricePoint', 'default_price_point')
         self.restaurant_default_price_point = (
             sum(self.restaurant_price_point.values()) /
             len(self.restaurant_price_point.values())
@@ -306,9 +309,9 @@ class PricePoint(Recommender):
                 restaurant, self.restaurant_default_price_point)
             diner_price_point = self.diner_average_price_point.get(
                 diner, self.diner_default_price_point)
-            score = (Config.get('PricePoint', 'maximum_price_point') -
+            score = (self.config.get('PricePoint', 'maximum_price_point') -
                      abs(restaurant_price_point - diner_price_point))
             recommendations.append((diner, restaurant, score))
 
         return SQLContext(self.spark).createDataFrame(
-            self.spark.parallelize(recommendations), Config.get_schema())
+            self.spark.parallelize(recommendations), self.config.get_schema())
