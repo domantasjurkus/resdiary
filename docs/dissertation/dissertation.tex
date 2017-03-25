@@ -343,6 +343,8 @@ Misc Points:
 \item Reference papers and libarires to justify why Python 
 \item Demonstrate that the research conducted was relevant
 \item Was Python the correct choice - research conducted proved Python and C\# integration wouldn't be an issue. However as the customer lacked Python knowledge it probably deterred them from wishing to integrate our system into their existing one. Had the system been created in C\# then perhaps this would have been different. Perhaps this should have been better discussed with the customer in the initial stages of the project.
+\item Python chosen as development language as majority of the team have at least two years development experience with it minimum
+\item Python industry standard for machine learning projects and thus has a lot of pre-existing libraries the team could utilise during development
 \end{itemize}
 
 
@@ -593,6 +595,8 @@ Misc points:
 % ################# Comment Log ####################
 % REFERENCE: Developer Anarchy - article || paper on it
 % REFERENCE: Sports model of team structure - roles
+%
+% Perhaps tie in the mythical man month refelction to the ending better as well
 % ##################################################
 
 % I feel like I have written the words 'component' and 'aspect' a lot in this section
@@ -617,28 +621,8 @@ Embarcement of this model saw the productivity of the team vastly increase, part
 While the team still embraced the anarchy philosophy of allowing developers to aid development of different components as desired, having lead section developers established expertise within the team of the various system components. This allowed created a communication loop where developers unfamilar with one aspect of the system knew exactly who to ask their quieries regarding the specifics of the implementation. This was extremely beneficial for the testing development as the lead system tester would often have a query regarding testing one specific aspect of the system and could get a rapid response through asking the lead feature developer about the specific thus reducing the time required to implement the test case which in turn improve the test developers efficeny. Additionally this system improved the feature specific testing as the lead developer fo the component could provide feedback to the tester regarding how to further improve and developer particular tests in order to better verify and test the system.   
 
 % End with what the team learned - saw the dangers of too many developers attempting to work on same aspect and avoided it / how for more complex projects structure was needed and pure anarchy would not suffice.
-Through experimentation of the development structure the team eventually found a system which they were comfortable with which resulted in development occurring at a steady pace. This occurred when the distinct, over-arching 'recommendation system' and 'display application' subteams were established and lead developer roles taken up regarding specific subcomponents of those larger topics. In part this decision to subdivide was a natural process as the first few months of 'developer anarchy' allowed the team to experiment with different sections of the development and gave developers the freedom to work on whatever component they believed to be the most important and interesting. Although not a traditional 'Scrum structure' the team found this initial approach to be beneficial when the time came to subdive into teams as the initial developer freedom saw some team members gravitate towards and away from some aspects of the development based off the past experience working with that particular component during the initial stages of the development. As such the team believes that the organisational transition from complete anarchy to a subdivision structure was a natural evolution as developers found the roles they enjoyed and believed they were of most use to the overall development of the project. Although the approach could have been taken to subdivide earlier or from the outset of the project, the team enjoyed the freedom to experiment during the initial stages of the project and view it as having a postive impact towards each developer's initial understanding of the system and how they might best be of use to a successful development process. 
-% Possibly tie in man month as well with the end though if anything goes in this section it will probably be that part     
-
-
-% HERE is notes downwards
-Why did it fail?
-People did not communicate effectively
-People did not wish to do what they viewed as less important tasks - front end / testing
-Underestimated the complexity of building such a system and the time required to do so - prototyping, etc.
-
-Anarchy would explain the lack of time estimates and product owner however.
-
-Reasons for the failure of the anarchy include the following reasons:
-
-\begin{itemize}
-\item Failure to communicate between the team - people weren’t discussing what they were actively working on, tickets didn’t reflect what people were working on, people didn’t yield results in an efficient enough manner.
-\item Failure to fully understand domain - anarchy structures require huge expertise of the problem domain which regardless of how smart you are you cannot gain a grasp of in a few weeks. There’s a reason we pay for years worth of experience in a field / industry.
-\item Motivation took a hit over Christmas (it was the holidays)
-\item (Lecture 6) The sports model of role based development structure - the team adopted this model in the second half of development.
-\item (Lecture 6 / Lecture 7) The team paid measure to the Mythical Man Month text in order to avoid too many cooks entering the back end development after the team split to focus on the front and back end split.
-\end{itemize}
-
+Through experimentation of the development structure the team eventually found a system which they were comfortable with which resulted in development occurring at a steady pace. This occurred when the distinct, over-arching 'recommendation system' and 'display application' subteams were established and lead developer roles taken up regarding specific subcomponents of those larger topics. In part this decision to subdivide was a natural process as the first few months of 'developer anarchy' allowed the team to experiment with different sections of the development and gave developers the freedom to work on whatever component they believed to be the most important and interesting. Although not a traditional 'Scrum structure' the team found this initial approach to be beneficial when the time came to subdive into teams as the initial developer freedom saw some team members gravitate towards and away from some aspects of the development based off the past experience working with that particular component during the initial stages of the development. As such the team believes that the organisational transition from complete anarchy to a subdivision structure was a natural evolution as developers found the roles they enjoyed and believed they were of most use to the overall development of the project. Although the approach could have been taken to subdivide earlier or from the outset of the project, the team enjoyed the freedom to experiment during the initial stages of the project and view it as having a postive impact towards each developer's initial understanding of the system and how they might best be of use to a successful development process.
+    
 
 \subsection{REFLECTION POINT - Code Reviews \& Branching}
 \label{sec:codereviewbranch}
@@ -703,7 +687,7 @@ Misc Points:
 \subsection{REFLECTION POINT - Pair Programming}
 \label{sec:pairprogramming}
 % ##################################################
-% LAST EDIT:  20/03/17  Joseph
+% LAST EDIT:  25/03/17  Joseph
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
 % REFERENCE:  XP Programming Website
@@ -715,18 +699,18 @@ Misc Points:
 % Instead its main benefit was getting the final version of the front end established in a manner which allowed for rapid additional developments to occur.
 % That I learnt a thing or two along the way is a side point to mention in the passing.
 
-% Reflection here is the team decided to give it a shot and found it beneficial
-% Saw the advantages of it in effect and wishes they had done it earlier and more often
+% Reflection here is the team decided to give it a shot because its used frequently in industry and found it to be a beneficial practice
+% Saw the advantages of it in effect and wished it had been done earlier and more frequently
 
-Used in place of code reviews in later stages of project where time was precious and establishing a proper code review procedure not beneficial (no point when there's only N weeks remaining and code reviews sparsely). 
 % Give a rough estimate of the time as to tie into end point of team wishing they had done it more often
 
-Example case - used in the setup of the node and initial setup of the display application (css \& html pre-written). No sense in the two developers working on the same component simultaneously but individually so instead it made sense to use the opportunity to conduct pair programming exercise. This would also allow each developer to know the full extent of the system progress which they could then work on at a later time independently but the same base knowledge of the system was established between both developers as they had both developed it. This saved time later in the project as the code was also written to a higher standard (see reference of pair programming on XP programming). 
-% Get across the economic and design benefits of conducting this process from above references
+Used primarily for the initial development work for the front end. The team wanted the opportunity to perform pair programming as it is an industry practice. The initial development work for the revised version of the display application was an ample opportunity to do so it was used in the setup of the node and initial setup of the display application (css \& html pre-written). No sense in the two developers working on the same component simultaneously but individually so instead it made sense to use the opportunity to conduct pair programming exercise. This would also allow each developer to know the full extent of the system progress which they could then work on at a later time independently but the same base knowledge of the system was established between both developers as they had both developed it. This saved time later in the project as the code was also written to a higher standard (see reference of pair programming on XP programming). This was the most significant period of pair programming conducted although it also occurred with bug fixing and other smaller development work on different aspects of the display application system.
+
+Get across the economic and design benefits of conducting this process from above references
 
 Get across the idea that although not intended as a mentor student relationship it was beneficial in the learning of developers. It established the common system knowledge.
 
-End with its a process that the team wishes they had conducted earlier and more often.
+End with its a process that the team wishes they had conducted earlier and more often and possibly suggest some features where it would have proved beneficial - one might be setting up tests for certain aspects of the system. 
 
 
 \subsection{REFLECTION POINT - Dropping Features}
