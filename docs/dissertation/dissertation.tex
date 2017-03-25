@@ -413,7 +413,7 @@ Misc Points:
 
 From the outset of the project the team were aware of the need to properly capture the requirements of the project. It is widely documented that two of the primary reasons for software failure is due to building the wrong system and building the system incorrectly (said in lecture 3 - get academic proof) both of which were major threats to the development of our project. The team was mindful of how easily building an incorrect system, one not based off similarity between users, or selection of the incorrect machine learning model and subsequent project failure could occur in our project. 
 
-Adhering to the advice of avoiding early commitment to a particular design solutions during the requirements elicitation process as is discussed in Section (reference case study reflection at technical overview point) the team left the decision regarding the specific models and tool choice until after this phase was conducted. Although the requirements would evolve as the project developed, as is to be expected, the team felt with the correct initial system goals established the team could easily justify decision designs in relation to the key goals of the system. Such technical decisions, specifically the choice of development language, machine learning models and clustered computing framework, are discussed in Sections (reference all three technical reflections) respectively. 
+Adhering to the advice of avoiding early commitment to a particular design solution during the requirements elicitation process as is discussed in Section (reference case study reflection at technical overview point) the team left the decision regarding the specific models and tool choice until after this phase was conducted. Although the requirements would evolve as the project developed, as is to be expected, the team felt with the correct initial system goals established the team could easily justify decision designs in relation to the key goals of the system. Such technical decisions, specifically the choice of development language, machine learning models and clustered computing framework, are discussed in Sections (reference all three technical reflections) respectively. 
 
 Knowing the significance of the requirements engineering process for the sucessful development of the project, the team dedicated the first milestone to ensuring the proposed system to be built was correct. This occurred in parallel with technical research into similar systems and their creation (reference Netflix research from section 2). To ensure the team captured all functionality of the system the team, having conducted the initial customer interview, prepared a requirements specification document which was later refined through customer discussions (reference section 2 requirements section). 
 
@@ -429,7 +429,7 @@ One shortcoming of the use of stories however was the measure of priority attach
 Another area of improvement in the requirement gathering process would have been the inclusion of use scenarios in the “Given, When, Then” format. This is a natural progression of user stories as it expands upon an individual story to provide an example of it in action. Such scenarios could then be utilised to allow for further refinement discussions to occur with the customer in order to establish conditions of system acceptance and thus form the basis of acceptance and scenario testing to be conducted on our system. Such tests are absent and would have improved our testing process as is discussed in Section (reference testing reflection point).  
 
 % Tidy up the ending better - more postive - team did well in this regard and so should end on positive note
-Although the aforementioned could have utilised to improve the team's cost estimation and test process for the project, the team established a good understanding of the customer's vision and corresponding system requirements. This ultimately showed during the various customer demonstration where by second to last meeting they encouraged to the team to follow where we saw the development of the system going as they were already impressed and pleased with the results. This level of confidence placed in the team we feel showed we had a good initial grasp of the system and thus were able to deliver and take steer the project in the direction we saw it heading towards the later stages of the project. 
+Although the aforementioned could have utilised to improve the team's cost estimation and test process for the project, the team established a good understanding of the customer's vision and corresponding system requirements. This ultimately showed during the various customer demonstrations where by second to last meeting they encouraged to the team to follow where we saw the development of the system going as they were already impressed and pleased with the results. This level of confidence placed in the team we feel showed we had a good initial grasp of the system and thus were able to deliver and take steer the project in the direction we saw it heading towards the later stages of the project. 
 
 % Here downwards is notes
 \begin{itemize}
@@ -444,82 +444,81 @@ Although the aforementioned could have utilised to improve the team's cost estim
 \end{itemize}
 
 
-\subsection{REFLECTION POINT - Testing}
+\subsection{REFLECTION POINT - Testing and Continuous Integration}
 \label{testing}
 % ##################################################
-% LAST EDIT:  19/03/17  Joseph
+% LAST EDIT:  25/03/17  Dom
 % NOTE:       TODO
 % ################# Comment Log ####################
 % ##################################################
 
-% Was a testing model used? 																No
-% Should a testing model have been used? 													...
-% Why was testing important for this project?												Testing helped ensure a consistent interface between classes and functions
-% When did the testing start in dev cycle?  												During the later part of the project lifetime
-% Would the XP test strategy have been suitable?  											...
-% Are there machine learning specific test strategies which could have been followed?  		...
+% Importance of Testing
+Testing is an important aspect of any large-scale software project.
+Testing helps assert the quality of the software by ensuring that the essential requirements of the system are met.
+Detecting and fixing faults early on reduces the cost of fixing those faults in the future.
+Testing helps ensure the software is reliable and does not break under non-standard scenarios, such as when fed malformed input.
 
-
-% General outline of testing:
-% A suite of unit tests was written to ensure that each commit did not break the execution of the project.
-
-% Was it easy/hard to test and why? 
-% Hard: it is not always easy to determine whether particular functions return sensible values, for example whether a sensible subset of restaurants are filtered out for being too far. As such, the test suite of the project focuses on invoking such functions and inspecting the returned type.
-
-% Discuss why continuous integration was particularly important for the project:
-% Jenkins, the continuous integration environment for this project, was useful for automatically running test cases after each comming to the source code. The integration of Cobertura provided coverage reports that helped indicating the parts of the project that required additional testing.
-% The unit tests were set up to run on Jenkins, a continuous integration environment. Jenkins was set up to push notifications to the team's communication channel whenever a test case would fail. This enabled early notification of issues, allowing the team to patch up bugs early on. Jenkins also provided coverage reports for the source files, indicating the percentage of classes, conditionals and lines covered.
-
+% Testing Strategy Considerations
+% Why was testing important for this project?
+Tests were useful for our project as they helped ensure a consistent interface among classes and functions. The test suite aided in minimising the disruption caused by rapid, concurrent changes to the various project components.
+Although no strict testing model was enforced during development, the team agreed that the general testing principles of Extreme Programming would be applied during the project.
 % Would a TDD test strategy have been suitable? 
-% A test-driven development strategy would not have been sufficient due to the project being of R\&D nature. The project structure, class definitios and method signatures changed significantly throught the project - a TDD approach would have most likely caused continuous test case rewritting, slowing the entire project down.
+% 	A test-driven development strategy would not have been sufficient due to the project being of R\&D nature. The project structure, class definitios and method signatures changed significantly throught the project - a TDD approach would have most likely caused continuous test case rewritting, slowing the entire project down.
 
-% What statistical level of confidence do we have regarding the accuracy of the system in relation to our conducted testing? 
-% Coverage percentage which, although different for classes, lines and conditionals, stands above 50
+% Actual Testing
+% When did the testing start in dev cycle?
+%	During the later part of the project lifetime
+% Why was it late?
+%	Due to the experimental nature of the project, early tests would have most likely been rewritten
+% There was an overlap between testing and evaluaton
+For our project the team decided to have one developer dedicated to the task of testing the system. % Possibly reference this as an industry practice and talk about why the team thought it would be suitable to use this setup for the project. Why it fell in line with our role based sports model from team structure reflection point.
+Initially the testing comprised of the creation of a suite of unit tests to ensure that each alteration to the source code did not break the execution / build of the system.
+Due to the concurrent development of multiple components of the system, the test suite was helpful in signaling issues early on when expected functionality was not performant, or an expected interface was broken. In particular, concurrent work on multiple recommenders often caused issues when recommendations were merged into the System recommender. These issues were caught and signaled by the test suite, enabling team members to patch broken builds in an efficent manner, allowing the development process to continue smothly.
+%Initially it was if the broken builid was reported that the team corrected it immediately - this slacked off a little later in the development cycle but it was still done to a high standard / fast pace. (Quote figures from Jenkins reports in relation to response time as evidence (if they back up this claim) with relation to industy / academic response rate recommendations)
 
-% What could have been improved?
-% A notable shortcoming was that tests were not written under any particular testing strategy. This lead to the discovery of several modules missing tests cases, and some tests using untested modules. Following a stricter test plan would have led to more systematic test development, allowing to uncover the beforementioned problems earlier.
+% Integration testing
+Integration testing was performed by running the System recommender in conjunction with other recommenders.
 
+% Regresion testing
+After integrating the System recommender with other units of code, unit tests served as regression tests for ensuring that existing functionalitydid not fall apart after using the system as a whole.
 
+% Continuous integration
+The test suite for the project was set up to run on Jenkins, a continuous integration environment. Automatic test cases ran after each commit to the source code. In case of failure, the team would be instantly notified of a broken build. This enabled early awareness of issues, allowing the team to patch up detected bugs before proceeding to add new features.
+Jenkins was also configured to provided coverage reports for the source files, indicating the proportion of the project covered by test cases.
+
+% Coverage
+% Reference and talk about why code coverage reports are beneficial in industry and how they can be used to improve testing as we did - reflect that this was a good thing the team did and ultimately helped drive and improve the test process
+Coverage is a statistical metric indicating the proportion of source code covered by unit tests. 
+The Cobertura extension to Jenkins provided the team with a detailed visual representation of the coverage reports, indicating the percentage of classes, conditionals and lines covered. These reports helped drive the testing process by identifying the portions of the source code which were in need of testing.
+
+% Acceptance tests
+% Two ways to spin this:
+% 1. Claim that acceptance tests were present:
+Acceptance tests were conducted in person with the stakeholders of the project. A presentation displaying several arbitrary diners, their recent bookings and the generated recommendations indicated the sensibility of the engine which met the expected behaviour as defined by user stories.
+% 2. Say that there is a lack of acceptance tests
+% For example let's say there are no acceptance tests but these were identified a type of testing which would have been beneficial if included. Explain why this would have been beneficial, what extra level of awesome it would have brought to the project and then talk about the steps we could have taken to implemented it into the project.
+
+% Shortcoming and how testing could have been improved
+% Explain shortcomings of the testing system used and potential alternatives - one I can recall being that some code was commit which passed tests but broke some functionality of the system. Part of this was due to having a tester who obviously couldn't write tests for code that had just been commit but also may have been due to system not being tested in that regard or something.
+A notable shortcoming of the testing was that tests were not written under any particular strategy. This lead to the discovery of several modules missing tests cases, and some tests using untested modules. Following a stricter test plan would have led to more systematic test development, allowing to uncover the beforementioned problems earlier. Mutation testing is another benefit that could have been leveraged by inspecting the test cases themselves and whether they are able to detect edge-cases in the source code.
+
+Performance tests could have been a useful addition to the test suite, however it was difficult to perform such tests due to the project's direct dependency on Spark. The potential speed of computing recommendations was maximised by tweaking the configuration for Spark to use multiple cores. Stress tests would have also been beneficial in order to inspect the behaviour of the engine when processing overly-large files.
+
+A stronger emphasis on acceptance testing would have benefited the team in assuring that the project meets the expectations. Although there were considerations on testing the front-end portion of the project, it was agreed that such tests were not essential for the presentation of the recommendations.
+
+%
+% Harsh questions that are partially answered
+%
+% Are there test strategies specifically for machine learning projects which could have been followed?
+% 	Yes, I believe this goes back to evaluating and calculating mean squared error, this is what Paulus and Edward did.
 % Could we have used test scenarios with and determined the levels of outcomes are acceptable for each scenario ?
+% 	Determining 'levels of outcomes' is hard, not sure about this
 % Could we have set objective acceptance criteria and established the amount of error you and your users are willing to accept ?
-% Should our testing have better utilised statisical measures in relation to the system accuracy ?
+% 	Yes, setting acceptance criteria from the user stories would have been useful, but establishing the amount of error users are willing to accept is hard due to qualitative results from the engine.
+% Should our testing have better utilised statisical measures in relation to the system accuracy?
+%	Yes, the statistical part was tricky, that's why most testing resided withing unit testing.
 % Could the testing have provided internal feedback on the efforts of the application. First, evaluate the application according to the acceptance criteria. Second, be prepared to support those assertions in statistical terms; for example, be 95 percent confident that the application will produce an answer within a given range. Last, have a high-level understanding of the underpinnings of the application, so that any deficiencies might be able to be ascribed to a particular application component.
 
-
-% TODO: READ THE FOLLOWING AND NOTE ANY IDEAS
-% http://pages.cs.wisc.edu/~dpage/cs760/evaluating.pdf
-
-
-\begin{itemize}
-\item (Lecture 10) Continuous integration practices minimise the disruption caused by rapid, concurrent changes to software systems - explain why this was suitable for our purposes, concurrent development of aspects of the system (evaluator and recommender), etc - Testing / Code Reviews
-\item Overlap between testing and evaluation.
-\item Although there were considerations on testing the front-end portion of the project, it was agreed that such tests were not essential for the presentation of the recommendations.
-\item Integration testing: The System recommender was tested in conjunction with other recommenders for integration.
-\item Regression testing: A regression test for hyperparameter learning was written.
-\item Mutation tests were considered but not used.
-\end{itemize}
-
-% Above is Dom / Joseph's Notes
-% Below is general structure of how I see the section coming together
-
-% Lead in with a general statement about why testing is imporant even when the project itself is research focused (R\&D) project.
-
-% General outline of when testing started and what the test process was for the project - continous integration / how it was decided to test the aspects that we did end up testing. Explain why testing started when it did (due to nature of project and tests which would have been required to be rewritten). Could even say the team considered a TDD strategy but this was decided against for the above reasons. Explain how the decision was made instead to take the approach that we did as the team believed it would be suitable for the project. Talk about why the testing we did was good.
-
-For our project the team decided to have one developer dedicated to the task of testing the system. % Possibly reference this as an industry practice and talk about why the team thought it would be suitable to use this setup for the project. Why it fell in line with our role based sports model from team structure reflection point.
-Primiarly the testing comprised of the creation of a suite of unit tests to ensure that each alteration to the source code did not break the execution / build of the system. Such unit tests were setup to run with the Jenkins continous integration environment with was configured to push notifications to the team's communication channel (the Slack collaboration tool) in the event of test case failure. % Find academic / industry reference for why this setup is standard practice and its benefits
-This allowed for early notification of issue / broken builds allowing the team to ammend errors / patch bugs / etc. as soon as possible. % Talk about why this is industry practice via references.
-Next reflect how the team abided by this system and managed to patch broken builds in an efficent manner. Discuss how the team managed to do this practice successfully and development proceeded smoothly as a result. Initially it was if the broken builid was reported that the team corrected it immediately - this slacked off a little later in the development cycle but it was still done to a high standard / fast pace. (Quote figures from Jenkins reports in relation to response time as evidence (if they back up this claim) with relation to industy / academic response rate recommendations)
-% Lead into this better but...
-The Cobertura extension to Jenkins provided the team with coverage reports for the source files to indicate the percentage of classes, conditionals and lines covered. Such reports were then used to help identify aspects of the system where additional testing was required. % Reference and talk about why code coverage reports are beneficial in industry and how they can be used to improve testing as we did - reflect that this was a good thing the team did and ultimately helped drive and improve the test process
-
-% Continue overview of the test process as described above
-
-% Explain shortcomings of the testing system used and potential alternatives - one I can recall being that some code was commit which passed tests but broke some functionality of the system. Part of this was due to having a tester who obviously couldn't write tests for code that had just been commit but also may have been due to system not being tested in that regard or something.
-
-% Recommend (see what I did there) what other testing could have been integrated (acceptance, etc.) and suggest a possible strategy for this. 
-
-% For example let's say there are no acceptance tests but these were identified a type of testing which would have been beneficial if included. Explain why this would have been beneficial, what extra level of awesome it would have brought to the project and then talk about the steps we could have taken to implemented it into the project.
 
 
 \subsection{REFLECTION POINT - Scrum Lead In}
