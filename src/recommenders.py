@@ -92,7 +92,7 @@ class System(Recommender):
             for i, recommender in enumerate(recommenders):
                 self.weights[recommender] = weights[i]
             # keep track of the best weights
-            evaluation = evaluate(self.spark, self, data)
+            evaluation = evaluate(self.spark, self, data, self.config)
             if evaluation > best_evaluation:
                 best_evaluation = evaluation
                 best_weights = weights

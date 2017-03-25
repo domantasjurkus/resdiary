@@ -4,13 +4,13 @@ from sets import Set
 from data import Data
 from config import Config
 
-def evaluate(spark, model, bookings_data):
+def evaluate(spark, model, bookings_data, config=Config):
     '''Takes a SparkContext instance, a recommendation model and a DataFrame of
     bookings, feeds the earlier half of the data (for each user) to the
     algorithm and returns a ratio right/total, where 'right' is the number of
     recommended restaurants that were later visited and 'total' is the total
     number of recommendations.'''
-    data = Data(spark)
+    data = Data(spark, config)
     # filter out half of the data to partial_data and store the remaining
     # restaurant IDs
     answers = defaultdict(Set)
