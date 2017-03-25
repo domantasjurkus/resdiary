@@ -2,10 +2,11 @@ import unittest
 
 from pyspark.sql.dataframe import DataFrame
 
-from base import BaseTestCase
-from src.recommenders import System
-from stubs.stub_algorithm import StubCuisineType
 from src.data import Data
+from src.recommenders import System
+from base import BaseTestCase
+from stubs.stub_algorithm import StubCuisineType
+from stubs.stub_config import StubConfig
 
 # Do 2 tuples have a common scalar?
 def has_scalar(tpl1, tpl2):
@@ -28,7 +29,7 @@ class SystemAlgorithmTest(unittest.TestCase, BaseTestCase):
 
 	@classmethod
 	def setUpClass(self):
-		self.alg = System(self.sc)
+		self.alg = System(self.sc, StubConfig)
 		self.data = Data(self.sc)
 		self.maximum_weight = 2
 
@@ -63,17 +64,16 @@ class SystemAlgorithmTest(unittest.TestCase, BaseTestCase):
 					continue
 				self.assertFalse(has_scalar(tpl, tpl2))
 
-		# Bring back stub recommender
+		# Bring back stub recommenders
 		self.alg.recommenders = temp
 
 	def test03_learn(self):
-		# Set all weights to -1
-
-		# Trigger hyperparameter learning
+		self.alg.config.set_weights((0, 0, 0, 0))
 		self.alg.learn_hyperparameters(self.bookings)
 
-		# Inspect if the weights have changed
-
+		# After learning, at least one recommender should be weighted
+		# ie the sum cannot be non-negative
+		self.assertTrue(sum(self.alg.config.get_weights()) > 0)
 
 	@classmethod
 	def tearDownClass(self):

@@ -46,8 +46,8 @@ class System(Recommender):
     '''Combines other recommenders to issue the final recommendations for each
     user.'''
 
-    def __init__(self, spark):
-        super(System, self).__init__(spark)
+    def __init__(self, spark, config=Config):
+        super(System, self).__init__(spark, config)
         recommenders = self.config.get_recommenders()
         self.recommenders = dict((name, eval(name)(self.spark))
                                  for name in recommenders)

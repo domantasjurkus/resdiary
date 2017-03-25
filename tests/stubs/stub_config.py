@@ -31,6 +31,13 @@ class StubConfig:
 		StubConfig.save_changes()
 
 	@staticmethod
+	def get_weights():
+		weights = []
+		for recommender in StubConfig.get_recommenders():
+			weights.append(StubConfig.get(recommender, 'weight'))
+		return weights
+
+	@staticmethod
 	def set_hyperparameters(recommender, parameters):
 		for name, value in parameters.items():
 			StubConfig.rcfg.set(recommender, name, str(value))
