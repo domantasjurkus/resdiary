@@ -6,7 +6,6 @@ from base import BaseTestCase
 class ContentBaseTest(BaseTestCase):
 
 	def test_main(self):
-		# No output expected from training
 		self.alg.train(self.bookings)
 
 		rdd = self.sc.parallelize([(row['Diner Id'], row['Restaurant Id'])
