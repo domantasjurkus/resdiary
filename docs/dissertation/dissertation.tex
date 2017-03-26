@@ -270,16 +270,35 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 
 % Several sections that reflect on your experiences during the team project. Each section should discuss one theme, characterised by incidents or events that occurred during the team course of the project from which you learned (approximately 12-15 pages).
 
-% STRUCTURE PLAN ??? -> Unless you propose something better
+% Currently I see a potential layout of Section 3 as follows:
 
-% Currently I see the layout of Section 3 as follows:
+% Technical lead in - summary of technical section to tie detailed technical retrospectives with requirements engineering and testing (requirements engineering is the one to cut / shorten if space needed)
 
-% Section on technical choices containing the major decisions - Models / Python / Spark - tie in requirements engineering (closely associated with technical decisions) and testing as a technical reflection (this leaves remaining reflection points Agile, non-technical and process focused)
+% Technical Reflection: Python - a technical reflection on the choice of Python as the development language
 
-% Section on Scrum methods and general practices which could have been done better
+% Technical Reflection: Models & System Design - a technical reflection on the choice of models and how we used them in the creation of our own system design system (if this runs long split into reflection on models and reflection on system design)  
 
-% End with discussion on whether Scrum was correct method to use or if it would have worked better if followed more strictly - leads into conclusion as I expect it will feature a discussion of this point 
+% Technical Reflection: Spark - a technical reflection on the decison to use Spark
 
+% Agile / Technical Reflection: Requirements Engineering - a reflection on the requirements engineering process which the team performed well and made the right choices but tease potential improvements which could have occurred
+
+% Technical Reflection: Testing - a reflection on the testing process with a general summary and discussion of the procedure used with some suggestions for improvements
+
+% Scrum lead in - summary of the Scrum and method reflection points as this is the remaining focus of section 3 and setup the idea that the team used Scrum structure with additional practices and initially developer anarchy before transferring over to structure
+
+% Agile Reflection: Team Organisation - reflection on how the team initially started with anarchy and how the transision over to role based sports model improved development and how the team drew from the knowledge of anarchy to better structure the team at this stage
+
+% Agile Reflection: Communication Breakdown - reflection on how communication was identified as being poor (much like the team structure) then proceeded to be improved slightly before becoming worse then improving slightly again
+
+% Agile Reflection: Code Reviews - reflect on another retrospective point of lack of branching and code reviews and the problems it brought 
+
+% Agile Reflection: Pair Programming - reflect on the few times this was conducted and how it was a beneficial experience that should have been done more often
+
+% Agile Reflection: Dropped Features - reflect briefly on the dropped features but where possible reference away (cost estimation, lack of communication - reference away) and touch mainly on how scope creep and things like that at the start of the project meant the team thought they could achieve more than they did. I imagine the reference away is a simple sentence of two along the lines of 'Some of the most common reasons for feature dropping in industry include X, Y, Z as discussed here (reference). While some of these contributed to the dropping of proposed features (give examples of which explicitly) such as dropping of feature A because of poor cost estimation as discussed here...' the primary reason for dropping of features in our project was scope creep, etc.
+
+% Agile Reflection: Cost Estimation - reflect on the lack of cost estimation and how it contributed partly to the team organisation needed to be reshuffled as parts of the system were avoided how it didn't effect the initial work on the system rather towards the end meant for proposed features needing to be dropped as not enough time was left for their development. Not so much that the priorities were wrong in this regard rather 
+
+% NOTE: Scurm vs. XP - I think this should be best moved to a paragraph of the conclusion as it was not really an 'incident' or 'event' as much as a reflection on if we used the correct methods. Putting it in the conclusion might better suit it.   
 
 
 \subsection{REFLECTION POINT - Technical Overview Section}
@@ -358,6 +377,7 @@ Misc Points:
 
 Misc Points:
 \begin{itemize}
+\item Tie in the Netflix research (Netflix Prize, etc.) and say how this research influenced our choice of models and system design
 \item Explain how the collaborative filter works and WHY it is applicable for our needs
 \item Explain how the content based filter works and WHY it is applicable for our needs
 \item Reference papers and other models (Netflix) to justify choice
@@ -429,7 +449,7 @@ Although some modifications were necessary, as is to be expected, the team found
 One shortcoming of the use of stories however was the measure of priority attached to each user stories and the subsequent task breakdown by association. The team did not conduct a formal task estimation procedure beyond the breakdown of the user stories into smaller, more general tasks. This was in part due to the lack of technical knowledge into the subject area from the team at this stage in development though the team should have conducted proper task estimation to assist with project planning and management as is discussed here (reference planning and cost estimation reflection point). 
 
 % Transision into this better and potentially expand on
-Another area of improvement in the requirement gathering process would have been the inclusion of use scenarios in the “Given, When, Then” format. This is a natural progression of user stories as it expands upon an individual story to provide an example of it in action. Such scenarios could then be utilised to allow for further refinement discussions to occur with the customer in order to establish conditions of system acceptance and thus form the basis of acceptance and scenario testing to be conducted on our system. Such tests are absent and would have improved our testing process as is discussed in Section (reference testing reflection point).  
+Another area of improvement in the requirement gathering process would have been the inclusion of use scenarios in the “Given, When, Then” format. This is a natural progression of user stories as it expands upon an individual story to provide an example of it in action. Such scenarios could then be utilised to allow for further refinement discussions to occur with the customer in order to better establish conditions for system acceptance which would improve the acceptance tests of the system and allow for scenario testing to be conducted on our system. A discussion regarding such tests and other methods of improvements is discussed in Section (reference testing)  
 
 % Tidy up the ending better - more postive - team did well in this regard and so should end on positive note
 Although the aforementioned could have utilised to improve the team's cost estimation and test process for the project, the team established a good understanding of the customer's vision and corresponding system requirements. This ultimately showed during the various customer demonstrations where by second to last meeting they encouraged to the team to follow where we saw the development of the system going as they were already impressed and pleased with the results. This level of confidence placed in the team we feel showed we had a good initial grasp of the system and thus were able to deliver and take steer the project in the direction we saw it heading towards the later stages of the project. 
@@ -557,34 +577,6 @@ Lead in with a general why Agile is used for large projects such as ours.
 As is often a common practice in industry (get a reference backing up claim) the team did not adhere strictly to one specfic agile framework. Instead the Scrum methodology was used as the overarching framework with additional agile practices from alternative methods, such as prototyping and extreme programming, being adopted as the team felt their use necessary and applicable. While this behaviour ensuresd a flexibile production envirnoment and the team found modertate success with the loose methodology it was not without its issues. Primarily this was due to the lack of discipline within the team to hold all of the key Scrum methods, as weekly stand up style meetings were cancelled in favour of a more open source style of development environment, and roles, as the team employed no product owner role and the scrum master was additionally on the development team. 
 
 Ultimately this would come at a cost of the teams ability to collaborate effectively on the project as the lack of stand ups led to communication issues as is discussed in Section (reference communication issue). Additionally the lack of product owner and focused scrum master roles played into some disfunctionality within the team organisation structure as highlighted in Section (reference team structure). By not conducting incomplete work and priority reviews at the each sprint's end the team inevitably saw proposed features be dropped as is discussed in Section (reference dropping features) and examined more thoroughly in Section (reference backlog management). This however may also be a consequence of the lack of formal cost estimation procedures conducted during the project as examined in Section (reference cost estimation) and not the teams approach to the Scrum methodology. Finally the issue of if whether such failures could have been avoided through use of a different agile framework, the Extreme Programming framework, is considered in comparision to following the Scrum methodology more strictly and closely than was conducted by the team in Section (reference stricter Scrum vs XP - final reflection point).
-
-
-\subsection{FINAL REFLECTION POINT - Scrum vs XP - Was Scrum The Right Choice}
-\label{sec:scrumvsxp}
-% ##################################################
-% LAST EDIT:  15/03/17  Joseph
-% NOTE:         Temp notes / thoughts
-% ################# Comment Log ####################
-% ##################################################
-
-Comparision I see here being made now is should we have stuck with Scrum but follow the practice more closely with stand ups, product owner and scrum master - ensure to explain academic nature of project affecting that one in some regard, extensions to Scrum methods which could have been used to tackle specific problems, etc.
-
-Contrast this against using the XP system for example.
-
-Misc points:
-\begin{itemize}
-\item Our prototyping was beneficial - gave good understanding of working with the data sets in addition to seeing how and what the front end application would need to convey to non-technical people and people not familiar with the nature of the project. Spin here is to implement more forms of prototyping as this was beneficial and perhaps should have been conducted more. Not Scrum or XP but another framework that could have been adapted in. 
-\item Time between meetings served as a good sprint dates - working on smaller iterations may have ensured better communication within the team.
-\item Development typically did not change much within a sprint - XP difference here may not have made much of a difference though the dropped feature could have been explored earlier in the development cycle than the 2nd semester.
-\item Task priority was a bit of an issue as we didn’t really do proper task estimation - XP would have solved that issue as it forces strict policy and task estimation.
-\item Scrum has no engineering practices whereas our project definitely should have. XP would have forced pair programming from the start (rather than sporadic occurrences within sprints), ensured better, more thorough testing from an earlier stage in the project and avoided the whole code review “you deleted all my code you bastard” arguments.
-\item User stories are originally from XP 
-\item Scenarios are from XP - discussed in requirements engineering reflection point 
-\item Instead perhaps it would have been better to adopt additional Scrum extensions of backlog refinement and burn down charts in addition to having more defined roles and stand up meetings.
-\item Reference throughout to relevant subsection reflection points tackling each specific issue.
-\item Although the team did not conform to the Scrum practice of holding daily, or frequent, stand up meetings and the consequences of this practice are discussed at length in Section (reference lack of stand ups / poor communication).
-\item Look into Scrumban and Agilo for Trac - did a light version informally but it would may have improved the process to got all out and use this.
-\end{itemize}
 
 
 \subsection{REFLECTION POINT - Team Structure}
@@ -836,6 +828,27 @@ based on the specific issues discussed in previous sections.  Reflect
 on the extent to which these lessons could be generalised to other
 types of software project.  Relate the wider lessons to others
 reported in case studies in the software engineering literature.
+
+
+% Moving this to here for now as I beieve a paragraph addressing it here is better suited and flows better
+Comparision I see here being made now is should we have stuck with Scrum but follow the practice more closely with stand ups, product owner and scrum master - ensure to explain academic nature of project affecting that one in some regard, extensions to Scrum methods which could have been used to tackle specific problems, etc.
+
+Contrast this against using the XP system for example.
+
+Misc points:
+\begin{itemize}
+\item Our prototyping was beneficial - gave good understanding of working with the data sets in addition to seeing how and what the front end application would need to convey to non-technical people and people not familiar with the nature of the project. Spin here is to implement more forms of prototyping as this was beneficial and perhaps should have been conducted more. Not Scrum or XP but another framework that could have been adapted in. 
+\item Time between meetings served as a good sprint dates - working on smaller iterations may have ensured better communication within the team.
+\item Development typically did not change much within a sprint - XP difference here may not have made much of a difference though the dropped feature could have been explored earlier in the development cycle than the 2nd semester.
+\item Task priority was a bit of an issue as we didn’t really do proper task estimation - XP would have solved that issue as it forces strict policy and task estimation.
+\item Scrum has no engineering practices whereas our project definitely should have. XP would have forced pair programming from the start (rather than sporadic occurrences within sprints), ensured better, more thorough testing from an earlier stage in the project and avoided the whole code review “you deleted all my code you bastard” arguments.
+\item User stories are originally from XP 
+\item Scenarios are from XP - discussed in requirements engineering reflection point 
+\item Instead perhaps it would have been better to adopt additional Scrum extensions of backlog refinement and burn down charts in addition to having more defined roles and stand up meetings.
+\item Reference throughout to relevant subsection reflection points tackling each specific issue.
+\item Although the team did not conform to the Scrum practice of holding daily, or frequent, stand up meetings and the consequences of this practice are discussed at length in Section (reference lack of stand ups / poor communication).
+\item Look into Scrumban and Agilo for Trac - did a light version informally but it would may have improved the process to got all out and use this.
+\end{itemize}
 
 %==============================================================================
 \bibliographystyle{plain}
