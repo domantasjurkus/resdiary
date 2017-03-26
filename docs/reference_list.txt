@@ -1,3 +1,6 @@
+Testing:
+http://fileadmin.cs.lth.se/cs/education/EDA270/Reports/2009/SvenssonGraden.pdf
+
 Code reviews:
 http://verraes.net/2013/10/pre-merge-code-reviews/
 http://haacked.com/archive/2013/10/28/code-review-like-you-mean-it.aspx/
