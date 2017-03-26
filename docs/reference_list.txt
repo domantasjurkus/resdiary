@@ -1,3 +1,9 @@
+Code reviews:
+http://verraes.net/2013/10/pre-merge-code-reviews/
+http://haacked.com/archive/2013/10/28/code-review-like-you-mean-it.aspx/
+https://about.gitlab.com/2015/08/05/6-reasons-why-pre-is-better-than-post-production-code-review/
+https://thepugautomatic.com/2014/02/code-review/
+
 Pair programming:
 https://collaboration.csc.ncsu.edu/laurie/Papers/XPSardinia.PDF  -- benefits & costs
 https://www.agilealliance.org/glossary/pairing/ -- benefits & costs
