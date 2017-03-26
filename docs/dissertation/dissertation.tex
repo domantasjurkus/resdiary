@@ -125,6 +125,7 @@ The goal of the algorithm was to accurately predict a user's rating of a film ba
 
 We also spent time discussing what the customer viewed as the end state of the system - whether it would be integreated into the existing ResDiary portal or whether the output would suffice as a proof-of-concept prototype. They were initially undecided in this regard, partially due to an internal transition in their own development frameworks, and thus suggested our initial aim should be to focus on the creation of the recommendation engine. The decision regarding the final state of the project ultimately would not be made until midway through the development cycle when the customer decided to view the project as simply a proof-of-concept. Nonetheless, at all points during development, due consideration was given to the future integration of our system with ResDiary. 
 
+
 \subsection{Project Scoping}
 \label{sec:ourinitobjectives}
 % ##################################################
@@ -192,14 +193,6 @@ While some of the team felt this justified being defined within the specificatio
 
 Thus, prior to this meeting, development efforts were split between the creation of a prototype system (which implemented a basic content-based filtering model) and on the long-term solution (with multiple recommenders) to the project. The prototype system was demonstrated during an interim meeting on December 7th, where the technical decisions of the long term solution were discussed at length. Following this meeting, implementation of the system proper commenced. 
 
-
-% \subsection{Technical Research \& Prototyping}
-% \label{sec:techresearchproto}
-% ##################################################
-% LAST EDIT:  15/03/17  Joseph
-% NOTE:         Perhaps best to merge with above subsection
-% ################# Comment Log ####################
-% ##################################################
 
 \newpage
 \subsection{Defining the End Product}
@@ -457,18 +450,6 @@ Another area of improvement in the requirement gathering process would have been
 % Tidy up the ending better - more postive - team did well in this regard and so should end on positive note
 Although the aforementioned could have utilised to improve the team's cost estimation and test process for the project, the team established a good understanding of the customer's vision and corresponding system requirements. This ultimately showed during the various customer demonstrations where by second to last meeting they encouraged to the team to follow where we saw the development of the system going as they were already impressed and pleased with the results. This level of confidence placed in the team we feel showed we had a good initial grasp of the system and thus were able to deliver and take steer the project in the direction we saw it heading towards the later stages of the project. 
 
-% Here downwards is notes
-\begin{itemize}
-\item (Lecture 13) Requirements gathering is an ongoing iterative process that runs concurrently alongside requirements analysis and capture - our project saw this in real effect due to the changing nature of the requirements of our project.
-\item (Lecture 14) Requirements engineering is an iterative process of elicitation, capture and validation - talk about how we did this to ensure we were gathering the correct requirements.
-\item (Lecture 3) Causes of software project failing - building system for wrong reason, building the wrong system, building the system wrong. We could tie in the dropped new user recommendation to a proposed goal which was later determined to be a requirement which would be built for the wrong reason. As such the feature was dropped to avoid building an incorrect system.
-\item (Lecture 13) Cultural differences between engineers and customers - although the developers were technical they don’t know anything regarding machine learning or the development of a system such as ours - Requirements Risk
-\item (Lecture 13) Vague requirements specification of end state of system / customer uncertainty regarding the final state of the system - Requirements Risk
-\item (Lecture 13) A means of investigating poorly understood requirements (prototyping) - Managing Requirements Risk - perhaps we could have prototyped both a front end display and an integration method / discussed this with the customer earlier. This would have defined a determined end state of the system prior to January which would have allowed for an earlier split in development focus and resulted in either integration or improved front end. Granted one must also consider that technical decisions were still ongoing at this time.
-\item (Lecture 13) Requirements evolution - occurred when we discovered potential features which were ultimately dropped (new user recommendations)
-\item (Lecture 14) Avoid early commitments to particular design solutions during requirements elicitation
-\end{itemize}
-
 
 \subsection{REFLECTION POINT - Testing and Continuous Integration}
 \label{testing}
@@ -651,30 +632,13 @@ Misc Notes:
 \subsection{REFLECTION POINT - Code Reviews \& Branching}
 \label{sec:codereviewbranch}
 % ##################################################
-% LAST EDIT:  25/03/17  Joseph
-% NOTE:       First Draft WIP
+% LAST EDIT:  26/03/17  Joseph
+% NOTE:       First Draft
 % ################# Comment Log ####################
 % Very, very, rough
 % Struggling to explain why it appeared that commits were fine which were in fact broken
 % REFERENCE: Good Agile code commit practices
-
-% Decided to make pair programming its own reflection point as it had positive effect on development
-% Reasonable to suggest some team members used it in place of code reviews due to system design, need for guide for inexperienced developers 
-% getting into unfamiliar component fast 
-
 % ##################################################
-
-% Code reviews - negative reflection (we should have done code reviews)
-% Branching - neutral reflection (tutor guy didn't seem to like that we were all commiting to master so maybe talk cons of doing that in relation to lack of code reviews resulting in tensions with deleted code)
-
-Story to paint here is the following:
-\begin{itemize}
-\item Start by explaining why the lack of branching
-\item Explain why code reviews were needed
-\item Explain how and why code reviews would have been beneficial - allow for branching and have code reviews upon merging / semi regularly
-\item Suggest pair programming as an alternative to code reviews and fire off reference to reflection point
-\item Summarise the pair programming which occurred and why it was beneficial ending with it should have been done more
-\end{itemize}
 
 % Lead in with explanation of why the system design was structured to create the best possible system and in part discouraged branching
 From the outset of the project, knowing the importance the system design would have on the development of the project, the proposed design was constructed to achieve high levels of cohesion and low levels coupling within the system. As outlined in Section (reference to system design / models section) at the outset of development the team believed that the individual components, the evaluation system, collaborative and content based filters, in relation to system design where independent enough to allow for development to proceed without the need for development trunks. Rather the team felt adopting a branch heavy menatlity would discourage committing code due to additional time required to handle merge costs and decrease the rate of code refactoring within the project. Although this system of minimising branching did ensure speedy integration of code throughout the duration of the project it was not without its problems during that later stages of the development as are discussed below.
@@ -691,24 +655,6 @@ Instead the standard industry practice of avoiding such internal conflicts is th
 % End with the team should have done code reviews and wished they had looking back over the development. Although damage control methods mentioned above and pair programming to an extent were used in the short term to rectify issues the code reviews would have solved but that the team's solution was not long term. 
 In retrospect the team discovered the benefits and need for code reviews first hand. Although the team effectively coped with the situation and problems which arose from not coducting pre or post merge code reviews such solutions were short term and would not suffice as a long term solution. Ultimately the decision to avoid branching influenced the team's belief for the need to conduct the code review process and as shown while it worked in the initial stages of development as the code base's complexity and interaction between components grew so too did the need for code reviews. Had the team the foresight to realise this then the code review process could have been introduced alongside the introduction of the pair programming process at the start the fourth development milestone.   
 
-% HERE is notes downward 
-Misc Points:
-\begin{itemize}
-\item The system was designed such that branching was unnecessary for the project. Branching was somewhat discouraged throughout the project in order to reduce merge costs / time. Whether the time saved outweighs the time spent fixing and altering other people’s code remains to be seen.
-\item Lack of code reviews meant that the code often had inconsistent styling.
-\item Lack of code reviews meant a significant portion of time was spent fixing or altering other people's code to work with parts of the system they did not realise they had broken.
-\item Lack of code reviews meant code which was WIP was deleted prior to it being fully implemented into the system - again lack of branching issue somewhat.
-\item Suggested at the first retrospective but ended up avoiding. Would have reduced a number of problems with development cycle but you can't be perfect.
-\item Highlighted in retrospective 3 with the code integration being highlighted.
-\item Highlighted even more in retrospective 4 with code integration really being highlighted.
-\item Reference potential methods or strategies for code reviews which could have integrated into the development.
-\item Reference how other and often professional developers recommend doing code reviews.
-\item Mention that pair programming was conducted and the benefits of doing it. Mention it should have been conducted more frequently, reference that it was beneficial when suggesting if XP was potentially better than Scrum.
-\item Code reviews might have improved development efficency as less time spent refactoring and fixing broken code. Reduced arguments caused due to deleting other people's code prior to full implementation. Branching also would have fixed this as only get back to master upon passing all tests. This would require testing to have been more efficent as well thus suggesting test strategy should have been utilised to improve test efficency.
-\item (Lecture 26) Outline of inspection methods - should probably mention which we should have used in the code reviews.
-\item (Lecture 8) Change management and the conflicts caused from developers working in parallel and contributions are made to the master branch which are not fully implemented or break some aspect of the system. In hindsight this probably should have justified a separate branch which would be integrated into the master upon passing all of the tests with a successful build in Jenkins the continuous integration system.
-\end{itemize}
-
 
 \subsection{REFLECTION POINT - Pair Programming}
 \label{sec:pairprogramming}
@@ -721,16 +667,6 @@ Misc Points:
 % REFERENCE:  Agile Allicance 
 % Need to tie in references more but the content is largely here
 % ##################################################
-
-% Then again pair progamming is not a student mentor relationship so probably can't lean into this too much.
-
-% Instead its main benefit was getting the final version of the front end established in a manner which allowed for rapid additional developments to occur.
-% That I learnt a thing or two along the way is a side point to mention in the passing.
-
-% Reflection here is the team decided to give it a shot because its used frequently in industry and found it to be a beneficial practice
-% Saw the advantages of it in effect and wished it had been done earlier and more frequently
-
-% Give a rough estimate of the time as to tie into end point of team wishing they had done it more often
 
 % Start with why the practice comes recommended
 Lead in with a general statement about the benefits of pair programming to a development team (reference). 
@@ -758,7 +694,7 @@ Although it was used occasionally for debugging aspects of the display applicati
 \subsection{REFLECTION POINT - Dropping Features}
 \label{sec:droppingreflection}
 % ##################################################
-% LAST EDIT:  15/03/17  Joseph
+% LAST EDIT:  26/03/17  Joseph
 % NOTE:       First Draft WIP
 % ################# Comment Log ####################
 % Currently a pool of notes
@@ -827,7 +763,36 @@ Lead in summaries the other failure points / reflection points that cost estimat
 % ################# Comment Log ####################
 % ##################################################
 
-This is just a collection of quotes and notes taken from the PSD notes that will likely be included as reflection points. These are some of the key PSD points which we'll need to hit on with the reflections PSD literature.
+Requirements Engineering:
+\begin{itemize}
+\item (Lecture 13) Requirements gathering is an ongoing iterative process that runs concurrently alongside requirements analysis and capture - our project saw this in real effect due to the changing nature of the requirements of our project.
+\item (Lecture 14) Requirements engineering is an iterative process of elicitation, capture and validation - talk about how we did this to ensure we were gathering the correct requirements.
+\item (Lecture 3) Causes of software project failing - building system for wrong reason, building the wrong system, building the system wrong. We could tie in the dropped new user recommendation to a proposed goal which was later determined to be a requirement which would be built for the wrong reason. As such the feature was dropped to avoid building an incorrect system.
+\item (Lecture 13) Cultural differences between engineers and customers - although the developers were technical they don’t know anything regarding machine learning or the development of a system such as ours - Requirements Risk
+\item (Lecture 13) Vague requirements specification of end state of system / customer uncertainty regarding the final state of the system - Requirements Risk
+\item (Lecture 13) A means of investigating poorly understood requirements (prototyping) - Managing Requirements Risk - perhaps we could have prototyped both a front end display and an integration method / discussed this with the customer earlier. This would have defined a determined end state of the system prior to January which would have allowed for an earlier split in development focus and resulted in either integration or improved front end. Granted one must also consider that technical decisions were still ongoing at this time.
+\item (Lecture 13) Requirements evolution - occurred when we discovered potential features which were ultimately dropped (new user recommendations)
+\item (Lecture 14) Avoid early commitments to particular design solutions during requirements elicitation
+\end{itemize}
+
+Code Reviews:
+\begin{itemize}
+\item The system was designed such that branching was unnecessary for the project. Branching was somewhat discouraged throughout the project in order to reduce merge costs / time. Whether the time saved outweighs the time spent fixing and altering other people’s code remains to be seen.
+\item Lack of code reviews meant that the code often had inconsistent styling.
+\item Lack of code reviews meant a significant portion of time was spent fixing or altering other people's code to work with parts of the system they did not realise they had broken.
+\item Lack of code reviews meant code which was WIP was deleted prior to it being fully implemented into the system - again lack of branching issue somewhat.
+\item Suggested at the first retrospective but ended up avoiding. Would have reduced a number of problems with development cycle but you can't be perfect.
+\item Highlighted in retrospective 3 with the code integration being highlighted.
+\item Highlighted even more in retrospective 4 with code integration really being highlighted.
+\item Reference potential methods or strategies for code reviews which could have integrated into the development.
+\item Reference how other and often professional developers recommend doing code reviews.
+\item Mention that pair programming was conducted and the benefits of doing it. Mention it should have been conducted more frequently, reference that it was beneficial when suggesting if XP was potentially better than Scrum.
+\item Code reviews might have improved development efficency as less time spent refactoring and fixing broken code. Reduced arguments caused due to deleting other people's code prior to full implementation. Branching also would have fixed this as only get back to master upon passing all tests. This would require testing to have been more efficent as well thus suggesting test strategy should have been utilised to improve test efficency.
+\item (Lecture 26) Outline of inspection methods - should probably mention which we should have used in the code reviews.
+\item (Lecture 8) Change management and the conflicts caused from developers working in parallel and contributions are made to the master branch which are not fully implemented or break some aspect of the system. In hindsight this probably should have justified a separate branch which would be integrated into the master upon passing all of the tests with a successful build in Jenkins the continuous integration system.
+\end{itemize}
+
+Misc:
 \begin{itemize}
 \item (Lecture 19) Throw-away front end prototype was used and was good as it gave a better understanding of the requirements the front end would require upon it becoming the final state of the system. This knowledge and the discovered failures fed into the redesigned system and so the throw-away prototype was very beneficial to the project. (MINI REFLECTION POINT ?)
 \item (Lecture 19) Prototyping is used to reduce risks caused by uncertainty in software projects, not introduce more risk - to some extent this was done for components of the back end system as well.
