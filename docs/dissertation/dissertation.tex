@@ -284,6 +284,9 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 
 % Technical Reflection: Testing - a reflection on the testing process with a general summary and discussion of the procedure used with some suggestions for improvements
 
+% ??? We could also talk about prototyping here as a technical development practice and using one front end display as a throaway but space looks tight
+% Probably use the protype throwaway stuff throughout and conclude saying how encouraging it in development was a beneficial practice (then again maybe that is more suitable than the requirements engineering reflection - shorten that in favour of prototyping reflection section?)
+
 % Scrum lead in - summary of the Scrum and method reflection points as this is the remaining focus of section 3 and setup the idea that the team used Scrum structure with additional practices and initially developer anarchy before transferring over to structure
 
 % Agile Reflection: Team Organisation - reflection on how the team initially started with anarchy and how the transision over to role based sports model improved development and how the team drew from the knowledge of anarchy to better structure the team at this stage
@@ -423,7 +426,7 @@ Misc Points:
 \label{sec:teamstructure}
 % ##################################################
 % LAST EDIT:  20/03/17  Joseph
-% NOTE:         Temp notes / thoughts
+% NOTE:       First Draft
 % ################# Comment Log ####################
 % - References the cost estimation reflection point as an improvement - tie those two together
 % - References scenarios which flows to testing via test scenarios / acceptance testing - ties those two together
@@ -548,7 +551,7 @@ A stronger emphasis on acceptance testing would have benefited the team in assur
 \label{sec:teamstructure}
 % ##################################################
 % LAST EDIT:  21/03/17  Joseph
-% NOTE:         Temp notes / thoughts
+% NOTE:       First Draft
 % ################# Comment Log ####################
 % Ending is real clunky but I like the idea of a lead in general reflection via references to the Scrum
 % ##################################################
@@ -583,7 +586,7 @@ Ultimately this would come at a cost of the teams ability to collaborate effecti
 \label{sec:teamstructure}
 % ##################################################
 % LAST EDIT:  25/03/17  Joseph
-% NOTE:         Temp notes / thoughts
+% NOTE:       First Draft
 % ################# Comment Log ####################
 % REFERENCE: Developer Anarchy - article || paper on it
 % REFERENCE: Sports model of team structure - roles
@@ -616,11 +619,40 @@ While the team still embraced the anarchy philosophy of allowing developers to a
 Through experimentation of the development structure the team eventually found a system which they were comfortable with which resulted in development occurring at a steady pace. This occurred when the distinct, over-arching 'recommendation system' and 'display application' subteams were established and lead developer roles taken up regarding specific subcomponents of those larger topics. In part this decision to subdivide was a natural process as the first few months of 'developer anarchy' allowed the team to experiment with different sections of the development and gave developers the freedom to work on whatever component they believed to be the most important and interesting. Although not a traditional 'Scrum structure' the team found this initial approach to be beneficial when the time came to subdive into teams as the initial developer freedom saw some team members gravitate towards and away from some aspects of the development based off the past experience working with that particular component during the initial stages of the development. As such the team believes that the organisational transition from complete anarchy to a subdivision structure was a natural evolution as developers found the roles they enjoyed and believed they were of most use to the overall development of the project. Although the approach could have been taken to subdivide earlier or from the outset of the project, the team enjoyed the freedom to experiment during the initial stages of the project and view it as having a postive impact towards each developer's initial understanding of the system and how they might best be of use to a successful development process.
     
 
+\subsection{REFLECTION POINT - Communication Breakdown \& Task Backlog}
+\label{sec:communicationbreakdown}
+% ##################################################
+% LAST EDIT:  16/03/17  Joseph
+% NOTE:         Temp notes / thoughts
+% ################# Comment Log ####################
+% ##################################################
+
+This was an issue which occurred throughout most of the retrospectives.
+
+I current envision this as a mixture of improving the communication within the team (it was poor some steps were taken but it remained poor) in relation to the lack of communication effecting the task backlog being worked on effectively. Then suggest potential strategies for combatting the communication hurdle and task backlog.
+
+Misc Notes:
+\begin{itemize}
+\item Slack was set up and made the dedicated communication channel for project communication.
+\item Despite having a Slack communication remained somewhat poor.
+\item Decision made to ensure tickets actively represent what feature of the system you are working on.
+\item Ticket system improved but commits / development did not occur in a time efficient manner.
+\item Sub teams additionally helped communication within front end and back end through team communication as a whole was still somewhat lacking.
+\item Specific incident - Edward not providing data sent from customer in a timely manner.
+\item Part of team felt agreeing to meet up in person at least once a week to work on project was a waste of time / resources - this had an adverse effect on communication that wasn’t addressed. Instead majority of team met up once a week at scheduled time as some developers strayed through the valley of the shadow of death into the unknown.
+\item Perhaps Joseph focusing less on development taking on a product owner style of role would have improved the development.
+\item Talk about the benefits a product owner would have had on the development of our specific project - improved efficiency of tackling task backlog (tasks were avoided from one milestone to the next)
+\item (Lecture 7) Perhaps burn down charts per sprints would have been a good idea and would have improved prediction of task completion, backlog management, communication and prioritisation of backlog tasks.
+\item Pair programming increase communication and coordination greatly - positive
+\item Subteams increased communication a lot as well - postive
+\end{itemize}
+
+
 \subsection{REFLECTION POINT - Code Reviews \& Branching}
 \label{sec:codereviewbranch}
 % ##################################################
 % LAST EDIT:  25/03/17  Joseph
-% NOTE:         Temp notes / thoughts
+% NOTE:       First Draft WIP
 % ################# Comment Log ####################
 % Very, very, rough
 % Struggling to explain why it appeared that commits were fine which were in fact broken
@@ -654,7 +686,7 @@ Unfortunately as a result of poor communication between developers (reference co
 % Explain why the above fixes worked in the short term but are not long term solutions
 
 % Then explain why code reviews are the long term solution to the problem
-Instead the most obvious combat to this problem would be to conduct regular code reviews...
+Instead the standard industry practicce of avoiding such internal conflicts is through the use of code reviews (reference use of code reviews in industry). 
 
 % End with the team should have done code reviews and wished they had looking back over the development. Although damage control methods mentioned above and pair programming to an extent were used in the short term to rectify issues the code reviews would have solved but that the team's solution was not long term. 
 
@@ -679,11 +711,13 @@ Misc Points:
 \subsection{REFLECTION POINT - Pair Programming}
 \label{sec:pairprogramming}
 % ##################################################
-% LAST EDIT:  25/03/17  Joseph
+% LAST EDIT:  26/03/17  Joseph
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
 % REFERENCE:  XP Programming Website
 % REFERENCE:  Paper on costs and benefits
+% REFERENCE:  Agile Allicance 
+% Need to tie in references more but the content is largely here
 % ##################################################
 
 % Then again pair progamming is not a student mentor relationship so probably can't lean into this too much.
@@ -696,20 +730,34 @@ Misc Points:
 
 % Give a rough estimate of the time as to tie into end point of team wishing they had done it more often
 
-Used primarily for the initial development work for the front end. The team wanted the opportunity to perform pair programming as it is an industry practice. The initial development work for the revised version of the display application was an ample opportunity to do so it was used in the setup of the node and initial setup of the display application (css \& html pre-written). No sense in the two developers working on the same component simultaneously but individually so instead it made sense to use the opportunity to conduct pair programming exercise. This would also allow each developer to know the full extent of the system progress which they could then work on at a later time independently but the same base knowledge of the system was established between both developers as they had both developed it. This saved time later in the project as the code was also written to a higher standard (see reference of pair programming on XP programming). This was the most significant period of pair programming conducted although it also occurred with bug fixing and other smaller development work on different aspects of the display application system.
+% Start with why the practice comes recommended
+Lead in with a general statement about the benefits of pair programming to a development team (reference). 
 
-Get across the economic and design benefits of conducting this process from above references
+% Knowing it comes recommended developers who have not already done it at work on a larger scale and more complex project wished to see how it would translate. How does it translate to actual development beyond the nature of an assignment which is designed to be solveable in a specific way.
+Knowing that pair programming is a highly recommended development practice and having some rudimentary experience with the method through the second year JOOSE (yes tie this in better) laboratories some of the developers within the team wished to see how the practice would translate to a much larger and complex project, beyond the artifical designed nature of a academic task within the laboratory setting. Instead the developers wished to see how the practice translated to feature creation and development where the task need not have one particular designed solution in mind.
 
-Get across the idea that although not intended as a mentor student relationship it was beneficial in the learning of developers. It established the common system knowledge.
+% Transision into the when, where and why of conducting the process
+The decision for some of the developers to partake in this process was made in parallel to the team subdivision as is discussed here (reference). With this structure in place it made logical sense for the two developers wishing to conduct the process be on the same team and so both Josh and Joseph decided to handle the redesign and creation of the display application for the generated recommendations. Initially this started with the two developers meeting to create some GUI mockups for the proposed front end with the start of development work being identified as the best opportunity to conduct the pair programming process. As the team wished follow the development practice prototype of treating the first iteration of the display application as a throwaway prototype and incorporate the feedback and observations made into the redesigned iteration, the fresh start on development work was identified as the best opportunity to conduct the pair programming process. This development work stood out as there was no sense in both developers attempting the work simultaneously rather if used as a pair programming exercise the following benefits would be seen.
 
-End with its a process that the team wishes they had conducted earlier and more often and possibly suggest some features where it would have proved beneficial - one might be setting up tests for certain aspects of the system. 
+% Benefit one it increased coordination and reduced subsequent learning time of the system by the developer who didn't lay the foundations
+Firstly pair programming reduces the coordination efforts required within a team since there are N/2 pairs to coordinate instead of N individual developers. As only two developers at this time were developing the display application through use of pair programming both developers knew the entire extent of the development work and the specifics of the system upon completion of the exercise. This allowed for more efficent individual development as both developers had created the foundation of the system and discussed where their individual development efforts would be focused next. 
+
+Secondly as both developers strove for a well designed system foundation the connection between pair programming and better designed solution seemed obvious. As both developers brought differing levels of prior experience, one having more web devlopment experience than the other, saw an increased diffusion in knowledge among the developers which in turn reduced the potential for defects and poor design decisions in the early development work. Having multiple developers also introduced a larger number of potential solutions being proposed for specific problems than a single programmer can suggest. This allowed for discussions regarding which proposition would be the most suited for the long term development of the application and thus also increased the quality of the system's design.  
+% Maybe tie in a specific example here but I can't think of one right now 
+
+% Just a quick note on why it was beneficial from a learning perspective
+Finally although pair programming should not be viewed as a student-mentor relationship (reference) conducting the pair programming process transfers skills and knowledge between developers by association. Performing this here was of great benefit to the less experienced web developer as he found he picked up on the minute techniques and broader skills used by the more experienced developer. Additionally as he was not faced with an the initial learning curve of attempting to jump in and understand a previously setup system he found he had a greater level of confidence to assist and experiment with development wherever possible.  
+
+% End with its a process that the team wishes they had conducted earlier and more often and possibly suggest some features where it would have proved beneficial - one might be setting up tests for certain aspects of the system. 
+Although it was used occasionally for debugging aspects of the display application and recommendation engine, the process as highlighted above for the creation of new features was only conducted once during the development cycle. Having seen the benefits suggested by (reference benefits papers) in real effect the particular developers involved and the team as a whole regretted not conducting the pair programming process more frequently during the development process. Had the team the opportunity to start afresh then pair programming would have been encouraged earlier and more often especially on the development of features such as A
+% End with suggestion of where pair programming could have been used
 
 
 \subsection{REFLECTION POINT - Dropping Features}
 \label{sec:droppingreflection}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
-% NOTE:         Temp notes / thoughts
+% NOTE:       First Draft WIP
 % ################# Comment Log ####################
 % Currently a pool of notes
 % Two types of feature dropping:
@@ -769,33 +817,6 @@ Lead in summaries the other failure points / reflection points that cost estimat
 \end{itemize}
 
 
-\subsection{REFLECTION POINT - Communication Breakdown \& Task Backlog}
-\label{sec:communicationbreakdown}
-% ##################################################
-% LAST EDIT:  16/03/17  Joseph
-% NOTE:         Temp notes / thoughts
-% ################# Comment Log ####################
-% ##################################################
-
-This was an issue which occurred throughout most of the retrospectives.
-
-I current envision this as a mixture of improving the communication within the team (it was poor some steps were taken but it remained poor) in relation to the lack of communication effecting the task backlog being worked on effectively. Then suggest potential strategies for combatting the communication hurdle and task backlog.
-
-Misc Notes:
-\begin{itemize}
-\item Slack was set up and made the dedicated communication channel for project communication.
-\item Despite having a Slack communication remained somewhat poor.
-\item Decision made to ensure tickets actively represent what feature of the system you are working on.
-\item Ticket system improved but commits / development did not occur in a time efficient manner.
-\item Sub teams additionally helped communication within front end and back end through team communication as a whole was still somewhat lacking.
-\item Specific incident - Edward not providing data sent from customer in a timely manner.
-\item Part of team felt agreeing to meet up in person at least once a week to work on project was a waste of time / resources - this had an adverse effect on communication that wasn’t addressed. Instead majority of team met up once a week at scheduled time as some developers strayed through the valley of the shadow of death into the unknown.
-\item Perhaps Joseph focusing less on development taking on a product owner style of role would have improved the development.
-\item Talk about the benefits a product owner would have had on the development of our specific project - improved efficiency of tackling task backlog (tasks were avoided from one milestone to the next)
-\item (Lecture 7) Perhaps burn down charts per sprints would have been a good idea and would have improved prediction of task completion, backlog management, communication and prioritisation of backlog tasks.
-\end{itemize}
-
-
 \subsection{REFLECTION POINT - MISC POINTS FROM PSD NOTES}
 \label{sec:miscpsd}
 % ##################################################
@@ -829,6 +850,10 @@ on the extent to which these lessons could be generalised to other
 types of software project.  Relate the wider lessons to others
 reported in case studies in the software engineering literature.
 
+
+I think that you probably tie the protype throwaway stuff in here and say how encouraging it in development was a beneficial practice (then again maybe that is more suitable than the requirements engineering reflection - shorten that in favour of prototyping?)
+
+Conclusion point - pair programming was beneficial and those who conducted in the practice got a lot out of it.
 
 % Moving this to here for now as I beieve a paragraph addressing it here is better suited and flows better
 Comparision I see here being made now is should we have stuck with Scrum but follow the practice more closely with stand ups, product owner and scrum master - ensure to explain academic nature of project affecting that one in some regard, extensions to Scrum methods which could have been used to tackle specific problems, etc.

@@ -1,3 +1,4 @@
 Pair programming:
 https://collaboration.csc.ncsu.edu/laurie/Papers/XPSardinia.PDF  -- benefits & costs
+https://www.agilealliance.org/glossary/pairing/ -- benefits & costs
 http://www.extremeprogramming.org/rules/pair.html  -- benefits & costs
