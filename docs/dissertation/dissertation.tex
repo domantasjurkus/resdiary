@@ -50,9 +50,6 @@ The abstract shall go here! Here is some things to keep in mind while writing it
 % ##################################################
 % LAST EDIT: 	06/03/17	Josh
 % ################# Comment Log ####################
-% 	A. 	We mention the integration but the final 
-%		state of the system is for it to be used
-%		as a proof of concept / prototype by RD.		<--	Joseph 
 % ##################################################
 \section{Introduction}
 \label{sec:intro}
@@ -60,7 +57,6 @@ The abstract shall go here! Here is some things to keep in mind while writing it
 
 The Professional Software Development (PSD3) course at The University of Glasgow requires students to engage with the practices and methodologies used in modern large-scale software engineering. The purpose of this dissertation is to document the development of the software project created as part of this course by Team I. 
 
-% ---------- A ----------
 The project was to build, over the course of several months, a recommendation engine for the Glasgow-based company ResDiary.
 The main deliverable was a system capable of producing sensible restaurant recommendations for existing ResDiary users; a system that could be integrated into the existing ResDiary platform at a later date. 
 
@@ -123,6 +119,8 @@ The inspiration for the idea stems from the similar system provided by online se
 
 The goal of the algorithm was to accurately predict a user's rating of a film based solely on previous user ratings and no additional information about either the users or films. A set of training data (a subset of Netflix's real user data) with half a million user ratings was provided to participants, with the algorithm using this data to predict user ratings for a disjoint subset of the user data. No information other than user ID, film ID and date of rating was provided. Our Resdiary project followed a similar structure. ResDiary's users, as with Netflix's, leave review scores ranging from 1 to 5. We were given a subset of their user data which we split into further subsets for training and for evaluation. The research provided an excellent springboard from which to launch our own collaborative filtering model. With such a strong similarity between the requirements of our system and theirs, it was a natural choice.
 
+% Maybe move the Netflix stuff to the choice of models to save on space in this section -- Joseph 27/03
+
 We also spent time discussing what the customer viewed as the end state of the system - whether it would be integreated into the existing ResDiary portal or whether the output would suffice as a proof-of-concept prototype. They were initially undecided in this regard, partially due to an internal transition in their own development frameworks, and thus suggested our initial aim should be to focus on the creation of the recommendation engine. The decision regarding the final state of the project ultimately would not be made until midway through the development cycle when the customer decided to view the project as simply a proof-of-concept. Nonetheless, at all points during development, due consideration was given to the future integration of our system with ResDiary. 
 
 
@@ -176,6 +174,8 @@ To help us understand the actual scenarios in which the system might be used, we
 At the November 16th meeting we presented and discussed our project proposal with the customer.
 
 They felt we had a good understanding of their vision. They broadly agreed with the proposed requirements and could envision how our high level system would operate (and potentially integrate into their existing one). We briefly explained that there were two major models for building recommendation systems: collaborative-based filtering and content-based filtering. The high level system architecture accounts for this by allowing multiple 'recommenders' to each implement a different approach to producing recommendations. These recommendations are then combined and filtered for the final output. The customer expressed strong interest in the potential of "fine tuning" this system, through altering the significance placed on individual recommenders. 
+
+% Probably include the UML diagram (the one used in the presentation as well) in here to help explain the system -- Joseph 27/03
 
 There were, of course, areas of concern. Our proposed response rate of one second to respond to a request was queried. They felt that they needed to further clarify the volume of data the system would be expected to work with in a real world deployment. This may put a constraint on our ability to realise that performance. We discussed the alternative of using a nightly build system, as this how they expected the system would operate in a real world setting. In addition, they recommended developing a lightweight front-end application to display the recommendations. This would be a lightweight app, rather than any actual integration with their system, but they rationalised its throwaway nature by suggesting it would help them better understand our system, assist with demonstrating its functionality and most importantly provide a clear indication it was producing sensible results. 
 
@@ -242,7 +242,12 @@ In Section \ref{sec:ourinitobjectives} we discuss the specifics of Netflix Recom
 
 Additionally we need to demonstrate that the research conducted was RELEVANT.
 
-This section can only be written after the software is in its final handover state.
+Show how the research of the Netflix prize lead us to collab / content / etc. which was used in the final system
+
+Need to hit what we achieved - an implict and explict collaborative filter, content based filters on cuisine type and price point, location filtering, auto configuration and the evaluator system. Mention integration with Spark better than we did in the presentation. This outputed csv files which fed into the display application though it could easily be configured to work with a database. 
+
+Mention some of the future proposals we hit on in the presentation such as the reasoning for recommendations, expanding the collaborative to use more than the limits of the data we worked with and content based recommendations for location.
+
 \newpage
 
 
@@ -326,6 +331,11 @@ We then analyse key elements of our software process: team structure and how it 
 % REFERENCE: Section on Spark [2]
 % REFERENCE: Python pre-existing libraries [3]
 % ##################################################
+
+% ################# References #####################
+
+% ##################################################
+
 One of the key considerations in any software development project is the choice of the technologies used to implement it. We spent much of the first iteration contesting two broad approaches: implementing the system in their own language (C\#) or using our Python alternative.
 
 From an early stage, as we outline in section 2, it was clear the client placed a high priority on integration with their existing system. In other words: with their existing technology stack. ResDiary uses Microsoft's C\# language and the ASP.NET web framework for its backend system. The natural starting point, therefore, was to find a solution within that language ecosystem. 
@@ -346,6 +356,10 @@ Of course, the choice of Python begs the question of how we integrate with the c
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
 % ##################################################
+
+% ################# References #####################
+% ##################################################
+
 
 Misc Points:
 \begin{itemize}
@@ -372,6 +386,11 @@ Misc Points:
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
 % ##################################################
+
+% ################# References #####################
+% http://www.infoworld.com/article/3031690/analytics/why-you-should-use-spark-for-machine-learning.html
+% ##################################################
+
 
 \begin{itemize}
 \item Team decided the entire team should spend time over Christmas playing around with Apache Spark to ensure common understanding of the system between team members. This may not have been the best use of resource and instead team could have split earlier and the front end developers not bothered playing around with it as they did not end up touching it directly during the development of the project. 
@@ -400,6 +419,16 @@ Misc Points:
 % There should be more events and incidents from the development in here
 % ##################################################
 
+% ################# References #####################
+% [1] http://fileadmin.cs.lth.se/cs/education/EDA270/Reports/2009/SvenssonGraden.pdf 
+
+% Test Driven Development - Software Engineering Course Textbook Section 8.2
+
+% Continuous Integration References
+% https://www.martinfowler.com/articles/continuousIntegration.html
+% http://aosabook.org/en/integration.html
+% ##################################################
+
 % -- Importance of Testing --
 % Testing is an important aspect of any large-scale software project. Testing helps assert the quality of the software by ensuring that the essential requirements of the system are met. Detecting and fixing faults early on reduces the cost of fixing those faults in the future. Testing helps ensure the software is reliable and does not break under non-standard scenarios, such as when fed malformed input.
 
@@ -426,6 +455,7 @@ The through testing of any large-scale software project is a vital process which
 
 Knowing the importance of the test process the team made the decision to dedicate the majority of one developer's efforts to the process of testing the system as is outlined in Section (reference team structure). It was at this point where the team felt the introduction of testing to the project would be most beneficial as introduction earlier while the system was still experimental in nature would have resulted in early tests being frequently rewritten. The decision to employ one developer to lead the testing process came from the decision to adopt the role based sports model and so the role of lead test developer felt like a natural role for which one developer should take. 
 
+% [1]
 At this time the team discussed whether the test-driven development strategy was applicable to our project. This was eventually decided to not be sufficent due to the research based nature of the system as the project structure, class definitions and method signatures changed significantly throughout the development cycle. Utilising a test-driven development strategy the team believed would most likely have caused continuous test case rewritting thus slowing down the entire project's development. As such rather than follow a strict testing strategy or policy the team instead adopted the five types of testing outlined for the Extreme Programming methodology in Section 2 of the paper (reference - paper with section 2 full of types of testing and maybe expand on this a little).
 
 Initially the testing comprised of the creation of a suite of unit tests to ensure that each alteration to the source code did not break the execution / build of the system.
@@ -462,6 +492,12 @@ The final area for improvement of the test procedure would have been to better i
 % REFERENCE: Sports model of team structure - roles
 %
 % Perhaps tie in the mythical man month refelction to the ending better as well
+% ##################################################
+
+% ################# References #####################
+% References maybe hard for this section
+% http://doras.dcu.ie/20469/1/MRP_SengNotes.pdf
+% http://www.ambysoft.com/essays/agileRoles.html
 % ##################################################
 
 % I feel like I have written the words 'component' and 'aspect' a lot in this section
@@ -503,6 +539,17 @@ Through experimentation of the development structure the team eventually found a
 % Suggests the use of quick stand up style meetings and burn down charts as an easy fix to the problems faced
 % ##################################################
 
+% ################# References #####################
+% Stand ups
+% https://www.mountaingoatsoftware.com/agile/scrum/meetings/daily-scrum
+% https://www.agilealliance.org/glossary/daily-meeting/
+
+% Burn down charts
+% https://www.scrumalliance.org/community/articles/2013/august/burn-down-chart-%E2%80%93-an-effective-planning-and-tracki
+% http://www.agilenutshell.com/burndown
+% ##################################################
+
+
 An issue highlighted throughout the conducted retrospectives for the project was the issue communication between developers within the team. Although communication did steadily improve over the development period the team prior to entering the final development sprint the team did not believe it to be of the highest possible standard despite some of the highlighted issues being addressed and amended. 
 
 What was found during the first retrospective was that the lack of focused development communication channel resulted in some loss of information between team members. To combat this the decision was made to organise a Slack channel for focused communication regarding the project's development. In addition to this it was also highlighted that only a subset of the developers were actively using the ticket management system (Trac) and so efforts were made to ensure the entirety of the team used the system in a consistent manner. This would see the introduction of some general team wide styling options, such as for commit messages and tickets, to ensure a consistent, clear style was  establish for use within the team. 
@@ -527,6 +574,15 @@ An additional agile practice which could have been added to each meeting would h
 % Very, very, rough
 % Struggling to explain why it appeared that commits were fine which were in fact broken
 % REFERENCE: Good Agile code commit practices
+% ##################################################
+
+% ################# References #####################
+% http://verraes.net/2013/10/pre-merge-code-reviews/
+% http://haacked.com/archive/2013/10/28/code-review-like-you-mean-it.aspx/
+% https://about.gitlab.com/2015/08/05/6-reasons-why-pre-is-better-than-post-production-code-review/
+% https://thepugautomatic.com/2014/02/code-review/
+
+% Software Engineering Recommended Course Textbook - Chapter 24
 % ##################################################
 
 % Lead in with explanation of why the system design was structured to create the best possible system and in part discouraged branching
@@ -555,6 +611,12 @@ In retrospect the team discovered the benefits and need for code reviews first h
 % REFERENCE:  Paper on costs and benefits
 % REFERENCE:  Agile Allicance 
 % Need to tie in references more but the content is largely here
+% ##################################################
+
+% ################# References #####################
+% https://collaboration.csc.ncsu.edu/laurie/Papers/XPSardinia.PDF
+% https://www.agilealliance.org/glossary/pairing/
+% http://www.extremeprogramming.org/rules/pair.html
 % ##################################################
 
 % Start with why the practice comes recommended
@@ -592,6 +654,9 @@ Although it was used occasionally for debugging aspects of the display applicati
 %  2. Dropped due to lack of time / project management / planning - recommendation reasons / system recommender saying contribution states from various other recommenders on the system recommendation / comparision of our system against other methods such as random guessing, etc - mention then fire off to relevant reflection point section 
 % ##################################################
 
+% ################# References #####################
+% ##################################################
+
 % For example, if you found that you had to drop a feature during an iteration, discuss the reasons why the feature had to be dropped. Had you given yourselves too much work? Was the feature harder to implement than you realised? Had you got your priorities wrong? Then consider looking at the literature (see the recommended reading for PSD3) on project planning and estimation. Was your experience typical of a software project? What steps do other developers advocate for improving estimation?
 
 % General lead in regarding that feature dropping occurs for many reasons
@@ -620,6 +685,15 @@ Ultimately although the team was forced to drop a desired feature due to lack of
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
 % I have no real idea where I'm going with this section
+% ##################################################
+
+% ################# References #####################
+% Cost Estimation
+% Chapter 23 - Software Engineering Textbook Recommended in Course
+%
+% Planning Poker
+% https://wingman-sw.com/articles/planning-poker
+% https://www.mountaingoatsoftware.com/agile/planning-poker
 % ##################################################
 
 % Talk about why cost estimation is good for a project
