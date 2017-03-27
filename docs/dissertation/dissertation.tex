@@ -339,28 +339,22 @@ However the technical choices of a software project are not made in isolation ra
 \end{itemize}
 
 
-\subsection{REFLECTION POINT - Python}
+\subsection{REFLECTION POINT - Python vs C\#}
 \label{sec:pyreflection}
 % ##################################################
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
 % ##################################################
+One of the key considerations in any software development project is the choice of the technologies used to implement it. We spent much of the first iteration contesting two broad approaches: implementing the system in their own language (C\#) or using our Python alternative.
 
-Misc Points:
-\begin{itemize}
-\item What alternatives did we consider - C Sharp / Scala
-\item What were the benefits of using it - already familiar / libraries / industry standard
-\item The choice of Python is mentioned in a retrospective as the choice was slow and not well discussed and we just jumped into it - how did we ensure this did not occur with other major technical decisions
-\item Did Python influence other later choices - Spark, etc.
-\item What were the limitations of using Python
-\item Was using Python the correct choice in the long term 
-\item Reference papers and libarires to justify why Python 
-\item Demonstrate that the research conducted was relevant
-\item Was Python the correct choice - research conducted proved Python and C\# integration wouldn't be an issue. However as the customer lacked Python knowledge it probably deterred them from wishing to integrate our system into their existing one. Had the system been created in C\# then perhaps this would have been different. Perhaps this should have been better discussed with the customer in the initial stages of the project.
-\item Python chosen as development language as majority of the team have at least two years development experience with it minimum
-\item Python industry standard for machine learning projects and thus has a lot of pre-existing libraries the team could utilise during development
-\end{itemize}
+From an early stage, as we outline in section 2, it was clear the client placed a high priority on integration with their existing system. In other words: with their existing technology stack. ResDiary uses Microsoft's C\# language and the ASP.NET web framework for its backend system. The natural starting point, therefore, was to find a solution within that language ecosystem. 
+
+It became clear very quickly that in order to meet the goal of delivering a recommendation system within the time limit, we would be compelled to draw on existing machine learning libraries. It was not practical, nor within the team’s competency to write complex big data algorithms from scratch. The team researched machine learning libraries in C\# and found some promising results - the popular Accord.NET library providing much of the required functionality. 
+
+Eventually, however, we agreed on using the Spark machine learning library, using Python. Python is the industry standard for machine learning projects and had a lot of pre-existing libraries the team could utilise during development. Its natural application domain is scripting and data analysis. By contrast, though it does have some suitable libraries, C\# is geared toward web applications. Python also had the advantage of being familiar to the team, with the majority of members having at least two years development experience. By contrast, only one member had significant experience with C\# and the ASP.NET framework.
+
+Of course, the choice of Python begs the question of how we integrate with the customer system. While our research indicated that calling Python scripts from C\# would not be an issue, the client did not have much familiarity with Python and that may have deterred them from wishing to use our system as more than a proof-of-concept ultimately. The choice of language, perhaps, should have been discussed more thoroughly in the initial stages of the project.
 
 
 \subsection{REFLECTION POINT - Models}
