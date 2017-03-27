@@ -15,7 +15,7 @@ class Evaluator(Base):
         self.algorithm = algorithm
 
     def mse_evaluation(self, bookings):
-        model=self.algorithm
+        model = self.algorithm
         bookings = Data(self.spark).get_bookings_with_score(bookings)
         data, test_ratings = bookings.randomSplit([0.8, 0.2])
         testdata = test_ratings.rdd.map(lambda r: (r[0], r[1]))
@@ -45,7 +45,7 @@ class Evaluator(Base):
         algorithm and returns a ratio right/total, where 'right' is the number of
         recommended restaurants that were later visited and 'total' is the total
         number of recommendations.'''
-        model=self.algorithm
+        model = self.algorithm
         data = Data(self.spark, self.config)
         # filter out half of the data to partial_data and store the remaining
         # restaurant IDs
