@@ -23,22 +23,26 @@
 \maketitle
 
 % ##################################################
-% LAST EDIT: 	06/03/17	Joseph
+% LAST EDIT: 	27/03/17	Josh
 % ################# Comment Log ####################
+% Josh: Note: what we DISCOVERED as opposed to what we did, but also need to talk about results. 
+% Looked at various academic papers for ideas. 
 % ##################################################
 \begin{abstract}
-The abstract shall go here! Here is some things to keep in mind while writing it.
+Recommendation systems are increasingly used by businesses to provide their customers with tailored suggestions for products that may interest them. This paper presents a case study of the challenges we encountered in developing such a system for a well-known restaurant booking service. 
+
+We discuss how we implemented and delivered a working recommendations engine which produces sensible suggestions for new restaurants, tailored to a given user's taste. We explore the relevant machine learning concepts we discovered and the technologies we utilised. Finally, we reflect on the software engineering practices we followed throughout the project and how they contributed to the end result.
 \end{abstract}
 
-\begin{itemize}
-\item The abstract is likely the first substantive description of your work read by an examiner. View it as an opportunity to set accurate expectations.
-\item The abstract is a summary of the whole thesis. It presents all the major elements of your work in a highly condensed form. (Write it having written the rest of the paper) The paper sets the abstract.
-\item It must be capable of substituting for the whole paper when there is insufficient time and space for the full text.
-\item Keep it short and snappy. 
-\item The primary function of your thesis (and by extension your abstract) is not to tell readers what you did, it is to tell them what you discovered.
-\item Approximately the last half of the abstract should be dedicated to summarizing and interpreting your results.
-\item The most common error in abstracts is failure to present results.
-\end{itemize}
+%\begin{itemize}
+%\item The abstract is likely the first substantive description of your work read by an examiner. View it as an opportunity to set accurate expectations.
+%\item The abstract is a summary of the whole thesis. It presents all the major elements of your work in a highly condensed form. (Write it having written the rest of the paper) The paper sets the abstract.
+%\item It must be capable of substituting for the whole paper when there is insufficient time and space for the full text.
+%\item Keep it short and snappy. 
+%\item The primary function of your thesis (and by extension your abstract) is not to tell readers what you did, it is to tell them what you discovered.
+%\item Approximately the last half of the abstract should be dedicated to summarizing and interpreting your results.
+%\item The most common error in abstracts is failure to present results.
+%\end{itemize}
 
 % Comment out this line if you do not wish to give consent for your work to be distributed in electronic format.
 % We hereby give consent - spread the knowledge - pending on result of project
@@ -68,7 +72,7 @@ In section \ref{sec:background} we present the background to the project, the mo
 
 %this will surely be expanded to enumerate each separate section better I would like to discuss in detail the practices, issue-tracking, the team work/team load - Josh etc.
 
-In subsequent sections \ref{sec:alice} through Section \ref{sec:reflections} we explore the challenges we faced through development and the steps we took to resolve them, explore the impact of team dynamics on the outcome and reflect on what we have learned from the experience. We also explain how we applied the good development practices learned in PSD3. In particular we highlight the role of version control, agile development and issue tracking.
+In subsequent sections \ref{sec:leadreflection} through Section \ref{sec:costreflection} we explore the challenges we faced through development and the steps we took to resolve them, explore the impact of team dynamics on the outcome and reflect on what we have learned from the experience. We also explain how we applied the good development practices learned in PSD3. In particular we highlight the role of version control, agile development and issue tracking.
 
 \newpage
 
@@ -193,8 +197,6 @@ While some of the team felt this justified being defined within the specificatio
 
 Thus, prior to this meeting, development efforts were split between the creation of a prototype system (which implemented a basic content-based filtering model) and on the long-term solution (with multiple recommenders) to the project. The prototype system was demonstrated during an interim meeting on December 7th, where the technical decisions of the long term solution were discussed at length. Following this meeting, implementation of the system proper commenced. 
 
-
-\newpage
 \subsection{Defining the End Product}
 \label{sec:jandefinedstate}
 % ##################################################
@@ -286,10 +288,10 @@ Mention some of the future proposals we hit on in the presentation such as the r
 % Agile Reflection: Cost Estimation - reflect on the lack of cost estimation and how it contributed partly to the team organisation needed to be reshuffled as parts of the system were avoided how it didn't effect the initial work on the system rather towards the end meant for proposed features needing to be dropped as not enough time was left for their development. Not so much that the priorities were wrong in this regard rather 
 
 
-\subsection{Lead in to reflection points}
+\subsection{Introduction}
 \label{sec:leadreflection}
 % ##################################################
-% LAST EDIT:  27/03/17  Joseph
+% LAST EDIT:  27/03/17  Josh
 % NOTE:      
 % ################# Comment Log ####################
 
@@ -309,11 +311,12 @@ We start by exploring the early technical choices. One must consider whether the
 We then analyse key elements of our software process: team structure and how it developed over time \ref{sec:teamstructure}, how we managed intra-team communication  \ref{sec:communication}, code reviews \ref{sec:codereviewbranch} and our use of pair programming \ref{sec:pairprogramming}. Finally we discuss why certain features were dropped \ref{sec:droppingreflection} and our approach to cost estimation \ref{sec:costreflection}.
 
 
-\subsection{REFLECTION POINT - Python vs C\#}
+\subsection{Reflection: Python vs C\#}
 \label{sec:pyreflection}
 % ##################################################
 % LAST EDIT:  27/03/17  Joseph
 % NOTE:       This will do
+% NOTE:       I wonder if Technology Stack will just become one section. 
 % ################# Comment Log ####################
 % REFERENCE: Accord.NET [1]
 % REFERENCE: Section on Spark [2]
@@ -337,34 +340,50 @@ Eventually, however, we agreed on using the Spark machine learning library, usin
 Of course, the choice of Python begs the question of how we integrate with the customer system. While our research indicated that calling Python scripts from C\# would not be an issue, the client did not have much familiarity with Python and that may have deterred them from wishing to use our system as more than a proof-of-concept ultimately. The choice of language, perhaps, should have been discussed more thoroughly in the initial stages of the project.
 
 
-\subsection{REFLECTION POINT - Models}
+\subsection{Reflection: Recommendation System Models}
 \label{sec:modelreflection}
 % ##################################################
-% LAST EDIT:  15/03/17  Joseph
+% LAST EDIT:  27/03/17  Josh
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
 % ##################################################
-
+% Josh: I moved the Netflix discussion here. Explain CF and CB. 
+%  Considered explaining over-fitting and ALS in more detail, but trying to tie it to most relevant customer issues (i.e. lack of data)
+%  I need to add some stuff on content-based and possibly expand on the evaluator, but again trying to keep it more geared towards process and reflection.
 % ################# References #####################
+% Section 3.3 ALS:  http://cs229.stanford.edu/proj2014/Christopher%20Aberger,%20Recommender.pdf
+% Implicit ALS: http://yifanhu.net/PUB/cf.pdf
 % ##################################################
 
+There are two broad approaches to building recommender systems: \textbf{collaborative filtering} and \textbf{content-based filtering}. 
 
-Misc Points:
-\begin{itemize}
-\item Tie in the Netflix research (Netflix Prize, etc.) and say how this research influenced our choice of models and system design
-\item Explain how the collaborative filter works and WHY it is applicable for our needs
-\item Explain how the content based filter works and WHY it is applicable for our needs
-\item Reference papers and other models (Netflix) to justify choice
-\item What were the limits of the models - customer asked to only retrain on new data but limit of model disallows this - need for specific type of data that is not always present within the data set.
-\item Did we choose the right models
-\item Did the models impact later decisions
-\item Probably suggest some alternative models which could have been explored
-\item Demonstrate that the research conducted was relevant
-\item Tie in the Netflix competetion and Netflix model as referenced in \ref{sec:initcustobjectives}
-\item Knowing the complaints of lacking various fields, columns, data was the model choice actually correct? From the outset it was the more obvious choice but would an alternative have yielded better results working with the data sets we were being given?
-\item Jeremy asked about the reusability of our system and the models during the presentation - mention ours is tailored to our specific system and results to improve the accuracy of the results and predictions
-\item Mention the system design of having seperate recommenders feed into the system and how these were chosen in relation to that goal and as a result the system designed in the manner that it was.
-\end{itemize}
+Collaborative-filtering algorithms work on the principle of identifying users with similar preferences (often obtained via user ratings), and recommending new items based on those preferences. It does not rely on specific information about the user nor the items under consideration, merely who the user is and the ratings they have given. Content-based filtering, by contrast, exploits the underlying features of items with which a user has previously interacted (bought or liked, depending on the context), and attempts to recommend items with similar features. These features may be descriptors such as film length or price. Hybrid recommenders combine both approaches to produce recommendations. Most of our development effort was concentrated on building a collaborative-filtering recommender, though we did implement content-based recommenders and a 'system' recommender which combines recommendations from the other recommenders and outputs the best ones. 
+
+As we outlined in our discussion of the customer’s initial motivation \ref{sec:custobjectives}, the starting point of our research was investigating a challenge issued by Netflix in 2006. Participants were tasked with developing a recommendation algorithm that would better their own. The goal of the algorithm was to accurately predict a user's rating of a film based solely on previous user ratings and no additional information about either the users or films. Naturally, this suggests a collaborative-filtering model.
+
+A set of training data (a subset of Netflix's real user data) with half a million user ratings was provided to participants, with the candidate algorithm analysing this data and using it to predict user ratings for a second, disjoint subset of the user data (validation set). No information other than user ID, film ID and date of rating was provided. Our Resdiary project followed a similar structure. ResDiary's users, as with Netflix's, leave review scores ranging from 1 to 5. We were given a subset of their user data which we split into further subsets for training and for evaluation. The research thus provided an excellent springboard from which to launch our own collaborative filtering model. With such a strong similarity between the requirements of our system and theirs, it was a natural jump.
+
+Our collaborative-filtering system used the well-known alternating least squares algorithm (ALS) to produce its results. Much of the challenge in implementing the model was in avoiding common machine learning pitfalls such as \textbf{overfitting} - an issue that occurs when the candidate model becomes too dependent on training data and performs poorly when predicting on new data. Ultimately our model produced credible results which the customer was impressed with, but the development was not without problems. A well-documented difficulty of collaborative filtering is the sparsity of user ratings in most data, that is: most users simply \textit{do not rate} items they view or purchase. Certainly, we found with the ResDiary data set that many bookings had NULL entries for user ratings. We were able to overcome this, to some extent, by implementing an implicit ALS aglorithm as an alternative recommender. Implicit algorithms infer a user rating where it does not exist by analysing other available properties. Our algorithm analyses the number of visits a user has made to a restaurant to imply a user preference.
+
+One of the persistent issues that surfaced across many iterations was a lack of data. On multiple occasions we found that we simply did not possess the necessary volume of data to make our recommendations more accurate. Big data analysis, as the name implies, requires large quantities of data! Understandably, ResDiary could not give us access to real user data, given the associated data protection issues, but the volume of data we were given in the initial stages (around ten thousand rows), was a limiting factor in our early development efforts and compromised the extent to which we could fine-tune our end product algorithms. Before taking on a future project we may wish to clarify up front that large quantities of data will be required to produce meaningful results.
+
+
+%Misc Points:
+%\begin{itemize}
+%\item Tie in the Netflix research (Netflix Prize, etc.) and say how this research influenced our choice of models and system design
+%\item Explain how the collaborative filter works and WHY it is applicable for our needs
+%\item Explain how the content based filter works and WHY it is applicable for our needs
+%\item Reference papers and other models (Netflix) to justify choice
+%\item What were the limits of the models - customer asked to only retrain on new data but limit of model disallows this - need for specific type of data that is not always present within the data set.
+%\item Did we choose the right models
+%\item Did the models impact later decisions
+%\item Probably suggest some alternative models which could have been explored
+%\item Demonstrate that the research conducted was relevant
+%\item Tie in the Netflix competetion and Netflix model as referenced in \ref{sec:initcustobjectives}
+%\item Knowing the complaints of lacking various fields, columns, data was the model choice actually correct? From the outset it was the more obvious choice but would an alternative have yielded better results working with the data sets we were being given?
+%\item Jeremy asked about the reusability of our system and the models during the presentation - mention ours is tailored to our specific system and results to improve the accuracy of the results and predictions
+%\item Mention the system design of having seperate recommenders feed into the system and how these were chosen in relation to that goal and as a result the system designed in the manner that it was.
+%\end{itemize}
 
 
 \subsection{REFLECTION POINT - Apache Spark}
@@ -399,7 +418,7 @@ Misc Points:
 
 
 \subsection{REFLECTION POINT - Testing and Continuous Integration}
-\label{testing}
+\label{sec:testing}
 % ##################################################
 % LAST EDIT:  26/03/17  Josepg
 % NOTE:       Draft
