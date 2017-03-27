@@ -1,6 +1,6 @@
 from pyspark.sql import SQLContext
 from collections import defaultdict
-from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS 
+from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS  
 from base import Base
 from math import sqrt
 from sets import Set
