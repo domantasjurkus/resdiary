@@ -86,7 +86,8 @@ class System(Recommender):
         return SQLContext(self.spark).createDataFrame(top_recommendations,
                                                       self.config.get_schema())
 
-    def learn_hyperparameters(self, data):
+    def learn_hyperparameters(self, data): 
+        evaluator = Evaluator(self.spark,self)
         recommenders = self.recommenders.keys()
         best_evaluation = 0
         maximum_weight = self.config.get('System', 'maximum_weight')
@@ -96,7 +97,7 @@ class System(Recommender):
             for i, recommender in enumerate(recommenders):
                 self.weights[recommender] = weights[i]
             # keep track of the best weights
-            evaluation = evaluate(self.spark, self, data, self.config)
+            evaluation = evaluator.right_total_evaluation(data)
             if evaluation > best_evaluation:
                 best_evaluation = evaluation
                 best_weights = weights
