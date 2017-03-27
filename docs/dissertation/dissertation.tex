@@ -337,34 +337,50 @@ Eventually, however, we agreed on using the Spark machine learning library, usin
 Of course, the choice of Python begs the question of how we integrate with the customer system. While our research indicated that calling Python scripts from C\# would not be an issue, the client did not have much familiarity with Python and that may have deterred them from wishing to use our system as more than a proof-of-concept ultimately. The choice of language, perhaps, should have been discussed more thoroughly in the initial stages of the project.
 
 
-\subsection{REFLECTION POINT - Models}
+\subsection{REFLECTION POINT - Recommendation System Models}
 \label{sec:modelreflection}
 % ##################################################
-% LAST EDIT:  15/03/17  Joseph
+% LAST EDIT:  27/03/17  Josh
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
 % ##################################################
-
+% Josh: I moved the Netflix discussion here. Explain CF and CB. 
+%  Considered explaining over-fitting and ALS in more detail, but trying to tie it to most relevant customer issues (i.e. lack of data)
+%  I need to add some stuff on content-based and possibly expand on the evaluator, but again trying to keep it more geared towards process and reflection.
 % ################# References #####################
+% Section 3.3 ALS:  http://cs229.stanford.edu/proj2014/Christopher%20Aberger,%20Recommender.pdf
+% Implicit ALS: http://yifanhu.net/PUB/cf.pdf
 % ##################################################
 
+There are two broad approaches to building recommender systems: \textbf{collaborative filtering} and \textbf{content-based filtering}. 
 
-Misc Points:
-\begin{itemize}
-\item Tie in the Netflix research (Netflix Prize, etc.) and say how this research influenced our choice of models and system design
-\item Explain how the collaborative filter works and WHY it is applicable for our needs
-\item Explain how the content based filter works and WHY it is applicable for our needs
-\item Reference papers and other models (Netflix) to justify choice
-\item What were the limits of the models - customer asked to only retrain on new data but limit of model disallows this - need for specific type of data that is not always present within the data set.
-\item Did we choose the right models
-\item Did the models impact later decisions
-\item Probably suggest some alternative models which could have been explored
-\item Demonstrate that the research conducted was relevant
-\item Tie in the Netflix competetion and Netflix model as referenced in \ref{sec:initcustobjectives}
-\item Knowing the complaints of lacking various fields, columns, data was the model choice actually correct? From the outset it was the more obvious choice but would an alternative have yielded better results working with the data sets we were being given?
-\item Jeremy asked about the reusability of our system and the models during the presentation - mention ours is tailored to our specific system and results to improve the accuracy of the results and predictions
-\item Mention the system design of having seperate recommenders feed into the system and how these were chosen in relation to that goal and as a result the system designed in the manner that it was.
-\end{itemize}
+Collaborative-filtering algorithms work on the principle of identifying users with similar preferences (often obtained via user ratings), and recommending new items based on those preferences. It does not rely on specific information about the user nor the items under consideration, merely who the user is and the ratings they have given. Content-based filtering, by contrast, exploits the underlying features of items with which a user has previously interacted (bought or liked, depending on the context), and attempts to recommend items with similar features. These features may be descriptors such as film length or price. Hybrid recommenders combine both approaches to produce recommendations. Most of our development effort was concentrated on building a collaborative-filtering recommender, though we did implement content-based recommenders and a 'system' recommender which combines recommendations from the other recommenders and outputs the best ones. 
+
+As we outlined in our discussion of the customer’s initial motivation \ref{sec:custobjectives}, the starting point of our research was investigating a challenge issued by Netflix in 2006. Participants were tasked with developing a recommendation algorithm that would better their own. The goal of the algorithm was to accurately predict a user's rating of a film based solely on previous user ratings and no additional information about either the users or films. Naturally, this suggests a collaborative-filtering model.
+
+A set of training data (a subset of Netflix's real user data) with half a million user ratings was provided to participants, with the candidate algorithm analysing this data and using it to predict user ratings for a second, disjoint subset of the user data (validation set). No information other than user ID, film ID and date of rating was provided. Our Resdiary project followed a similar structure. ResDiary's users, as with Netflix's, leave review scores ranging from 1 to 5. We were given a subset of their user data which we split into further subsets for training and for evaluation. The research thus provided an excellent springboard from which to launch our own collaborative filtering model. With such a strong similarity between the requirements of our system and theirs, it was a natural jump.
+
+Our collaborative-filtering system used the well-known alternating least squares algorithm (ALS) to produce its results. Much of the challenge in implementing the model was in avoiding common machine learning pitfalls such as \textbf{overfitting} - an issue that occurs when the candidate model becomes too dependent on training data and performs poorly when predicting on new data. Ultimately our model produced credible results which the customer was impressed with, but the development was not without problems. A well-documented difficulty of collaborative filtering is the sparsity of user ratings in most data, that is: most users simply \textit{do not rate} items they view or purchase. Certainly, we found with the ResDiary data set that many bookings had NULL entries for user ratings. We were able to overcome this, to some extent, by implementing an implicit ALS aglorithm as an alternative recommender. Implicit algorithms infer a user rating where it does not exist by analysing other available properties. Our algorithm analyses the number of visits a user has made to a restaurant to imply a user preference.
+
+One of the persistent issues that surfaced across many iterations was a lack of data. On multiple occasions we found that we simply did not possess the necessary volume of data to make our recommendations more accurate. Big data analysis, as the name implies, requires large quantities of data! Understandably, ResDiary could not give us access to real user data, given the associated data protection issues, but the volume of data we were given in the initial stages (around ten thousand rows), was a limiting factor in our early development efforts and compromised the extent to which we could fine-tune our end product algorithms. Before taking on a future project we may wish to clarify up front that large quantities of data will be required to produce meaningful results.
+
+
+%Misc Points:
+%\begin{itemize}
+%\item Tie in the Netflix research (Netflix Prize, etc.) and say how this research influenced our choice of models and system design
+%\item Explain how the collaborative filter works and WHY it is applicable for our needs
+%\item Explain how the content based filter works and WHY it is applicable for our needs
+%\item Reference papers and other models (Netflix) to justify choice
+%\item What were the limits of the models - customer asked to only retrain on new data but limit of model disallows this - need for specific type of data that is not always present within the data set.
+%\item Did we choose the right models
+%\item Did the models impact later decisions
+%\item Probably suggest some alternative models which could have been explored
+%\item Demonstrate that the research conducted was relevant
+%\item Tie in the Netflix competetion and Netflix model as referenced in \ref{sec:initcustobjectives}
+%\item Knowing the complaints of lacking various fields, columns, data was the model choice actually correct? From the outset it was the more obvious choice but would an alternative have yielded better results working with the data sets we were being given?
+%\item Jeremy asked about the reusability of our system and the models during the presentation - mention ours is tailored to our specific system and results to improve the accuracy of the results and predictions
+%\item Mention the system design of having seperate recommenders feed into the system and how these were chosen in relation to that goal and as a result the system designed in the manner that it was.
+%\end{itemize}
 
 
 \subsection{REFLECTION POINT - Apache Spark}
