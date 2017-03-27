@@ -42,6 +42,10 @@ class Recommender(Base):
         hyperparameters.'''
         raise NotImplementedError("Don't use this class, extend it")
 
+    def get_algorithm_name(self):
+        ''' Returns the name of the object instance. '''
+        return type(self).__name__
+
 class System(Recommender):
     '''Combines other recommenders to issue the final recommendations for each
     user.'''
@@ -82,7 +86,8 @@ class System(Recommender):
         return SQLContext(self.spark).createDataFrame(top_recommendations,
                                                       self.config.get_schema())
 
-    def learn_hyperparameters(self, data):
+    def learn_hyperparameters(self, data): 
+        evaluator = Evaluator(self.spark,self)
         recommenders = self.recommenders.keys()
         best_evaluation = 0
         maximum_weight = self.config.get('System', 'maximum_weight')
@@ -92,7 +97,7 @@ class System(Recommender):
             for i, recommender in enumerate(recommenders):
                 self.weights[recommender] = weights[i]
             # keep track of the best weights
-            evaluation = evaluate(self.spark, self, data, self.config)
+            evaluation = evaluator.right_total_evaluation(data)
             if evaluation > best_evaluation:
                 best_evaluation = evaluation
                 best_weights = weights
@@ -166,6 +171,7 @@ class ALS(Recommender):
         x += jump
 
     def learn_hyperparameters(self, bookings):
+        evaluator = Evaluator(self.spark,self)
         bookings = Data(self.spark).get_bookings_with_score(bookings)
         data, test_ratings = bookings.randomSplit([0.8, 0.2])
         testdata = test_ratings.rdd.map(lambda r: (r[0], r[1]))
@@ -180,7 +186,7 @@ class ALS(Recommender):
                               product(*range_values)):
             self.train(data, parameters)
             predictions = self.predict(testdata)
-            mse = calculate_mse(test_ratings, predictions)
+            mse = evaluator.calculate_mse(test_ratings, predictions)
             if mse < best_mse:
                 best_parameters = parameters
                 best_mse = mse
