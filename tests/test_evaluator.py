@@ -13,7 +13,7 @@ class EvaluatorTest(unittest.TestCase, BaseTestCase):
 	# Set up fixtures that last for all test cases
 	@classmethod
 	def setUpClass(self):
-		self.evaluator = Evaluator(self.sc,ExplicitALS(self.sc))
+		self.evaluator = Evaluator(self.sc,ExplicitALS(self.sc), config=StubConfig)
 		self.bookings = Data(self.sc).get_bookings('test.txt')
 
 

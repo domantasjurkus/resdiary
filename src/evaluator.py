@@ -53,7 +53,7 @@ class Evaluator(Base):
         # read all the data and separate by diner id
         bookings = defaultdict(list)
 
-        for booking in bookings_data .collect():
+        for booking in bookings_data.collect():
             bookings[booking['Diner Id']].append(booking)
         partial_data = []
         for personal_bookings in bookings.values():
