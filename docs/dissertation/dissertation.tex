@@ -233,6 +233,11 @@ We also elected in the aftermath of the meeting to drop the proposed nonfunction
 % ##################################################
 
 % Information on the final software that was delivered to the customer.
+
+This is a postive brief summary of all that was achieve.
+
+The customer was happy so we are also happy with our creation.
+
 In Section \ref{sec:ourinitobjectives} we discuss the specifics of Netflix Recommendations and the Netflix Prize competition so we need to make sure to tie this, the influence and similarity between that system and our final output. 
 
 Additionally we need to demonstrate that the research conducted was RELEVANT.
@@ -265,8 +270,6 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 
 % Currently I see a potential layout of Section 3 as follows:
 
-% Technical lead in - summary of technical section to tie detailed technical retrospectives with requirements engineering and testing (requirements engineering is the one to cut / shorten if space needed)
-
 % Technical Reflection: Python - a technical reflection on the choice of Python as the development language
 
 % Technical Reflection: Models & System Design - a technical reflection on the choice of models and how we used them in the creation of our own system design system (if this runs long split into reflection on models and reflection on system design)  
@@ -276,11 +279,6 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 % Agile / Technical Reflection: Requirements Engineering - a reflection on the requirements engineering process which the team performed well and made the right choices but tease potential improvements which could have occurred
 
 % Technical Reflection: Testing - a reflection on the testing process with a general summary and discussion of the procedure used with some suggestions for improvements
-
-% ??? We could also talk about prototyping here as a technical development practice and using one front end display as a throaway but space looks tight
-% Probably use the protype throwaway stuff throughout and conclude saying how encouraging it in development was a beneficial practice (then again maybe that is more suitable than the requirements engineering reflection - shorten that in favour of prototyping reflection section?)
-
-% Scrum lead in - summary of the Scrum and method reflection points as this is the remaining focus of section 3 and setup the idea that the team used Scrum structure with additional practices and initially developer anarchy before transferring over to structure
 
 % Agile Reflection: Team Organisation - reflection on how the team initially started with anarchy and how the transision over to role based sports model improved development and how the team drew from the knowledge of anarchy to better structure the team at this stage
 
@@ -294,64 +292,48 @@ This is an example of how to reference an inlcuded figure (see Figure \ref{fig:a
 
 % Agile Reflection: Cost Estimation - reflect on the lack of cost estimation and how it contributed partly to the team organisation needed to be reshuffled as parts of the system were avoided how it didn't effect the initial work on the system rather towards the end meant for proposed features needing to be dropped as not enough time was left for their development. Not so much that the priorities were wrong in this regard rather 
 
-% NOTE: Scurm vs. XP - I think this should be best moved to a paragraph of the conclusion as it was not really an 'incident' or 'event' as much as a reflection on if we used the correct methods. Putting it in the conclusion might better suit it.   
 
-
-\subsection{REFLECTION POINT - Technical Overview Section}
+\subsection{Lead in to reflection points}
 \label{sec:techoverviewreflection}
 % ##################################################
-% LAST EDIT:  18/03/17  Joseph
-% NOTE:         Temp notes / thoughts
+% LAST EDIT:  27/03/17  Joseph
+% NOTE:      
 % ################# Comment Log ####################
-% Development Langauges, Models and Spark being 3 sub-sub-categories within this encompassing category.
 
-% Reference general importance of design decisions here
-% Reference specific sub-sub-category when applicable
+% Originally I proposed a separate agile and technical one of these
+% We don't have the space or time to do that
 
-% If we tie in testing and requirements engineering here the remaining reflections are less technical and
-% more agile reflections
+% It works better to have one lead in to this section anyway - why have to lead ins?
+
 % ##################################################
 
-% This section should be a mainly postive reflection of the technical choices of the project.
+% Reference off every reflection section in Section 3 and end with a tie in to the conclusion
 
-% The occasional limitation can be mentioned in the passing such as the use of Python scaring the customer off integration (theory) 
-% and the drawbacks of the collab not allowing for training based on only new data (this if anything is a requirements engineering failure
-% that could have been picked up earlier but customer did not consider until after seeing operation of prototype and use of data in its creation)
-% Spark was fine. I have no gripes about using Spark.
+Throughout the development of the software project the team faced many trials and tribulations. From the early technical choices on which success of the project lay balanced to Agile practices and methods employed for successful development; it was a hell of a ride. 
 
-1. Talk about why the technical choices are significant development points in the software development process.
-2. Talk about how preemptive commitment too early is bad and should be avoided - reference case study - saying team used this as an warning. Use this as reference throw over to requirements engineering reflection point. 
-3. Introduce the three major technical decisions of our project
-4. Tie in testing and use as a reference throw over
+Despite the successful development achieved by the team (reference Section 2 final state) within any software project there is room from improvements in both the technical decisions and development methodology. From the technical perspective one must consider whether the major decisions, (reference Python, Spark and Models Reflections), where in fact the correct decisions to have made in retrospect. Additionally one might also consider if the system was correctly tested (reference Testing Reflection) for no system is released bug free and testing always improved. 
 
-Preemptive commitment to particular design choices too early in the software development cycle leaves a software project at high risk of failure (reference a case study where an incorrect design decision lead to failure - lecture 1 / 3 recommended reading?). Summary of how this system failed in relation to incorrect design choice. 
-
-Say the team used this as a warning for the major design decisions - Development language, Models, Spark - that were involved with our project which are detailed below.
-
-State how the technical choices do not occur in isolation rather they are heavily work with the requirements gathering stage (reference lead in)
-
-Additionally discuss how they are related to the testing of the system (reference lead in) 
-
-However the technical choices of a software project are not made in isolation rather they are heavily influenced by the requirements engineering process of the 
-
-\begin{itemize}
-\item Demonstrate that the research conducted was relevant
-\end{itemize}
+From the development process and methods used there again is room for improvement, even when following the Agile development practices of the Scrum and Extreme Programming methodologies as the team did. It may be that the team chooses instead to not adhere strictly to such frameworks and instead opt for a looser and more flexible development methodology. What transpires from this approach though is the discovery of some practices which the team regrets having not introduced earlier (reference Pair programming) but also the risk of introducing problems which transpire over time (reference cost estimation and communication). Whereas some problems can be easily addressed upon encounter through the introduction of additional development structure (reference team organisation) others must unfortunately utilise temporary methods to complete development when clear long term solutions clearly exist (reference code reviews). Considering all of this especially of importance when considering why the project was forced to dropped proposed development features (reference dropped features) though the ultimate goal being to grow as a developer and consider the experienced gained from the development process (reference conclusion).
 
 
 \subsection{REFLECTION POINT - Python vs C\#}
 \label{sec:pyreflection}
 % ##################################################
-% LAST EDIT:  15/03/17  Joseph
-% NOTE:         Temp notes / thoughts
+% LAST EDIT:  27/03/17  Joseph
+% NOTE:       This will do
 % ################# Comment Log ####################
+% REFERENCE: Accord.NET [1]
+% REFERENCE: Section on Spark [2]
+% REFERENCE: Python pre-existing libraries [3]
 % ##################################################
 One of the key considerations in any software development project is the choice of the technologies used to implement it. We spent much of the first iteration contesting two broad approaches: implementing the system in their own language (C\#) or using our Python alternative.
 
 From an early stage, as we outline in section 2, it was clear the client placed a high priority on integration with their existing system. In other words: with their existing technology stack. ResDiary uses Microsoft's C\# language and the ASP.NET web framework for its backend system. The natural starting point, therefore, was to find a solution within that language ecosystem. 
 
+% [1]
 It became clear very quickly that in order to meet the goal of delivering a recommendation system within the time limit, we would be compelled to draw on existing machine learning libraries. It was not practical, nor within the team’s competency to write complex big data algorithms from scratch. The team researched machine learning libraries in C\# and found some promising results - the popular Accord.NET library providing much of the required functionality. 
 
+% [2], [3]
 Eventually, however, we agreed on using the Spark machine learning library, using Python. Python is the industry standard for machine learning projects and had a lot of pre-existing libraries the team could utilise during development. Its natural application domain is scripting and data analysis. By contrast, though it does have some suitable libraries, C\# is geared toward web applications. Python also had the advantage of being familiar to the team, with the majority of members having at least two years development experience. By contrast, only one member had significant experience with C\# and the ASP.NET framework.
 
 Of course, the choice of Python begs the question of how we integrate with the customer system. While our research indicated that calling Python scripts from C\# would not be an issue, the client did not have much familiarity with Python and that may have deterred them from wishing to use our system as more than a proof-of-concept ultimately. The choice of language, perhaps, should have been discussed more thoroughly in the initial stages of the project.
@@ -389,7 +371,6 @@ Misc Points:
 % LAST EDIT:  15/03/17  Joseph
 % NOTE:         Temp notes / thoughts
 % ################# Comment Log ####################
-% Readded after accidental deletion
 % ##################################################
 
 \begin{itemize}
@@ -408,42 +389,6 @@ Misc Points:
 \item Quote the numbers Mason! The numbers! (You know the ones Eduard likes to mention)
 \item Limited the ability to perform performance tests on the system
 \end{itemize}
-
-
-\subsection{REFLECTION POINT - Requirements Engineering}
-\label{sec:teamstructure}
-% ##################################################
-% LAST EDIT:  20/03/17  Joseph
-% NOTE:       First Draft
-% ################# Comment Log ####################
-% - References the cost estimation reflection point as an improvement - tie those two together
-% - References scenarios which flows to testing via test scenarios / acceptance testing - ties those two together
-% Reference back in subsequent reflection points to reduce lead in repetition 
-% ##################################################
-
-% Perhaps tie in the requirements risks and perhaps suggest methods of dealing with such risks via papers
-
-% Basically we've reflected on the technical choices now why was it important that the requirements were engineering properly to better inform the technical choices and what could have been done to do this process even better
-
-From the outset of the project the team were aware of the need to properly capture the requirements of the project. It is widely documented that two of the primary reasons for software failure is due to building the wrong system and building the system incorrectly (said in lecture 3 - get academic proof) both of which were major threats to the development of our project. The team was mindful of how easily building an incorrect system, one not based off similarity between users, or selection of the incorrect machine learning model and subsequent project failure could occur in our project. 
-
-Adhering to the advice of avoiding early commitment to a particular design solution during the requirements elicitation process as is discussed in Section (reference case study reflection at technical overview point) the team left the decision regarding the specific models and tool choice until after this phase was conducted. Although the requirements would evolve as the project developed, as is to be expected, the team felt with the correct initial system goals established the team could easily justify decision designs in relation to the key goals of the system. Such technical decisions, specifically the choice of development language, machine learning models and clustered computing framework, are discussed in Sections (reference all three technical reflections) respectively. 
-
-Knowing the significance of the requirements engineering process for the sucessful development of the project, the team dedicated the first milestone to ensuring the proposed system to be built was correct. This occurred in parallel with technical research into similar systems and their creation (reference Netflix research from section 2). To ensure the team captured all functionality of the system the team, having conducted the initial customer interview, prepared a requirements specification document which was later refined through customer discussions (reference section 2 requirements section). 
-
-Within this document the team elected to use the user stories method of requirements specification in order to create an all encompassing set of stories which reflected the proposed features and functionality of the system. As the recommendations are made to ResDiary customers the team felt user stories provided a good a boundary artifact between the proposed users, customers and developers (taken from PSD lecture 15 key point) and that user stories were a natural choice opposed to alternative specification techniques such as use case diagrams because… 
-% Try to sell the idea that user stories are the natural choice for our project as user stories are written from the customer perspective and the recommendations are being made to the end customers
-
-Although some modifications were necessary, as is to be expected, the team found that proposed the user stories modelled the customer requirements with a good level of accuracy (reference section 2 refinements after initial meeting). In addition to this the additional proposed features, generating recommendations for new users and the ability to recommend previously visted restraunts, that the team suggested were recieved with good feedback by the customer. They believed such features tackled aspects of the problem they themselves had not yet considered and felt we had a good understanding of the system. 
-
-% Establish that task estimation was not properly conducted then reference away to specific reflection into that topic
-One shortcoming of the use of stories however was the measure of priority attached to each user stories and the subsequent task breakdown by association. The team did not conduct a formal task estimation procedure beyond the breakdown of the user stories into smaller, more general tasks. This was in part due to the lack of technical knowledge into the subject area from the team at this stage in development though the team should have conducted proper task estimation to assist with project planning and management as is discussed here (reference planning and cost estimation reflection point). 
-
-% Transision into this better and potentially expand on
-Another area of improvement in the requirement gathering process would have been the inclusion of use scenarios in the “Given, When, Then” format. This is a natural progression of user stories as it expands upon an individual story to provide an example of it in action. Such scenarios could then be utilised to allow for further refinement discussions to occur with the customer in order to better establish conditions for system acceptance which would improve the acceptance tests of the system and allow for scenario testing to be conducted on our system. A discussion regarding such tests and other methods of improvements is discussed in Section (reference testing)  
-
-% Tidy up the ending better - more postive - team did well in this regard and so should end on positive note
-Although the aforementioned could have utilised to improve the team's cost estimation and test process for the project, the team established a good understanding of the customer's vision and corresponding system requirements. This ultimately showed during the various customer demonstrations where by second to last meeting they encouraged to the team to follow where we saw the development of the system going as they were already impressed and pleased with the results. This level of confidence placed in the team we feel showed we had a good initial grasp of the system and thus were able to deliver and take steer the project in the direction we saw it heading towards the later stages of the project. 
 
 
 \subsection{REFLECTION POINT - Testing and Continuous Integration}
@@ -505,41 +450,6 @@ The final area for improvement of the test procedure would have been to better i
 % Should our testing have better utilised statisical measures in relation to the system accuracy?
 %	Yes, the statistical part was tricky, that's why most testing resided withing unit testing.
 % Could the testing have provided internal feedback on the efforts of the application. First, evaluate the application according to the acceptance criteria. Second, be prepared to support those assertions in statistical terms; for example, be 95 percent confident that the application will produce an answer within a given range. Last, have a high-level understanding of the underpinnings of the application, so that any deficiencies might be able to be ascribed to a particular application component.
-
-
-\subsection{REFLECTION POINT - Scrum Lead In}
-\label{sec:teamstructure}
-% ##################################################
-% LAST EDIT:  21/03/17  Joseph
-% NOTE:       First Draft
-% ################# Comment Log ####################
-% Ending is real clunky but I like the idea of a lead in general reflection via references to the Scrum
-% ##################################################
-
-
-% !!!!!!!!!!!!!!! IMPORTANT NOTE TO SELF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-%
-% Scrum reflection story
-%
-% The way I envision the general reflection for the Scrum method being 
-% examine each of our shortcomings in terms of team workflow (task backlog, communication, etc)
-% and to possibly suggest Scrum / XP methods / extensions which could have been employed
-% to avoid such failures from the team. This can then be used in the final reflection
-% point comparing which framework we should have followed more closely. For example 
-% following Scrum more closely with daily (very frequent) stand up meetings would have
-% avoided the issue of lack of communication of what you are actively working on.
-% Additionally Scrum task and priortiy reviews would have handled that issue, etc.
-%
-% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-% Now see this as a general lead in saying we used Scrum, highlight the overall performance and tease the key failures of our use of Scrum. Finish with a tie in to the final reflection point on whether Scrum was the correct practice to use for the project. 
-
-Lead in with a general why Agile is used for large projects such as ours.
-
-As is often a common practice in industry (get a reference backing up claim) the team did not adhere strictly to one specfic agile framework. Instead the Scrum methodology was used as the overarching framework with additional agile practices from alternative methods, such as prototyping and extreme programming, being adopted as the team felt their use necessary and applicable. While this behaviour ensuresd a flexibile production envirnoment and the team found modertate success with the loose methodology it was not without its issues. Primarily this was due to the lack of discipline within the team to hold all of the key Scrum methods, as weekly stand up style meetings were cancelled in favour of a more open source style of development environment, and roles, as the team employed no product owner role and the scrum master was additionally on the development team. 
-
-Ultimately this would come at a cost of the teams ability to collaborate effectively on the project as the lack of stand ups led to communication issues as is discussed in Section (reference communication issue). Additionally the lack of product owner and focused scrum master roles played into some disfunctionality within the team organisation structure as highlighted in Section (reference team structure). By not conducting incomplete work and priority reviews at the each sprint's end the team inevitably saw proposed features be dropped as is discussed in Section (reference dropping features) and examined more thoroughly in Section (reference backlog management). This however may also be a consequence of the lack of formal cost estimation procedures conducted during the project as examined in Section (reference cost estimation) and not the teams approach to the Scrum methodology. Finally the issue of if whether such failures could have been avoided through use of a different agile framework, the Extreme Programming framework, is considered in comparision to following the Scrum methodology more strictly and closely than was conducted by the team in Section (reference stricter Scrum vs XP - final reflection point).
 
 
 \subsection{REFLECTION POINT - Team Structure}
@@ -722,74 +632,128 @@ Refelecting over their time on the project the team believes that the lack of fo
 To combat such behaviour the use of a cost estimation technique, such as planning poker (reference to planning poker), each sprint would have better highlighted the cost and time estimates for each task per development sprint. This would have given a better estimate of the workload assigned to each developer and highlighted potential situations where one developer had committed to a greater amount of work than was feasilbe for a particular sprint. This would have allowed other developers to step and and reduce over committed developers workload and thus increased the throughput of completed tasks per sprint. Additionally planning poker would have assisted and encouraged the creation of the burn down charts as proposed for use in Section (reference communication section) which would have aided the team's task management and thus benefitted the team in multiple development channels. Had such techniques been introduced from the outset of the project then the development time may have been found to include dropped feature of generating reasons for recommendations as is discussed in Section (reference dropped feature section) as the team would have been better prepared to manage the finite free development resources available towards the end of the development cylce and found the needed resources to develop the feature for inclusion within the final system. 
 
 
-\subsection{REFLECTION POINT - MISC POINTS FROM PSD NOTES}
-\label{sec:miscpsd}
+% HERE DOWNWARDS ARE MISC NOTES
+% Requirements Engineering:
+% (Lecture 13) Requirements gathering is an ongoing iterative process that runs concurrently alongside requirements analysis and capture - our project saw this in real effect due to the changing nature of the requirements of our project.
+% (Lecture 14) Requirements engineering is an iterative process of elicitation, capture and validation - talk about how we did this to ensure we were gathering the correct requirements.
+% (Lecture 3) Causes of software project failing - building system for wrong reason, building the wrong system, building the system wrong. We could tie in the dropped new user recommendation to a proposed goal which was later determined to be a requirement which would be built for the wrong reason. As such the feature was dropped to avoid building an incorrect system.
+% (Lecture 13) Cultural differences between engineers and customers - although the developers were technical they don’t know anything regarding machine learning or the development of a system such as ours - Requirements Risk
+% (Lecture 13) Vague requirements specification of end state of system / customer uncertainty regarding the final state of the system - Requirements Risk
+% (Lecture 13) A means of investigating poorly understood requirements (prototyping) - Managing Requirements Risk - perhaps we could have prototyped both a front end display and an integration method / discussed this with the customer earlier. This would have defined a determined end state of the system prior to January which would have allowed for an earlier split in development focus and resulted in either integration or improved front end. Granted one must also consider that technical decisions were still ongoing at this time.
+% (Lecture 13) Requirements evolution - occurred when we discovered potential features which were ultimately dropped (new user recommendations)
+% (Lecture 14) Avoid early commitments to particular design solutions during requirements elicitation
+
+% Communication:
+% Slack was set up and made the dedicated communication channel for project communication.
+% Despite having a Slack communication remained somewhat poor.
+% Decision made to ensure tickets actively represent what feature of the system you are working on.
+% Ticket system improved but commits / development did not occur in a time efficient manner.
+% Sub teams additionally helped communication within front end and back end through team communication as a whole was still somewhat lacking.
+% Specific incident - Edward not providing data sent from customer in a timely manner.
+% Part of team felt agreeing to meet up in person at least once a week to work on project was a waste of time / resources - this had an adverse effect on communication that wasn’t addressed. Instead majority of team met up once a week at scheduled time as some developers strayed through the valley of the shadow of death into the unknown.
+% Perhaps Joseph focusing less on development taking on a purer scrum master of role would have improved the development though it due to this being an academic project that the team felt that not suitable or possible as everyone should have played an active role in development.
+% Talk about the benefits a product owner would have had on the development of our specific project - improved efficiency of tackling task backlog (tasks were avoided from one milestone to the next)
+% (Lecture 7) Perhaps burn down charts per sprints would have been a good idea and would have improved prediction of task completion, backlog management, communication and prioritisation of backlog tasks.
+% Pair programming increase communication and coordination greatly - positive
+% Subteams increased communication a lot as well - postive
+
+% Code Reviews:
+% The system was designed such that branching was unnecessary for the project. Branching was somewhat discouraged throughout the project in order to reduce merge costs / time. Whether the time saved outweighs the time spent fixing and altering other people’s code remains to be seen.
+% Lack of code reviews meant that the code often had inconsistent styling.
+% Lack of code reviews meant a significant portion of time was spent fixing or altering other people's code to work with parts of the system they did not realise they had broken.
+% Lack of code reviews meant code which was WIP was deleted prior to it being fully implemented into the system - again lack of branching issue somewhat.
+% Suggested at the first retrospective but ended up avoiding. Would have reduced a number of problems with development cycle but you can't be perfect.
+% Highlighted in retrospective 3 with the code integration being highlighted.
+% Highlighted even more in retrospective 4 with code integration really being highlighted.
+% Reference potential methods or strategies for code reviews which could have integrated into the development.
+% Reference how other and often professional developers recommend doing code reviews.
+% Mention that pair programming was conducted and the benefits of doing it. Mention it should have been conducted more frequently, reference that it was beneficial when suggesting if XP was potentially better than Scrum.
+% Code reviews might have improved development efficency as less time spent refactoring and fixing broken code. Reduced arguments caused due to deleting other people's code prior to full implementation. Branching also would have fixed this as only get back to master upon passing all tests. This would require testing to have been more efficent as well thus suggesting test strategy should have been utilised to improve test efficency.
+% (Lecture 26) Outline of inspection methods - should probably mention which we should have used in the code reviews.
+% (Lecture 8) Change management and the conflicts caused from developers working in parallel and contributions are made to the master branch which are not fully implemented or break some aspect of the system. In hindsight this probably should have justified a separate branch which would be integrated into the master upon passing all of the tests with a successful build in Jenkins the continuous integration system.
+
+% Cost Estimation:
+% This comes up a lot and should be its own reflection point
+% Discuss that it was not properly conducted and explain the benefits of employing it
+% Talk potential cost estimation techniques we could have employed (planning poker)
+% Discuss what other developers advocate in this regard and how they could have been incorporated into our project
+
+% Misc:
+% (Lecture 19) Throw-away front end prototype was used and was good as it gave a better understanding of the requirements the front end would require upon it becoming the final state of the system. This knowledge and the discovered failures fed into the redesigned system and so the throw-away prototype was very beneficial to the project. (MINI REFLECTION POINT ?)
+% (Lecture 19) Prototyping is used to reduce risks caused by uncertainty in software projects, not introduce more risk - to some extent this was done for components of the back end system as well.
+% (Lecture 30) Formal specification is a specific thing so probably don't just refer to a specification document as being formal loosely.
+% (Lecture 32) Refactoring is an important process which went on over the course of development.
+
+
+% -- OLD TECHNICAL LEAD IN SECTION --
+% This section should be a mainly postive reflection of the technical choices of the project.
+
+% The occasional limitation can be mentioned in the passing such as the use of Python scaring the customer off integration (theory) 
+% and the drawbacks of the collab not allowing for training based on only new data (this if anything is a requirements engineering failure
+% that could have been picked up earlier but customer did not consider until after seeing operation of prototype and use of data in its creation)
+% Spark was fine. I have no gripes about using Spark.
+
+% 1. Talk about why the technical choices are significant development points in the software development process.
+% 2. Talk about how preemptive commitment too early is bad and should be avoided - reference case study - saying team used this as an warning. Use this as reference throw over to requirements engineering reflection point. 
+% 3. Introduce the three major technical decisions of our project
+% 4. Tie in testing and use as a reference throw over
+
+% Preemptive commitment to particular design choices too early in the software development cycle leaves a software project at high risk of failure (reference a case study where an incorrect design decision lead to failure - lecture 1 / 3 recommended reading?). Summary of how this system failed in relation to incorrect design choice. 
+
+% Say the team used this as a warning for the major design decisions - Development language, Models, Spark - that were involved with our project which are detailed below.
+
+% State how the technical choices do not occur in isolation rather they are heavily work with the requirements gathering stage (reference lead in)
+
+% Additionally discuss how they are related to the testing of the system (reference lead in) 
+ 
+% However the technical choices of a software project are not made in isolation rather they are heavily influenced by the requirements engineering process of the 
+
+
+% -- OLD SCRUM LEAD IN SECTION --
+% Lead in with a general why Agile is used for large projects such as ours.
+ 
+% As is often a common practice in industry (get a reference backing up claim) the team did not adhere strictly to one specfic agile framework. Instead the Scrum methodology was used as the overarching framework with additional agile practices from alternative methods, such as prototyping and extreme programming, being adopted as the team felt their use necessary and applicable. While this behaviour ensuresd a flexibile production envirnoment and the team found modertate success with the loose methodology it was not without its issues. Primarily this was due to the lack of discipline within the team to hold all of the key Scrum methods, as weekly stand up style meetings were cancelled in favour of a more open source style of development environment, and roles, as the team employed no product owner role and the scrum master was additionally on the development team. 
+
+% Ultimately this would come at a cost of the teams ability to collaborate effectively on the project as the lack of stand ups led to communication issues as is discussed in Section (reference communication issue). Additionally the lack of product owner and focused scrum master roles played into some disfunctionality within the team organisation structure as highlighted in Section (reference team structure). By not conducting incomplete work and priority reviews at the each sprint's end the team inevitably saw proposed features be dropped as is discussed in Section (reference dropping features) and examined more thoroughly in Section (reference backlog management). This however may also be a consequence of the lack of formal cost estimation procedures conducted during the project as examined in Section (reference cost estimation) and not the teams approach to the Scrum methodology. Finally the issue of if whether such failures could have been avoided through use of a different agile framework, the Extreme Programming framework, is considered in comparision to following the Scrum methodology more strictly and closely than was conducted by the team in Section (reference stricter Scrum vs XP - final reflection point).
+
+
+% -- I don't know if the requirements engineering section is needed or entirely relevant (certainly saves word count) --
+% -- At this point its all just words to me anyway --
+
+% \subsection{REFLECTION POINT - Requirements Engineering}
+% \label{sec:teamstructure}
 % ##################################################
-% LAST EDIT:  16/03/17  Joseph
-% NOTE:         Temp notes / thoughts
+% LAST EDIT:  20/03/17  Joseph
+% NOTE:       First Draft
 % ################# Comment Log ####################
+% - References the cost estimation reflection point as an improvement - tie those two together
+% - References scenarios which flows to testing via test scenarios / acceptance testing - ties those two together
+% Reference back in subsequent reflection points to reduce lead in repetition 
 % ##################################################
 
-Requirements Engineering:
-\begin{itemize}
-\item (Lecture 13) Requirements gathering is an ongoing iterative process that runs concurrently alongside requirements analysis and capture - our project saw this in real effect due to the changing nature of the requirements of our project.
-\item (Lecture 14) Requirements engineering is an iterative process of elicitation, capture and validation - talk about how we did this to ensure we were gathering the correct requirements.
-\item (Lecture 3) Causes of software project failing - building system for wrong reason, building the wrong system, building the system wrong. We could tie in the dropped new user recommendation to a proposed goal which was later determined to be a requirement which would be built for the wrong reason. As such the feature was dropped to avoid building an incorrect system.
-\item (Lecture 13) Cultural differences between engineers and customers - although the developers were technical they don’t know anything regarding machine learning or the development of a system such as ours - Requirements Risk
-\item (Lecture 13) Vague requirements specification of end state of system / customer uncertainty regarding the final state of the system - Requirements Risk
-\item (Lecture 13) A means of investigating poorly understood requirements (prototyping) - Managing Requirements Risk - perhaps we could have prototyped both a front end display and an integration method / discussed this with the customer earlier. This would have defined a determined end state of the system prior to January which would have allowed for an earlier split in development focus and resulted in either integration or improved front end. Granted one must also consider that technical decisions were still ongoing at this time.
-\item (Lecture 13) Requirements evolution - occurred when we discovered potential features which were ultimately dropped (new user recommendations)
-\item (Lecture 14) Avoid early commitments to particular design solutions during requirements elicitation
-\end{itemize}
+% Perhaps tie in the requirements risks and perhaps suggest methods of dealing with such risks via papers
 
-Communication:
-\begin{itemize}
-\item Slack was set up and made the dedicated communication channel for project communication.
-\item Despite having a Slack communication remained somewhat poor.
-\item Decision made to ensure tickets actively represent what feature of the system you are working on.
-\item Ticket system improved but commits / development did not occur in a time efficient manner.
-\item Sub teams additionally helped communication within front end and back end through team communication as a whole was still somewhat lacking.
-\item Specific incident - Edward not providing data sent from customer in a timely manner.
-\item Part of team felt agreeing to meet up in person at least once a week to work on project was a waste of time / resources - this had an adverse effect on communication that wasn’t addressed. Instead majority of team met up once a week at scheduled time as some developers strayed through the valley of the shadow of death into the unknown.
-\item Perhaps Joseph focusing less on development taking on a purer scrum master of role would have improved the development though it due to this being an academic project that the team felt that not suitable or possible as everyone should have played an active role in development.
-\item Talk about the benefits a product owner would have had on the development of our specific project - improved efficiency of tackling task backlog (tasks were avoided from one milestone to the next)
-\item (Lecture 7) Perhaps burn down charts per sprints would have been a good idea and would have improved prediction of task completion, backlog management, communication and prioritisation of backlog tasks.
-\item Pair programming increase communication and coordination greatly - positive
-\item Subteams increased communication a lot as well - postive
-\end{itemize}
+% Basically we've reflected on the technical choices now why was it important that the requirements were engineering properly to better inform the technical choices and what could have been done to do this process even better
 
-Code Reviews:
-\begin{itemize}
-\item The system was designed such that branching was unnecessary for the project. Branching was somewhat discouraged throughout the project in order to reduce merge costs / time. Whether the time saved outweighs the time spent fixing and altering other people’s code remains to be seen.
-\item Lack of code reviews meant that the code often had inconsistent styling.
-\item Lack of code reviews meant a significant portion of time was spent fixing or altering other people's code to work with parts of the system they did not realise they had broken.
-\item Lack of code reviews meant code which was WIP was deleted prior to it being fully implemented into the system - again lack of branching issue somewhat.
-\item Suggested at the first retrospective but ended up avoiding. Would have reduced a number of problems with development cycle but you can't be perfect.
-\item Highlighted in retrospective 3 with the code integration being highlighted.
-\item Highlighted even more in retrospective 4 with code integration really being highlighted.
-\item Reference potential methods or strategies for code reviews which could have integrated into the development.
-\item Reference how other and often professional developers recommend doing code reviews.
-\item Mention that pair programming was conducted and the benefits of doing it. Mention it should have been conducted more frequently, reference that it was beneficial when suggesting if XP was potentially better than Scrum.
-\item Code reviews might have improved development efficency as less time spent refactoring and fixing broken code. Reduced arguments caused due to deleting other people's code prior to full implementation. Branching also would have fixed this as only get back to master upon passing all tests. This would require testing to have been more efficent as well thus suggesting test strategy should have been utilised to improve test efficency.
-\item (Lecture 26) Outline of inspection methods - should probably mention which we should have used in the code reviews.
-\item (Lecture 8) Change management and the conflicts caused from developers working in parallel and contributions are made to the master branch which are not fully implemented or break some aspect of the system. In hindsight this probably should have justified a separate branch which would be integrated into the master upon passing all of the tests with a successful build in Jenkins the continuous integration system.
-\end{itemize}
+% From the outset of the project the team were aware of the need to properly capture the requirements of the project. It is widely documented that two of the primary reasons for software failure is due to building the wrong system and building the system incorrectly (said in lecture 3 - get academic proof) both of which were major threats to the development of our project. The team was mindful of how easily building an incorrect system, one not based off similarity between users, or selection of the incorrect machine learning model and subsequent project failure could occur in our project. 
 
-Cost Estimation:
-\begin{itemize}
-\item This comes up a lot and should be its own reflection point
-\item Discuss that it was not properly conducted and explain the benefits of employing it
-\item Talk potential cost estimation techniques we could have employed (planning poker)
-\item Discuss what other developers advocate in this regard and how they could have been incorporated into our project
-\end{itemize}
+% Adhering to the advice of avoiding early commitment to a particular design solution during the requirements elicitation process as is discussed in Section (reference case study reflection at technical overview point) the team left the decision regarding the specific models and tool choice until after this phase was conducted. Although the requirements would evolve as the project developed, as is to be expected, the team felt with the correct initial system goals established the team could easily justify decision designs in relation to the key goals of the system. Such technical decisions, specifically the choice of development language, machine learning models and clustered computing framework, are discussed in Sections (reference all three technical reflections) respectively. 
 
-Misc:
-\begin{itemize}
-\item (Lecture 19) Throw-away front end prototype was used and was good as it gave a better understanding of the requirements the front end would require upon it becoming the final state of the system. This knowledge and the discovered failures fed into the redesigned system and so the throw-away prototype was very beneficial to the project. (MINI REFLECTION POINT ?)
-\item (Lecture 19) Prototyping is used to reduce risks caused by uncertainty in software projects, not introduce more risk - to some extent this was done for components of the back end system as well.
-\item (Lecture 30) Formal specification is a specific thing so probably don't just refer to a specification document as being formal loosely.
-\item (Lecture 32) Refactoring is an important process which went on over the course of development.
-\end{itemize}
+% Knowing the significance of the requirements engineering process for the sucessful development of the project, the team dedicated the first milestone to ensuring the proposed system to be built was correct. This occurred in parallel with technical research into similar systems and their creation (reference Netflix research from section 2). To ensure the team captured all functionality of the system the team, having conducted the initial customer interview, prepared a requirements specification document which was later refined through customer discussions (reference section 2 requirements section). 
+
+% Within this document the team elected to use the user stories method of requirements specification in order to create an all encompassing set of stories which reflected the proposed features and functionality of the system. As the recommendations are made to ResDiary customers the team felt user stories provided a good a boundary artifact between the proposed users, customers and developers (taken from PSD lecture 15 key point) and that user stories were a natural choice opposed to alternative specification techniques such as use case diagrams because… 
+% Try to sell the idea that user stories are the natural choice for our project as user stories are written from the customer perspective and the recommendations are being made to the end customers
+
+% Although some modifications were necessary, as is to be expected, the team found that proposed the user stories modelled the customer requirements with a good level of accuracy (reference section 2 refinements after initial meeting). In addition to this the additional proposed features, generating recommendations for new users and the ability to recommend previously visted restraunts, that the team suggested were recieved with good feedback by the customer. They believed such features tackled aspects of the problem they themselves had not yet considered and felt we had a good understanding of the system. 
+
+% Establish that task estimation was not properly conducted then reference away to specific reflection into that topic
+% One shortcoming of the use of stories however was the measure of priority attached to each user stories and the subsequent task breakdown by association. The team did not conduct a formal task estimation procedure beyond the breakdown of the user stories into smaller, more general tasks. This was in part due to the lack of technical knowledge into the subject area from the team at this stage in development though the team should have conducted proper task estimation to assist with project planning and management as is discussed here (reference planning and cost estimation reflection point). 
+
+% Transision into this better and potentially expand on
+% Another area of improvement in the requirement gathering process would have been the inclusion of use scenarios in the “Given, When, Then” format. This is a natural progression of user stories as it expands upon an individual story to provide an example of it in action. Such scenarios could then be utilised to allow for further refinement discussions to occur with the customer in order to better establish conditions for system acceptance which would improve the acceptance tests of the system and allow for scenario testing to be conducted on our system. A discussion regarding such tests and other methods of improvements is discussed in Section (reference testing)  
+
+% Tidy up the ending better - more postive - team did well in this regard and so should end on positive note
+% Although the aforementioned could have utilised to improve the team's cost estimation and test process for the project, the team established a good understanding of the customer's vision and corresponding system requirements. This ultimately showed during the various customer demonstrations where by second to last meeting they encouraged to the team to follow where we saw the development of the system going as they were already impressed and pleased with the results. This level of confidence placed in the team we feel showed we had a good initial grasp of the system and thus were able to deliver and take steer the project in the direction we saw it heading towards the later stages of the project. 
 
 
 %==============================================================================
@@ -802,37 +766,23 @@ Misc:
 
 % A conclusion that draws general and wider lessons from the case study (approximately 1-2 pages)
 
-Explain the wider lessons that you learned about software engineering,
-based on the specific issues discussed in previous sections.  Reflect
-on the extent to which these lessons could be generalised to other
-types of software project.  Relate the wider lessons to others
-reported in case studies in the software engineering literature.
+% Explain the wider lessons that you learned about software engineering, based on the specific issues discussed in previous sections. Reflect on the extent to which these lessons could be generalised to other types of software project. Relate the wider lessons to others reported in case studies in the software engineering literature.
 
-Tie in that although the team introduced scope creep that they were aware enough to kill such proposed features in the crib before too much development time was wasted such development.
+All our negatives are positives.
 
-I think that you probably tie the protype throwaway stuff in here and say how encouraging it in development was a beneficial practice (then again maybe that is more suitable than the requirements engineering reflection - shorten that in favour of prototyping?)
+The team saw the benefit of frequent prototyping which resulted in a display application that presented the information very well to the customer. This reinforced through real, practical experience that the ideas presented in software literature of rapid and frequent prototpying have a postive effect on the development efforts.
 
-Conclusion point - pair programming was beneficial and those who conducted in the practice got a lot out of it.
+The importance of code reviews, even when not dealing with branching systems, was encountered by the team and would have avoided tensions towards the end of development. Had the team the chance to start the project afresh then such practices would certainly have been integrated into the team's process.
 
-% Moving this to here for now as I beieve a paragraph addressing it here is better suited and flows better
-Comparision I see here being made now is should we have stuck with Scrum but follow the practice more closely with stand ups, product owner and scrum master - ensure to explain academic nature of project affecting that one in some regard, extensions to Scrum methods which could have been used to tackle specific problems, etc.
+The importance of testing, especially combined with continuous integration for non-complex systems, was seen by the team.
 
-Contrast this against using the XP system for example.
+The team faced the real world problem of scope creep within a project and had the awareness and foresight to recognise occurrences of it and drop the features from development.
 
-Misc points:
-\begin{itemize}
-\item Our prototyping was beneficial - gave good understanding of working with the data sets in addition to seeing how and what the front end application would need to convey to non-technical people and people not familiar with the nature of the project. Spin here is to implement more forms of prototyping as this was beneficial and perhaps should have been conducted more. Not Scrum or XP but another framework that could have been adapted in. 
-\item Time between meetings served as a good sprint dates - working on smaller iterations may have ensured better communication within the team.
-\item Development typically did not change much within a sprint - XP difference here may not have made much of a difference though the dropped feature could have been explored earlier in the development cycle than the 2nd semester.
-\item Task priority was a bit of an issue as we didn’t really do proper task estimation - XP would have solved that issue as it forces strict policy and task estimation.
-\item Scrum has no engineering practices whereas our project definitely should have. XP would have forced pair programming from the start (rather than sporadic occurrences within sprints), ensured better, more thorough testing from an earlier stage in the project and avoided the whole code review “you deleted all my code you bastard” arguments.
-\item User stories are originally from XP 
-\item Scenarios are from XP - discussed in requirements engineering reflection point 
-\item Instead perhaps it would have been better to adopt additional Scrum extensions of backlog refinement and burn down charts in addition to having more defined roles and stand up meetings.
-\item Reference throughout to relevant subsection reflection points tackling each specific issue.
-\item Although the team did not conform to the Scrum practice of holding daily, or frequent, stand up meetings and the consequences of this practice are discussed at length in Section (reference lack of stand ups / poor communication).
-\item Look into Scrumban and Agilo for Trac - did a light version informally but it would may have improved the process to got all out and use this.
-\end{itemize}
+The team discovered the flexibility of Agile practices found by not strictly following any one particular methodology. Although this did result in at times poor cost estimation and communication had such measures that are highlighted in Sections (reference cost est. and communication) then the troubles faced by the team would largely be avoided.
+
+The importance of making the correct initial design decisions, avoiding jumping into the development and conducting the proper research was highlighted to the team as making an incorrect design choice of model and committing to development too early would have resulted in a development time too short to create a good functional system. Instead the team selected the correct choice of model which reflected in the accurate output of the system.
+
+This also reinforced the importance of requirements engineering because without a good grasp of the customer's intent the team could have easily built the wrong system which would have resulted in software failure -- there's a link between this point and one of the early lectures in the course.  
 
 %==============================================================================
 \bibliographystyle{plain}
