@@ -170,6 +170,7 @@ class ALS(Recommender):
         x += jump
 
     def learn_hyperparameters(self, bookings):
+        evaluator = Evaluator(self.spark,self)
         bookings = Data(self.spark).get_bookings_with_score(bookings)
         data, test_ratings = bookings.randomSplit([0.8, 0.2])
         testdata = test_ratings.rdd.map(lambda r: (r[0], r[1]))
@@ -184,7 +185,7 @@ class ALS(Recommender):
                               product(*range_values)):
             self.train(data, parameters)
             predictions = self.predict(testdata)
-            mse = calculate_mse(test_ratings, predictions)
+            mse = evaluator.calculate_mse(test_ratings, predictions)
             if mse < best_mse:
                 best_parameters = parameters
                 best_mse = mse

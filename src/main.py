@@ -13,7 +13,8 @@ def execute_algorithm(args):
 def evaluate_algorithm(args):
 	bookings = data.get_bookings(args['data'])
 	algorithm = algorithms[args['alg'].lower()](sc)
-	print '{}: {:.3f}%'.format(args['alg'], evaluate(sc, algorithm, bookings))
+	evaluator = Evaluator(sc,algorithm)
+	evaluator.evaluate(bookings)
 
 def train_algorithm(args):
 	bookings = data.get_bookings(args['data'])
@@ -52,7 +53,7 @@ if __name__ == "__main__":
 
 	# Import only if arguments were provided
 	from pyspark import SparkContext
-	from evaluator import evaluate
+	from evaluator import *
 	from recommenders import *
 
 	sc = SparkContext('local[*]','Recommendation engine')
