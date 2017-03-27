@@ -42,6 +42,10 @@ class Recommender(Base):
         hyperparameters.'''
         raise NotImplementedError("Don't use this class, extend it")
 
+    def get_algorithm_name(self):
+        ''' Returns the name of the object instance. '''
+        return type(self).__name__
+
 class System(Recommender):
     '''Combines other recommenders to issue the final recommendations for each
     user.'''
