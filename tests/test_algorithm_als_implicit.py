@@ -1,11 +1,11 @@
-import unittest
+from unittest import TestCase
 
 from src.recommenders import ImplicitALS
 from src.data import Data
 from base_als import ALSTest
 from stubs.stub_config import StubConfig
 
-class ALSImplicitTest(ALSTest, unittest.TestCase):
+class ALSImplicitTest(ALSTest, TestCase):
 	
 	@classmethod
 	def setUpClass(self):

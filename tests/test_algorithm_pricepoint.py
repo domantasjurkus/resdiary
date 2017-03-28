@@ -1,11 +1,11 @@
-import unittest
+from unittest import TestCase
 
-from src.recommenders import CuisineType
+from src.recommenders import PricePoint
 from base_content import ContentBaseTest
 from stubs.stub_config import StubConfig
 
-class PricePointTest(ContentBaseTest, unittest.TestCase):
+class PricePointTest(ContentBaseTest, TestCase):
 	
 	@classmethod
 	def setUpClass(self):
-		self.alg = CuisineType(self.sc, config=StubConfig)
+		self.alg = PricePoint(self.sc, config=StubConfig)

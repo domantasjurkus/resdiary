@@ -1,37 +1,31 @@
-import unittest
+from unittest import TestCase
 
 from pyspark.sql.dataframe import DataFrame
 
 from src.data import Data
 from src.recommenders import System
+
 from base import BaseTestCase
 from stubs.stub_algorithm import StubCuisineType
 from stubs.stub_config import StubConfig
 
-# Do 2 tuples have a common scalar?
-def has_scalar(tpl1, tpl2):
-	if len(tpl1) != len(tpl2):
+def collinear(v1, v2):
+        '''Are the two vectors collinear? I.e., is one a constant multiple of
+        the other?'''
+	if len(v1) != len(v2):
 		return False
-
-	arr = []
-	for i in range(0, len(tpl1)):
-		# Avoid division by 0 by adding 1
-		arr.append((tpl1[i]+1.0)/(tpl2[i]+1.0))
-
-	# Convert list to set, if it has one element - scalar found
-	if len(set(arr)) == 1:
-		return True
-
-	return False
+        # Avoid division by 0 by adding 1
+	arr = set((v1[i] + 1.0) / (v2[i] + 1.0) for i in range(len(v1)))
+	return len(arr) == 1
 
 
-class SystemAlgorithmTest(unittest.TestCase, BaseTestCase):
+class SystemAlgorithmTest(TestCase, BaseTestCase):
 
 	@classmethod
 	def setUpClass(self):
 		self.alg = System(self.sc, StubConfig)
 		self.data = Data(self.sc)
-		self.maximum_weight = 2
+		self.maximum_weight = StubConfig.get('System', 'maximum_weight')
 
 		# Replace all other recommenders with a
 		# stub that likes every restaurant
@@ -43,7 +37,8 @@ class SystemAlgorithmTest(unittest.TestCase, BaseTestCase):
 		self.assertIsInstance(self.alg.predict(self.bookings), DataFrame)
 
 		# Check for detection of empty RDD
-		self.assertRaises(ValueError, self.alg.predict, self.sc.parallelize([]))
+		self.assertRaises(ValueError, self.alg.predict,
+                                  self.sc.parallelize([]))
 
 	def test02_weights(self):
 		# Temporarily change recommender count
@@ -55,14 +50,13 @@ class SystemAlgorithmTest(unittest.TestCase, BaseTestCase):
 		for tpl in weights:
 			# All coefficients are in [0, maximum_weight]
 			for val in tpl:
-				self.assertTrue(0<=val and val<=self.maximum_weight)
+				self.assertTrue(0 <= val <= self.maximum_weight)
 
 			# Ensure tuples that are integer multiples
 			# of other tuples are not present
 			for tpl2 in weights:
-				if tpl == tpl2:
-					continue
-				self.assertFalse(has_scalar(tpl, tpl2))
+				if tpl != tpl2:
+                                        self.assertFalse(collinear(tpl, tpl2))
 
 		# Bring back stub recommenders
 		self.alg.recommenders = temp
