@@ -6,8 +6,9 @@ from pyspark.sql import SQLContext
 from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS  
 
 from base import Base
-from data import Data
 from config import Config
+from data import Data
+import recommenders
 
 class Evaluator(Base):
 
@@ -27,9 +28,9 @@ class Evaluator(Base):
         predictions = self.algorithm.predict(testdata)
         mse = self.calculate_mse(test_ratings, predictions)
         print "Mean Squared Error for {} recommender: {:.3f}".format(
-            self.algorithm, mse)
+            self.algorithm.get_algorithm_name(), mse)
         print "Root Mean Squared Error for {} recommender: {:.3f}".format(
-            self.algorithm, sqrt(mse))
+            self.algorithm.get_algorithm_name(), sqrt(mse))
 
     def calculate_mse(self, actual, predictions):
         actual = actual.rdd.map(lambda r: ((r[0], r[1]), r[2]))
@@ -94,7 +95,8 @@ class Evaluator(Base):
         return float(right) / total
 
     def evaluate(self, bookings):
-        print '{}: {:.3f}%'.format(self.algorithm,
-                                   self.right_total_evaluation(bookings))
-        if 'ALS' in self.algorithm.get_algorithm_name():
-            self.mse_evaluation(bookings)
+       if isinstance(self.algorithm, recommenders.System):
+            print '{}: {:.3f}%'.format(self.algorithm.get_algorithm_name(),
+                                       self.right_total_evaluation(bookings))
+       else:
+           self.mse_evaluation(bookings)

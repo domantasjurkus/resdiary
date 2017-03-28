@@ -3,7 +3,7 @@ from collections import Counter, defaultdict
 import heapq
 from itertools import product, starmap
 import os.path
-import shutil,sys
+import shutil
 import csv
 
 from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS as SparkALS
