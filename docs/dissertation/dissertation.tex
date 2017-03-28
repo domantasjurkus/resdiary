@@ -225,30 +225,33 @@ Nonfunctional
 \end{itemize}
 
 %Ensure a reference is provided to feature removal
-We also elected in the aftermath of the meeting to drop the proposed nonfunctional requirements of implementing recommendations for new users. A more detailed account into and justification of this decision can be found in Section 3.
+We also elected in the aftermath of the meeting to drop the proposed nonfunctional requirements of implementing recommendations for new users. A more detailed account into and justification of this decision can be found in Section \ref{sec:droppingreflection}.
 
 \subsection{Delivered Software}
 \label{sec:finsoftware}
 % ##################################################
-% LAST EDIT: 	06/03/17	Joseph
+% LAST EDIT: 	28/03/17	Josh
 % ################# Comment Log ####################
+% Josh: possibly mention Netflix. Section 2 needs to be shorter in general. 
 % ##################################################
 
 % Information on the final software that was delivered to the customer.
+At the final client meeting we delivered the completed software. The key features we successfully implemented are:
 
-This is a postive brief summary of all that was achieve.
+\begin{itemize}
+\item A working recommendations engine that produces sensible restaurant suggestions. 
+\item An explicit collaborative filter recommender which uses ResDiary user ratings.
+\item An implicit collaborative filter recommender which infers user ratings.
+\item Content-based recommenders using restaurant cuisine type and price point.
+\item A system recommender which combines the output from the different recommenders and selects the optimal recommendations.
+\item An evaluator system which assesses the quality of the generated recommendations.
+\item Recommendations filtered by location. 
+\item A front-end application which allows the customer to select a random user and view their browsing history and our recommendations.
+\end{itemize}
 
-The customer was happy so we are also happy with our creation.
+Both the team and the customer were satisfied with the end product. Our research into machine learning allowed us to understand how recommendation systems are built. We investigated different tools and frameworks for building our software, and selected a platform (Apache Spark) which suited our needs. This knowledge enabled us to construct a functional recommendation engine and implement a solution which meets the goals established at the outset of the project. 
 
-In Section \ref{sec:ourinitobjectives} we discuss the specifics of Netflix Recommendations and the Netflix Prize competition so we need to make sure to tie this, the influence and similarity between that system and our final output. 
-
-Additionally we need to demonstrate that the research conducted was RELEVANT.
-
-Show how the research of the Netflix prize lead us to collab / content / etc. which was used in the final system
-
-Need to hit what we achieved - an implict and explict collaborative filter, content based filters on cuisine type and price point, location filtering, auto configuration and the evaluator system. Mention integration with Spark better than we did in the presentation. This outputed csv files which fed into the display application though it could easily be configured to work with a database. 
-
-Mention some of the future proposals we hit on in the presentation such as the reasoning for recommendations, expanding the collaborative to use more than the limits of the data we worked with and content based recommendations for location.
+Additionally, while our software uses csv files as its output, it can be easily configured to work with a database, and adapted with API calls to allow integration with the customer system. Future extensions to the system we discussed include providing a reasoning for recommendations (e.g. `This was recommended because the price is similar'), adapting the implicit collaborative filtering model to better work with the limits of the data (we discuss this in Section \ref{sec:modelreflection} and building a content-based recommender for location.
 
 \newpage
 
