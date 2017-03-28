@@ -21,8 +21,7 @@ def collinear(v1, v2):
 
 class SystemAlgorithmTest(TestCase, BaseTestCase):
 
-	@classmethod
-	def setUpClass(self):
+	def setUp(self):
 		self.alg = System(self.sc, StubConfig)
 		self.data = Data(self.sc)
 		self.maximum_weight = StubConfig.get('System', 'maximum_weight')
@@ -30,19 +29,20 @@ class SystemAlgorithmTest(TestCase, BaseTestCase):
 		# Replace all other recommenders with a
 		# stub that likes every restaurant
 		# This stub must be defined in default.cfg
-		self.alg.recommenders = { "CuisineType": StubCuisineType(self.sc) }
+		self.alg.recommenders = {'CuisineType': StubCuisineType(self.sc)}
+                self.alg.weights = {'CuisineType': 1}
 
 	def test01_predict(self):
+                self.alg.train(self.bookings)
 		# Check that predictions match interface
-		self.assertIsInstance(self.alg.predict(self.bookings), DataFrame)
+		self.assertIsInstance(self.alg.predict(
+                        self.data.nearby_restaurants(self.bookings)), DataFrame)
 
 		# Check for detection of empty RDD
 		self.assertRaises(ValueError, self.alg.predict,
                                   self.sc.parallelize([]))
 
 	def test02_weights(self):
-		# Temporarily change recommender count
-		temp = self.alg.recommenders
 		self.alg.recommenders = {"a":"a", "b":"b", "c":"c"}
 
 		weights = self.alg.generate_weights(self.maximum_weight)
@@ -58,18 +58,14 @@ class SystemAlgorithmTest(TestCase, BaseTestCase):
 				if tpl != tpl2:
                                         self.assertFalse(collinear(tpl, tpl2))
 
-		# Bring back stub recommenders
-		self.alg.recommenders = temp
-
 	def test03_learn(self):
 		self.alg.config.set_weights((0, 0, 0, 0))
 		self.alg.learn_hyperparameters(self.bookings)
 
-		# After learning, at least one recommender should be weighted
-		# ie the sum cannot be non-negative
+		# After learning, at least one recommender should have a
+                # non-zero weight, i.e., the sum has to be positive
 		self.assertTrue(sum(self.alg.config.get_weights()) > 0)
 
-	@classmethod
-	def tearDownClass(self):
+	def tearDown(self):
 		del self.alg
 		del self.data

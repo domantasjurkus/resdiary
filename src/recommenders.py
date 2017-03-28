@@ -60,15 +60,24 @@ class System(Recommender):
         self.recommendations_per_user = self.config.get("System",
                                                         "recs_per_user")
 
+        if all(w == 0 for w in self.weights.values()):
+            raise ValueError("All weights can't be set to zero")
+
     def train(self, data, load=False):
         for name, recommender in self.recommenders.iteritems():
-            recommender.train(data)
+            if self.weights[name] > 0:
+                recommender.train(data)
             
     def predict(self, data):
         # tally up the scores for each (user, restaurant) pair multiplied by the
         # weights
         scores = defaultdict(lambda: defaultdict(int))
         for name, model in self.recommenders.iteritems():
+            # if we are ignoring a recommender's results, there's no reason to
+            # run it
+            if self.weights[name] == 0:
+                continue
+
             for row in model.predict(data).collect():
                 partial_score = self.weights[name] * row['score']
                 scores[row['userID']][row['restaurantID']] += partial_score
@@ -263,7 +272,6 @@ class CuisineType(Recommender):
                             len(self.restaurant_cuisine[restaurant] &
                                 self.liked_cuisine[diner]))
                            for diner, restaurant in diners_restaurants]
-        recommendations =  self.spark.parallelize(recommendations)
         return SQLContext(self.spark).createDataFrame(
            recommendations, self.config.get_schema())
 
@@ -321,4 +329,4 @@ class PricePoint(Recommender):
             recommendations.append((diner, restaurant, score))
 
         return SQLContext(self.spark).createDataFrame(
-            self.spark.parallelize(recommendations), self.config.get_schema())
+            recommendations, self.config.get_schema())

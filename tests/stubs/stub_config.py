@@ -26,7 +26,8 @@ class StubConfig:
 
 	@staticmethod
 	def set_weights(weights):
-		for recommender, weight in zip(StubConfig.get_recommenders(), weights):
+		for recommender, weight in zip(StubConfig.get_recommenders(),
+                                               weights):
 			StubConfig.rcfg.set(recommender, 'weight', str(weight))
 		StubConfig.save_changes()
 
