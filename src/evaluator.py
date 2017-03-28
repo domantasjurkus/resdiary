@@ -13,27 +13,23 @@ class Evaluator(Base):
 
     def __init__(self, spark, algorithm, config=Config):
         super(Evaluator, self).__init__(spark)
-        self.config = config      
+        self.config = config
         self.algorithm = algorithm
 
     def mse_evaluation(self, bookings):
-        model = self.algorithm
         bookings = Data(self.spark).get_bookings_with_score(bookings)
-        data, test_ratings = bookings.randomSplit([0.8, 0.2])
+        training_percentage = Config.get('DEFAULT', 'training_percentage', float)
+        data, test_ratings = bookings.randomSplit([training_percentage,
+                                                   1 - training_percentage])
         testdata = test_ratings.rdd.map(lambda r: (r[0], r[1]))
-        recommender_name = self.algorithm.get_algorithm_name()
-        r = Config.get(recommender_name, "rank")
-        i = Config.get(recommender_name, "iterations")
-        l = Config.get(recommender_name, "lambda", float)
-        if 'explicit' in self.algorithm.get_algorithm_name().lower():
-            model = ALS.train(data, r, i, l)
-        else:
-            ALS.trainImplicit(data, r, i, l, nonnegative=True)
+        self.algorithm.train(data)
 
-        predictions = SQLContext(self.spark).createDataFrame( model.predictAll(testdata), self.config.get_schema())
+        predictions = self.algorithm.predict(testdata)
         mse = self.calculate_mse(test_ratings, predictions)
-        print "Mean Squared Error for {} recommender: {:.3f}".format(self.algorithm.get_algorithm_name(), mse)
-        print "Root Mean Squared Error for {} recommender: {:.3f}".format(self.algorithm.get_algorithm_name(), sqrt(mse))  
+        print "Mean Squared Error for {} recommender: {:.3f}".format(
+            self.algorithm, mse)
+        print "Root Mean Squared Error for {} recommender: {:.3f}".format(
+            self.algorithm, sqrt(mse))
 
     def calculate_mse(self, actual, predictions):
         actual = actual.rdd.map(lambda r: ((r[0], r[1]), r[2]))
@@ -64,7 +60,7 @@ class Evaluator(Base):
                 continue
             
             first_test_index = int(num_bookings * Config.get("DEFAULT",
-                                                             "training_percent",
+                                                             "training_percentage",
                                                              float))
             if first_test_index == num_bookings-1:
                 first_test_index -= 1

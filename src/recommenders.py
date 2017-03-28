@@ -43,7 +43,7 @@ class Recommender(Base):
         raise NotImplementedError("Don't use this class, extend it")
 
     def get_algorithm_name(self):
-        ''' Returns the name of the object instance. '''
+        '''Returns the name of the object instance.'''
         return type(self).__name__
 
 class System(Recommender):
