@@ -1,4 +1,4 @@
-import unittest
+from unittest import TestCase
 
 from pyspark.rdd import RDD
 from pyspark.sql.dataframe import DataFrame
@@ -7,7 +7,7 @@ from base import BaseTestCase
 from stubs.stub_config import StubConfig
 from src.data import Data
 
-class DataTest(unittest.TestCase, BaseTestCase):
+class DataTest(TestCase, BaseTestCase):
 
 	@classmethod
 	def setUpClass(self):
@@ -24,7 +24,6 @@ class DataTest(unittest.TestCase, BaseTestCase):
 		filtered = self.data.filter_outliers(self.bookings)
 		self.assertIsInstance(filtered, DataFrame)
 		self.assertTrue(filtered.count() < self.bookings.count())
-
 
 	@classmethod
 	def tearDownClass(self):

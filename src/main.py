@@ -13,7 +13,7 @@ def execute_algorithm(args):
 def evaluate_algorithm(args):
 	bookings = data.get_bookings(args['data'])
 	algorithm = algorithms[args['alg'].lower()](sc)
-	evaluator = Evaluator(sc,algorithm)
+	evaluator = Evaluator(sc, algorithm)
 	evaluator.evaluate(bookings)
 
 def train_algorithm(args):

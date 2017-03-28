@@ -1,15 +1,17 @@
-from pyspark.sql import SQLContext
 from collections import defaultdict
-from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS  
-from base import Base
 from math import sqrt
 from sets import Set
+
+from pyspark.sql import SQLContext
+from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS  
+
+from base import Base
 from data import Data
 from config import Config
 
 class Evaluator(Base):
 
-    def __init__(self, spark, algorithm,  config=Config):
+    def __init__(self, spark, algorithm, config=Config):
         super(Evaluator, self).__init__(spark)
         self.config = config      
         self.algorithm = algorithm
@@ -30,7 +32,6 @@ class Evaluator(Base):
 
         predictions = SQLContext(self.spark).createDataFrame( model.predictAll(testdata), self.config.get_schema())
         mse = self.calculate_mse(test_ratings, predictions)
-        print mse
         print "Mean Squared Error for {} recommender: {:.3f}".format(self.algorithm.get_algorithm_name(), mse)
         print "Root Mean Squared Error for {} recommender: {:.3f}".format(self.algorithm.get_algorithm_name(), sqrt(mse))  
 
@@ -62,7 +63,9 @@ class Evaluator(Base):
                 # not enough bookings to use this user for evaluation
                 continue
             
-            first_test_index = int(num_bookings * Config.get("DEFAULT", "training_percent", float))
+            first_test_index = int(num_bookings * Config.get("DEFAULT",
+                                                             "training_percent",
+                                                             float))
             if first_test_index == num_bookings-1:
                 first_test_index -= 1
 
@@ -94,7 +97,8 @@ class Evaluator(Base):
                 right += 1
         return float(right) / total
 
-    def evaluate(self,bookings):
-        '{}: {:.3f}%'.format(self.algorithm, self.right_total_evaluation(bookings))
+    def evaluate(self, bookings):
+        print '{}: {:.3f}%'.format(self.algorithm,
+                                   self.right_total_evaluation(bookings))
         if 'ALS' in self.algorithm.get_algorithm_name():
             self.mse_evaluation(bookings)

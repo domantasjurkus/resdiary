@@ -57,7 +57,8 @@ class System(Recommender):
                                  for name in recommenders)
         self.weights = dict((name, self.config.get(name, 'weight'))
                                  for name in recommenders)
-        self.recommendations_per_user = self.config.get("System", "recs_per_user")
+        self.recommendations_per_user = self.config.get("System",
+                                                        "recs_per_user")
 
     def train(self, data, load=False):
         for name, recommender in self.recommenders.iteritems():
@@ -87,7 +88,7 @@ class System(Recommender):
                                                       self.config.get_schema())
 
     def learn_hyperparameters(self, data): 
-        evaluator = Evaluator(self.spark,self)
+        evaluator = Evaluator(self.spark, self)
         recommenders = self.recommenders.keys()
         best_evaluation = 0
         maximum_weight = self.config.get('System', 'maximum_weight')

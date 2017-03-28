@@ -16,7 +16,8 @@ class ALSTest(BaseTestCase):
 		self.assertTrue(type(self.alg.model) in [MatrixFactorizationModel, ALS])
 
 	def test02_predict(self):
-		self.assertIsInstance(self.alg.predict(self.data.nearby_restaurants(self.bookings)), DataFrame)
+		self.assertIsInstance(self.alg.predict(
+                        self.data.nearby_restaurants(self.bookings)), DataFrame)
 
 	def test03_learn(self):
 		self.alg.learn_hyperparameters(self.bookings)
@@ -32,9 +33,9 @@ class ALSTest(BaseTestCase):
 		actual_r = self.alg.config.get(type(self.alg).__name__, "rank")
 		actual_i = self.alg.config.get(type(self.alg).__name__, "iterations")
 		actual_l = self.alg.config.get(type(self.alg).__name__, "lambda", float)
-		self.assertTrue(min_r <= actual_r and actual_r <= max_r)
-		self.assertTrue(min_i <= actual_i and actual_i <= max_i)
-		self.assertTrue(min_l <= actual_l and actual_l <= max_l)
+		self.assertTrue(min_r <= actual_r <= max_r)
+		self.assertTrue(min_i <= actual_i <= max_i)
+		self.assertTrue(min_l <= actual_l <= max_l)
 
 	@classmethod
 	def tearDownClass(self):

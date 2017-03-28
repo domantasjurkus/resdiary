@@ -1,27 +1,25 @@
-import unittest
-import sys, os, csv, StringIO
-from pyspark.sql import SQLContext
+import os
+from unittest import TestCase
+
 from src.data import Data
 from src.evaluator import *
-from base import BaseTestCase
-from stubs.stub_algorithm import StubCuisineType
-from stubs.stub_config import StubConfig
 from src.recommenders import ExplicitALS
 
-class EvaluatorTest(unittest.TestCase, BaseTestCase):
+from base import BaseTestCase
+from stubs.stub_config import StubConfig
+
+class EvaluatorTest(TestCase, BaseTestCase):
 
 	# Set up fixtures that last for all test cases
 	@classmethod
 	def setUpClass(self):
-		self.evaluator = Evaluator(self.sc,ExplicitALS(self.sc), config=StubConfig)
-		self.bookings = Data(self.sc).get_bookings('test.txt')
-
+                self.bookings = Data(self.sc).get_bookings(os.path.join(
+                        os.path.dirname(__file__), 'stubs', 'datastubs',
+                        'stub_bookings2.txt'))
+		self.evaluator = Evaluator(self.sc, ExplicitALS(self.sc),
+                                           StubConfig)
 
 	def test_evaluator(self):
 		self.evaluator.evaluate(self.bookings)
-		self.assertTrue(isinstance(self.evaluator.right_total_evaluation(self.bookings), float));
-
-
-	@classmethod
-	def tearDownClass(self):
-		pass
+		self.assertIsInstance(self.evaluator.right_total_evaluation(
+                        self.bookings), float)
