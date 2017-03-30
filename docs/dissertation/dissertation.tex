@@ -299,32 +299,9 @@ Additionally, while our software uses csv files as its output, it can be easily 
 
 Throughout the development of the software project the team faced many challenges. Machine learning and ‘big data’ was an area in which most members of the team were inexperienced, and this was the first large software project the majority had participated in. In this section we discuss the significant decisions we made throughout the software process and reflect on where our approach was successful and the areas in which we identified shortcomings. 
 
-We start by exploring the early technical choices. One must consider whether the major decisions in system design, technology stack and language choice were, in the final analysis, the optimal ones \ref{sec:pyreflection}. We also consider the issue of whether there was sufficient and correct testing carried out \ref{sec:testing} and assess the difficulties in developing suitable tests for a machine learning application.
+We start by exploring the early technical choices. One must consider whether the major decisions in system design, technology stack and language choice were, in the final analysis, the optimal ones \ref{sec:pyreflection}. We also consider the issue of whether there was sufficient and correct testing carried out and assess the difficulties in developing suitable tests for a machine learning application \ref{sec:testing} .
 
 We then analyse key elements of our software process: team structure and how it developed over time \ref{sec:teamstructure}, how we managed intra-team communication  \ref{sec:communication}, code reviews \ref{sec:codereviewbranch} and our use of pair programming \ref{sec:pairprogramming}. Finally we discuss why certain features were dropped \ref{sec:droppingreflection} and our approach to cost estimation \ref{sec:costreflection}.
-
-
-\subsection{Reflection: Python vs C\#}
-\label{sec:pyreflection}
-% ##################################################
-% LAST EDIT:  27/03/17  Joseph
-% NOTE:       I wonder if Technology Stack will just become one section. 
-% ################# Comment Log ####################
-
-% ################# References #####################
-% http://accord-framework.net/ -- Accord.NET
-% ##################################################
-
-One of the key considerations in any software development project is the choice of the technologies used to implement it. We spent much of the first iteration contesting two broad approaches: implementing the system in their own language (C\#) or using our Python alternative.
-
-From an early stage, as we outline in section 2, it was clear the client placed a high priority on integration with their existing system. In other words: with their existing technology stack. ResDiary uses Microsoft's C\# language and the ASP.NET web framework for its backend system. The natural starting point, therefore, was to find a solution within that language ecosystem. 
-
-It became clear very quickly that in order to meet the goal of delivering a recommendation system within the time limit, we would be compelled to draw on existing machine learning libraries. It was not practical, nor within the team’s competency to write complex big data algorithms from scratch. The team researched machine learning libraries in C\# and found some promising results - the popular Accord.NET library providing much of the required functionality. 
-
-Eventually, however, we agreed on using the Spark machine learning library, using Python. Python is the industry standard for machine learning projects and had a lot of pre-existing libraries the team could utilise during development. Its natural application domain is scripting and data analysis. By contrast, though it does have some suitable libraries, C\# is geared towards web applications. Python also had the advantage of being familiar to the team, with the majority of members having at least two years development experience. By contrast, only one member had significant experience with C\# and the ASP.NET framework.
-
-Of course, the choice of Python begs the question of how we integrate with the customer system. While our research indicated that calling Python scripts from C\# would not be an issue, the client did not have much familiarity with Python and that may have deterred them from wishing to use our system as more than a proof-of-concept ultimately. The choice of language, perhaps, should have been discussed more thoroughly in the initial stages of the project.
-
 
 \subsection{Reflection: Recommendation System Models}
 \label{sec:modelreflection}
@@ -353,37 +330,29 @@ Our collaborative-filtering system used the well-known alternating least squares
 
 One of the persistent issues that surfaced across many iterations was a lack of data. On multiple occasions we found that we simply did not possess the necessary volume of data to make our recommendations more accurate. Big data analysis, as the name implies, requires large quantities of data! Understandably, ResDiary could not give us access to real user data, given the associated data protection issues, but the volume of data we were given in the initial stages (around ten thousand rows), was a limiting factor in our early development efforts and compromised the extent to which we could fine-tune our end product algorithms. Before taking on a future project we may wish to clarify up front that large quantities of data will be required to produce meaningful results.
 
-
-\subsection{REFLECTION POINT - Apache Spark}
-\label{sec:sparkreflection}
+\subsection{Reflection: Technology}
+\label{sec:pyreflection}
 % ##################################################
-% LAST EDIT:  15/03/17  Joseph
-% NOTE:         Temp notes / thoughts
+% LAST EDIT:  30/03/17 JOSH
+% NOTE:       I wonder if Technology Stack will just become one section. 
 % ################# Comment Log ####################
-% ##################################################
 
 % ################# References #####################
-% http://www.infoworld.com/article/3031690/analytics/why-you-should-use-spark-for-machine-learning.html
+% http://accord-framework.net/ -- Accord.NET
+% http://spark.apache.org/mllib/ -- SPARK MLib
 % ##################################################
 
+One of the key considerations in any software development project is the choice of the technologies used to implement it. We spent much of the first iteration contesting two broad approaches: implementing the system in their own language (C\#) or using our Python alternative.
 
-\begin{itemize}
-\item Team decided the entire team should spend time over Christmas playing around with Apache Spark to ensure common understanding of the system between team members. This may not have been the best use of resource and instead team could have split earlier and the front end developers not bothered playing around with it as they did not end up touching it directly during the development of the project. 
-\item Common knowledge was gained though but a more typical front end, back end split in focus may have been beneficial and resulted in an improved front end application sooner.
-\item Why was the decision made to use Spark?
-\item Did any previous decisions (models / languages / tools) influence our choice of Spark
-\item What were the alternatives to using Spark
-\item What were the benefits of using it?
-\item What were the limitations of using it?
-\item Was Spark the right choice?
-\item What impact did deciding to use Spark have on the project?
-\item Demonstrate that the research conducted was relevant
-\item Spark seemed fine for our purposes.
-\item Future proposal for system / talk about scalability and benefits of using Spark
-\item Quote the numbers Mason! The numbers! (You know the ones Eduard likes to mention)
-\item Limited the ability to perform performance tests on the system
-\end{itemize}
+From an early stage, as we outline in section 2, it was clear the client placed a high priority on integration with their existing system. In other words: with their existing technology stack. ResDiary uses Microsoft's C\# language and the ASP.NET web framework for its backend system. The natural starting point, therefore, was to find a solution within that language ecosystem. 
 
+It became clear very quickly that in order to meet the goal of delivering a recommendation system within the time limit, we would be compelled to draw on existing machine learning libraries. It was not practical, nor within the team’s competency to write complex big data algorithms from scratch. The team researched machine learning libraries in C\# and found some promising results - the popular Accord.NET library providing much of the required functionality. 
+
+Eventually however the team agreed on using Python. Python is the industry standard for machine learning projects and had a lot of pre-existing libraries the team could utilise during development. Its natural application domain is scripting and data analysis. By contrast, though it does have some suitable libraries, C\# is geared towards web applications. Python also had the advantage of being familiar to the team, with the majority of members having at least two years development experience. By contrast, only one member had significant experience with C\# and the ASP.NET framework.
+
+We made the decision to use the open source Apache Spark library. Spark provides a suite of tools for big data processing and machine learning (MLib), and exposes its functionality through APIs for Python. The key rationale for utilising Spark versus other potential libraries was its horizontal scalability. Spark is designed with clustered computing in mind allowing it to run its operations with high degree of parallelism. It also allows capacity to be dynamically increased as required. 
+
+Of course, the choice of Python as the implementation language begs the question of how we integrate with the customer system. While our research indicated that calling Python scripts from C\# would not be an issue, the client did not have much familiarity with Python and that may have deterred them from wishing to use our system as more than a proof-of-concept ultimately. The choice of language, perhaps, should have been discussed more thoroughly in the initial stages of the project.
 
 \subsection{Reflection: Testing and Continuous Integration}
 \label{sec:testing}
