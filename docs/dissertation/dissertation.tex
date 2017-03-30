@@ -128,15 +128,15 @@ ResDiary senior software engineers Adam Connelly and Ian Strachan acted as custo
 The initial customer meeting occurred on October 19th and was led by Ian Strachan. This was our first contact with the customer and served as the customer requirements elicitation meeting. The meeting began with an overview of the ResDairy business \ref{sec:customer}, a discussion of the services they provide and an explanation of their technology stack. The ResDiary daily operation involves gathering large quantities of valuable customer data. This collection of big data, however, is currently unused beyond supporting basic business needs (i.e. retrieving booking records). The developers view this as a significant shortcoming of their system.
 
 % [A]
-As such, therefore, the company is exploring potential ways to exploit this vast quantity of valuable data. The developers had conducted some research into the area, and discovered that none of their competitors currently offer a restaurant recommendation service within their booking platform. Thus, if they were able to develop a system which would make recommendations to users based on their previous dining habits and similarity to other users, they would gain a competitive edge. It would also help increase restaurant discovery on their platform, which is beneficial to both restaurants and potential clientele. 
+As such, the company is exploring potential ways to exploit this vast quantity of valuable data. The developers had conducted some research into the area, and discovered that none of their competitors currently offer a restaurant recommendation service within their booking platform. Thus, if they were able to develop a system which would make recommendations to users based on their previous dining habits and similarity to other users, they would gain a competitive edge. It would also help increase restaurant discovery on their platform, which is beneficial to both restaurants and potential clientele. 
 
-The inspiration for the idea stems from the similar system provided by online services such as Amazon and Netflix, which push recommended products and films respectively to their users. The Netflix model, in particular, was the closest reference point for the system they wished to develop. A parallel between making recommendations based on a user's film history and their similarity to other users, and a similar recommendation engine using ResDiary's dining history is easy to see. As a starting point for our own research, they suggested looking into the Netflix Prize - a competition held by Netflix starting in 2006 challenging participants to better their own recommendation algorithm. 
+The inspiration for the idea stems from the similar system provided by online services such as Amazon and Netflix, which push recommended products and films respectively to their users. The Netflix model, in particular, was the closest reference point for the system they wished to develop. A parallel between making recommendations based on a user's film history and their similarity to other users, and a similar recommendation engine using ResDiary's dining history is easy to see. As a starting point for our own research, they suggested looking into the Netflix Prize - a competition held by Netflix starting in 2006 challenging participants to better their own recommendation algorithm. \cite{Netflix2006}
 
 The goal of the algorithm was to accurately predict a user's rating of a film based solely on previous user ratings and no additional information about either the users or films. A set of training data (a subset of Netflix's real user data) with half a million user ratings was provided to participants, with the algorithm using this data to predict user ratings for a disjoint subset of the user data. No information other than user ID, film ID and date of rating was provided. Our ResDiary project followed a similar structure. ResDiary's users, as with Netflix's, leave review scores ranging from 1 to 5. We were given a subset of their user data which we split into further subsets for training and for evaluation. The research provided an excellent springboard from which to launch our own collaborative filtering model. With such a strong similarity between the requirements of our system and theirs, it was a natural choice.
 
 % Maybe move the Netflix stuff to the choice of models to save on space in this section -- Joseph 27/03
 
-We also spent time discussing what the customer viewed as the end state of the system - whether it would be integreated into the existing ResDiary portal or whether the output would suffice as a proof-of-concept prototype. They were initially undecided in this regard, partially due to an internal transition in their own development frameworks, and thus suggested our initial aim should be to focus on the creation of the recommendation engine. The decision regarding the final state of the project ultimately would not be made until midway through the development cycle when the customer decided to view the project as simply a proof-of-concept. Nonetheless, at all points during development, due consideration was given to the future integration of our system with ResDiary. 
+We also spent time discussing what the customer viewed as the end state of the system - whether it would be integrated into the existing ResDiary portal or whether the output would suffice as a proof-of-concept prototype. They were initially undecided in this regard, partially due to an internal transition in their own development frameworks, and thus suggested our initial aim should be to focus on the creation of the recommendations engine. The decision regarding the final state of the project would ultimately not be made until midway through the development cycle when the customer decided to view the project as simply a proof-of-concept. Nonetheless, at all points during development, due consideration was given to the future integration of our system with ResDiary. 
 
 
 \subsection{Project Scoping}
@@ -159,7 +159,7 @@ The proposal document included an array of requirements that the team agreed upo
 \begin{itemize}
 \item The recommendation engine must accurately suggest restaurants based on the users' dining history and similarity to other users with similar eating preferences.
 \item Recommended restaurants should be in close proximity to where the user typically eats or the geographical location of where they are currently searching.
-\item The recommendation engine may recommend restaurants that  the user has previously visited should the user allow this option.
+\item The recommendation engine may recommend restaurants that the user has previously visited should the user allow this option.
 \end{itemize}
 
 \subsubsection{Initial nonfunctional requirements:}
@@ -197,11 +197,12 @@ We made modifications to the specification document to incorporate the customer 
 reviews, etc.
 \end{itemize}
 
-Furthermore, a soft goal developed within the team to produce a more comprehensive front end application to showcase the recommendation system. While some members felt this justified being included and defined formally within the specification document, the majority instead felt the focus of the project should be on creating the most accurate recommendations. We elected to delay defining an exact end state until the customer clarified exactly what they required. We agreed, eventually, that should clarify not be forthcoming, we would press for clarity on the issue during the scheduled January 26th meeting, and define an agreed handover state for the project. 
+Furthermore, a soft goal developed within the team to produce a more comprehensive front end application to showcase the recommendation system. While some members felt this justified being included and defined formally within the specification, the majority felt the focus of the project should be on creating the most accurate recommendations.
 
-While some of the team felt this justified being defined within the specification the majority instead felt the focus of the project should be on creating the most accurate recommendations and delay defining an end state until it was defined by the customer. Should the customer not provide clarity earlier it was decided to press for clarity on this issue during the scheduled January 26th meeting and define a agreed handover state for the project. 
+% Dom: don't think we need this
+% A more detailed discussion about handing in the final state for the project occured during the January 26th meeting.
 
-Thus, prior to this meeting, development efforts were split between the creation of a prototype system (which implemented a basic content-based filtering model) and on the long-term solution (with multiple recommenders) to the project. The prototype system was demonstrated during an interim meeting on December 7th, where the technical decisions of the long term solution were discussed at length. Following this meeting, implementation of the system proper commenced. 
+Initial development efforts were split between the creation of a prototype system (which implemented a basic content-based filtering model) and on the long-term solution (with multiple recommenders) to the project. The prototype system was demonstrated during an interim meeting on December 7th, where the technical decisions of the long term solution were discussed at length. Following this meeting, the full implementation of the system commenced. 
 
 \subsection{Defining the End Product}
 \label{sec:jandefinedstate}
@@ -214,9 +215,9 @@ Thus, prior to this meeting, development efforts were split between the creation
 
 As we discuss in the previous sections, the decision to define an exact final handover state for the system was deferred until the end of the third development sprint. During our January 26th progress meeting, the team pressed the customer for clarity on how they envisioned the end product. 
 
-It became clear that the customer wished to view the project as a "proof-of-concept" demonstration, with their intended use being to assess the worth of creating a similar system for use with their existing portal. Additionally, they wished to learn from our work, as both developers had little experience in the field of machine learning. The business use of our system would be as a prototype to justify the development resources required to develop their own solution.
+It became clear that the customer wished to view the project as a "proof-of-concept" demonstration, with their intended use being to assess the worth of creating a similar system for use with their existing portal. Additionally, they wished to learn from our work, as both developers had little experience in the field of machine learning.
 
-With the final handover state of the system now clarified, the team decided that a redesign of the front end of the application was necessary. We noted while giving a demonstration of the software to a non-technical member of the ResDiary team, that the system was not properly communicating the recommendations being made. It was unclear to a non-technical user how the system operated and whether or not the results it produced were sensible. Given it was confirmed that the primary audience of our software will likely be non-technical users (being given a demonstration), there was urgency to produce a more intuitive, friendly front end. 
+With the final handover state of the system now clarified, the team decided that a redesign of the front end of the application was necessary. We noted while giving a demonstration of the software to a non-technical member of the ResDiary team, that the system was not properly communicating the recommendations being made. It was unclear to a non-technical user how the system operated and whether or not the results it produced were sensible. Given it was confirmed that the primary audience of our software will likely be non-technical users (being given a demonstration), there was a necessity to produce a more intuitive, friendly front end. 
 
 The following requirements were discovered and added to the project, with the aim of producing a front end redesign which visually demonstrated that the system was producing accurate predictions:
 
@@ -242,7 +243,7 @@ We also elected in the aftermath of the meeting to drop the proposed nonfunction
 % ##################################################
 
 % Information on the final software that was delivered to the customer.
-At the final client meeting we delivered the completed software. The key features we successfully implemented are:
+At the final client meeting we delivered the completed software. The key features that were successfully implemented were:
 
 \begin{itemize}
 \item A working recommendations engine that produces sensible restaurant suggestions. 
@@ -765,6 +766,7 @@ The team discovered the flexibility of Agile practices by not strictly following
 In general, team members can reflect on a development process which resulted in a successful end product and facilitated gaining rich insight into machine learning and valuable experience in professional software development. Nonetheless, we have identified opportunities for improvement in both our product and our software process, and concrete actions that can be taken to enhance future development.
 
 %==============================================================================
+\newpage
 \bibliographystyle{plain}
 \bibliography{dissertation}
 \end{document}
