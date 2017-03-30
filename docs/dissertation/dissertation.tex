@@ -125,12 +125,14 @@ ResDiary senior software engineers Adam Connelly and Ian Strachan acted as custo
 
 % Initial Meeting and the customer's motivation for the project.
 
-The initial customer meeting occurred on October 19th and was led by Ian Strachan. This was our first contact with the customer and served as the customer requirements elicitation meeting. The meeting began with an overview of the ResDairy business \ref{sec:customer}, a discussion of the services they provide and an explanation of their technology stack. The ResDiary daily operation involves gathering large quantities of valuable customer data. This collection of big data, however, is currently unused beyond supporting basic business needs (i.e. retrieving booking records). The developers view this as a significant shortcoming of their system.
+The initial customer meeting occurred on October 19th and was led by Ian Strachan. This was our first contact with the customer and served as the customer requirements elicitation meeting. The meeting began with an overview of the ResDairy business
+%\ref{sec:customer}
+, a discussion of the services they provide and an explanation of their technology stack. The ResDiary daily operation involves gathering large quantities of valuable customer data. This collection of big data, however, is currently unused beyond supporting basic business needs (i.e. retrieving booking records). The developers view this as a significant shortcoming of their system.
 
 % [A]
 As such, the company is exploring potential ways to exploit this vast quantity of valuable data. The developers had conducted some research into the area, and discovered that none of their competitors currently offer a restaurant recommendation service within their booking platform. Thus, if they were able to develop a system which would make recommendations to users based on their previous dining habits and similarity to other users, they would gain a competitive edge. It would also help increase restaurant discovery on their platform, which is beneficial to both restaurants and potential clientele. 
 
-The inspiration for the idea stems from the similar system provided by online services such as Amazon and Netflix, which push recommended products and films respectively to their users. The Netflix model, in particular, was the closest reference point for the system they wished to develop. A parallel between making recommendations based on a user's film history and their similarity to other users, and a similar recommendation engine using ResDiary's dining history is easy to see. As a starting point for our own research, they suggested looking into the Netflix Prize - a competition held by Netflix starting in 2006 challenging participants to better their own recommendation algorithm. \cite{Netflix2006}
+The inspiration for the idea stems from the similar system provided by online services such as Amazon and Netflix, which push recommended products and films respectively to their users. The Netflix model, in particular, was the closest reference point for the system they wished to develop. A parallel between making recommendations based on a user's film history and their similarity to other users, and a similar recommendation engine using ResDiary's dining history is easy to see. As a starting point for our own research, they suggested looking into the Netflix Prize - a competition held by Netflix starting in 2006 challenging participants to better their own recommendation algorithm. \cite{NetflixPrize}
 
 The goal of the algorithm was to accurately predict a user's rating of a film based solely on previous user ratings and no additional information about either the users or films. A set of training data (a subset of Netflix's real user data) with half a million user ratings was provided to participants, with the algorithm using this data to predict user ratings for a disjoint subset of the user data. No information other than user ID, film ID and date of rating was provided. Our ResDiary project followed a similar structure. ResDiary's users, as with Netflix's, leave review scores ranging from 1 to 5. We were given a subset of their user data which we split into further subsets for training and for evaluation. The research provided an excellent springboard from which to launch our own collaborative filtering model. With such a strong similarity between the requirements of our system and theirs, it was a natural choice.
 
@@ -170,7 +172,9 @@ The proposal document included an array of requirements that the team agreed upo
 \item User and restaurant locations should be interpreted using coordinates rather than city name as those are of arbitrary precision within the dataset.
 \end{itemize}
 
-To help us understand the actual scenarios in which the system might be used, we prepared a set of user stories (ranked by priority). They provided a quick, intuitive way to ensure we had covered all the conceivable use cases the customer may require. We also prepared a high-level system UML diagram and a step-by-step work-flow of how the system would generate the actual recommendations. Due to the customer's ambiguity regarding the final state of the system, the endpoint was left intentionally vague to allow for flexibility. Instead the emphasis was to build and produce the most accurate recommendation for a given user. 
+To help us understand the actual scenarios in which the system might be used, we prepared a set of user stories (ranked by priority). They provided a quick, intuitive way to ensure we had covered all the conceivable use cases the customer may require.
+%We also prepared a high-level system UML diagram and a step-by-step work-flow of how the system would generate the actual recommendations.
+Due to the customer's ambiguity regarding the final state of the system, the endpoint was left intentionally vague to allow for flexibility. Instead the emphasis was to build and produce the most accurate recommendation for a given user. 
 
 
 \subsection{Refinement of Requirements}
@@ -181,9 +185,7 @@ To help us understand the actual scenarios in which the system might be used, we
 % If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point
 % ##################################################
 
-At the November 16th meeting we presented and discussed our project proposal with the customer.
-
-They felt we had a good understanding of their vision. They broadly agreed with the proposed requirements and could envision how our high level system would operate (and potentially integrate into their existing one). We briefly explained that there were two major models for building recommendation systems: collaborative-based filtering and content-based filtering. The high level system architecture accounts for this by allowing multiple 'recommenders' to each implement a different approach to producing recommendations. These recommendations are then combined and filtered for the final output. The customer expressed strong interest in the potential of "fine tuning" this system, through altering the significance placed on individual recommenders. 
+At the November 16th meeting we presented and discussed our project proposal with the customer. They broadly agreed with the proposed requirements and could envision how our high level system would operate (and potentially integrate into their existing one). We briefly explained that there were two major models for building recommendation systems: collaborative-based filtering and content-based filtering. The high level system architecture accounts for this by allowing multiple 'recommenders' to each implement a different approach to producing recommendations. These recommendations are then combined and filtered for the final output. The customer expressed strong interest in the potential of "fine tuning" this system, through altering the significance placed on individual recommenders. 
 
 % Probably include the UML diagram (the one used in the presentation) in here to help explain the system -- Joseph 27/03
 
@@ -258,7 +260,8 @@ At the final client meeting we delivered the completed software. The key feature
 
 Both the team and the customer were satisfied with the end product. Our research into machine learning allowed us to understand how recommendation systems are built. We investigated different tools and frameworks for building our software, and selected a platform (Apache Spark) which suited our needs. This knowledge enabled us to construct a functional recommendation engine and implement a solution which meets the goals established at the outset of the project. 
 
-Additionally, while our software uses csv files as its output, it can be easily configured to work with a database, and adapted with API calls to allow integration with the customer system. Future extensions to the system we discussed include providing a reasoning for recommendations (e.g. `This was recommended because the price is similar'), adapting the implicit collaborative filtering model to better work with the limits of the data (we discuss this in Section \ref{sec:modelreflection} and building a content-based recommender for location.
+% Dom: commented out for trimming Section 2
+%Additionally, while our software uses csv files as its output, it can be easily configured to work with a database, and adapted with API calls to allow integration with the customer system. Future extensions to the system we discussed include providing a reasoning for recommendations (e.g. `This was recommended because the price is similar'), adapting the implicit collaborative filtering model to better work with the limits of the data (we discuss this in Section \ref{sec:modelreflection} and building a content-based recommender for location.
 
 \newpage
 
@@ -284,8 +287,6 @@ Additionally, while our software uses csv files as its output, it can be easily 
 
 % ################# References #####################
 %
-% Netflix Prize:
-% http://www.netflixprize.com/rules.html  -- Rules of Netflix Prize
 % https://www.cs.uic.edu/~liub/KDD-cup-2007/NetflixPrize-description.pdf  -- Netflix Prize Overview / Description Paper
 % http://www.netflixprize.com/community/topic_1537.html  -- Links papers which build off each other (winners)
 % 
