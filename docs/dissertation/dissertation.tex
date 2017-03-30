@@ -180,13 +180,19 @@ Due to the customer's ambiguity regarding the final state of the system, the end
 \subsection{Refinement of Requirements}
 \label{sec:custrefineinitobj}
 % ##################################################
-% LAST EDIT:  15/03/17  Joseph
+% LAST EDIT:  30/03/17 JOSH
 % ################# Comment Log ####################
 % If required (page count) maybe cut down requirements engineering and incorporating customer feedback in reflection point
 % ##################################################
 
 At the November 16th meeting we presented and discussed our project proposal with the customer. They broadly agreed with the proposed requirements and could envision how our high level system would operate (and potentially integrate into their existing one). We briefly explained that there were two major models for building recommendation systems: collaborative-based filtering and content-based filtering. The high level system architecture accounts for this by allowing multiple 'recommenders' to each implement a different approach to producing recommendations. These recommendations are then combined and filtered for the final output. The customer expressed strong interest in the potential of "fine tuning" this system, through altering the significance placed on individual recommenders. 
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=8cm]{images/ResDiary_UML.png}
+\caption{High level system architecture showing multiple recommenders and the evaluator.}
+\label{fig:uml}
+\end{figure}
 % Probably include the UML diagram (the one used in the presentation) in here to help explain the system -- Joseph 27/03
 
 There were, of course, areas of concern. Our proposed response rate of one second to respond to a request was queried. They felt that they needed to further clarify the volume of data the system would be expected to work with in a real world deployment. This may put a constraint on our ability to realise that performance. We discussed the alternative of using a nightly build system, as this how they expected the system would operate in a real world setting. In addition, they recommended developing a lightweight front-end application to display the recommendations. This would be a lightweight app, rather than any actual integration with their system, but they rationalised its throwaway nature by suggesting it would help them better understand our system, assist with demonstrating its functionality and most importantly provide a clear indication it was producing sensible results. 
@@ -301,7 +307,7 @@ Throughout the development of the software project the team faced many challenge
 
 We start by exploring the early technical choices. One must consider whether the major decisions in system design, technology stack and language choice were, in the final analysis, the optimal ones (\ref{sec:pyreflection}). We also consider the issue of whether there was sufficient and correct testing carried out and assess the difficulties in developing suitable tests for a machine learning application (\ref{sec:testing}).
 
-We then analyse key elements of our software process: team structure and how it developed over time (\ref{sec:teamstructure}), how we managed intra-team communication  (\ref{sec:communication}), code reviews (\ref{sec:codereviewbranch}) and our use of pair programming (\ref{sec:pairprogramming}). Finally we discuss why certain features were dropped (\ref{sec:droppingreflection}) and our approach to cost estimation (\ref{sec:costreflection}).
+We then analyse key elements of our software process: team structure and how it developed over time (\ref{sec:teamstructure}), how we managed intra-team communication  (\ref{sec:communication}), code reviews (\ref{sec:codereviewbranch}) and our use of pair programming (\ref{sec:pairprogramming}). Finally we discuss why certain features were dropped and our approach to cost estimation (\ref{sec:droppingreflection}).
 
 \subsection{Reflection: Recommendation System Models}
 \label{sec:modelreflection}
