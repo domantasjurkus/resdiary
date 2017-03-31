@@ -130,10 +130,11 @@ class System(Recommender):
         return weights
 
 class ALS(Recommender):
-
+    ''' Alternating least squares model base class. '''
     __metaclass__ = ABCMeta
     
     def train(self, bookings, parameters=None, load=False):
+        ''' Load or train a new model. If the model doesn't exist, save it. '''
         recommender_name = type(self).__name__
         if load:
             self.model = self.load_model(recommender_name)
@@ -185,6 +186,7 @@ class ALS(Recommender):
         x += jump
 
     def learn_hyperparameters(self, bookings):
+        ''' Learn the best possible hyper parameters by comparing Mean Squared error. '''
         evaluator = Evaluator(self.spark,self)
         bookings = Data(self.spark).get_bookings_with_score(bookings)
         data, test_ratings = bookings.randomSplit([0.8, 0.2])

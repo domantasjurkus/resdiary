@@ -14,12 +14,12 @@ def evaluate_algorithm(args):
 	bookings = data.get_bookings(args['data'])
 	algorithm = algorithms[args['alg'].lower()]
 
-        # Evaluating any other algorithm doesn't make sense because the main
-        # evaluator checks how many of the recommendations are later visited,
-        # but all recommenders except System return all the input pairs as
-        # recommendations (with scores added)
-        if algorithm not in [ExplicitALS, ImplicitALS, System]:
-                raise ValueError('This algorithm cannot be evaluated')
+	# Evaluating any other algorithm doesn't make sense because the main
+	# evaluator checks how many of the recommendations are later visited,
+	# but all recommenders except System return all the input pairs as
+	# recommendations (with scores added)
+	if algorithm not in [ExplicitALS, ImplicitALS, System]:
+	        raise ValueError('This algorithm cannot be evaluated')
 
 	Evaluator(sc, algorithm(sc)).evaluate(bookings)
 
@@ -65,6 +65,7 @@ if __name__ == "__main__":
 
 	sc = SparkContext('local[*]','Recommendation engine')
 	sc.setLogLevel("ERROR")
+	# Checkpoints necessary for training models with many iterations.
 	sc.setCheckpointDir("./checkpoints/")
 	data = Data(sc)
 
