@@ -10,8 +10,10 @@ Recommendations engine for ResDiary (https://www.resdiary.com/)
 - Joseph O'Hagan (JosephOHagan): 2136120o 
 
 # IMPORTANT!
-The recommendations generated from the provided test files would probably be inaccurate, since the dataset is small.
+- The recommendations generated from the provided test files would probably be inaccurate, since the dataset is small.
 If you want accurate results the dataset should be at least 100K.
+- The generated recommendations are in the format: userID,restaurantID,Score and only System,ExplicitALS and ImplicitALS could be evaluated.
+The content based recommenders were evaluated by performing manual data analysis, since they cannot be compared against a score.
 
 # Installation
 1. Run deployment.sh: `./deployment.sh` which should automatically install all required components.
