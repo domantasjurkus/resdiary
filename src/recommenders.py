@@ -192,9 +192,9 @@ class ALS(Recommender):
         best_mse = float('inf')
         parameter_names = ['rank', 'iterations', 'lambda']
         types = [int, int, float]
-        range_values = [(self.config.get('DEFAULT', 'min_' + parameter, t),
-                         self.config.get('DEFAULT', 'max_' + parameter, t),
-                         self.config.get('DEFAULT', parameter + '_step', t))
+        range_values = [self.frange(self.config.get('DEFAULT', 'min_' + parameter, t),
+                                    self.config.get('DEFAULT', 'max_' + parameter, t),
+                                    self.config.get('DEFAULT', parameter + '_step', t))
                         for parameter, t in zip(parameter_names, types)]
         for parameters in map(lambda v: dict(zip(parameter_names, v)),
                               product(*range_values)):
