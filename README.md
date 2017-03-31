@@ -47,7 +47,7 @@ A few examples that are specific for ALS and System recommenders:
 ``` spark-submit src/main.py --alg=System --data=tests/stubs/datastubs/stub_bookings.txt --out=data/recommendations.csv --func=execute ```
 
 3. To load an existing model and then generate recommendations:
-``` spark-submit src/main.py --alg=System --data=tests/stubs/datastubs/stub_bookings.txt --out=data/recommendations.csv **--load=true** --func=execute ```
+``` spark-submit src/main.py --alg=System --data=tests/stubs/datastubs/stub_bookings.txt --out=data/recommendations.csv --load=true --func=execute ```
 
 4. To evaluate a model:
 ``` spark-submit src/main.py --alg=ExplicitALS --data=tests/stubs/datastubs/stub_bookings.txt --func=evaluate ```
