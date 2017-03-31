@@ -25,9 +25,9 @@ Before running Spark make sure you can run it globally with the following comman
 
 **If you don't want to do this every time then consider adding this command to your bash profile or /etc/environment.**
 
-To run the recommendations script:
+To train and predict a model based on a given dataset:
 ```
-spark-submit src/main.py --alg=ALS --data=data/test_data.csv --out=/home/user/data/recommendations.csv
+spark-submit src/main.py --alg=ExplicitALS --data=tests/stubs/datastubs/stub_bookings.txt --out=recommendations.csv --func=execute
 ```
 
 - `--alg`: [`explicitals`, `implicitals`, `contentbased`, `pricepoint`, `system`]
@@ -51,24 +51,46 @@ A few examples that are specific for ALS and System recommenders:
 
 # Detailed guide
 
-## System recommender
+### System recommender
 - The System recommender combines other recommenders by giving weights to them. They can be configured in default.cfg.
 - Running System recommender in `--func=train` mode will result in writing the best possible weights in default.cfg.
 
-## ExplicitALS
+### ExplicitALS
 - This recommender should be used on a large dataset which includes ratings given explicitly by users.
 - On 1M rows the Mean Squared Error is around 0.4 for the default parameters in the configuration file which suggests that the algorithms is quite accurate.
 
-## ImplicitALS
+### ImplicitALS
 - This recommender should be used on a large dataset with ratings inferred from data sources such as browser history,visiting frequency and etc. 
 
-## CuisineType and PricePoint
-- These content based recommenders are not dependent on the size of the dataset. They should be given higher weight when the dataset consists of users who haven't rated restaurants at all.
+### CuisineType
+- This content based recommender finds out what cusine types users like. Then it recommenders restaurants with similar cuisine types. This recommender should almost always have weight of 1.
 
-## Database connection
+### PricePoint
+- This content based recommender is not dependent on the size of the dataset. It should be given higher weight when the dataset consists of users who haven't rated restaurants at all.
+
+### Database connection
 - Since we don't have the complete schema of ResDiary tables, we didn't write query/write functions for a database. They should be very easy to implement, since Spark allows the queried data to be saved in DataFrames which we use. 
 
 ## Config options
+### Default params
+- training_percentage: Specifies what percentage of the data will be used for training. 80% is usually the best value
+- data_dir: Specifies the folder where the restaurants and cuisine type data should be placed.
+- lat_diff: Latitude difference. Location filtering works by comparing the latitude and longtitude differences of restaurants.
+- long_diff: Longtitude difference. Increase if you want to recommende restaurants in a bigger range.
+- schema: The header of the output files
+- restaurant_file: Specifies the name of the file which contains restaurants data.
+- Other default parameters: Specify min,max values and the incrementing step for hyper parameters. These are used to train better models.
+
+### System
+- recs_per_user: How many recommendations per user to generate
+- maximum_weight: Weights are generate in the inverval [0, maximum_weight]
+
+### Recommender specific:
+- ALS recommenders include best hyper parameters
+- CuisineType specifies minimum_like_score = 4 as default. This means that only cuisine types rated with 4 and 5 would be considered when recommending restaurants. It also uses specific file that contains cuisine types data.
+
+### Universal
+- weight: How important is the score of this recommender. This is considered only in System recommender. For example, if ExplicitALS has weight 2, CuisineType has weight 1 and PricePoint has weight 1 then the score of the System recommender is mostly based on the ExplicitALS.
 
 #  Presentation Mode
 `npm install` to install all required components.
