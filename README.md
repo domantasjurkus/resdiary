@@ -5,32 +5,49 @@ Recommendations engine for ResDiary (https://www.resdiary.com/)
 - Vladimir Bardarski (PeshoGoshov): 
 - Paulius Dilkas (dilkas): 2146879d
 - Dom Jurkus (domantasjurkus):
-- Edward Kalfov (TheScouser):
+- Edward Kalfov (TheScouser): 2129029k
 - Josh O'brien (Josh-Dev): 
 - Joseph O'Hagan (JosephOHagan): 2136120o 
 
+# IMPORTANT!
+The recommendations generated from the provided test files would probably be inaccurate, since the dataset is small.
+If you want accurate results the dataset should be at least 100K.
+
+# Installation
+1. Run deployment.sh which should automatically install all required components.
+2. If the script fails then, go to http://spark.apache.org/downloads.html and download version 2.1.0 of Apache Spark.
+3. Unzip the archive in your home folder for example
+4. In order to run spark from anywhere we have to add its /bin folder to the PATH environment variable: ```PATH=$PATH:~/spark-2.1.0-bin-hadoop2.7/bin/```
+5. Go to /resdiary repository and run sudo pip install requirements.txt
 
 # Generating recommendations
 To run the recommendations script:
 ```
-python src/main.py --alg=ALS --data=data/Booking.csv --out=/home/user/data/recommendations.csv
-```
-Alternatively if that fails...
-```
-spark-submit src/main.py --alg=ALS --data=data/Booking.csv --out=/home/user/data/recommendations.csv
+spark-submit src/main.py --alg=ALS --data=data/test_data.csv --out=/home/user/data/recommendations.csv
 ```
 
 `--alg`: [`explicitals`, `implicitals`, `contentbased`, `pricepoint`, `system`]  
-`--data` `--out`: relative (`src/data/Booking.csv`) or absolute (`/home/steve/Booking.csv`) paths  
-`--func`: [`execute`, `evaluate`, `train`]  
+`--data` `--out`: relative (`src/data/Bookings.csv`) or absolute (`/home/steve/Bookings.csv`) paths
+`--func`: [`execute`, `evaluate`, `train`]
+`--load`(optional): [`true`]
 
+A few examples that are specific for ALS and System recommenders:
+1. To find the best possible hyper parameters:
+``` spark-submit src/main.py --alg=ExplicitALS --data=tests/stubs/datastubs/stub_bookings.txt --func=train ```
+2. To train the algorithm and then generate recommendations:
+``` spark-submit src/main.py --alg=System --data=tests/stubs/datastubs/stub_bookings.txt --out=data/recommendations.csv --func=execute ```
+3. To load an existing model and then generate recommendations:
+``` spark-submit src/main.py --alg=System --data=tests/stubs/datastubs/stub_bookings.txt --out=data/recommendations.csv *--load=true* --func=execute ```
+4. To evaluate a model:
+``` spark-submit src/main.py --alg=ExplicitALS --data=tests/stubs/datastubs/stub_bookings.txt --func=evaluate ```
 
 #  Presentation Mode
+`npm install` to install all required components.
 `node server.js` will launch a server on `http://localhost:3000`.    
 
 
 ##  Testing
-`python test.py` triggers tests and produces coverage reports in `coverage/`.
+`spark-submit test.py` triggers tests and produces coverage reports in `coverage/`.
 
 
 ###  Outside of lab access Jenkins / Trac / VM
