@@ -24,7 +24,7 @@ If you want accurate results the dataset should be at least 100K.
 
 1. Go to http://spark.apache.org/downloads.html and download version 2.1.0 of Apache Spark.
 2. Unzip the archive in your home folder for example
-3. Go to /resdiary repository and run sudo pip install requirements.txt
+3. Run `pip install requirements.txt`
 4. Follow step 2 which shows how to make Spark global for the current terminal instance.
 
 # Generating recommendations
