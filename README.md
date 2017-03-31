@@ -5,7 +5,7 @@ Recommendations engine for ResDiary (https://www.resdiary.com/)
 - Vladimir Bardarski (PeshoGoshov): 
 - Paulius Dilkas (dilkas): 2146879d
 - Dom Jurkus (domantasjurkus):
-- Edward Kalfov (TheScouser): 2129029k
+- Eduard Kalfov (TheScouser): 2129029k
 - Josh O'brien (Josh-Dev): 
 - Joseph O'Hagan (JosephOHagan): 2136120o 
 
