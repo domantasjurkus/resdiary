@@ -15,7 +15,7 @@ class EvaluatorTest(TestCase, BaseTestCase):
 	def setUpClass(self):
                 self.bookings = Data(self.sc).get_bookings(os.path.join(
                         os.path.dirname(__file__), 'stubs', 'datastubs',
-                        'stub_bookings2.txt'))
+                        'stub_bookings.txt'))
 		self.evaluator = Evaluator(self.sc, ExplicitALS(self.sc),
                                            StubConfig)
 
