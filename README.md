@@ -15,12 +15,14 @@ If you want accurate results the dataset should be at least 100K.
 
 # Installation
 1. Run deployment.sh: `./deployment.sh` which should automatically install all required components.
-2. Before running Spark make sure you can run it globally with the following command:
-``` PATH=$PATH:~/spark-2.1.0-bin-hadoop2.7/bin/ ```. Otherwise, you'll have to explicitly specify spark-submit which is quite long: `~/spark-2.1.0-bin-hadoop2.7/bin/spark-submit`
+2. Before running Spark make sure you can run it globally with the following command: <br>
+``` PATH=$PATH:~/spark-2.1.0-bin-hadoop2.7/bin/ ```
+<br> Otherwise, you'll have to explicitly specify spark-submit which is quite long: <br>
+`~/spark-2.1.0-bin-hadoop2.7/bin/spark-submit`
 
 **If you don't want to do this every time then consider adding this command to your bash profile or /etc/environment.**
 
-**If the script fails then:** 
+**If the deplyment script fails then:** 
 
 1. Go to http://spark.apache.org/downloads.html and download version 2.1.0 of Apache Spark.
 2. Unzip the archive in your home folder for example
@@ -40,16 +42,16 @@ spark-submit src/main.py --alg=ExplicitALS --data=tests/stubs/datastubs/stub_boo
 
 A few examples that are specific for ALS and System recommenders:
 
-1. To find the best possible hyper parameters:
+1. To find the best possible hyper parameters:<br>
 ``` spark-submit src/main.py --alg=ExplicitALS --data=tests/stubs/datastubs/stub_bookings.txt --func=train ```
 
-2. To train the algorithm and then generate recommendations:
+2. To train the algorithm and then generate recommendations:<br>
 ``` spark-submit src/main.py --alg=System --data=tests/stubs/datastubs/stub_bookings.txt --out=data/recommendations.csv --func=execute ```
 
-3. To load an existing model and then generate recommendations:
+3. To load an existing model and then generate recommendations:<br>
 ``` spark-submit src/main.py --alg=System --data=tests/stubs/datastubs/stub_bookings.txt --out=data/recommendations.csv --load=true --func=execute ```
 
-4. To evaluate a model:
+4. To evaluate a model:<br>
 ``` spark-submit src/main.py --alg=ExplicitALS --data=tests/stubs/datastubs/stub_bookings.txt --func=evaluate ```
 
 # Detailed guide
