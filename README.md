@@ -74,7 +74,7 @@ A few examples that are specific for ALS and System recommenders:
 - This content based recommender is not dependent on the size of the dataset. It should be given higher weight when the dataset consists of users who haven't rated restaurants at all.
 
 ### Database connection
-- Since we don't have the complete schema of ResDiary tables, we didn't write query/write functions for a database. They should be very easy to implement, since Spark allows the queried data to be saved in DataFrames which we use. 
+- Since the complete schema of ResDiary tables wasn't known, I/O functions for a database weren't developed. However, they should be very easy to implement, since Spark allows the queried data to be saved in DataFrames which we use. 
 
 ## Config options
 ### Default params
