@@ -201,8 +201,6 @@ class ALS(Recommender):
             self.train(data, parameters)
             predictions = self.predict(testdata)
             mse = evaluator.calculate_mse(test_ratings, predictions)
-            print mse
-            print parameters
             if mse < best_mse:
                 best_parameters = parameters
                 best_mse = mse
