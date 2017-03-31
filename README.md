@@ -17,10 +17,14 @@ If you want accurate results the dataset should be at least 100K.
 1. Run deployment.sh which should automatically install all required components.
 2. If the script fails then, go to http://spark.apache.org/downloads.html and download version 2.1.0 of Apache Spark.
 3. Unzip the archive in your home folder for example
-4. In order to run spark from anywhere we have to add its /bin folder to the PATH environment variable: ```PATH=$PATH:~/spark-2.1.0-bin-hadoop2.7/bin/```
-5. Go to /resdiary repository and run sudo pip install requirements.txt
+4. Go to /resdiary repository and run sudo pip install requirements.txt
 
 # Generating recommendations
+Before running Spark make sure you can run it globally with the following command:
+``` PATH=$PATH:~/spark-2.1.0-bin-hadoop2.7/bin/ ```
+
+**If you don't want to do this every time then consider adding this command to your bash profile or /etc/environment.**
+
 To run the recommendations script:
 ```
 spark-submit src/main.py --alg=ALS --data=data/test_data.csv --out=/home/user/data/recommendations.csv

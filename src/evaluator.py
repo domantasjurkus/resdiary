@@ -8,7 +8,6 @@ from pyspark.mllib.recommendation import  MatrixFactorizationModel, ALS
 from base import Base
 from config import Config
 from data import Data
-import recommenders
 
 class Evaluator(Base):
 
@@ -95,8 +94,10 @@ class Evaluator(Base):
         return float(right) / total
 
     def evaluate(self, bookings):
-       if isinstance(self.algorithm, recommenders.System):
+        from recommenders import System
+        
+        if isinstance(self.algorithm, System):
             print '{}: {:.3f}%'.format(self.algorithm.get_algorithm_name(),
                                        self.right_total_evaluation(bookings))
-       else:
-           self.mse_evaluation(bookings)
+        else:
+            self.mse_evaluation(bookings)
