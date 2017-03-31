@@ -22,7 +22,7 @@ If you want accurate results the dataset should be at least 100K.
 
 **If you don't want to do this every time then consider adding this command to your bash profile or /etc/environment.**
 
-**If the deplyment script fails then:** 
+**If the deployment script fails then:** 
 
 1. Go to http://spark.apache.org/downloads.html and download version 2.1.0 of Apache Spark.
 2. Unzip the archive in your home folder for example
