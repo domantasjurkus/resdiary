@@ -30,8 +30,8 @@ To run the recommendations script:
 spark-submit src/main.py --alg=ALS --data=data/test_data.csv --out=/home/user/data/recommendations.csv
 ```
 
-- `--alg`: [`explicitals`, `implicitals`, `contentbased`, `pricepoint`, `system`]  
-- `--data` `--out`: relative (`src/data/Bookings.csv`) or absolute (`/home/steve/Bookings.csv`) paths
+- `--alg`: [`explicitals`, `implicitals`, `contentbased`, `pricepoint`, `system`]
+- `--data`(input) `--out`(output): relative (`src/data/Bookings.csv`) or absolute (`/home/steve/Bookings.csv`) paths
 - `--func`: [`execute`, `evaluate`, `train`]
 - `--load`(optional): [`true`]
 
@@ -49,10 +49,30 @@ A few examples that are specific for ALS and System recommenders:
 4. To evaluate a model:
 ``` spark-submit src/main.py --alg=ExplicitALS --data=tests/stubs/datastubs/stub_bookings.txt --func=evaluate ```
 
+# Detailed guide
+
+## System recommender
+- The System recommender combines other recommenders by giving weights to them. They can be configured in default.cfg.
+- Running System recommender in `--func=train` mode will result in writing the best possible weights in default.cfg.
+
+## ExplicitALS
+- This recommender should be used on a large dataset which includes ratings given explicitly by users.
+- On 1M rows the Mean Squared Error is around 0.4 for the default parameters in the configuration file which suggests that the algorithms is quite accurate.
+
+## ImplicitALS
+- This recommender should be used on a large dataset with ratings inferred from data sources such as browser history,visiting frequency and etc. 
+
+## CuisineType and PricePoint
+- These content based recommenders are not dependent on the size of the dataset. They should be given higher weight when the dataset consists of users who haven't rated restaurants at all.
+
+## Database connection
+- Since we don't have the complete schema of ResDiary tables, we didn't write query/write functions for a database. They should be very easy to implement, since Spark allows the queried data to be saved in DataFrames which we use. 
+
+## Config options
+
 #  Presentation Mode
 `npm install` to install all required components.
 `node server.js` will launch a server on `http://localhost:3000`.    
-
 
 ##  Testing
 `spark-submit test.py` triggers tests and produces coverage reports in `coverage/`.
