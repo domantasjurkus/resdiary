@@ -9,8 +9,8 @@ class ContentBaseTest(BaseTestCase):
 		self.alg.train(self.bookings)
 
 		rdd = self.sc.parallelize([(row['Diner Id'],
-                                            row['Restaurant Id'])
-                                           for row in self.bookings.collect()])
+                                    row['Restaurant Id'])
+                                    for row in self.bookings.collect()])
 
 		self.assertIsInstance(self.alg.predict(rdd), DataFrame)
 
