@@ -22,8 +22,8 @@ def collinear(v1, v2):
 class SystemAlgorithmTest(TestCase, BaseTestCase):
 
 	def setUp(self):
-		self.alg = System(self.sc, StubConfig)
-		self.data = Data(self.sc)
+		self.alg = System(self.sc, config=StubConfig)
+		self.data = Data(self.sc, config=StubConfig)
 		self.maximum_weight = StubConfig.get('System', 'maximum_weight')
 
 		# Replace all other recommenders with a
@@ -36,11 +36,10 @@ class SystemAlgorithmTest(TestCase, BaseTestCase):
                 self.alg.train(self.bookings)
 		# Check that predictions match interface
 		self.assertIsInstance(self.alg.predict(
-                        self.data.nearby_restaurants(self.bookings)), DataFrame)
+							  self.data.nearby_restaurants(self.bookings)), DataFrame)
 
 		# Check for detection of empty RDD
-		self.assertRaises(ValueError, self.alg.predict,
-                                  self.sc.parallelize([]))
+		self.assertRaises(ValueError, self.alg.predict, self.sc.parallelize([]))
 
 	def test02_weights(self):
 		self.alg.recommenders = {"a":"a", "b":"b", "c":"c"}
@@ -56,14 +55,14 @@ class SystemAlgorithmTest(TestCase, BaseTestCase):
 			# of other tuples are not present
 			for tpl2 in weights:
 				if tpl != tpl2:
-                                        self.assertFalse(collinear(tpl, tpl2))
+					self.assertFalse(collinear(tpl, tpl2))
 
 	def test03_learn(self):
-		self.alg.config.set_weights((0, 0, 0, 0))
+		self.alg.config.set_weights((1, 1, 1, 1))
 		self.alg.learn_hyperparameters(self.bookings)
 
 		# After learning, at least one recommender should have a
-                # non-zero weight, i.e., the sum has to be positive
+		# non-zero weight, i.e., the sum has to be positive
 		self.assertTrue(sum(self.alg.config.get_weights()) > 0)
 
 	def tearDown(self):

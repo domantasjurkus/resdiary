@@ -97,7 +97,7 @@ class System(Recommender):
                                                       self.config.get_schema())
 
     def learn_hyperparameters(self, data): 
-        evaluator = Evaluator(self.spark, self)
+        evaluator = Evaluator(self.spark, self, self.config)
         recommenders = self.recommenders.keys()
         best_evaluation = 0
         maximum_weight = self.config.get('System', 'maximum_weight')
