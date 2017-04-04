@@ -60,6 +60,8 @@ class Data(Base):
         nearby_restaurants = defaultdict(set)
         for i, current_restaurant in enumerate(restaurants):
             for r in restaurants[i:]:
+                if current_restaurant['RestaurantId'] == r['RestaurantId']:
+                    continue
                 if (abs(current_restaurant['Lat'] - r['Lat']) < lat_diff and
                     abs(current_restaurant['Lon'] - r['Lon']) < long_diff):
                     current = current_restaurant['RestaurantId']

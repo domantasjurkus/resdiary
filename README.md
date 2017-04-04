@@ -32,7 +32,7 @@ The content based recommenders were evaluated by performing manual data analysis
 4. Follow step 2 which shows how to make Spark global for the current terminal instance.
 
 # Generating recommendations
-To train a model and generate recommendations based on a given dataset:
+To train and predict a model based on a given dataset:
 ```
 spark-submit src/main.py --alg=ExplicitALS --data=tests/stubs/datastubs/stub_bookings.txt --out=recommendations.csv --func=execute
 ```
